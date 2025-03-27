@@ -5,7 +5,7 @@ export default function Home() {
   const {name} = useContext(AppContext);
   return (
     <>
-      <h1 className="title">Coordenadas de {name}</h1>
+      <h1 className="title">Puntos de reciclaje de {name}</h1>
     </>
   );
 }
