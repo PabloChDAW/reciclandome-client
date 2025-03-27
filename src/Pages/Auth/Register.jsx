@@ -41,7 +41,6 @@ export default function Register() {
   return (
     <>
       <h1 className="title">Register a new account</h1>
-        {/* {token} */}
       <form onSubmit={handleRegister} className="w-1/2 mx-auto space-y-6">
         <div>
           <input
