@@ -15,3 +15,7 @@ Aplicación web SPA (Single Page Application) creada con React-Router-DOM y Tail
 4. En src/App.jsx borramos todos los import excepto el de App.css y borramos el useState y todo el contenido del return, dejando sólo un hola mundo. Además como sólo tenemos una función, borramos el export y en la declaración de la función incluimos export default.
 5. En src/main.jsx borramos el import de index.css y el StrictMode.
 6. Borrar el directorio src/assets con su contenido.
+
+### 2. COMENZAR A DESARROLLAR EL PROYECTO
+1. Levantar la API reciclandome-api abriendo dicho proyecto y ejecutando `php artisan serve`.
+2. Configurar Vite con vite.config.js añadiendo el servidor como proxy, con la URL y los headers. Esto reducirá el código cada vez que tengamos que implementar un fetch (sólo habrá que poner api/user, api/posts, etc).
