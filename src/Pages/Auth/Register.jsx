@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+  // Permite redireccionar automáticamente a una determinada ruta.
+  const navigate = useNavigate();
+
   // Maneja el estado (valores) de los campos de entrada del formulario.
   const [formData, setFormData] = useState({
     name: '',
@@ -24,6 +28,8 @@ export default function Register() {
     if (data.errors) {
       setErrors(data.errors);
     } else {
+      localStorage.setItem("token", data.token);
+      navigate("/");
       console.log(data);
     }
   }
