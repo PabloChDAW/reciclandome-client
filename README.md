@@ -19,3 +19,4 @@ Aplicación web SPA (Single Page Application) creada con React-Router-DOM y Tail
 ### 2. COMENZAR A DESARROLLAR EL PROYECTO
 1. Levantar la API reciclandome-api abriendo dicho proyecto y ejecutando `php artisan serve`.
 2. Configurar Vite con vite.config.js añadiendo el servidor como proxy, con la URL y los headers. Esto reducirá el código cada vez que tengamos que implementar un fetch (sólo habrá que poner api/user, api/posts, etc).
+3. En src/App.jsx importar BrowserRouter, Routes y Route de "react-router-dom y en el return anidamos Route (donde definiremos el layout poniendo el path al homepage y el elemento que renderizará) en Routes y en BrowserRouter. Dentro definimos la ruta a Home que será la misma que su padre ('/').
