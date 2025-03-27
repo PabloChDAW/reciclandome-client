@@ -9,10 +9,17 @@ export default function Register() {
     password_confirmation: '',
   });
 
-  function handleRegister(e) {
+  async function handleRegister(e) {
     e.preventDefault();
+    /* Petición de autenticación */
+    const res = await fetch("/api/register", {
+      method: "post",
+      body: JSON.stringify(formData),
+    });
 
-    console.log(formData);
+    const data = await res.json();
+
+    console.log(data);
   }
 
   return (
