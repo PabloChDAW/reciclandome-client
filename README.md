@@ -10,3 +10,5 @@ Aplicación web SPA (Single Page Application) creada con React-Router-DOM y Tail
 `npm install -D tailwindcss@3 postcss autoprefixer`,
 `npx tailwindcss init -p`,
 `npm install react-router-dom`
+2. Configurar TailwindCSS añadiendo los directorios a tailwind.config.js (podemos omitir .ts y .tsx).
+3. Borrar src/index.css. Borrar el contenido y copiar el contenido de [las clases personalizadas usadas para las pruebas iniciales](https://github.com/JonVadar/YouTube_videos/blob/main/tailwind_classes.css) que también contienen las directivas de Tailwind, en src/App.css.
