@@ -46,3 +46,14 @@ Aplicación web SPA (Single Page Application) creada con React-Router-DOM y Tail
 9. En AppContext.jsx creamos un useState para el token que recoja el valor inicial desde el almacenamiento local. Ahora en la etiqueta AppContent.Provider donde teníamos el value de prueba, ponemos de value token y setToken, exponiendo el token a toda la aplicación.
 10. En Register.jsx en el else bajo la línea que guarda el token en local storage, usamos setToken para capturar el token. Ahora a modo de prueba comentamos la línea que redirige a Home y por ejemplo bajo el h1 hacemos que se renderice  el token. Hacemos un registro y se verá en pantalla el token. Verlo también en el almacenamiento local. Comentamos la renderización del token y el token en useContext, y descomentamos el navigate a Home. Sólo era una demostración. Con esto ya tenemos el token en el estado de la aplicación, y también en el almacenamiento local.
     - Nota: No estaba enviando bien el token desde el controlador en el Backend (AuthController.php->función register), y me he vuelto loco para pillar bien el token en el lado cliente (ver también README.md del Backend, parte 2, 1.4).
+
+### 4. AUTORIZACIÓN
+1. En el punto actual hemos conseguido **autenticar** al usuario. Ahora lo vamos a **autorizar**. Para ello creamos otro useState "user" en AppContext.jsx con un objeto vacío como estado inicial.
+2. Crear también la función asíncrona "getUser()" , y dentro:
+    - Un const para la respuesta de un fetch al endpoint `api/user` que nos dará al usuario autenticado. Recordar que esa ruta está protegida por el middleware Sanctum, por tanto requerirá el token, así que incluimos headers con la clave Authorization y de valor un string vacío para ver qué ocurre.
+    - Recogemos el dato como JSON como siempre.
+    - Lo mostramos en consola.
+3. Como queremos que esta función se ejecute siempre que el token se actualice, creamos un hook useEffect que la llame. Dicho hook tendrá como primer argumento una función flecha, y como segundo argumento el hook token (el useState) entre corchetes (este argumento ha de ser un array) de manera que el hook se ejecutará si el hook token cambia de valor. En la función flecha ejecutamos un console.log para observar el funcionamiento. Vemos que ya aparece el mensaje en consola. Ahora si registramos otro usuario, vemos en consola el objeto creado (data) por el fetch de getUser(), además de el mensaje enviado otra vez por el hook useEffect.
+    - Nota: Como recordatorio, si el segundo argumento del hook useEffect fuese un array vacío, el useEffect sólo se ejecutaría una vez al ejecutarse la función AppProvider donde se encuentra.
+    - [Documentación del hook useEffect](https://es.react.dev/reference/react/useEffect)
+
