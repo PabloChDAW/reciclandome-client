@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../../Context/AppContext";
 
 export default function Register() {
+  const { setToken } = useContext(AppContext); 
+
   // Permite redireccionar automáticamente a una determinada ruta.
   const navigate = useNavigate();
 
@@ -29,6 +32,7 @@ export default function Register() {
       setErrors(data.errors);
     } else {
       localStorage.setItem("token", data.token);
+      setToken(data.token);
       navigate("/");
       console.log(data);
     }
