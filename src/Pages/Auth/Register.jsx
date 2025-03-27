@@ -9,6 +9,8 @@ export default function Register() {
     password_confirmation: '',
   });
 
+  const [errors, setErrors] = useState({});
+
   async function handleRegister(e) {
     e.preventDefault();
     /* Petición de autenticación */
@@ -19,7 +21,11 @@ export default function Register() {
 
     const data = await res.json();
 
-    console.log(data);
+    if (data.errors) {
+      setErrors(data.errors);
+    } else {
+      console.log(data);
+    }
   }
 
   return (
@@ -33,6 +39,8 @@ export default function Register() {
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           />
+          {/* Si errors.name es true, renderiza el párrafo */}
+          {errors.name && <p className="error">{errors.name[0]}</p>}
         </div>
 
         <div>
@@ -42,6 +50,7 @@ export default function Register() {
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           />
+          {errors.email && <p className="error">{errors.email[0]}</p>}
         </div>
 
         <div>
@@ -51,6 +60,7 @@ export default function Register() {
             value={formData.password}
             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
           />
+          {errors.password && <p className="error">{errors.password[0]}</p>}
         </div>
 
         <div>
