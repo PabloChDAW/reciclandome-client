@@ -25,3 +25,5 @@ Aplicación web SPA (Single Page Application) creada con React-Router-DOM y Tail
     Resumen:
     - En App.jsx tenemos definido el sistema de enrutado.
     - Layout.jsx es la pantalla principal de la aplicación donde se renderizarán los componentes cuando sean llamados a través de la ruta. Por ejemplo a través de la ruta "/" se renderiza el componente Home, que en este punto muestra un h1 con el texto "Coordenadas".
+6. En src/Pages crear el directorio Auth con los archivos Register.jsx y Login.jsx dentro. Copiar la función de Home dentro de ambos, cambiar los nombres y los textos del return.
+7. En Layout.jsx en el nav bajo el Link crear un div con los dos links a Register y Login, y en App.jsx las rutas a ambos componentes.
