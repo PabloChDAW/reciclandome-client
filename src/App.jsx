@@ -6,6 +6,9 @@ import Register from './Pages/Auth/Register';
 import Login from './Pages/Auth/Login';
 import { useContext } from 'react';
 import { AppContext } from './Context/AppContext';
+import Create from './Pages/Points/Create';
+import Show from './Pages/Points/Show';
+import Update from './Pages/Points/Update';
 
 export default function App() {
   const { user } = useContext(AppContext);
@@ -16,7 +19,10 @@ export default function App() {
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
           <Route path='/register' element={user ? <Home /> : <Register />} />
-          <Route path='/login' element={<Login />} />
+          <Route path='/login' element={user ? <Home /> : <Login />} />
+          <Route path='/create' element={user ? <Create /> : <Login />} />
+          <Route path='/points/:id' element={<Show />} />
+          <Route path='/points/update/:id' element={user ? <Update /> : <Login />} />
         </Route>
       </Routes>
     </BrowserRouter>

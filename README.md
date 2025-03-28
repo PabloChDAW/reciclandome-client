@@ -81,3 +81,81 @@ Aplicación web SPA (Single Page Application) creada con React-Router-DOM y Tail
     - Capturar la respuesta en json con el await como siempre, y mostrarla en consola.
     - En caso de que la respuesta sea ok, queremos resetear el token y el user state, borrar el token del almacenamiento local y redireccionar a Home, porqhe si autenticación debe redireccionarse a Home. Así que promero declaramos el hook useNavigate "navigate", y en la función logout() actualizamos el user y el token con setUser y setToken a null, borramos el elemento del local storage y redirigimos a Home. Ir a AppContext para exponer setUser en el value (es el que faltaba de los 4).
 3. Presionamos en Logout y recibimos el mensaje 405 en consola (Method Not Allowed) porque el método no puede ser GET, sino POST. Arreglarlo en el fetch.
+
+## PARTE 2: CRUD (CREATE - READ - UPDATE - DELETE)
+La primera funcionalidad va a ser que el usuario pueda realizar un CRUD básico de coordenadas, que se listarán en la pantalla principal. Se podrá acceder a cada punto pero sólo el usuario que haya registrado el punto podrá actualizar sus valores o eliminarlo.
+---
+### 7. CREAR PUNTO
+1. Registrar un nuevo usuario. Una vez estamos logueados con el token,
+2. En src/Pages crear la carpeta Posts, y dentro crear Create.jsx. Dentro crear la función principal.
+3. En el return de la función poner el título en un h1 y debajo, un form sin action, y dentro un div con un input tipo number con 5 decimales y con placeholder. Debajo del div poner otro div, y dentro otro input igual. Bajo este segundo div, poner un botón con el texto Crear.
+4. En Layout.jsx, en la parte del return correspondiente al usuario autenticado, copiar uno de los links y pegarlo bajo la línea que renderiza el welcome back cambiándole el path a /create y poniéndole el texto Nuevo punto.
+5. En App.jsx, copiar la ruta al login y pegarla debajo de ésta. Así estará protegida (si user es true, renderiza el componente Create, y si no, Login). Ya podemos ver el link Nuevo punto y pinchar en él.
+6. En Create.jsx, crear el hook useState formData cuyo valor inicial será un objeto con las propiedades longitude y latitude con valor 0.
+7. Crear la función asíncrona para crear points:
+    - preventDefault al evento.
+    - console.log de formData.
+    - En la etiqueta del form, evento onSubmit que la ejecute.
+    - En la etiqueta input la latitud, capturar con value la latitud, y con un listener onChange ejecutar el setter del hook formData (setFormData()). Éste setter acepta por parámetro un objeto con una copia (usando spread) de formData, y el valor de latitude. Luego copiar esas dos líneas (value y onChange) Y pegárselas al longitude cambiando la propiedad en ambas líneas. Ahora al pulsar el botón Crear obtenemos en consola el objeto con los valores iniciales a 0, o lo que introduzcamos.
+    - Crear el fetch con el endpoint /api/posts con el método post y el headers con el token que debemos importar con su correspondiente hook useContext(AppContext) arriba del todo de la función principal. Ponerle también body con los datos del form usando JSON.stringify.
+    - Como siempre, capturar la respuesta en data con el await y pasarle data al console.log.
+8. Ahora al pulsar Crear con los campos vacíos obtenemos los errores de validación correspondientes de nuestra API. Para usarlos, bajo el useState formData crear el useState de errors con un objeto vacío de estado inicial. Dentro de la función handleCreate, ponemos un if que ejecute el setter de errors cuando haya errores, y en el else redirija a Home. Declarar este navigate (el hook useNavigate de siempre) sobre el useContext.
+9. Para mostrar los errores, bajo la etiqueta input del title, renderizar los errores usando un ternario para cuando existan. Recordar que errors es un array, así que hay que especificar que queremos renderizar el texto (elemento 0). Copiar esta línea y pegar bajo el textarea cambiando latitude por longitude. Ahora al pulsar Create con los inputs vacíos observamos los correspondientes mensajes de error.
+10. Ahora creamos un point y lo vemos en consola. Tenemos los datos del point, y lo guardamos bien en la BD, pero no tenemos el nombre del usuario que lo ha escrito. Para ello hacemos unos cambios en PostController.php. En la función store() tenemos en el return el $point. Lo cambiamos por un array con clave 'point' y valor $point, y añadimos clave 'user' con valor $point->user (usando la relación Eloquent que devuelve el usuario al que pertenece el point). Ahora creamos un point para ver que obtenemos en consola un objeto con dos propiedades (point y user). Hacer este cambio también en los return de show() y update(). Ya podemos comentar el console.log que muestra el point al crearse.
+
+### 7. MOSTRAR TODOS LOS POINTS
+1. En Home.jsx, definir la función asíncrona getPoints() que contiene un fetch al endpoint /api/points por GET (no hace falta ponerlo) y data recogiendo la respuesta en JSON. Mostrarla en un console.log.
+2. Queremos ejecutar esta función cuando se monte el componente, así que lo hacemos en un useEffect con dos argumentos, el callback y un array vacío. Ir a Home para ver en consola los points que haya en la BD pero sin mostrar los usuarios. Solucionarlo en PointController.php cambiando el return usando el método with con la relación (user) aplicándole latest() (para ordenarlos descendentemente en el tiempo) y luego get(). Ahora vemos que en la respuesta se incluye toda la información del usuario que crea cada point.
+3. Para mostrar los points en Home.jsx, crear el hook useState points con un array vacío como estado inicial. Luego el getPoints() dentro de un if para cuando la respuesta sea ok, actualizar el estado de points con los datos de la respuesta (data) y comentar el console.log.
+4.  En el return bajo el h1, usando un ternario para cuando haya points (points.length > 0) mapear data para mostrarlos (en un div usando como key el point.id), y si no hay ninguno, mostrar un párrafo diciéndolo. Al mostrarlos usar un h2 para el título, un small para el usuario que lo creó y la fecha de creación usando la clase Date con el método toLocaleTimeString(), y otro párrafo para el body del point.
+5. Probar hacer logout, registrar un nuevo usuario y crear un nuevo post. Lo siguiente es crear páginas individuales para cada point.
+
+### 8. MOSTRAR UN POST CONCRETO
+1. Crear un Link (de react-router-dom) dentro de cada point con el texto Ver más. Ponerte el atributo to con la ruta (`/points/${point.id}`). Ahora si pinchamos en alguno de estos links, nos muestra en la url el id de ese point. Ahora toca crear el componente y la ruta.
+2. En la carpeta Points crear el archivo Show.jsx con la función principal que por ahora simplemente devolverá un texto para probar que funciona.
+3. En App.jsx crear la ruta, que va a ser pública, por lo que no tiene que estar protegida. Para ello, copiar la ruta Home y pegarla debajo de la de Create cambiando el index por el path a la ruta que será dinámica, por tanto, será así: "/points/:id" de manera que aplicamos el nombre "id" para que luego podamos llamarla usando dicho nombre. Cambiamos el elemento por Show y ya estaría.
+4. Ahora en Show.jsx poner un console.log con el hook useParams() para ver qué obtenemos al pulsar en algún botón Read more. Vemos que se muestra el texto de prueba de Show.jsx, la url correcta (con el id del point) y en consola el id del point. Si escribimos ahora lo que sea en la url se mostrará en consola (así es como funciona el hook useParams()). Ahora lo que queremos es capturar esa id en una variable.
+    - [Documentación del hook useParams](https://api.reactrouter.com/v7/functions/react_router.useParams.html)
+5. De vuelta en Show.jsx, comentar el console.log y declarar el hook useParams id y usarlo para hacer un fetch a un point en particular.
+6. Copiar la función getPosts de Home.jsx y pegarla en Show.jsx porque va a ser muy parecida. Cambiarle el nombre por getPoint() y la url por la url dinámica `/api/points/${id}`. Comentar el if y primero hacer un console.log de data para ver qué recibimos de la API.
+7. Para llamar a dicha función usamos el useEffect igual que la última vez (para que se ejecute al montar el componente). Ahora volver a Home y pinchar en un point para ver en consola que devuelve la información relativa a ese point. Mostremos esa información.
+8. declarar el useState point con valor inicial null. Ahora descomentar el if que va a actualizar el valor del hook con data.point y comentar el console.log.
+9. Copiar todo el return de Home.jsx para pegarlo en el return de Show.jsx. Borrar el h1. En la condición ahora queremos comprobar simplemente si point es true, y ya no necesitamos mapear nada, porque sólo mostraremos dicho point, así que borramos la línea del map y abajo los dos paréntesis que sobran. Borramos también el Link. En el else ahora ponemos de texto Punto no encontrado. Cambiar algún estilo.
+
+Ya sólo queda hacer las funcionalidades de actualizar y eliminar, que conllevan una dificultad añadida, porque el usuario no sólo debe estar autenticado, sino también autorizado para que sólo pueda actuar sobre sus points y no los de otro usuario.
+
+### 9. ACTUALIZAR UN POST
+1. Añadir un botón en cada página de point individual para actualizarlo. Para ello, en Show.jsx bajo el párrafo del body, crear un div que dentro tenga un Link de react-router-dom con el texto Update. Añadirle un atributo to como hicimos con el Link Show, que contenga la ruta acabada en el id del point.
+2. No queremos que aparezca este botón si el usuario no es dueño del point. Para ello, en AppContext.jsx recordemos que el useState "user" guarda la instancia del usuario que nos da la BD **si el token existe**. Por tanto la comprobación que vamos a hacer es que el id del usuario autenticado sea el mismo que el id del usuario del point. Así que en Show.jsx bajo el hook useParamas declaramos un useContext user con AppContext como argumento. Ahora tenemos acceso tanto al user como al point (que tiene los datos de su user).
+3. Ahora el nuevo div que hemos creado en Show.jsx con el Link para actualizar lo metemos en un ternario que compare las id. Recordar que esta declaración sería algo como "compara las ids y (&&) si son iguales, renderiza lo que sigue".
+    - Nota: Recordar que si en este punto no hubiera un usuario logueado, la aplicación petaría porque user.id sería null. Esto hay que arreglarlo.
+Ahora vamos a crear el componente para actualizar.
+4. En la carpeta Points crear el archivo Update.jsx con la función principal que devuelva un texto de prueba.
+5. En App.jsx crear la correspondiente ruta para este nuevo archivo. Para ello copiar la ruta de Create y pegarla la última, cambiando el path por "/points/update/:id" y el componente Create por Update. Comprobar que el link Update funciona mostrando el texto de prueba.
+6. Copiar todo el código de Create.jsx y pegarlo en Update.jsx sustituyendo lo que haya. Cambiar el nombre de la función principal por Update y de la función handleCreate por handleUpdate. Cambiar el endpoint en el fetch por un string vacío por ahora. Cambiar el método del fetch por "put". Descomentar el log de data en handleUpdate() para ver cualquier error inesperado. En el Markup (return de la función principal) cambiar el h1 por "Modifica tu punto" y cambiar la función del onSubmit por handleUpdate. Por último cambiar el texto del botón por Actualizar.
+7. Ahora debemos coger el id del point desde la URL. Para ello volvemos a usar el hook useParams declarándolo arriba del todo de la función principal en Update.jsx.
+8. En el fetch de handleUpdate() ponemos la URL dinámica `/api/points/${id}` donde id es el hook useParams que hemos creado.
+9. Volviendo a Show.jsx copiamos la función getPoint() y la pegamos en Update.jsx bajo las declaraciones de hooks, y en el if cambiamos el setPoint(data.point) por setFormData() para pasarle un objeto por parámetro com las propiedades title y body cuyos valores cogeremos de data.
+    - Nota: Esto es muy **refactorizable**. De hecho estaría bien separar todas las peticiones en un archivo aparte.
+10. Queremos que ésta función getPoint() de Update.jsx sea ejecutada al montar el componente. Por tanto lo haremos como siempre con un useEffect al final de la función principal, justo antes del return. Ahora si le damos a update en un point veremos los campos rellenados con la información actual de dicho point. Ya podemos actualizarlo y vemos el resultado en consola. Ahora el problema es que si accedemos a un point que no corresponde al usuario logueado, y manualmente modificamos la URL añadiéndole update antes del id, podemos intentar hackear el point ajeno y actualizarlo, pero en el intento recibiremos un error 403 (Forbidden), ya que las políticas implementadas en Laravel no lo permitirán y veremos en consola el mensaje "You do not own this point". Esto está bien pero es mejor todavía si evitamos que el usuario pueda acceder a esa URL. Hagámoslo.
+11. Primero importamos el usuario en Update.jsx añadiéndolo junto al token en el hook useContext.
+12. Ahora en la función getPoint() de Update.jsx al principio del if metemos otro if que compruebe si el user_id del point no coincide con el id del usuario para que en tal caso redirija a Home. Probar que funciona la casuística.
+
+### 10. BORRAR UN POINT
+1. Esta funcionalidad se producirá en el componente Show.jsx así que en dicho archivo en el return principal bajo el Link, añadir un form con un listener onSubmit que ejecute la función handleDelete, y dentro un botón con el texto "Eliminar". Vamos a crear la función.
+2. En Show.jsx bajo la función getPoint creamos dicha función que será asíncrona, con el evento por parámetro y que contiene:
+    - El correspondiente preventDefault().
+    ...Un momento. Si en este punto mostramos un post del usuario logueado ya vemos el botón, pero al recargar la página la vista peta, porque está buscando un id de user que ahora mismo es null. Para evitar esto, en el ternario que compara el id del usuario con el user_id del post (que es justo donde se produce el null) añadimos antes la condición de que dicho usuario exista. Continuamos con la función.
+    - El request a nuestra API (el fetch de siempre) con el mismo endpoint dinámico que usamos para el update.
+    - El método "delete" y el header con el token (añadir el token al hook useContext para poder leerlo en Show.jsx).
+    - la propiedad data con la respuesta en JSON como siempre.
+    - Logueamos el data (estas dos últimas líneas no son necesarias pero bueno).
+    - Todo esto se supone que va a ocurrir sólo si el usuario existe y es dueño del post, así que justo bajo el preventDefault lo controlamos con un if y metemos todo lo siguiente de la función dentro.
+    - Por último, dentro del if pero al final de éste ponemos otro if para que si la respuesta es ok rediriga a Home con navigate (recuerda antes declarar arriba el correspondiente hook useNavigate).
+Probar borrar un point.
+
+## NOTAS ADICIONALES
+- Hay mucho que refactorizar en esta aplicación. Por ejemplo las peticiones a la API podrían separarse en un archivo aparte.
+- También sería interesante mostrar los mensajes que nos da la API en mensajes Toast.
+- Prestar atención a los problemillas ocultos que muestra la consola del navegador e ir solucionándolos uno a uno.
+- Y muchas cosas más que ya se nos irán ocurriendo.

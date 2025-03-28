@@ -51,14 +51,14 @@ export default function Login() {
         <div>
           <input
             type="password"
-            placeholder="Password"
+            placeholder="Contraseña"
             value={formData.password}
             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
           />
           {errors.password && <p className="error">{errors.password[0]}</p>}
         </div>
 
-        <button className="primary-btn">Login</button>
+        <button className="primary-btn">Iniciar sesión</button>
       </form>
     </>
   );

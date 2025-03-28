@@ -40,12 +40,12 @@ export default function Register() {
 
   return (
     <>
-      <h1 className="title">Register a new account</h1>
+      <h1 className="title">Registrar una nueva cuenta</h1>
       <form onSubmit={handleRegister} className="w-1/2 mx-auto space-y-6">
         <div>
           <input
             type="text"
-            placeholder="Name"
+            placeholder="Nombre"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           />
@@ -66,7 +66,7 @@ export default function Register() {
         <div>
           <input
             type="password"
-            placeholder="Password"
+            placeholder="Contraseña"
             value={formData.password}
             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
           />
@@ -76,12 +76,12 @@ export default function Register() {
         <div>
           <input
             type="password"
-            placeholder="Confirm Password"
+            placeholder="Confirmar contraseña"
             value={formData.password_confirmation}
             onChange={(e) => setFormData({ ...formData, password_confirmation: e.target.value })}
           />
         </div>
-        <button className="primary-btn">Register</button>
+        <button className="primary-btn">Registrarse</button>
       </form>
     </>
   );
