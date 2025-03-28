@@ -21,6 +21,27 @@ export default function Show() {
     }
   }
 
+  async function handleDelete(e) {
+    e.preventDefault();
+
+    if (user && user.id === point.user_id) {
+      /* Petición de borrado de un post. */
+      const res = await fetch(`/api/points/${id}`, {
+        method: "delete",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+  
+      const data = await res.json();
+      console.log(data);
+
+      if (res.ok) {
+        navigate("/");
+      }
+    }
+  }
+
   useEffect(() => {
     getPoint();
   }, []);
@@ -46,6 +67,12 @@ export default function Show() {
           >
             Modificar
           </Link>
+
+          <form onSubmit={handleDelete}>
+              <button className="bg-red-500 text-white text-sm rounded-lg px-3 py-1">
+                Eliminar
+              </button>
+            </form>
           </div>}
         </div>
       ) : (

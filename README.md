@@ -140,3 +140,22 @@ Ahora vamos a crear el componente para actualizar.
 10. Queremos que ésta función getPoint() de Update.jsx sea ejecutada al montar el componente. Por tanto lo haremos como siempre con un useEffect al final de la función principal, justo antes del return. Ahora si le damos a update en un point veremos los campos rellenados con la información actual de dicho point. Ya podemos actualizarlo y vemos el resultado en consola. Ahora el problema es que si accedemos a un point que no corresponde al usuario logueado, y manualmente modificamos la URL añadiéndole update antes del id, podemos intentar hackear el point ajeno y actualizarlo, pero en el intento recibiremos un error 403 (Forbidden), ya que las políticas implementadas en Laravel no lo permitirán y veremos en consola el mensaje "You do not own this point". Esto está bien pero es mejor todavía si evitamos que el usuario pueda acceder a esa URL. Hagámoslo.
 11. Primero importamos el usuario en Update.jsx añadiéndolo junto al token en el hook useContext.
 12. Ahora en la función getPoint() de Update.jsx al principio del if metemos otro if que compruebe si el user_id del point no coincide con el id del usuario para que en tal caso redirija a Home. Probar que funciona la casuística.
+
+### 10. BORRAR UN POINT
+1. Esta funcionalidad se producirá en el componente Show.jsx así que en dicho archivo en el return principal bajo el Link, añadir un form con un listener onSubmit que ejecute la función handleDelete, y dentro un botón con el texto "Eliminar". Vamos a crear la función.
+2. En Show.jsx bajo la función getPoint creamos dicha función que será asíncrona, con el evento por parámetro y que contiene:
+    - El correspondiente preventDefault().
+    ...Un momento. Si en este punto mostramos un post del usuario logueado ya vemos el botón, pero al recargar la página la vista peta, porque está buscando un id de user que ahora mismo es null. Para evitar esto, en el ternario que compara el id del usuario con el user_id del post (que es justo donde se produce el null) añadimos antes la condición de que dicho usuario exista. Continuamos con la función.
+    - El request a nuestra API (el fetch de siempre) con el mismo endpoint dinámico que usamos para el update.
+    - El método "delete" y el header con el token (añadir el token al hook useContext para poder leerlo en Show.jsx).
+    - la propiedad data con la respuesta en JSON como siempre.
+    - Logueamos el data (estas dos últimas líneas no son necesarias pero bueno).
+    - Todo esto se supone que va a ocurrir sólo si el usuario existe y es dueño del post, así que justo bajo el preventDefault lo controlamos con un if y metemos todo lo siguiente de la función dentro.
+    - Por último, dentro del if pero al final de éste ponemos otro if para que si la respuesta es ok rediriga a Home con navigate (recuerda antes declarar arriba el correspondiente hook useNavigate).
+Probar borrar un point.
+
+## NOTAS ADICIONALES
+- Hay mucho que refactorizar en esta aplicación. Por ejemplo las peticiones a la API podrían separarse en un archivo aparte.
+- También sería interesante mostrar los mensajes que nos da la API en mensajes Toast.
+- Prestar atención a los problemillas ocultos que muestra la consola del navegador e ir solucionándolos uno a uno.
+- Y muchas cosas más que ya se nos irán ocurriendo.
