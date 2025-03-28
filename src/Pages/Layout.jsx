@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
+import { AppContext } from "../Context/AppContext";
 
 export default function Layout() {
+  const { user, token, setUser, setToken } = useContext(AppContext);
+
   return (
     <>
       <header>
@@ -9,7 +13,10 @@ export default function Layout() {
             Home
           </Link>
 
-          <div className="space-x-4">
+          {user ? (
+            <p className="text-slate-400 text-xs">{user.name}</p>
+          ) : (
+            <div className="space-x-4">
             <Link to="/register" className="nav-link">
               Registrarse
             </Link>
@@ -18,6 +25,7 @@ export default function Layout() {
               Login
             </Link>
           </div>
+          )}
         </nav>
       </header>
 
