@@ -81,3 +81,24 @@ Aplicación web SPA (Single Page Application) creada con React-Router-DOM y Tail
     - Capturar la respuesta en json con el await como siempre, y mostrarla en consola.
     - En caso de que la respuesta sea ok, queremos resetear el token y el user state, borrar el token del almacenamiento local y redireccionar a Home, porqhe si autenticación debe redireccionarse a Home. Así que promero declaramos el hook useNavigate "navigate", y en la función logout() actualizamos el user y el token con setUser y setToken a null, borramos el elemento del local storage y redirigimos a Home. Ir a AppContext para exponer setUser en el value (es el que faltaba de los 4).
 3. Presionamos en Logout y recibimos el mensaje 405 en consola (Method Not Allowed) porque el método no puede ser GET, sino POST. Arreglarlo en el fetch.
+
+## PARTE 2: CRUD (CREATE - READ - UPDATE - DELETE)
+La primera funcionalidad va a ser que el usuario pueda realizar un CRUD básico de coordenadas, que se listarán en la pantalla principal. Se podrá acceder a cada punto pero sólo el usuario que haya registrado el punto podrá actualizar sus valores o eliminarlo.
+---
+### 7. CREAR PUNTO
+1. Registrar un nuevo usuario. Una vez estamos logueados con el token,
+2. En src/Pages crear la carpeta Posts, y dentro crear Create.jsx. Dentro crear la función principal.
+3. En el return de la función poner el título en un h1 y debajo, un form sin action, y dentro un div con un input tipo number con 5 decimales y con placeholder. Debajo del div poner otro div, y dentro otro input igual. Bajo este segundo div, poner un botón con el texto Crear.
+4. En Layout.jsx, en la parte del return correspondiente al usuario autenticado, copiar uno de los links y pegarlo bajo la línea que renderiza el welcome back cambiándole el path a /create y poniéndole el texto Nuevo punto.
+5. En App.jsx, copiar la ruta al login y pegarla debajo de ésta. Así estará protegida (si user es true, renderiza el componente Create, y si no, Login). Ya podemos ver el link Nuevo punto y pinchar en él.
+6. En Create.jsx, crear el hook useState formData cuyo valor inicial será un objeto con las propiedades longitude y latitude con valor 0.
+7. Crear la función asíncrona para crear points:
+    - preventDefault al evento.
+    - console.log de formData.
+    - En la etiqueta del form, evento onSubmit que la ejecute.
+    - En la etiqueta input la latitud, capturar con value la latitud, y con un listener onChange ejecutar el setter del hook formData (setFormData()). Éste setter acepta por parámetro un objeto con una copia (usando spread) de formData, y el valor de latitude. Luego copiar esas dos líneas (value y onChange) Y pegárselas al longitude cambiando la propiedad en ambas líneas. Ahora al pulsar el botón Crear obtenemos en consola el objeto con los valores iniciales a 0, o lo que introduzcamos.
+    - Crear el fetch con el endpoint /api/posts con el método post y el headers con el token que debemos importar con su correspondiente hook useContext(AppContext) arriba del todo de la función principal. Ponerle también body con los datos del form usando JSON.stringify.
+    - Como siempre, capturar la respuesta en data con el await y pasarle data al console.log.
+8. Ahora al pulsar Crear con los campos vacíos obtenemos los errores de validación correspondientes de nuestra API. Para usarlos, bajo el useState formData crear el useState de errors con un objeto vacío de estado inicial. Dentro de la función handleCreate, ponemos un if que ejecute el setter de errors cuando haya errores, y en el else redirija a Home. Declarar este navigate (el hook useNavigate de siempre) sobre el useContext.
+9. Para mostrar los errores, bajo la etiqueta input del title, renderizar los errores usando un ternario para cuando existan. Recordar que errors es un array, así que hay que especificar que queremos renderizar el texto (elemento 0). Copiar esta línea y pegar bajo el textarea cambiando latitude por longitude. Ahora al pulsar Create con los inputs vacíos observamos los correspondientes mensajes de error.
+10. Ahora creamos un point y lo vemos en consola. Tenemos los datos del point, y lo guardamos bien en la BD, pero no tenemos el nombre del usuario que lo ha escrito. Para ello hacemos unos cambios en PostController.php. En la función store() tenemos en el return el $point. Lo cambiamos por un array con clave 'point' y valor $point, y añadimos clave 'user' con valor $point->user (usando la relación Eloquent que devuelve el usuario al que pertenece el point). Ahora creamos un point para ver que obtenemos en consola un objeto con dos propiedades (point y user). Hacer este cambio también en los return de show() y update(). Ya podemos comentar el console.log que muestra el point al crearse.
