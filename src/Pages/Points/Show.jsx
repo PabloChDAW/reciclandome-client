@@ -40,6 +40,12 @@ export default function Show() {
           </div>
 
           {user && user.id === point.user_id && <div className="flex items-center justify-end gap-4">
+          <Link
+            to={`/points/update/${point.id}`}
+            className="bg-green-500 text-white text-sm rounded-lg px-3 py-1"
+          >
+            Modificar
+          </Link>
           </div>}
         </div>
       ) : (
