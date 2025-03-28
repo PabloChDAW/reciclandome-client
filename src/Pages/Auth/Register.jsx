@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 
 export default function Register() {
-  const { setToken } = useContext(AppContext); 
+  const { setToken } = useContext(AppContext);
 
   // Permite redireccionar automáticamente a una determinada ruta.
   const navigate = useNavigate();
@@ -34,22 +34,22 @@ export default function Register() {
       localStorage.setItem("token", data.token);
       setToken(data.token);
       navigate("/");
-      console.log(data);
+      // console.log(data);
     }
   }
 
   return (
     <>
-      <h1 className="title">Regístrate</h1>
+      <h1 className="title">Register a new account</h1>
       <form onSubmit={handleRegister} className="w-1/2 mx-auto space-y-6">
         <div>
           <input
             type="text"
-            placeholder="Nombre"
+            placeholder="Name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           />
-          {/* Si errors.name es true, renderiza el párrafo */}
+          {/* Si errors.name es true, renderizar el párrafo */}
           {errors.name && <p className="error">{errors.name[0]}</p>}
         </div>
 
@@ -66,7 +66,7 @@ export default function Register() {
         <div>
           <input
             type="password"
-            placeholder="Contraseña"
+            placeholder="Password"
             value={formData.password}
             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
           />
@@ -76,12 +76,12 @@ export default function Register() {
         <div>
           <input
             type="password"
-            placeholder="Confirmar contraseña"
+            placeholder="Confirm Password"
             value={formData.password_confirmation}
             onChange={(e) => setFormData({ ...formData, password_confirmation: e.target.value })}
           />
         </div>
-        <button className="primary-btn">Registrarse</button>
+        <button className="primary-btn">Register</button>
       </form>
     </>
   );
