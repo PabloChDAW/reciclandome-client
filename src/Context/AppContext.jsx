@@ -18,7 +18,6 @@ export default function AppProvider({ children }) {
 
     if (res.ok) {
       setUser(data);
-    // console.log(data);
     }
   }
 

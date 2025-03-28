@@ -36,7 +36,7 @@ export default function Login() {
 
   return (
     <>
-      <h1 className="title">Login to your account</h1>
+      <h1 className="title">Accede a tu cuenta</h1>
       <form onSubmit={handleLogin} className="w-1/2 mx-auto space-y-6">
         <div>
           <input
