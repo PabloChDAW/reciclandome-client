@@ -79,7 +79,7 @@ Aplicación web SPA (Single Page Application) creada con React-Router-DOM y Tail
     - Evitar la recarga (preventDefault()).
     - Crear el response con un fetch al endpoint /api/logout. Recordar que este endpoint está protegido requiriendo un token, así que lo incluimos en la cabecera (headers), y para acceder a él, lo incluimos en el hook useContext declarado arriba en la función Layout().
     - Capturar la respuesta en json con el await como siempre, y mostrarla en consola.
-    - En caso de que la respuesta sea ok, queremos resetear el token y el user state, borrar el token del almacenamiento local y redireccionar a Home, porqhe si autenticación debe redireccionarse a Home. Así que promero declaramos el hook useNavigate "navigate", y en la función logout() actualizamos el user y el token con setUser y setToken a null, borramos el elemento del local storage y redirigimos a Home. Ir a AppContext para exponer setUser en el value (es el que faltaba de los 4).
+    - En caso de que la respuesta sea ok, queremos resetear el token y el user state, borrar el token del almacenamiento local y redireccionar a Home, porque si autenticación debe redireccionarse a Home. Así que primero declaramos el hook useNavigate "navigate", y en la función logout() actualizamos el user y el token con setUser y setToken a null, borramos el elemento del local storage y redirigimos a Home. Ir a AppContext para exponer setUser en el value (es el que faltaba de los 4).
 3. Presionamos en Logout y recibimos el mensaje 405 en consola (Method Not Allowed) porque el método no puede ser GET, sino POST. Arreglarlo en el fetch.
 
 ## PARTE 2: CRUD (CREATE - READ - UPDATE - DELETE)

@@ -13,6 +13,9 @@
 }
 
 @layer components {
+    /*otros inputs: date, time, color, range, checkbox, radio, file, hidden, image, month, week. 
+    Se puede separar estos y los nombrados arriba para aplicar diferentes directivas de estilos por defecto :)
+    TODO: Definir directivas estilos predeterminadas*/
     input[type="text"],
     input[type="email"],
     input[type="password"],
