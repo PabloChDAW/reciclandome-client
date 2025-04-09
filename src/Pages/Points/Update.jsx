@@ -22,7 +22,10 @@ export default function Update() {
 
     if (res.ok) {
       if (data.point.user_id !== user.id) {
-        navigate("/");
+        navigate("/"); //Redirección a home en caso de que la id del usuario logueado y la 
+        // id del usuario a la que pertenece el punto no sean coincidentes. De esta manera los usuarios 
+        // no tendrán oportunidad ni si quiera de acceder a realizar acciones para las que no tienen permisos
+        // (en este caso actualizar el punto)
       }
 
       setFormData({
