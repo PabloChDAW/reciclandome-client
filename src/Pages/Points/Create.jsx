@@ -1,16 +1,21 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
+import Map2 from "../../Components/Map2";
 
 export default function Create() {
   const navigate = useNavigate();
   const {token} = useContext(AppContext);
   const [formData, setFormData] = useState({
-    latitude: 0,
-    longitude: 0,
+    latitude: 40.4168,
+    longitude: -3.7038,
   });
 
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    
+  }, [formData]);
 
   async function handleCreate(e) {
     e.preventDefault();
@@ -39,6 +44,7 @@ export default function Create() {
   return (
     <>
       <h1 className="title">Crear un nuevo punto</h1>
+      <Map2 latitud={formData.latitude} longitud={formData.longitude} setFormData={setFormData}></Map2>
       <form onSubmit={handleCreate} className="w-1/2 mx-auto space-y-6">
         <div>
           <input
