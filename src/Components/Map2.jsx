@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import * as maptilersdk from '@maptiler/sdk';
 import "@maptiler/sdk/dist/maptiler-sdk.css";
 import './Map2.css';
@@ -8,6 +8,7 @@ export default function Map2({ latitud, longitud, setFormData}){
   const zoom = 14;
   const marker = useRef(null);
   maptilersdk.config.apiKey = 'bmHH9ekzKdndbQ2GrZEm';
+  const [noSeCentra, setNoSeCentra] = useState(false);
 
   useEffect(() => {
     if (!latitud || !longitud || map.current) return;
@@ -39,7 +40,8 @@ export default function Map2({ latitud, longitud, setFormData}){
     const handleClick = (e) => {
       const { lng, lat } = e.lngLat;
       console.log("Coordenadas click:", lng, lat);
-
+        
+      setNoSeCentra(true)
       setFormData(
         {latitude: lat,
         longitude: lng,
@@ -47,9 +49,14 @@ export default function Map2({ latitud, longitud, setFormData}){
       }
 
     map.current.on('click', handleClick);
-
+    
     marker.current.setLngLat([longitud, latitud]);
-    map.current.setCenter([longitud, latitud]);
+
+    if(!noSeCentra){
+        map.current.setCenter([longitud, latitud]);
+    }
+    setNoSeCentra(false);
+    
 
     return () => {
       if (map.current) {

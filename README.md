@@ -162,9 +162,41 @@ Probar borrar un point.
 
 ## NOTAS ADICIONALES
 - Hay mucho que refactorizar en esta aplicación. Por ejemplo las peticiones a la API podrían separarse en un archivo aparte.
-- También sería interesante mostrar los mensajes que nos da la API en mensajes Toast.
+- También sería interesante mostrar los mensajes que nos da la API en mensajes Toastr.
 - Prestar atención a los problemillas ocultos que muestra la consola del navegador e ir solucionándolos uno a uno.
 - Y muchas cosas más que ya se nos irán ocurriendo.
 
 ## TODO
-- Elaborar necesidades futuras del proyecto
+
+### PRIORIDAD HIGH
+
+- Hacer componente de mapa de show (Rafa)
+- Hacer pagina de show con: 
+- {
+  - Mapa con todos los puntos 
+  - Panel al hacer click con la información siguiente:
+  - Contacto, dirección, y el botón ver más que tiene la funcionalidad actual
+- } (Jesús)
+- Hacer Figma con las mejoras propuestas (Iván)
+
+### PRIORIDAD MEDIUM
+- Peticiones api a un archivo api.js y refactorizar código (Rafa/Jesus)
+- Componente mapa con puntos del usuario 
+- Página de Perfil Mostrando eso y más detalles por definir en perfil
+- Ir implementado estilos por defecto en el archivo de directivas App.css
+- Página de profile (Puntos que pertenecen al usuario) Tiene que tener todos los puntos
+  en mapa en chincheta y que cuando pique se abra el mismo panel con show con los botones de
+  ver más y también el botón de editar que lleve a la página de actualizar dicho punto.
+  (Rafa/Jesús)
+
+### PRIORIDAD LOW
+- Mostrar mensajes de confirmación de login (o fallo) en la página
+- Puntos favoritos
+- Implementar Rol moderador 
+- Implementar en la BBDD una tabla de peticiones
+- Implementar petición de creación de punto (en lugar de crearlo directamente)
+- Hacer que los mensajes de confirmación o fallo funcionen Toastr
+- Funcionalidad: Encontrar puntos cerca de mi
+- Funcionalidad: Encontrar mi ubicación actual para setear esos puntos por defecto al
+- crear punto
+- ...................
