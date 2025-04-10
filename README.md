@@ -170,6 +170,7 @@ Probar borrar un point.
 
 ### PRIORIDAD HIGH
 
+- Incluir Mapa de crear en actualizar (Rafa)
 - Hacer componente de mapa de show (Rafa)
 - Hacer pagina de show con: 
 - {
