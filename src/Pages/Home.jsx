@@ -29,7 +29,6 @@ export default function Home() {
 
     if (res.ok) {
       setPoints(data);
-      console.log('el data es:'+data)
     }
   }
 
@@ -41,7 +40,7 @@ export default function Home() {
     <>
       <h1 className="title">Puntos de reciclaje</h1>
       <Map3 points={points}></Map3> 
-      {/* QUE NO ME ENTERE YO QUE SE TE OLVIDA AÑADIR AQUÍ EL PROP, EIN? KEMENFADO >:( */}
+      {/* QUE NO ME ENTERE YO QUE SE TE OLVIDA AÑADIR AQUÍ ARRIBA EL PROP, EIN? KEMENFADO >:( */}
       {/* <InfoBox point={selectedPoint} /> Y esto para el componente*/}
       {points.length > 0 ? (
         points.map((point) => (

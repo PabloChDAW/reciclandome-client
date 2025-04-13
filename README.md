@@ -201,4 +201,6 @@ Probar borrar un point.
 - Funcionalidad: Encontrar mi ubicación actual para setear esos puntos por defecto al
 - crear punto
 - Hacer que los inputs sean componentes independientes
+- Implementar aviso de coordenadas inválidas o mapa por defecto
+- En lugar de borrar directamente, cuadro de dialogo que pida por confirmación
 - ...................

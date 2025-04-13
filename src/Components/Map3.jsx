@@ -16,14 +16,14 @@ export default function Map3({points}){ //Aquí debes añadir como prop el event
             map.current = new maptilersdk.Map({
                 container: mapContainer.current,
                 style: maptilersdk.MapStyle.STREETS,
-                center: [-3.70275,40.41831], /** <--
+                center: [-3.7038,40.4168], /** <-- Aquí no hace falta sanitización. El 0 es bien recibido, 
+                supongo por las múltiples chinchetas
                 * TODO <-- Estas pueden ser las coordenadas del GPS para centrarnos donde estamos y ver qué hay cerca
                 */
                 zoom: zoom
               });
         }
         points.forEach(point => {
-            console.log(point)
             const latitude = parseFloat(point.latitude);
             const longitude = parseFloat(point.longitude);
             marker.current = new maptilersdk.Marker({

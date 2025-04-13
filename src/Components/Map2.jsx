@@ -12,57 +12,63 @@ export default function Map2({ latitud, longitud, setFormData}){
 
   useEffect(() => {
     if (!latitud || !longitud || map.current) return;
+      if (latitud >= -90 && latitud <= 90 && longitud >= -180 && longitud <= 180) {
+        latitud = parseFloat(latitud)
+        longitud = parseFloat(longitud)
+        map.current = new maptilersdk.Map({
+          container: mapContainer.current,
+          style: maptilersdk.MapStyle.STREETS,
+          center: [longitud, latitud],
+          zoom: zoom
+        });
+        marker.current = new maptilersdk.Marker({
+        color: "#4F46E5", /* Morado rexulón */
+      draggable: true,   /* Para poder arrastrarla */
+        })
+        .setLngLat([longitud, latitud])
+        .addTo(map.current);
 
-    map.current = new maptilersdk.Map({
-      container: mapContainer.current,
-      style: maptilersdk.MapStyle.STREETS,
-      center: [longitud, latitud],
-      zoom: zoom
-    });
-    marker.current = new maptilersdk.Marker({
-    color: "#4F46E5", /* Morado rexulón */
-  draggable: true,   /* Para poder arrastrarla */
-    })
-    .setLngLat([longitud, latitud])
-    .addTo(map.current);
-
-    return () => {
-      if (map.current) {
-        map.current.remove();
-        map.current = null;
+        return () => {
+          if (map.current) {
+            map.current.remove();
+            map.current = null;
+          }
+        };
+      } else {
+        console.error('Coordenadas inválidas:', latitud, longitud);
+        //TODO: Implementar un aviso de coordenadas inválidas o mapa por defecto.
       }
-    };
   }, []);
 
   useEffect(() => {
     if (!map.current) return;
-    
-    const handleClick = (e) => {
-      const { lng, lat } = e.lngLat;
-      console.log("Coordenadas click:", lng, lat);
-        
-      setNoSeCentra(true)
-      setFormData(
-        {latitude: lat,
-        longitude: lng,
-    });
+      const handleClick = (e) => {
+        const { lng, lat } = e.lngLat;
+        console.log("Coordenadas click:", lng, lat);
+          
+        setNoSeCentra(true)
+        setFormData(
+          {latitude: lat,
+          longitude: lng,
+      });
+        }
+
+      map.current.on('click', handleClick);
+      
+      marker.current.setLngLat([longitud, latitud]);
+
+      if(!noSeCentra){
+          map.current.setCenter([longitud, latitud]);
       }
+      setNoSeCentra(false);
+      
 
-    map.current.on('click', handleClick);
-    
-    marker.current.setLngLat([longitud, latitud]);
-
-    if(!noSeCentra){
-        map.current.setCenter([longitud, latitud]);
-    }
-    setNoSeCentra(false);
-    
-
-    return () => {
-      if (map.current) {
-        map.current.off('click', handleClick);
-      }
-    };
+      return () => {
+        if (map.current) {
+          map.current.off('click', handleClick);
+        }
+      };
+      
   }, [latitud, longitud]); 
 
   return (
