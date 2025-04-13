@@ -171,7 +171,7 @@ Probar borrar un point.
 ### PRIORIDAD HIGH
 
 - Incluir Mapa de crear en actualizar (Rafa)
-- Hacer componente de mapa de show (Rafa)
+- Hacer componente de mapa de show (Rafa) [HECHO]
 - Hacer pagina de show con: 
 - {
   - Mapa con todos los puntos 
@@ -189,15 +189,16 @@ Probar borrar un point.
   en mapa en chincheta y que cuando pique se abra el mismo panel con show con los botones de
   ver más y también el botón de editar que lleve a la página de actualizar dicho punto.
   (Rafa/Jesús)
+- Implementar que la chincheta arrastrable, al ser soltada, de igual forma actualice las coordenadas en inputs
 
 ### PRIORIDAD LOW
 - Mostrar mensajes de confirmación de login (o fallo) en la página
 - Puntos favoritos
 - Implementar Rol moderador 
-- Implementar en la BBDD una tabla de peticiones
 - Implementar petición de creación de punto (en lugar de crearlo directamente)
 - Hacer que los mensajes de confirmación o fallo funcionen Toastr
 - Funcionalidad: Encontrar puntos cerca de mi
 - Funcionalidad: Encontrar mi ubicación actual para setear esos puntos por defecto al
 - crear punto
+- Hacer que los inputs sean componentes independientes
 - ...................
