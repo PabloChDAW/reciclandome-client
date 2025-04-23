@@ -5,6 +5,9 @@ import Map3 from "../Components/Map3";
 export default function Home() {
   const [points, setPoints] = useState([]);
 
+  //-----------------------------------------------------
+  const [selectedPoint, setSelectedPoint] = useState(null);
+
   // HOLA DE NUEVO YISUCRAIS :) 
   // Aquí te dejo esto. Un estado junto con el evento.
   // Te he dejado todo esto porque la estructura que hay que seguir es esta y de otra forma tendríamos muchos spagetis.
@@ -39,12 +42,29 @@ export default function Home() {
   return (
     <>
       <h1 className="title">Puntos de reciclaje</h1>
-      <Map3 points={points}></Map3> 
+      
+      {/*------------------------------------------Añadido onMarkerclick y lo siguiente*/}
+      <Map3 points={points} onMarkerClick={setSelectedPoint}></Map3> 
+
+      {selectedPoint && (
+        <div className="mt-4 p-4 border rounded-md border-blue-400 bg-blue-50">
+          <h2 className="text-lg font-bold mb-2">Punto Seleccionado</h2>
+          <p><strong>Latitud:</strong> {selectedPoint.latitude}</p>
+          <p><strong>Longitud:</strong> {selectedPoint.longitude}</p>
+          <p><strong>Usuario:</strong> {selectedPoint.user.name}</p>
+          <Link to={`/points/${selectedPoint.id}`} className="mt-2 inline-block bg-blue-600 text-white px-3 py-1 rounded-lg">
+            Ver más
+          </Link>
+        </div>
+      )}
+
+
+
       {/* QUE NO ME ENTERE YO QUE SE TE OLVIDA AÑADIR AQUÍ ARRIBA EL PROP, EIN? KEMENFADO >:( */}
       {/* <InfoBox point={selectedPoint} /> Y esto para el componente*/}
       {points.length > 0 ? (
         points.map((point) => (
-          <div key={point.id} className="mb-4 p-4 border rounded-md border-dashed border-slate-400">
+          <div key={point.id} className="mt-4 mb-4 p-4 border rounded-md border-dashed border-slate-400">
             <div className="mb-2 flex items-start justify-between">
               <div>
                 <p>Latitud: {point.latitude}</p>

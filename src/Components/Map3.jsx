@@ -3,13 +3,18 @@ import * as maptilersdk from '@maptiler/sdk';
 import "@maptiler/sdk/dist/maptiler-sdk.css";
 import './Map3.css';
 
-export default function Map3({points}){ //Aquí debes añadir como prop el evento onMarkerClick (clickar en chincheta)
+//añadimos el prop onMarkerClick
+export default function Map3({points, onMarkerClick }){ //Aquí debes añadir como prop el evento onMarkerClick (clickar en chincheta)
   const mapContainer = useRef(null);
   const map = useRef(null);
   const zoom = 4.5; //se puede ampliar a 14 cuando se tenga la funcionalidad del GPS
-  const marker = useRef(null);
+
+//pasamo de null a usar un array. Esto permite mantener múltiples referencias a los marcadores y eliminarlos correctamente después si es necesario.
+  const markers = useRef([]);
+  
   maptilersdk.config.apiKey = 'bmHH9ekzKdndbQ2GrZEm';
   console.log('Estructura de points:', points);
+  
   useEffect(() => {
     if(points && points.length>0){
         if(!map.current){
@@ -23,29 +28,48 @@ export default function Map3({points}){ //Aquí debes añadir como prop el event
                 zoom: zoom
               });
         }
+
+// Limpiar marcadores antiguos si hubiera
+      markers.current.forEach(marker => marker.remove());
+      markers.current = [];
+
         points.forEach(point => {
             const latitude = parseFloat(point.latitude);
             const longitude = parseFloat(point.longitude);
-            marker.current = new maptilersdk.Marker({
-            color: "#4F46E5", 
+
+            const newMarker = new maptilersdk.Marker({
+              color: "#476488", 
             })
             .setLngLat([longitude, latitude])
             .addTo(map.current)
-            // Este bloque de aquí añadiría el evento. ¡Tal vez quieras descomentarlo e investigar qué hace!
-            // .on('click', () => {
-            //     onMarkerClick(point); // Llama a la función pasada como prop
-            //   });
-            //   markers.current.push(marker); <-- Esto de aquí parece un estado, sabes como implementarlo, ¿Verdad?
+
+            newMarker.getElement().addEventListener('click', () => {
+              // Centrar el mapa en la chincheta
+              map.current.flyTo({
+                center: [longitude, latitude],
+                zoom: 14, // Puedes ajustar el zoom al nivel que prefieras
+                speed: 1.2, // Velocidad de la animación
+                curve: 1.42, // Suavidad de la animación
+                essential: true // Esto asegura que el movimiento ocurra incluso si el usuario ha reducido animaciones
+              });
+            
+              // Llamar a la función pasada como prop
+              onMarkerClick(point);
+            });
+
+          markers.current.push(newMarker);
         });
     }
     
     return () => {
       if (map.current) {
+//-----------------------------------
+        markers.current.forEach(marker => marker.remove());
         map.current.remove();
         map.current = null;
       }
     };
-  }, [points]);
+  }, [points, onMarkerClick]);
 
 
   return (
