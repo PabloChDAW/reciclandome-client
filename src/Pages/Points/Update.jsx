@@ -1,18 +1,26 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../Context/AppContext";
 import { useNavigate, useParams } from "react-router-dom";
+import Map2 from "../../Components/Map2";
 
 export default function Update() {
   const {id} = useParams();
   const navigate = useNavigate();
   const { token, user } = useContext(AppContext);
   const [formData, setFormData] = useState({
-    latitude: 0,
-    longitude: 0,
+    latitude: 40.4168,
+    longitude: -3.7038,
   });
 
-  const [errors, setErrors] = useState({});
+  // Seguridad y sanitización ---- //MapTyler no gestiona bien la iniciación en alguna coordenada 0.
+  // Estas líneas evitan que un tercero pueda denegarnos el servicio si consigue forzar la aplicación a iniciar
+  // Con valores válidos pero que MapTyler no puede gestionar (longitud o latitud 0)
+  const ε = 0.001;
+  const safeLat = formData.latitude === 0 ? ε : parseFloat(formData.latitude);
+  const safeLng = formData.longitude === 0 ? ε : parseFloat(formData.longitude);
+  // --------------
 
+  const [errors, setErrors] = useState({});
   async function getPoint() {
     /* Petición de datos de un point. */
     const res = await fetch(`/api/points/${id}`);
@@ -22,7 +30,10 @@ export default function Update() {
 
     if (res.ok) {
       if (data.point.user_id !== user.id) {
-        navigate("/");
+        navigate("/"); //Redirección a home en caso de que la id del usuario logueado y la 
+        // id del usuario a la que pertenece el punto no sean coincidentes. De esta manera los usuarios 
+        // no tendrán oportunidad ni si quiera de acceder a realizar acciones para las que no tienen permisos
+        // (en este caso actualizar el punto)
       }
 
       setFormData({
@@ -53,7 +64,6 @@ export default function Update() {
     }
 
     // console.log(formData);
-    console.log(data);
   }
 
   useEffect(() => {
@@ -63,6 +73,7 @@ export default function Update() {
   return (
     <>
       <h1 className="title">Modificar tu punto</h1>
+      <Map2 latitud={safeLat} longitud={safeLng} setFormData={setFormData}></Map2>
       <form onSubmit={handleUpdate} className="w-1/2 mx-auto space-y-6">
         <div>
           <input

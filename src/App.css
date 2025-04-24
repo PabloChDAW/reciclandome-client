@@ -9,10 +9,24 @@
 @layer base {
     body {
         font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    code {
+        font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
     }
 }
 
 @layer components {
+    /*otros inputs: date, time, color, range, checkbox, radio, file, hidden, image, month, week. 
+    Se puede separar estos y los nombrados arriba para aplicar diferentes directivas de estilos por defecto :)
+    TODO: Definir directivas estilos predeterminadas*/
     input[type="text"],
     input[type="email"],
     input[type="password"],

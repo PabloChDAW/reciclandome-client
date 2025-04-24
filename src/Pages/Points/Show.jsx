@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
-
+import Map from "../../Components/Map";
 export default function Show() {
   // console.log(useParams());
   const {id} = useParams();
@@ -59,7 +59,7 @@ export default function Show() {
               </small>
             </div>
           </div>
-
+          <Map latitud={point.latitude} longitud={point.longitude}></Map>
           {user && user.id === point.user_id && <div className="flex items-center justify-end gap-4">
           <Link
             to={`/points/update/${point.id}`}
