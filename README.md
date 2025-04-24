@@ -18,7 +18,7 @@ Aplicación web SPA (Single Page Application) creada con React-Router-DOM y Tail
 
 ### 2. COMENZAR A DESARROLLAR EL PROYECTO
 1. Levantar la API reciclandome-api abriendo dicho proyecto y ejecutando `php artisan serve`.
-2. Configurar Vite con vite.config.js añadiendo el servidor como proxy, con la URL y los headers. Esto reducirá el código cada vez que tengamos que implementar un fetch (sólo habrá que poner api/user, api/posts, etc).
+2. Configurar Vite con vite.config.js añadiendo el servidor como proxy, con la URL y los headers. Esto reducirá el código cada vez que tengamos que implementar un fetch (sólo habrá que poner api/user, api/points, etc).
 3. En src/App.jsx importar BrowserRouter, Routes y Route de "react-router-dom y en el return anidamos Route (donde definiremos el layout poniendo el path al homepage y el elemento que renderizará) en Routes y en BrowserRouter. Dentro definimos la ruta a Home que será la misma que su padre ('/').
 4. En src crear el directorio Pages y dentro los archivos Layout.jsx y Home.jsx
 5. En Home.jsx crear la función que devuelva un simple h1 por ahora, y lo mismo en Layout.jsx pero que devuelva un header con un nav con el link a Home (usando Link de react-router-dom) y un main con el Outlet (de react-router-dom también). Importamos ambos elementos en App.jsx. Ejecutamos `npm run dev` para ver la aplicación en el navegador.
@@ -114,7 +114,7 @@ la carga del usuario al mismo tiempo que se van recogiendo los puntos, lo que ev
 Ahora vemos que en la respuesta se incluye toda la información del usuario que crea cada point.
 1. Para mostrar los points en Home.jsx, crear el hook useState points con un array vacío como estado inicial. Luego dentro de un if en el getPoints() para cuando la respuesta sea ok, actualizar el estado de points con los datos de la respuesta (data) y comentar el console.log.
 2.  En el return bajo el h1, usando un ternario para cuando haya points (points.length > 0) mapear data para mostrarlos (esto se hace mediante un div y asignandole una key, que normalmente se requiere que sea un campo identificativo. React usa este dato para decidir cuando volver a renderizar y qué datos son los que han cambiado. No usar key o usar un campo no identificativo como por ejemplo latitud + longitud o el argumento index del bucle causaría problemas de mostrado en el front), y si no hay ninguno, mostrar un párrafo diciéndolo. Al mostrarlos usar un h2 para el título, un small para el usuario que lo creó y la fecha de creación usando la clase Date con el método toLocaleTimeString(), y otro párrafo para el body del point. Esta clase y método muestran la fecha en nuestra zona horaria.
-3. Probar hacer logout, registrar un nuevo usuario y crear un nuevo post. Lo siguiente es crear páginas individuales para cada point.
+3. Probar hacer logout, registrar un nuevo usuario y crear un nuevo point. Lo siguiente es crear páginas individuales para cada point.
 
 ### 8. MOSTRAR UN POINT CONCRETO
 1. Crear un Link (de react-router-dom) dentro de cada point con el texto Ver más. Ponerte el atributo to con la ruta (`/points/${point.id}`). Ahora si pinchamos en alguno de estos links, nos muestra en la url el id de ese point. Ahora toca crear el componente y la ruta.
