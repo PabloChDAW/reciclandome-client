@@ -35,6 +35,9 @@ export default function Layout() {
           <Link to="/" className="nav-link">
             Home
           </Link>
+          <Link to="/shop" className="nav-link">
+            Shop
+          </Link>
 
           {user ? (
             <div className="flex items-center space-x-4">

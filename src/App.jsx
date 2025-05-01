@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Layout from './Pages/Layout';
 import Home from './Pages/Home';
+import Shop from './Pages/Shop'
 import Register from './Pages/Auth/Register';
 import Login from './Pages/Auth/Login';
 import { useContext } from 'react';
@@ -18,6 +19,7 @@ export default function App() {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path='/shop' element={<Shop />} />
           <Route path='/register' element={user ? <Home /> : <Register />} />
           <Route path='/login' element={user ? <Home /> : <Login />} />
           <Route path='/create' element={user ? <Create /> : <Login />} />
