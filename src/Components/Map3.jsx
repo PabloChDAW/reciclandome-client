@@ -4,7 +4,7 @@ import "@maptiler/sdk/dist/maptiler-sdk.css";
 import './Map3.css';
 
 //añadimos el prop onMarkerClick
-export default function Map3({points, onMarkerClick }){ //Aquí debes añadir como prop el evento onMarkerClick (clickar en chincheta)
+export default function Map3({points, onMarkerClick }){
   const mapContainer = useRef(null);
   const map = useRef(null);
   const zoom = 4.5; //se puede ampliar a 14 cuando se tenga la funcionalidad del GPS
@@ -63,7 +63,6 @@ export default function Map3({points, onMarkerClick }){ //Aquí debes añadir co
     
     return () => {
       if (map.current) {
-//-----------------------------------
         markers.current.forEach(marker => marker.remove());
         map.current.remove();
         map.current = null;
