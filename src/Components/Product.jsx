@@ -1,8 +1,9 @@
 import React from 'react';
 
-const Product = ({ product }) => {
-  // Desestructuramos las propiedades del producto
-  const {id, name, description, price, stock} = product;
+const Product = ({ product, onAddToCart }) => {
+  const { id, name, description, price, stock } = product;
+
+  const isOutOfStock = stock === 0;
 
   return (
     <div className="product-card p-4 border rounded-lg shadow-md mb-4">
@@ -16,13 +17,22 @@ const Product = ({ product }) => {
         <strong>Precio:</strong> ${price}
       </p>
 
-      <p className="text-sm text-gray-600">
-        <strong>Stock:</strong> {stock} unidades disponibles
+      <p className={`text-sm ${isOutOfStock ? 'text-red-600' : 'text-gray-600'}`}>
+        <strong>Stock:</strong>{' '}
+        {isOutOfStock ? 'Sin stock' : `${stock} unidades disponibles`}
       </p>
 
       <div className="mt-4">
-        <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
-          Agregar al carrito
+        <button
+          className={`px-4 py-2 rounded-lg ${
+            isOutOfStock
+              ? 'bg-gray-400 cursor-not-allowed'
+              : 'bg-blue-500 text-white hover:bg-blue-600'
+          }`}
+          disabled={isOutOfStock}
+          onClick={() => onAddToCart(product)}
+        >
+          {isOutOfStock ? 'Agotado' : 'Agregar al carrito'}
         </button>
       </div>
     </div>
