@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import Layout from './Pages/Layout';
-import HomePage from './Pages/HomePage';
+import HomePage from './Pages/Home';
 import Shop from './Pages/Shop'
 import Register from './Pages/Auth/Register';
 import Login from './Pages/Auth/Login';
@@ -50,8 +50,8 @@ function AppInner() {
       <TopHeader />
       {!isHome && !isShop && <Header />}
       <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route index element={<HomePage />} />
+          <Route path="/" element={<Home />} />
+          <Route index element={<Home/>} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/contact" element={<ContactPage />} />
