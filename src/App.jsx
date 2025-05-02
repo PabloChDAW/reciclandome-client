@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Layout from './Pages/Layout';
 import Home from './Pages/Home';
+import HomePage from './Pages/HomePage';
 import Shop from './Pages/Shop'
 import Register from './Pages/Auth/Register';
 import Login from './Pages/Auth/Login';
@@ -12,6 +13,19 @@ import Show from './Pages/Points/Show';
 import Update from './Pages/Points/Update';
 import Cart from './Pages/Cart'; // Asegúrate de que la ruta es correcta
 
+import Header from "./Components/Header";
+import TopHeader from './Components/TopHeader';
+import Footer from "./Components/Footer";
+import Footer2 from "./Components/FooterLogin";
+import AboutPage from "./Pages/AboutPage";
+import BlogPage from "./Pages/BlogPage";
+import ContactPage from "./Pages/ContactPage";
+import ShopPage from "./Pages/ShopPage";
+import PoliticaPrivacidad from "./Pages/PoliticaPrivacidad";
+import PoliticaCookies from "./Pages/Cookies";
+import AvisoLegal from "./Pages/AvisoLegal";
+import ScrollToTop from "./Components/ScrollToTop.JSX";
+
 export default function App() {
   const { user } = useContext(AppContext);
 
@@ -19,8 +33,11 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Layout />}>
-          <Route index element={<Home />} />
+          <Route index element={<HomePage />} />
           <Route path='/shop' element={<Shop />} />
+          <Route path='/about' element={<AboutPage />} />
+          <Route path='/blog' element={<BlogPage />} />
+          <Route path='/contact' element={<ContactPage />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/register' element={user ? <Home /> : <Register />} />
           <Route path='/login' element={user ? <Home /> : <Login />} />
