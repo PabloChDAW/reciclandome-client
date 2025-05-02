@@ -19,7 +19,7 @@ import AboutPage from "./Pages/AboutPage";
 import BlogPage from "./Pages/BlogPage";
 import ContactPage from "./Pages/ContactPage";
 import ShopPage from "./Pages/ShopPage";
-import { CartProvider } from './Context/CartContext';
+import { CartProvider } from './context/CartContext';
 import PoliticaPrivacidad from "./Pages/PoliticaPrivacidad";
 import PoliticaCookies from "./Pages/Cookies";
 import AvisoLegal from "./Pages/AvisoLegal";
