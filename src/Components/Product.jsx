@@ -14,7 +14,7 @@ const Product = ({ product, onAddToCart }) => {
       </p>
 
       <p className="text-lg font-semibold text-green-600">
-        <strong>Precio:</strong> ${price}
+        <strong>Precio:</strong> {price}€
       </p>
 
       <p className={`text-sm ${isOutOfStock ? 'text-red-600' : 'text-gray-600'}`}>

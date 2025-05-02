@@ -6,8 +6,17 @@ export default function AppProvider({ children }) {
   
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [user, setUser] = useState(null);
-  const [cart, setCart] = useState([]);
 
+    // Leer carrito desde localStorage al iniciar
+    const [cart, setCart] = useState(() => {
+      const storedCart = localStorage.getItem("cart");
+      return storedCart ? JSON.parse(storedCart) : [];
+    });
+
+    // Guardar carrito en localStorage cada vez que cambie
+    useEffect(() => {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }, [cart]);
 
   async function getUser() {
     /* Petición de autorización */
@@ -32,7 +41,7 @@ export default function AppProvider({ children }) {
 
   return (
     /* Al envolver la aplicación en un contexto podemos pasar valores como propiedades. */
-    <AppContext.Provider value={{ token, setToken, user, setUser, cart, setCart}}>
+    <AppContext.Provider value={{ token, setToken, user, setUser, cart, setCart }}>
       {children}
     </AppContext.Provider>
   );

@@ -10,6 +10,7 @@ import { AppContext } from './Context/AppContext';
 import Create from './Pages/Points/Create';
 import Show from './Pages/Points/Show';
 import Update from './Pages/Points/Update';
+import Cart from './Pages/Cart'; // Asegúrate de que la ruta es correcta
 
 export default function App() {
   const { user } = useContext(AppContext);
@@ -20,6 +21,7 @@ export default function App() {
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
           <Route path='/shop' element={<Shop />} />
+          <Route path='/cart' element={<Cart />} />
           <Route path='/register' element={user ? <Home /> : <Register />} />
           <Route path='/login' element={user ? <Home /> : <Login />} />
           <Route path='/create' element={user ? <Create /> : <Login />} />
