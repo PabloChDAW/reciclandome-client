@@ -110,7 +110,14 @@ export default function HeaderHome() {
 
                 {/* Login y carrito */}
                 <div className="hidden md:flex items-center gap-4 text-black relative">
-                    <FaUser className="text-2xl hover:scale-110 transform duration-700 cursor-pointer" />
+                        {/* Login */}
+                    <Link
+                        to="/login"
+                        className="flex items-center justify-center text-md transform duration-300 hover:scale-110 cursor-pointer transition-all ease-in-out"
+                    >
+                    Hola, Identificate
+                    </Link>
+
                     <div onClick={() => setIsCartOpen(!isCartOpen)} className="relative cursor-pointer">
                         <FaShoppingCart className="text-2xl hover:scale-110 transform duration-700" />
                         {/* Número de productos */}

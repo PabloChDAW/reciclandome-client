@@ -48,21 +48,26 @@ export default function Header() {
                         <Link to="/shop" className="block px-4 py-2 text-center text-[#131700]  hover:text-yellow-950 border-b-2 border-black pb-1">Tienda</Link>
                         <Link to="/contact" className="block px-4 py-2 text-center text-[#131700] hover:text-yellow-950 ">Contacto</Link>
                         {/* Login y carrito en móvil */}
-                        <div className="flex items-center justify-center gap-6 py-4 text-[#131700]">
-                            <FaUser className="text-2xl cursor-pointer" />
-                            <div onClick={() => {
-                                setIsCartOpen(true);
-                                setMenuOpen(false); // Cerramos menú al abrir carrito
-                            }} className="relative cursor-pointer">
-                                <FaShoppingCart className="text-2xl" />
+                        <div className="flex items-center justify-center gap-2 py-4 text-[#131700]">
+                            <Link to="/login" className="flex items-center justify-center text-sm hover:scale-110 transform duration-700 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#131700"><path d="M480-120v-80h280v-560H480v-80h280q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H480Zm-80-160-55-58 102-102H120v-80h327L345-622l55-58 200 200-200 200Z" /></svg>Login</Link>
+                            <Link to="/register" className="flex items-center justify-center text-sm hover:scale-110  transform duration-700 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#131700"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z" /></svg>Logout</Link>
+                            {/*
+                            <div
+                                onClick={() => {
+                                    setIsCartOpen(true);
+                                    setMenuOpen(false); // Cerramos menú al abrir carrito
+                                }}
+                                className="relative cursor-pointer"
+                            >
+                            <FaShoppingCart className="text-2xl" />
                                 {cartItems.length > 0 && (
-                                    <span className="absolute -top-2 -right-2 bg-[#BBF7D0] text-green-900 font-bold text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                                        {cartItems.length}
-                                    </span>
+                                <span className="absolute -top-2 -right-2 bg-[#BBF7D0] text-green-900 font-bold text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                                    {cartItems.length}
+                                </span>
                                 )}
                             </div>
+                            */}
                         </div>
-
                     </div>
                 )}
 
@@ -92,7 +97,13 @@ export default function Header() {
 
                 {/* Login y carrito */}
                 <div className="hidden md:flex items-center gap-4 text-black relative">
-                    <FaUser className="text-2xl cursor-pointer" />
+                    {/* Login */}
+                    <Link
+                        to="/login"
+                        className="flex items-center justify-center text-md transform duration-300 hover:scale-110 cursor-pointer transition-all ease-in-out"
+                    >
+                    Hola, Identificate
+                    </Link>
                     <div onClick={() => setIsCartOpen(!isCartOpen)} className="relative cursor-pointer">
                         <FaShoppingCart className="text-2xl" />
                         {/* Número de productos */}
@@ -134,7 +145,7 @@ export default function Header() {
                                         <div className="flex-1">
                                             <h3 className="text-gray-800 font-semibold">{item.name}</h3>
                                             <p className="text-gray-600 text-sm">{item.price}</p>
-                                            
+
                                             {/* Contador */}
                                             <div className="flex items-center mt-2 space-x-2">
                                                 <button

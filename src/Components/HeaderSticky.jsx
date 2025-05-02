@@ -2,7 +2,7 @@ import { FaUser, FaShoppingCart } from "react-icons/fa";
 import { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 import { Link } from "react-router-dom";
-import { useCart } from '../context/CartContext';
+import { useCart } from '../Context/CartContext';
 
 
 
@@ -49,9 +49,8 @@ export default function HeaderSticky() {
                         <Link to="/contact" className="block px-4 py-2 text-center text-[#131700] hover:text-yellow-950 ">Contacto</Link>
                         {/* Login y carrito en móvil */}
                         <div className="flex items-center justify-center gap-6 py-4 text-[#131700]">
-                            <FaUser className="text-2xl cursor-pointer" />                            
-                        </div>
-
+                        <Link to ="/login" className="text-lg hover:scale-110 transform duration-700 cursor-pointer">Login</Link>
+                        <Link to ="/register" className="text-lg hover:scale-110 transform duration-700 cursor-pointer">Logout</Link>                        </div>
                     </div>
                 )}
 
@@ -81,7 +80,13 @@ export default function HeaderSticky() {
 
                 {/* Login y carrito */}
                 <div className="hidden md:flex items-center gap-4 text-black relative">
-                    <FaUser className="text-2xl cursor-pointer" />
+                    {/* Login */}
+                    <Link
+                        to="/login"
+                        className="flex items-center justify-center text-md transform duration-300 hover:scale-110 cursor-pointer transition-all ease-in-out"
+                    >
+                    Hola, Identificate
+                    </Link>
                 </div>
             </div>
         </header>

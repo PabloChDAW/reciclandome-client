@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    /*font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;*/
+    /*font-family:'Poppins', sans-serif;*/
+    font-family: 'Averia Serif Libre', 'serif';
+
+
+}
+h1, h2, h3{
+    color: #166534 
+}
+p,  ul, li{
+    color: #577759
+}
+
