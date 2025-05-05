@@ -67,11 +67,6 @@ export default function Header({ isHome  = false, isShop = false }) {
     : "sticky top-0 w-full bg-[#EBF0EB] shadow-md text-black transition-all duration-1000 ease-in-out";
 
 
-
-// Esto asegurará que el fondo se mantenga fijo y fluya de manera más suave.
-
-    
-
     return (
         <header className={`z-50 transition-all duration-500 ${headerClass}`}>
             <div className="mx-auto px-4 py-3 bg-opacity-40 z-99 flex items-center justify-between relative">
