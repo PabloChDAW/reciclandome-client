@@ -15,7 +15,7 @@ export default function Home() {
   async function getPoints() {
     const res = await fetch("/api/points");
     const data = await res.json();
-
+    console.log("hola")
     console.log(data);
 
     if (res.ok) {

@@ -42,6 +42,7 @@ export default function Map2({ latitud, longitud, setFormData}){
 
   useEffect(() => {
     if (!map.current) return;
+      if (latitud >= -90 && latitud <= 90 && longitud >= -180 && longitud <= 180) {
       const handleClick = (e) => {
         const { lng, lat } = e.lngLat;
         console.log("Coordenadas click:", lng, lat);
@@ -68,7 +69,7 @@ export default function Map2({ latitud, longitud, setFormData}){
           map.current.off('click', handleClick);
         }
       };
-      
+    }
   }, [latitud, longitud]); 
 
   return (
