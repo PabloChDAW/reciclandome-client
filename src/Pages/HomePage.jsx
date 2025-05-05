@@ -143,7 +143,7 @@ export default function HomePage() {
 
           <div>
             <img
-              src="/slider1.jpg"
+              src="/fondos_naturaleza2.jpg"
               alt="Mapa reciclaje"
               className="w-full h-auto rounded-2xl shadow-lg"
             />

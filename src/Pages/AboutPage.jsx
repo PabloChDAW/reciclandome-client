@@ -7,9 +7,9 @@ export default function AboutPage() {
         <>
             <div className="flex flex-col md:flex-row items-center justify-center p-10 sm:py-10 sm:max-w-7xl mx-auto">
                 <div className="flex flex-col md:flex-row gap-6">
-                    <div className="rounded-lg overflow-hidden">
+                    <div className="rounded-lg overflow-hidden flex justify-center">
                         <img
-                            src="/fondo_about.png"
+                            src="/fondos_naturaleza4.jpg"
                             alt="Reciclaje"
                             className="w-full max-w-sm object-cover"
                         />
@@ -83,11 +83,11 @@ export default function AboutPage() {
                 <div className="border-t-2 border-b-[#577759] w-2/4"></div>
             </div>
 
-            <div className="flex flex-col md:flex-row items-center justify-center p-10 sm:py-10 sm:max-w-7xl mx-auto pb-16">
+            <div className="flex flex-col md:flex-row items-center justify-center p-10 sm:py-10 sm:max-w-7xl mx-auto ">
                 <div className="flex flex-col md:flex-row gap-6">
-                    <div className="rounded-lg overflow-hidden order-1">
+                    <div className="rounded-lg overflow-hidden order-1 flex justify-center">
                         <img
-                            src="/fondo_about.png"
+                            src="/fondos_naturaleza3.jpg"
                             alt="Reciclaje"
                             className="w-full max-w-sm object-cover"
                         />
@@ -110,6 +110,9 @@ export default function AboutPage() {
                 </div>
             </div>
 
+            <div className="flex justify-center py-10">
+                <div className="border-t-2 border-b-[#577759] w-2/4"></div>
+            </div>
 
         </>
     );

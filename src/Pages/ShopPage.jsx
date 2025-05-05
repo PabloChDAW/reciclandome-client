@@ -74,12 +74,12 @@ const ShopPage = () => {
                                 {products.map((product, index) => (
                                     <div
                                         key={index}
-                                        className="border rounded-xl p-4 shadow-sm hover:shadow-md hover:shadow-[#D0FDD7] transition w-full"
+                                        className="border rounded-xl p-4 shadow-sm hover:shadow-md hover:shadow-[#D0FDD7] transition w-full duration-500 hover:scale-105"
                                     >
                                         <img
                                             src={product.image}
                                             alt={product.name}
-                                            className="w-full h-40 object-contain mb-4 hover:scale-110 transition duration-700"
+                                            className="w-full h-40 object-contain mb-4"
                                         />
                                         <h2 className="text-lg font-semibold mb-1">{product.name}</h2>
                                         <p className="text-black font-bold mb-2">EUR {product.price}€</p>

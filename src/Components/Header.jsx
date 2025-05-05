@@ -14,7 +14,12 @@ export default function Header({ isHome  = false, isShop = false }) {
     const [scrolled, setScrolled] = useState(false);
 
 
+    const location = useLocation(); // Obtiene la ruta actual
 
+    const getLinkClass = (path) => {
+        return location.pathname === path ? "text-green-900 font-bold" : "hover:text-green-900";
+    };
+    
 
     async function handleLogout(e) {
         e.preventDefault();
@@ -71,7 +76,7 @@ export default function Header({ isHome  = false, isShop = false }) {
     
 
     const headerClass = (isHome || isShop) && !scrolled
-    ? "absolute top-20 sm:top-10 w-full bg-transparent text-white transition-all duration-700 ease-out opacity-0"
+    ? "absolute top-20 sm:top-10 w-full bg-transparent text-white transition-all duration-700 ease-out"
     : "sticky top-0 w-full bg-[#EBF0EB] shadow-md text-black transition-all duration-1000  ease-out opacity-100";
 
     return (
@@ -113,24 +118,24 @@ export default function Header({ isHome  = false, isShop = false }) {
                             </button>
                         </div>
 
-                        <nav className="flex flex-col items-start gap-4 px-6 text-[#131700]">
-                            <Link to="/" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 hover:text-green-900">🏠 Inicio</Link>
+                        <nav className="flex flex-col items-start gap-8 px-6 text-lg text-[#131700]">
+                            <Link to="/" onClick={() => setMenuOpen(false)} className={`${getLinkClass("/")}`}>🏠 Inicio</Link>
                             <Link to="/map" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 font-bold animate-pulse hover:text-green-900">🗺️ Mapa Interactivo</Link>
-                            <Link to="/about" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 hover:text-green-900">👥 Quiénes Somos</Link>
-                            <Link to="/shop" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 hover:text-green-900">🛍️ Tienda</Link>
-                            <Link to="/contact" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 hover:text-green-900">📞 Contacto</Link>
+                            <Link to="/about" onClick={() => setMenuOpen(false)} className={`${getLinkClass("/about")}`}>👥 Quiénes Somos</Link>
+                            <Link to="/shop" onClick={() => setMenuOpen(false)} className={`${getLinkClass("/shop")}`}>🛍️ Tienda</Link>
+                            <Link to="/contact" onClick={() => setMenuOpen(false)} className={`${getLinkClass("/contact")}`}>📞 Contacto</Link>
 
-                            <div className="pt-4 border-t w-full">
+                            <div className="pt-10 border-t border-[#166534] w-full">
                                 {user ? (
-                                    <>
+                                    <div className="flex flex-col gap-4">
                                         <p className="text-sm">Hola, {user.name}</p>
                                         <button onClick={handleLogout} className="text-sm hover:underline">Cerrar sesión</button>
-                                    </>
+                                    </div>
                                 ) : (
-                                    <>
+                                    <div className="flex flex-col gap-4">
                                         <Link to="/login" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 hover:scale-105 transition-transform">👤 Login</Link>
                                         <Link to="/register" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 hover:scale-105 transition-transform">📝 Registro</Link>
-                                    </>
+                                    </div>
                                 )}
                             </div>
 
@@ -140,7 +145,7 @@ export default function Header({ isHome  = false, isShop = false }) {
                                         setMenuOpen(false);
                                         navigate("/cart");
                                     }}
-                                    className="w-full bg-green-700 text-white py-3 rounded-full flex items-center justify-center gap-2 hover:bg-green-800 transition-colors duration-300"
+                                    className="w-full border border-[#166534] bg-[#166534] text-white hover:bg-white hover:text-[#166534] py-3 rounded-full flex items-center justify-center gap-2 transition-colors duration-300"
                                 >
                                     🛒 Ver carrito ({totalItems})
                                 </button>
@@ -187,7 +192,7 @@ export default function Header({ isHome  = false, isShop = false }) {
 
                 {/* Navegación desktop */}
                 <nav className="hidden md:flex md:items-center md:gap-6 text-[#131700] lg:text-[20px] md:text-[17px]">
-                    <Link to="/" className="hover:underline hover:font-bold">Inicio</Link>
+                    <Link to="/" className={`${getLinkClass("/")}`}>Inicio</Link>
 
                     <div className="relative group hidden md:block">
                         <div className="hover:underline hover:font-bold cursor-pointer">
@@ -201,10 +206,10 @@ export default function Header({ isHome  = false, isShop = false }) {
                         </div>
                     </div>
 
-                    <Link to="/about" className="hover:underline hover:font-bold">Quienes Somos</Link>
-                    <Link to="/blog" className="hover:underline hover:font-bold">Blog</Link>
-                    <Link to="/shop" className="hover:underline hover:font-bold">Tienda</Link>
-                    <Link to="/contact" className="hover:underline hover:font-bold">Contacto</Link>
+                    <Link to="/about" className={`${getLinkClass("/about")}`}>Quienes Somos</Link>
+                    <Link to="/blog" className={`${getLinkClass("/blog")}`}>Blog</Link>
+                    <Link to="/shop" className={`${getLinkClass("/shop")}`}>Tienda</Link>
+                    <Link to="/contact" className={`${getLinkClass("/contact")}`}>Contacto</Link>
                 </nav>
 
                 {/* Auth + Carrito Desktop */}
