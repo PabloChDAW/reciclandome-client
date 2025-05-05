@@ -1,5 +1,5 @@
 import { useContext, useState, useRef, useEffect } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 import Header from "../Components/Header";
 import TopHeader from "../Components/TopHeader";
@@ -9,6 +9,11 @@ import Footer from "../Components/Footer";
 export default function Layout() {
   const { user, token, setUser, setToken } = useContext(AppContext);
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+  const isShop = location.pathname === "/shop";
+
 
   async function handleLogout(e) {
     e.preventDefault();
@@ -36,7 +41,7 @@ export default function Layout() {
   return (
     <>
       <TopHeader />
-      <Header />
+      <Header isHome={isHome} isShop={isShop} />
       <main>
         <Outlet /> {/** Esto renderiza las rutas hijas. */}
       </main>

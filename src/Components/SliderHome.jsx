@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-//import HeaderHome from './HeaderHome';
+import Header from './Header';
 
 export default function Slider({ images = [], interval = 4000 }) {
     const [current, setCurrent] = useState(0);
@@ -17,10 +17,6 @@ export default function Slider({ images = [], interval = 4000 }) {
             {/* Capa oscura opcional para contraste */}
             <div className="absolute inset-0 bg-white/60 z-10" />
 
-            {/* Header fijo encima del slider */}
-            <div className="absolute top-0 left-0 w-full z-30">
-            </div>
-
             {/* Imágenes del slider */}
             {images.map((src, idx) => (
                 <img
@@ -37,10 +33,10 @@ export default function Slider({ images = [], interval = 4000 }) {
 
             {/* Texto centrado */}
             <div className="absolute inset-0 mt-20 flex flex-col items-center justify-center text-center z-20">
-                <h1 className="text-4xl lg:text-6xl  md:text-6xl font-bold text-[#131700] drop-shadow-lg">
+                <h1 className="text-4xl lg:text-6xl  sm:text-6xl font-bold text-[#131700] drop-shadow-lg">
                     Reciclando.me
                 </h1>
-                <p className="p-10 text-xs lg:text-lg md:text-lg text-[#131700] font-medium max-w-2xl drop-shadow-md">
+                <p className="p-10 text-xs lg:text-lg sm:text-lg text-[#131700] font-medium max-w-2xl drop-shadow-md">
                     Encuentra puntos limpios, aprende a separar residuos y haz tu ciudad más sostenible con <span className="text-[#166534] font-bold">Reciclando.me</span>.
                     <br />
                     <span

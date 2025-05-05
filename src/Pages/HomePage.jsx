@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Map3 from "../Components/Map3";
 import { FaRecycle, FaTrashAlt, FaFileAlt, FaGlassMartiniAlt, FaLeaf } from 'react-icons/fa';
 import Slider from '../Components/SliderHome';
+import Header from "../Components/Header";
 
 export default function HomePage() {
   const sliderImages = ['/slider8.jpg', '/slider6.jpg', '/slider7.jpg'];
@@ -39,7 +40,7 @@ export default function HomePage() {
     <>
       {/* Header que aparece al hacer scroll */}
       <div
-        className={`fixed top-0 left-0 z-10 w-full transition-all duration-500 ease-in-out ${showHeader ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-5 pointer-events-none'}`}
+        className={`fixed top-0 left-0 z-10 w-full transition-all duration-1000 ease-in-out ${showHeader ? 'opacity-100 translate-y-0 duration-1000' : 'opacity-0 -translate-y-5 pointer-events-none'}`}
       >
       </div>
 

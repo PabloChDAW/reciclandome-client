@@ -1,16 +1,19 @@
 import { useState, useContext, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { HiMenu, HiX, HiOutlineUser, HiOutlineUserAdd } from "react-icons/hi";
 import { AppContext } from "../Context/AppContext";
 
 
 
-export default function Header() {
+export default function Header({ isHome  = false, isShop = false }) {
     const [menuOpen, setMenuOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const {user, cart, totalItems, increment, decrement, removeItem } = useContext(AppContext);
     const navigate = useNavigate();
     const dropdownRef = useRef(null);
+    const [scrolled, setScrolled] = useState(false);
+
+
 
 
     async function handleLogout(e) {
@@ -33,9 +36,44 @@ export default function Header() {
             navigate('/');
         }
     }
+    useEffect(() => {
+        if (!isHome && !isShop) return;
+    
+        const handleScroll = () => {
+            const screenWidth = window.innerWidth;  // Obtener el tamaño de la pantalla
+    
+            if (screenWidth >= 1440) {
+                // Pantallas grandes (1440px o mayores)
+                setScrolled(window.scrollY > 800);  // Cambia el valor de desplazamiento según lo necesites
+            } else if (screenWidth >= 1024) {
+                // Pantallas medianas (1024px o mayores)
+                setScrolled(window.scrollY > 800);  // Cambia el valor de desplazamiento según lo necesites
+            } else if (screenWidth >= 768) {
+                // Pantallas medianas (768px o mayores, como tablets)
+                setScrolled(window.scrollY > 800);  // Cambia el valor de desplazamiento según lo necesites
+            } else {
+                // Pantallas móviles
+                setScrolled(window.scrollY > 600);  // Cambia el valor de desplazamiento según lo necesites
+            }
+        };
+    
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [isHome, isShop]);
+    
+
+    const headerClass = (isHome || isShop) && !scrolled
+    ? "absolute top-20 sm:top-10 w-full bg-transparent text-white transition-all duration-1000 ease-in-out"
+    : "sticky top-0 w-full bg-[#EBF0EB] shadow-md text-black transition-all duration-1000 ease-in-out";
+
+
+
+// Esto asegurará que el fondo se mantenga fijo y fluya de manera más suave.
+
+    
 
     return (
-        <header className="sticky top-0 z-[100] shadow-md bg-[#EBF0EB]">
+        <header className={`z-50 transition-all duration-500 ${headerClass}`}>
             <div className="mx-auto px-4 py-3 bg-opacity-40 z-99 flex items-center justify-between relative">
                 {/* Logo */}
                 <Link to="/" className="flex items-center hover:scale-110 transform duration-700 gap-2">

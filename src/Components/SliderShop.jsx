@@ -17,11 +17,6 @@ export default function Slider({ images = [], interval = 4000 }) {
             {/* Capa oscura opcional para contraste */}
             <div className="absolute inset-0 bg-white/70 z-10" />
 
-            {/* Header fijo encima del slider */}
-            <div className="absolute top-0 left-0 w-full z-30">
-                {/*<Header />*/}
-            </div>
-
             {/* Imágenes del slider */}
             {images.map((src, idx) => (
                 <img
