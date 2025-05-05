@@ -19,9 +19,15 @@ export default function TopHeader() {
 
             {/* Redes sociales */}
             <div className="flex gap-3 w-full sm:w-auto  justify-center sm:justify-start mt-2 sm:mt-0">
+            <a href="https://tiktok.com/tu-perfil" aria-label="TikTok" target="_blank" rel="noopener noreferrer">
                 <FaTiktok className="w-4 lg:w-6 md:w-4  h-auto cursor-pointer hover:text-black hover:scale-110 transition duration-700" aria-label="TikTok" />
+            </a>
+            <a href="https://tiktok.com/tu-perfil" aria-label="XTwitter" target="_blank" rel="noopener noreferrer">
                 <FaXTwitter className="w-4 lg:w-6 md:w-4  h-auto cursor-pointer hover:text-black hover:scale-110 transition duration-700" aria-label="Twitter" />
+            </a>
+            <a href="https://tiktok.com/tu-perfil" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
                 <FaInstagram className="w-4 lg:w-6 md:w-4  h-auto cursor-pointer hover:text-black hover:scale-110 transition duration-700" aria-label="Instagram" />
+            </a>
             </div>
         </div>
     );

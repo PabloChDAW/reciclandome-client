@@ -12,10 +12,6 @@ import Show from './Pages/Points/Show';
 import Update from './Pages/Points/Update';
 import Cart from './Pages/Cart'; // Asegúrate de que la ruta es correcta
 
-import Header from "./Components/Header";
-import TopHeader from './Components/TopHeader';
-import Footer from "./Components/Footer";
-import Footer2 from "./Components/FooterLogin";
 import AboutPage from "./Pages/AboutPage";
 import BlogPage from "./Pages/BlogPage";
 import ContactPage from "./Pages/ContactPage";

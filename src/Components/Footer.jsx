@@ -46,10 +46,18 @@ const Footer = () => {
                 <div className="flex flex-col items-center">
                     <h3 className="font-bold text-lg">NUESTRAS REDES</h3>
                     <div className="flex space-x-4 mt-3 text-2xl text-[#577759]">
-                        <a href="#"><Mail className="w-6 h-6 hover:scale-110 transform duration-700" /></a>
-                        <a href="#"><FaTiktok className="w-6 h-6 hover:scale-110 transform duration-700" /></a> {/* TikTok icon replacement */}
-                        <a href="#"><FaXTwitter className="w-6 h-6 hover:scale-110 transform duration-700" /></a> {/* X/Twitter */}
-                        <a href="#"><FaInstagram className="w-6 h-6 hover:scale-110 transform duration-700" /></a>
+                        <div title="contacto@reciclando.me" className="w-6 h-6 hover:scale-110 transform duration-700">
+                            <Mail className="w-6 h-6" />
+                        </div>
+                        <a href="https://tiktok.com/tu-perfil" aria-label="TikTok" target="_blank" rel="noopener noreferrer">
+                            <FaTiktok className="w-6 h-6 hover:scale-110 transform duration-700" />
+                        </a>
+                        <a href="https://x.com/tu-perfil" aria-label="TikTok" target="_blank" rel="noopener noreferrer">
+                            <FaXTwitter className="w-6 h-6 hover:scale-110 transform duration-700" />
+                        </a>
+                        <a href="https://instagram.com/tu-perfil" aria-label="TikTok" target="_blank" rel="noopener noreferrer">
+                            <FaInstagram className="w-6 h-6 hover:scale-110 transform duration-700" />
+                        </a>
                     </div>
                 </div>
             </div>
