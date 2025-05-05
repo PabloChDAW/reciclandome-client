@@ -33,10 +33,10 @@ export default function Slider({ images = [], interval = 4000 }) {
 
             {/* Texto centrado */}
             <div className="absolute inset-0 mt-20 flex flex-col items-center justify-center text-center z-20">
-                <h1 className="text-4xl lg:text-6xl  md:text-6xl font-bold text-[#131700] drop-shadow-lg">
-                    TIENDA OFICIAL DE <br/>RECICLANDO.ME
+                <h1 className="text-5xl lg:text-6xl  md:text-6xl font-bold text-[#131700] drop-shadow-lg">
+                    Tienda oficial de <br/>Reciclando.me
                 </h1>
-                <p className="p-10 text-xs lg:text-lg md:text-lg text-[#131700] font-medium max-w-2xl drop-shadow-md">
+                <p className="p-10 text-md lg:text-lg md:text-lg text-[#131700] font-medium max-w-2xl drop-shadow-md">
                     "Con cada compra, ayudas a promover el reciclaje en tu ciudad."
                 </p>
             </div>

@@ -88,7 +88,7 @@ export default function Header({ isHome  = false, isShop = false }) {
                 </Link>
 
                 {/* Botón hamburguesa - solo visible en móviles */}
-                <div className="md:hidden z-50">
+                <div className="md:hidden z-50 text-black">
                     <button onClick={() => setMenuOpen(!menuOpen)}>
                         {menuOpen ? <HiX className="text-2xl" /> : <HiMenu className="text-2xl" />}
                     </button>
@@ -108,9 +108,9 @@ export default function Header({ isHome  = false, isShop = false }) {
                     {/* Menú lateral con transición de deslizamiento */}
                     <div
                         className={`
-            fixed top-0 right-0 h-full w-3/4 sm:w-2/5 bg-[#D0FDD7] z-50 shadow-lg transform transition-transform duration-700 ease-in-out
-            ${menuOpen ? 'translate-x-0' : 'translate-x-full'}
-        `}
+                            fixed top-0 right-0 h-full w-3/4 sm:w-2/5 bg-[#D0FDD7] z-50 shadow-lg transform transition-transform duration-700 ease-in-out
+                            ${menuOpen ? 'translate-x-0' : 'translate-x-full'}
+                        `}
                     >
                         <div className="flex justify-end p-4">
                             <button onClick={() => setMenuOpen(false)}>
