@@ -76,8 +76,8 @@ export default function Header({ isHome  = false, isShop = false }) {
     
 
     const headerClass = (isHome || isShop) && !scrolled
-    ? "absolute top-20 sm:top-10 w-full bg-transparent text-white transition-all duration-700 ease-out"
-    : "sticky top-0 w-full bg-[#EBF0EB] shadow-md text-black transition-all duration-1000  ease-out opacity-100";
+    ? "absolute top-20 sm:top-10 w-full bg-transparent shadow-md text-white transition-all duration-700 ease-out"
+    : "sticky top-0 w-full bg-[#EBF0EB] shadow-md text-black transition-all duration-1000 ease-out opacity-100";
 
     return (
         <header className={`z-50 transition-all duration-500 ${headerClass}`}>
