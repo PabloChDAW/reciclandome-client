@@ -60,12 +60,19 @@ export default function Header({ isHome  = false, isShop = false }) {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, [isHome, isShop]);
+
+    useEffect(() => {
+        if (!isHome && !isShop) return;
+    
+        const timeout = setTimeout(() => setScrolled(true), 300); // delay inicial
+        return () => clearTimeout(timeout);
+    }, []);
+    
     
 
     const headerClass = (isHome || isShop) && !scrolled
-    ? "absolute top-20 sm:top-10 w-full bg-transparent text-white transition-all duration-1000 ease-in-out"
-    : "sticky top-0 w-full bg-[#EBF0EB] shadow-md text-black transition-all duration-1000 ease-in-out";
-
+    ? "absolute top-20 sm:top-10 w-full bg-transparent text-white transition-all duration-700 ease-out opacity-0"
+    : "sticky top-0 w-full bg-[#EBF0EB] shadow-md text-black transition-all duration-1000  ease-out opacity-100";
 
     return (
         <header className={`z-50 transition-all duration-500 ${headerClass}`}>
@@ -87,9 +94,9 @@ export default function Header({ isHome  = false, isShop = false }) {
                     {/* Backdrop con transición de opacidad */}
                     <div
                         className={`
-            fixed inset-0 bg-black z-40 transition-opacity duration-700
-            ${menuOpen ? 'bg-opacity-40' : 'bg-opacity-0 pointer-events-none'}
-        `}
+                        fixed inset-0 bg-black z-40 transition-opacity duration-700
+                        ${menuOpen ? 'bg-opacity-40' : 'bg-opacity-0 pointer-events-none'}
+                    `}
                         onClick={() => setMenuOpen(false)}
                     ></div>
 
