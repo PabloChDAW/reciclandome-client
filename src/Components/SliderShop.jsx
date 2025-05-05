@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import HeaderHome from './HeaderHome';
+import Header from './Header';
 
 export default function Slider({ images = [], interval = 4000 }) {
     const [current, setCurrent] = useState(0);
@@ -19,7 +19,7 @@ export default function Slider({ images = [], interval = 4000 }) {
 
             {/* Header fijo encima del slider */}
             <div className="absolute top-0 left-0 w-full z-30">
-                <HeaderHome />
+                {/*<Header />*/}
             </div>
 
             {/* Imágenes del slider */}

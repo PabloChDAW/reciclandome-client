@@ -3,6 +3,7 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 import Header from "../Components/Header";
 import TopHeader from "../Components/TopHeader";
+import Footer from "../Components/Footer";
 
 
 export default function Layout() {
@@ -39,6 +40,7 @@ export default function Layout() {
       <main>
         <Outlet /> {/** Esto renderiza las rutas hijas. */}
       </main>
+      <Footer/>
     </>
   );
 }

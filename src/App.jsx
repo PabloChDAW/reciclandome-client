@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Layout from './Pages/Layout';
-import Home from './Pages/Home';
+import Home from './Pages/PuntosMapa.jsx';
 import HomePage from './Pages/HomePage';
 import Shop from './Pages/Shop'
 import Register from './Pages/Auth/Register';
@@ -24,19 +24,25 @@ import ShopPage from "./Pages/ShopPage";
 import PoliticaPrivacidad from "./Pages/PoliticaPrivacidad";
 import PoliticaCookies from "./Pages/Cookies";
 import AvisoLegal from "./Pages/AvisoLegal";
-import ScrollToTop from "./Components/ScrollToTop.JSX";
+import ScrollToTop from "./Components/ScrollToTop.jsx";
 
 export default function App() {
   const { user } = useContext(AppContext);
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
+      <div className="bg-[#f7f7f7]">
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path='/shop' element={<Shop />} />
-          <Route path='/about' element={<AboutPage />} />
+          {/*<Route path='/shop' element={<Shop />} />*/}
           <Route path='/blog' element={<BlogPage />} />
+          <Route path='/shop' element={<ShopPage />} />
+          <Route path='/about' element={<AboutPage />} />
+          <Route path='/politica-privacidad' element={<PoliticaPrivacidad />} />
+          <Route path='/politica-cookies' element={<PoliticaCookies />} />
+          <Route path='/aviso-legal' element={<AvisoLegal />} />
           <Route path='/contact' element={<ContactPage />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/register' element={user ? <Home /> : <Register />} />
@@ -46,6 +52,7 @@ export default function App() {
           <Route path='/points/update/:id' element={user ? <Update /> : <Login />} />
         </Route>
       </Routes>
+      </div>
     </BrowserRouter>
   );
 }
