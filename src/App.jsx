@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Layout from './Pages/Layout';
-import Home from './Pages/PuntosMapa.jsx';
 import HomePage from './Pages/HomePage';
 import Shop from './Pages/Shop'
 import Register from './Pages/Auth/Register';

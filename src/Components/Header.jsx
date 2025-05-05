@@ -1,7 +1,8 @@
 import { useState, useContext, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { HiMenu, HiX } from "react-icons/hi";
+import { HiMenu, HiX, HiOutlineUser, HiOutlineUserAdd } from "react-icons/hi";
 import { AppContext } from "../Context/AppContext";
+
 
 
 export default function Header() {
@@ -48,37 +49,68 @@ export default function Header() {
                     </button>
                 </div>
 
-                {/* Menú desplegable solo móvil */}
-                {menuOpen && (
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/4 bg-[#D0FDD7] shadow-lg z-40 flex flex-col items-center text-center md:hidden">
-                        <Link to="/" onClick={() => setMenuOpen(false)} className="block px-4 py-2 text-[#131700] hover:text-yellow-950 border-b-2 border-black pb-1">Inicio</Link>
-                        <Link
-                            to="/map"
-                            className="block px-4 py-2 font-bold border-b-2 border-black pb-1 hover:text-yellow-950 animate-pulse"
-                            style={{ animationDuration: '2.5s', animationIterationCount: 'infinite' }}
-                        >
-                            Mapa Interactivo
-                        </Link>
-                        <Link to="/about" className="block px-4 py-2 text-[#131700] hover:text-yellow-950 border-b-2 border-black pb-1">Quienes Somos</Link>
-                        <Link to="/shop" className="block px-4 py-2 text-[#131700] hover:text-yellow-950 border-b-2 border-black pb-1">Tienda</Link>
-                        <Link to="/contact" className="block px-4 py-2 text-[#131700] hover:text-yellow-950">Contacto</Link>
+                {/* Menú desplegable móvil con animación */}
+                <>
+                    {/* Backdrop con transición de opacidad */}
+                    <div
+                        className={`
+            fixed inset-0 bg-black z-40 transition-opacity duration-700
+            ${menuOpen ? 'bg-opacity-40' : 'bg-opacity-0 pointer-events-none'}
+        `}
+                        onClick={() => setMenuOpen(false)}
+                    ></div>
 
-                        {/* Auth móvil */}
-                        <div className="flex flex-col items-center gap-2 py-4 text-[#131700]">
-                            {user ? (
-                                <>
-                                    <p className="text-sm">Hola, {user.name}</p>
-                                    <button onClick={handleLogout} className="hover:underline text-sm">Cerrar sesión</button>
-                                </>
-                            ) : (
-                                <>
-                                    <Link to="/login" className="text-sm hover:scale-110 transform duration-700">Login</Link>
-                                    <Link to="/register" className="text-sm hover:scale-110 transform duration-700">Registrarse</Link>
-                                </>
-                            )}
+                    {/* Menú lateral con transición de deslizamiento */}
+                    <div
+                        className={`
+            fixed top-0 right-0 h-full w-3/4 sm:w-2/5 bg-[#D0FDD7] z-50 shadow-lg transform transition-transform duration-700 ease-in-out
+            ${menuOpen ? 'translate-x-0' : 'translate-x-full'}
+        `}
+                    >
+                        <div className="flex justify-end p-4">
+                            <button onClick={() => setMenuOpen(false)}>
+                                <HiX className="text-2xl text-[#131700]" />
+                            </button>
                         </div>
+
+                        <nav className="flex flex-col items-start gap-4 px-6 text-[#131700]">
+                            <Link to="/" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 hover:text-green-900">🏠 Inicio</Link>
+                            <Link to="/map" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 font-bold animate-pulse hover:text-green-900">🗺️ Mapa Interactivo</Link>
+                            <Link to="/about" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 hover:text-green-900">👥 Quiénes Somos</Link>
+                            <Link to="/shop" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 hover:text-green-900">🛍️ Tienda</Link>
+                            <Link to="/contact" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 hover:text-green-900">📞 Contacto</Link>
+
+                            <div className="pt-4 border-t w-full">
+                                {user ? (
+                                    <>
+                                        <p className="text-sm">Hola, {user.name}</p>
+                                        <button onClick={handleLogout} className="text-sm hover:underline">Cerrar sesión</button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <Link to="/login" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 hover:scale-105 transition-transform">👤 Login</Link>
+                                        <Link to="/register" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 hover:scale-105 transition-transform">📝 Registro</Link>
+                                    </>
+                                )}
+                            </div>
+
+                            <div className="pt-4 w-full">
+                                <button
+                                    onClick={() => {
+                                        setMenuOpen(false);
+                                        navigate("/cart");
+                                    }}
+                                    className="w-full bg-green-700 text-white py-3 rounded-full flex items-center justify-center gap-2 hover:bg-green-800 transition-colors duration-300"
+                                >
+                                    🛒 Ver carrito ({totalItems})
+                                </button>
+                            </div>
+                        </nav>
                     </div>
-                )}
+                </>
+
+
+
 
                 {/*
                 /* Carrito *
@@ -193,7 +225,7 @@ export default function Header() {
                                                 setDropdownOpen(false);
                                                 navigate("/cart");
                                             }}
-                                            className="mt-4 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 text-sm"
+                                            className="mt-4 w-full bg-[#166534] text-white py-3 rounded-full hover:bg-[#14532d] text-sm"
                                         >
                                             Ver carrito
                                         </button>
