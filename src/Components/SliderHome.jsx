@@ -56,7 +56,7 @@ export default function Slider({ images = [], interval = 4000 }) {
                         onClick={() => setCurrent(idx)}
                         className={`
                             w-3 h-3 rounded-full
-                            ${idx === current ? 'bg-white' : 'bg-white/50'}
+                            ${idx === current ? 'bg-transparent' : 'bg-transparent'}
                         `}
                     />
                 ))}

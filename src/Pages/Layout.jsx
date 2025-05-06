@@ -39,13 +39,13 @@ export default function Layout() {
 
 
   return (
-    <>
+    <div className="relative">
       <TopHeader />
       <Header isHome={isHome} isShop={isShop} />
       <main>
         <Outlet /> {/** Esto renderiza las rutas hijas. */}
       </main>
       <Footer/>
-    </>
+    </div>
   );
 }

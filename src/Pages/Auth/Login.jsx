@@ -38,7 +38,7 @@ export default function Login() {
 
   return (
     <>
-      <div className="p-10 sm:py-10 sm:max-w-7xl mx-auto flex items-center justify-center">
+      <div className="p-10 my-10 sm:py-10 sm:max-w-7xl mx-auto flex items-center justify-center">
         <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg space-y-6 animate-fade-in-up">
           <h1 className="text-xl md:text-3xl font-semibold text-[#14532d] text-center mb-6 animate-fade-in-down">
             Iniciar Sesión
@@ -46,7 +46,7 @@ export default function Login() {
 
           <form onSubmit={handleLogin} className="space-y-6">
             <div className="space-y-2">
-              <label htmlFor="email" className="text-sm md:text-base font-medium text-[#333]">Email</label>
+              <label htmlFor="email" className="text-sm md:text-base font-medium text-[#333]">📧 Email</label>
               <input
                 type="text"
                 id="email"
@@ -59,7 +59,7 @@ export default function Login() {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="password" className="text-sm md:text-base font-medium text-[#333]">Contraseña</label>
+              <label htmlFor="password" className="text-sm md:text-base font-medium text-[#333]">🔒 Contraseña</label>
               <input
                 type="password"
                 id="password"

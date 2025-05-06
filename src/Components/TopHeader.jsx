@@ -3,7 +3,7 @@ import { FaTiktok, FaXTwitter, FaInstagram } from "react-icons/fa6";
 
 export default function TopHeader() {
     return (
-        <div className="bg-[#D0FDD7] opacity-20 hover:opacity-100 transition duration-700 w-full mt-0 text-gray-800 flex flex-wrap items-center justify-between px-4 py-2 ">
+        <div className="bg-[#D0FDD7] z-50 opacity-20 hover:opacity-100 transition duration-700 w-full mt-0 text-gray-800 flex flex-wrap items-center justify-between px-4 py-2 ">
             {/* Información de contacto */}
             <div className="flex flex-wrap items-center justify-center gap-4 w-full sm:w-auto sm:flex-row">
                 <div className="flex items-center gap-1 text-xs sm:text-sm justify-center">

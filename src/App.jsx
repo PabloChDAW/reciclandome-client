@@ -14,6 +14,7 @@ import Cart from './Pages/Cart'; // Asegúrate de que la ruta es correcta
 
 import AboutPage from "./Pages/AboutPage";
 import BlogPage from "./Pages/BlogPage";
+import PostDetails from "./Pages/PostDetails";
 import ContactPage from "./Pages/ContactPage";
 import ShopPage from "./Pages/ShopPage";
 import PoliticaPrivacidad from "./Pages/PoliticaPrivacidad";
@@ -33,6 +34,7 @@ export default function App() {
           <Route index element={<HomePage />} />
           {/*<Route path='/shop' element={<Shop />} />*/}
           <Route path='/blog' element={<BlogPage />} />
+          <Route path="/blog/post/:id" element={<PostDetails />} />
           <Route path='/shop' element={<ShopPage />} />
           <Route path='/about' element={<AboutPage />} />
           <Route path='/politica-privacidad' element={<PoliticaPrivacidad />} />

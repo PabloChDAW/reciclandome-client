@@ -49,13 +49,13 @@ export default function Header({ isHome  = false, isShop = false }) {
     
             if (screenWidth >= 1440) {
                 // Pantallas grandes (1440px o mayores)
-                setScrolled(window.scrollY > 550);  // Cambia el valor de desplazamiento según lo necesites
+                setScrolled(window.scrollY > 600);  // Cambia el valor de desplazamiento según lo necesites
             } else if (screenWidth >= 1024) {
                 // Pantallas medianas (1024px o mayores)
-                setScrolled(window.scrollY > 550);  // Cambia el valor de desplazamiento según lo necesites
+                setScrolled(window.scrollY > 600);  // Cambia el valor de desplazamiento según lo necesites
             } else if (screenWidth >= 768) {
                 // Pantallas medianas (768px o mayores, como tablets)
-                setScrolled(window.scrollY > 550);  // Cambia el valor de desplazamiento según lo necesites
+                setScrolled(window.scrollY > 600);  // Cambia el valor de desplazamiento según lo necesites
             } else {
                 // Pantallas móviles
                 setScrolled(window.scrollY > 550);  // Cambia el valor de desplazamiento según lo necesites
@@ -76,8 +76,8 @@ export default function Header({ isHome  = false, isShop = false }) {
     
 
     const headerClass = (isHome || isShop) && !scrolled
-    ? "fixed top-10  w-full bg-transparent shadow-md text-white transition-all duration-700 ease-out"
-    : "fixed top-0 w-full bg-[#EBF0EB] shadow-md text-black transition-all duration-1000 ease-out opacity-100";
+    ? "fixed top-20 z-50 sm:top-10 w-full bg-transparent shadow-md text-white transition-all duration-700 ease-out"
+    : "sticky w-full bg-[#EBF0EB] shadow-md text-black transition-all duration-1000 ease-out opacity-100";
 
     return (
         <header className={`z-50 transition-all duration-500 ${headerClass}`}>
@@ -191,7 +191,7 @@ export default function Header({ isHome  = false, isShop = false }) {
 */}
 
                 {/* Navegación desktop */}
-                <nav className="hidden md:flex md:items-center md:gap-6 text-[#131700] lg:text-[20px] md:text-[17px]">
+                <nav className="hidden md:flex md:items-center md:gap-6 text-[#131700] lg:text-[20px] sm:text-[14px]">
                     <Link to="/" className={`${getLinkClass("/")}`}>Inicio</Link>
 
                     <div className="relative group hidden md:block">
@@ -216,11 +216,11 @@ export default function Header({ isHome  = false, isShop = false }) {
                 <div className="hidden md:flex items-center gap-6 text-[#131700] relative">
                     {user ? (
                         <>
-                            <p className="text-md">Hola, {user.name}</p>
+                            <p className="lg:text-[20px] sm:text-[14px]">Hola, {user.name}</p>
                             <button onClick={handleLogout} className="text-sm hover:underline">Cerrar sesión</button>
                         </>
                     ) : (
-                        <Link to="/login" className="text-md hover:scale-110 transform duration-300">Hola, identifícate</Link>
+                        <Link to="/login" className="lg:text-[20px] sm:text-[12px] hover:scale-110 transform duration-300">Hola, identifícate</Link>
                     )}
 
                     {/* Carrito */}
