@@ -3,12 +3,10 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { HiMenu, HiX, HiOutlineUser, HiOutlineUserAdd } from "react-icons/hi";
 import { AppContext } from "../Context/AppContext";
 
-
-
-export default function Header({ isHome  = false, isShop = false }) {
+export default function Header({ isHome = false, isShop = false }) {
     const [menuOpen, setMenuOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const {user, cart, totalItems, increment, decrement, removeItem } = useContext(AppContext);
+    const { user, cart, totalItems, increment, decrement, removeItem } = useContext(AppContext);
     const navigate = useNavigate();
     const dropdownRef = useRef(null);
     const [scrolled, setScrolled] = useState(false);
@@ -19,7 +17,6 @@ export default function Header({ isHome  = false, isShop = false }) {
     const getLinkClass = (path) => {
         return location.pathname === path ? "text-green-900 font-bold" : "hover:text-green-900";
     };
-    
 
     async function handleLogout(e) {
         e.preventDefault();
@@ -43,10 +40,10 @@ export default function Header({ isHome  = false, isShop = false }) {
     }
     useEffect(() => {
         if (!isHome && !isShop) return;
-    
+
         const handleScroll = () => {
             const screenWidth = window.innerWidth;  // Obtener el tamaño de la pantalla
-    
+
             if (screenWidth >= 1440) {
                 // Pantallas grandes (1440px o mayores)
                 setScrolled(window.scrollY > 600);  // Cambia el valor de desplazamiento según lo necesites
@@ -61,23 +58,23 @@ export default function Header({ isHome  = false, isShop = false }) {
                 setScrolled(window.scrollY > 550);  // Cambia el valor de desplazamiento según lo necesites
             }
         };
-    
+
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, [isHome, isShop]);
 
     useEffect(() => {
         if (!isHome && !isShop) return;
-    
+
         const timeout = setTimeout(() => setScrolled(true), 300); // delay inicial
         return () => clearTimeout(timeout);
     }, []);
-    
-    
+
+
 
     const headerClass = (isHome || isShop) && !scrolled
-    ? "fixed top-20 z-50 sm:top-10 w-full bg-transparent shadow-md text-white transition-all duration-700 ease-out"
-    : "sticky w-full bg-[#EBF0EB] shadow-md text-black transition-all duration-1000 ease-out opacity-100";
+        ? "fixed top-20 z-50 sm:top-10 w-full bg-transparent shadow-md text-white transition-all duration-700 ease-out"
+        : "sticky w-full bg-[#EBF0EB] shadow-md text-black transition-all duration-1000 ease-out opacity-100";
 
     return (
         <header className={`z-50 transition-all duration-500 ${headerClass}`}>
@@ -100,7 +97,7 @@ export default function Header({ isHome  = false, isShop = false }) {
                     <div
                         className={`
                         fixed inset-0 bg-black z-40 transition-opacity duration-700
-                        ${menuOpen ? 'bg-opacity-40' : 'bg-opacity-0 pointer-events-none'}
+                        ${menuOpen ? 'bg-opacity-70' : 'bg-opacity-0 pointer-events-none'}
                     `}
                         onClick={() => setMenuOpen(false)}
                     ></div>
@@ -108,7 +105,7 @@ export default function Header({ isHome  = false, isShop = false }) {
                     {/* Menú lateral con transición de deslizamiento */}
                     <div
                         className={`
-                            fixed top-0 right-0 h-full w-3/4 sm:w-2/5 bg-[#D0FDD7] z-50 shadow-lg transform transition-transform duration-700 ease-in-out
+                            fixed top-0 right-0 h-full w-3/4 sm:w-2/5 bg-white z-50 shadow-lg transform transition-transform duration-700 ease-in-out
                             ${menuOpen ? 'translate-x-0' : 'translate-x-full'}
                         `}
                     >
@@ -138,18 +135,20 @@ export default function Header({ isHome  = false, isShop = false }) {
                                     </div>
                                 )}
                             </div>
-
-                            <div className="pt-4 w-full">
-                                <button
-                                    onClick={() => {
-                                        setMenuOpen(false);
-                                        navigate("/cart");
-                                    }}
-                                    className="w-full border border-[#166534] bg-[#166534] text-white hover:bg-white hover:text-[#166534] py-3 rounded-full flex items-center justify-center gap-2 transition-colors duration-300"
+                            <div className="fixed bottom-4 left-4 right-4 z-50 md:hidden">
+                                <Link
+                                    to="/cart"
+                                    className="relative flex items-center justify-center border border-[#166534] bg-[#166534] hover:bg-white text-white hover:text-[#166534] rounded-full shadow-lg py-3 px-5 text-sm  transition-all duration-300"
                                 >
-                                    🛒 Ver carrito ({totalItems})
-                                </button>
+                                    🛒 VER CESTA
+                                    {totalItems > 0 && (
+                                        <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                                            {totalItems}
+                                        </span>
+                                    )}
+                                </Link>
                             </div>
+
                         </nav>
                     </div>
                 </>
@@ -227,7 +226,7 @@ export default function Header({ isHome  = false, isShop = false }) {
                     <div className="relative" ref={dropdownRef}>
                         <button
                             onClick={() => setDropdownOpen(!dropdownOpen)}
-                            className="flex nav-link relative text-sm hover:underline"
+                            className="relative flex items-center text-sm hover:underline"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -238,46 +237,92 @@ export default function Header({ isHome  = false, isShop = false }) {
                             >
                                 <path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
                             </svg>
-                            ({totalItems})
+
+                            {totalItems > 0 && (
+                                <span className="absolute -top-2 -right-2 bg-[#166534] text-white text-xs font-semibold w-5 h-5 flex items-center justify-center rounded-full">
+                                    {totalItems}
+                                </span>
+                            )}
                         </button>
 
 
+
                         {dropdownOpen && (
-                            <div className="absolute right-0 mt-2 w-64 bg-white shadow-lg border rounded-lg z-50 p-4">
-                                {cart.length === 0 ? (
-                                    <p className="text-gray-500 text-sm">Tu carrito está vacío.</p>
-                                ) : (
-                                    <>
-                                        <ul className="space-y-2 max-h-60 overflow-y-auto">
-                                            {cart.map((item) => (
-                                                <li key={item.id} className="flex justify-between items-center text-sm">
-                                                    <span className="truncate w-24">{item.name}</span>
-                                                    <div className="flex items-center space-x-1">
-                                                        <button onClick={() => decrement(item.id)} className="w-6 h-6 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-full transition-colors">-</button>
-                                                        <span className="font-medium p-1">{item.quantity}</span>
-                                                        <button onClick={() => increment(item.id)} className="w-6 h-6 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-full transition-colors">+</button>
-                                                        <button onClick={() => removeItem(item.id)} className="text-gray-400 hover:text-red-500 transition-colors ml-2">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                                <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
-                                                            </svg>
-                                                        </button>
-                                                    </div>
-                                                </li>
-                                            ))}
-                                        </ul>
+                            <>
+                                {/* Fondo oscuro que cierra el panel al hacer clic */}
+                                <div
+                                    className="fixed inset-0 bg-black bg-opacity-40 z-40"
+                                    onClick={() => setDropdownOpen(false)}
+                                />
+
+                                {/* Panel lateral con transición */}
+                                <div
+                                    className={`fixed top-0 right-0 h-full w-1/3 bg-white shadow-lg border-l z-50 p-4 overflow-y-auto transition-transform duration-500 ${dropdownOpen ? 'translate-x-0' : 'translate-x-full'}`}
+                                >
+                                    {/* Botón de cierre */}
+                                    <div className="flex justify-between items-center py-5 mb-10 border-b border-[#166534]">
+                                        <h2 className="text-2xl font-semibold">🛒 TU CESTA</h2>
                                         <button
-                                            onClick={() => {
-                                                setDropdownOpen(false);
-                                                navigate("/cart");
-                                            }}
-                                            className="mt-4 w-full bg-[#166534] text-white py-3 rounded-full hover:bg-[#14532d] text-sm"
+                                            onClick={() => setDropdownOpen(false)}
+                                            className="text-gray-500 hover:text-gray-800 transition"
                                         >
-                                            Ver carrito
+                                            ✕
                                         </button>
-                                    </>
-                                )}
-                            </div>
+                                    </div>
+
+                                    {/* Contenido del carrito */}
+                                    {cart.length === 0 ? (
+                                        <p className="text-gray-500 text-sm">Tu carrito está vacío. ¡Añade productos! 🛍️</p>
+                                    ) : (
+                                        <>
+                                            <ul className="space-y-10 mb-6">
+                                                {cart.map((item) => (
+                                                    <li key={item.id} className="flex justify-between items-center text-sm">
+                                                        {/* Imagen del producto */}
+                                                        <img
+                                                            src={item.image} // Asegúrate de que `item.image` tenga la URL de la imagen
+                                                            alt={item.name}
+                                                            className="w-16 h-16 object-cover rounded-md"
+                                                        />
+                                                        <span className="w-full ml-2">{item.name}</span>
+                                                        <div className="flex items-center space-x-1">
+                                                            <button onClick={() => decrement(item.id)} className="w-6 h-6 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-full">-</button>
+                                                            <span className="font-medium p-1">{item.quantity}</span>
+                                                            <button onClick={() => increment(item.id)} className="w-6 h-6 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-full">+</button>
+                                                            <button onClick={() => removeItem(item.id)} className="text-gray-400 hover:text-red-500 ml-2">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                                    <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                    </li>
+                                                ))}
+                                            </ul>
+
+                                            {/* Precio total */}
+                                            <div className="flex justify-between items-center text-lg font-semibold mb-4">
+                                                <span>Total: 💰</span>
+                                                <span className="text-green-500">{cart.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2)} €</span>
+                                            </div>
+
+                                            {/* Botón para ver el carrito completo */}
+                                            <button
+                                                onClick={() => {
+                                                    setDropdownOpen(false);
+                                                    navigate("/cart");
+                                                }}
+                                                className="mt-6 w-full bg-[#166534] text-white py-3 rounded-full hover:bg-[#14532d] text-sm"
+                                            >
+                                                Ver carrito 🛍️
+                                            </button>
+                                        </>
+                                    )}
+                                </div>
+                            </>
                         )}
+
+
+
                     </div>
                 </div>
 
