@@ -23,8 +23,8 @@ const Footer = () => {
                     {/* CONTACTO */}
                     <div>
                         <h3 className="font-bold text-lg">CONTACTO</h3>
-                        <p className="mt-2">Dirección: Calle de la fama, 123,<br />Córdoba, España</p>
-                        <p>Teléfono: +34 123 456 789</p>
+                        <p className="mt-2">Dirección: c/Ibn Hazm, 14<br />Córdoba, España</p>
+                        <p>Teléfono: +34 619 24 67 79</p>
                         <p>
                             Correo Electrónico:{" "}
                             <a href="mailto:contacto@reciclandome.com" className="text-green-700 hover:underline">
