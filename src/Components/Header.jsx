@@ -49,16 +49,16 @@ export default function Header({ isHome  = false, isShop = false }) {
     
             if (screenWidth >= 1440) {
                 // Pantallas grandes (1440px o mayores)
-                setScrolled(window.scrollY > 800);  // Cambia el valor de desplazamiento según lo necesites
+                setScrolled(window.scrollY > 550);  // Cambia el valor de desplazamiento según lo necesites
             } else if (screenWidth >= 1024) {
                 // Pantallas medianas (1024px o mayores)
-                setScrolled(window.scrollY > 800);  // Cambia el valor de desplazamiento según lo necesites
+                setScrolled(window.scrollY > 550);  // Cambia el valor de desplazamiento según lo necesites
             } else if (screenWidth >= 768) {
                 // Pantallas medianas (768px o mayores, como tablets)
-                setScrolled(window.scrollY > 800);  // Cambia el valor de desplazamiento según lo necesites
+                setScrolled(window.scrollY > 550);  // Cambia el valor de desplazamiento según lo necesites
             } else {
                 // Pantallas móviles
-                setScrolled(window.scrollY > 600);  // Cambia el valor de desplazamiento según lo necesites
+                setScrolled(window.scrollY > 550);  // Cambia el valor de desplazamiento según lo necesites
             }
         };
     
@@ -76,8 +76,8 @@ export default function Header({ isHome  = false, isShop = false }) {
     
 
     const headerClass = (isHome || isShop) && !scrolled
-    ? "absolute top-20 sm:top-10 w-full bg-transparent shadow-md text-white transition-all duration-700 ease-out"
-    : "sticky top-0 w-full bg-[#EBF0EB] shadow-md text-black transition-all duration-1000 ease-out opacity-100";
+    ? "fixed top-10  w-full bg-transparent shadow-md text-white transition-all duration-700 ease-out"
+    : "fixed top-0 w-full bg-[#EBF0EB] shadow-md text-black transition-all duration-1000 ease-out opacity-100";
 
     return (
         <header className={`z-50 transition-all duration-500 ${headerClass}`}>
