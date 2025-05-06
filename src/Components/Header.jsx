@@ -137,7 +137,7 @@ export default function Header({ isHome = false, isShop = false }) {
                             </div>
                             <div className="fixed bottom-4 left-4 right-4 z-50 md:hidden">
                                 <Link
-                                    to="/cart"
+                                    to="/cart" onClick={() => { setMenuOpen(false); }}
                                     className="relative flex items-center justify-center border border-[#166534] bg-[#166534] hover:bg-white text-white hover:text-[#166534] rounded-full shadow-lg py-3 px-5 text-sm  transition-all duration-300"
                                 >
                                     🛒 VER CESTA
@@ -148,14 +148,9 @@ export default function Header({ isHome = false, isShop = false }) {
                                     )}
                                 </Link>
                             </div>
-
                         </nav>
                     </div>
                 </>
-
-
-
-
                 {/*
                 /* Carrito *
                 <div className="relative flex items-center">
@@ -188,7 +183,6 @@ export default function Header({ isHome = false, isShop = false }) {
                     )}
                 </div>
 */}
-
                 {/* Navegación desktop */}
                 <nav className="hidden md:flex md:items-center md:gap-6 text-[#131700] lg:text-[20px] sm:text-[14px]">
                     <Link to="/" className={`${getLinkClass("/")}`}>Inicio</Link>
@@ -245,87 +239,120 @@ export default function Header({ isHome = false, isShop = false }) {
                             )}
                         </button>
 
-
-
                         {dropdownOpen && (
                             <>
                                 {/* Fondo oscuro que cierra el panel al hacer clic */}
                                 <div
-                                    className="fixed inset-0 bg-black bg-opacity-40 z-40"
+                                    className="fixed inset-0 bg-black bg-opacity-70 z-40"
                                     onClick={() => setDropdownOpen(false)}
                                 />
 
-                                {/* Panel lateral con transición */}
                                 <div
-                                    className={`fixed top-0 right-0 h-full w-1/3 bg-white shadow-lg border-l z-50 p-4 overflow-y-auto transition-transform duration-500 ${dropdownOpen ? 'translate-x-0' : 'translate-x-full'}`}
+                                    className={`fixed top-0 right-0 h-full w-full sm:w-1/3 bg-white shadow-lg border-l z-50 transition-transform duration-500 ${dropdownOpen ? "translate-x-0" : "translate-x-full"
+                                        }`}
                                 >
-                                    {/* Botón de cierre */}
-                                    <div className="flex justify-between items-center py-5 mb-10 border-b border-[#166534]">
-                                        <h2 className="text-2xl font-semibold">🛒 TU CESTA</h2>
-                                        <button
-                                            onClick={() => setDropdownOpen(false)}
-                                            className="text-gray-500 hover:text-gray-800 transition"
-                                        >
-                                            ✕
-                                        </button>
-                                    </div>
-
-                                    {/* Contenido del carrito */}
-                                    {cart.length === 0 ? (
-                                        <p className="text-gray-500 text-sm">Tu carrito está vacío. ¡Añade productos! 🛍️</p>
-                                    ) : (
-                                        <>
-                                            <ul className="space-y-10 mb-6">
-                                                {cart.map((item) => (
-                                                    <li key={item.id} className="flex justify-between items-center text-sm">
-                                                        {/* Imagen del producto */}
-                                                        <img
-                                                            src={item.image} // Asegúrate de que `item.image` tenga la URL de la imagen
-                                                            alt={item.name}
-                                                            className="w-16 h-16 object-cover rounded-md"
-                                                        />
-                                                        <span className="w-full ml-2">{item.name}</span>
-                                                        <div className="flex items-center space-x-1">
-                                                            <button onClick={() => decrement(item.id)} className="w-6 h-6 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-full">-</button>
-                                                            <span className="font-medium p-1">{item.quantity}</span>
-                                                            <button onClick={() => increment(item.id)} className="w-6 h-6 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-full">+</button>
-                                                            <button onClick={() => removeItem(item.id)} className="text-gray-400 hover:text-red-500 ml-2">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                                                                    <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
-                                                                </svg>
-                                                            </button>
-                                                        </div>
-                                                    </li>
-                                                ))}
-                                            </ul>
-
-                                            {/* Precio total */}
-                                            <div className="flex justify-between items-center text-lg font-semibold mb-4">
-                                                <span>Total: 💰</span>
-                                                <span className="text-green-500">{cart.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2)} €</span>
-                                            </div>
-
-                                            {/* Botón para ver el carrito completo */}
+                                    <div className="flex flex-col h-full p-4">
+                                        {/* Encabezado */}
+                                        <div className="flex justify-between items-center py-5 mb-6 border-b border-[#577759]">
+                                            <h2 className="text-2xl font-semibold">🛒 TU CESTA</h2>
                                             <button
+                                                onClick={() => setDropdownOpen(false)}
+                                                className="text-gray-500 hover:text-gray-800 transition"
+                                            >
+                                                ✕
+                                            </button>
+                                        </div>
+
+                                        {/* Contenido del carrito con scroll si es necesario */}
+                                        <div className="flex-1 overflow-y-auto">
+                                            {cart.length === 0 ? (
+                                                <p className="text-gray-500 text-sm">
+                                                    Tu carrito está vacío. ¡Añade productos! 🛍️
+                                                </p>
+                                            ) : (
+                                                <>
+                                                    <ul className="space-y-10 mb-6">
+                                                        {cart.map((item) => (
+                                                            <li
+                                                                key={item.id}
+                                                                className="flex justify-between items-center text-md"
+                                                            >
+                                                                <img
+                                                                    src={item.image}
+                                                                    alt={item.name}
+                                                                    className="w-16 h-16 object-cover rounded-md"
+                                                                />
+                                                                <span className="w-full ml-2">{item.name}</span>
+                                                                <div className="flex items-center space-x-1">
+                                                                    <button
+                                                                        onClick={() => decrement(item.id)}
+                                                                        className="w-6 h-6 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-full"
+                                                                    >
+                                                                        -
+                                                                    </button>
+                                                                    <span className="font-medium p-1">{item.quantity}</span>
+                                                                    <button
+                                                                        onClick={() => increment(item.id)}
+                                                                        className="w-6 h-6 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-full"
+                                                                    >
+                                                                        +
+                                                                    </button>
+                                                                    <button
+                                                                        onClick={() => removeItem(item.id)}
+                                                                        className="text-gray-400 hover:text-red-500 ml-2"
+                                                                    >
+                                                                        <svg
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            className="h-5 w-5"
+                                                                            fill="currentColor"
+                                                                            viewBox="0 0 20 20"
+                                                                        >
+                                                                            <path
+                                                                                fillRule="evenodd"
+                                                                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                                                clipRule="evenodd"
+                                                                            />
+                                                                        </svg>
+                                                                    </button>
+                                                                </div>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+
+                                                    {/* Total */}
+                                                    <div className="flex justify-between items-center text-lg font-semibold mb-4">
+                                                        <span className="text-[#166534]">Total: 💰</span>
+                                                        <span className="text-[#577759]">
+                                                            {cart
+                                                                .reduce((acc, item) => acc + item.price * item.quantity, 0)
+                                                                .toFixed(2)}{" "}
+                                                            €
+                                                        </span>
+                                                    </div>
+                                                </>
+                                            )}
+                                        </div>
+
+                                        {/* Botón fijo abajo */}
+                                        {cart.length > 0 && (
+                                            <Link
+                                                to="/cart"
                                                 onClick={() => {
                                                     setDropdownOpen(false);
                                                     navigate("/cart");
                                                 }}
-                                                className="mt-6 w-full bg-[#166534] text-white py-3 rounded-full hover:bg-[#14532d] text-sm"
+                                                className="mt-4 px-8 py-3 w-full border border-[#166534] bg-[#166534] hover:bg-white text-white hover:text-[#166534] rounded-full text-sm transition-all duration-500 flex items-center justify-center gap-2"
                                             >
-                                                Ver carrito 🛍️
-                                            </button>
-                                        </>
-                                    )}
+                                                VER CARRITO 🛍️
+                                            </Link>
+                                        )}
+                                    </div>
                                 </div>
+
                             </>
                         )}
-
-
-
                     </div>
                 </div>
-
             </div>
         </header>
     );

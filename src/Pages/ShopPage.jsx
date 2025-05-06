@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AppContext } from '../Context/AppContext';
 import SliderShop from '../Components/SliderShop';
+import { Link } from 'react-router-dom';
 
 const sliderImages = [
     '/fondo_tienda.jpg',
@@ -25,18 +26,19 @@ const products = [
         id: 3,
         name: "Camiseta Eco Guerrera",
         price: 15.95,
-        image: "/Camiseta_Eco_Guerrera.png",
+        image: "/Camiseta_Dont_Be_Trashy.png",
     },
     {
         id: 4,
         name: "Camiseta Planeta Feliz",
         price: 13.95,
-        image: "/Camiseta_Planeta_Feliz.png",
+        image: "/Camiseta_Niño_Reciclando.png",
     }
 ];
 
 const ShopPage = () => {
     const { cart, setCart } = useContext(AppContext);
+    const [showToast, setShowToast] = useState(false); 
 
     const handleAddToCart = (product) => {
         setCart(prevCart => {
@@ -50,6 +52,10 @@ const ShopPage = () => {
             }
             return [...prevCart, { ...product, quantity: 1 }];
         });
+
+        
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 2000);
     };
 
     return (
@@ -89,6 +95,13 @@ const ShopPage = () => {
                                     </div>
                                 ))}
                             </div>
+
+                            {/* ✅ Toast fuera del .map */}
+                            {showToast && (
+                                <div className="fixed bottom-5 right-5 bg-green-600 text-white px-4 py-2 rounded shadow-md z-50 transition-opacity duration-500">
+                                    <Link to="/cart" >✅ Producto añadido al carrito </Link>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

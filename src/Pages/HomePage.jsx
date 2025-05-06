@@ -150,10 +150,6 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-
-      <div className="flex justify-center py-10">
-        <div className="border-t-2 border-b-[#577759] w-2/4"></div>
-      </div>
     </>
   );
 }
