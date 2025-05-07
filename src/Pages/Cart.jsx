@@ -9,7 +9,9 @@ export default function Cart() {
   const increment = (id) => {
     setCart(prev =>
       prev.map(p =>
-        p.id === id ? { ...p, quantity: p.quantity + 1 } : p
+        p.id === id && p.quantity < p.stock
+          ? { ...p, quantity: p.quantity + 1 }
+          : p
       )
     );
   };
@@ -62,25 +64,31 @@ export default function Cart() {
                         {subtotal.toFixed(2)}€
                       </span>
                     </p>
+                    <p className="text-xs text-gray-400 mt-1">
+                      Stock disponible: {item.stock}
+                    </p>
                   </div>
 
-
                   <div className="flex items-center space-x-3">
-                    
                     <button
                       onClick={() => decrement(item.id)}
                       className="w-8 h-8 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
                     >
                       <span className="text-gray-600">-</span>
                     </button>
-                    
+
                     <span className="w-6 text-center font-medium">{item.quantity}</span>
-                    
+
                     <button
                       onClick={() => increment(item.id)}
-                      className="w-8 h-8 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
+                      disabled={item.quantity >= item.stock}
+                      className={`w-8 h-8 flex items-center justify-center rounded-full transition-colors ${
+                        item.quantity >= item.stock
+                          ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                          : 'bg-gray-100 hover:bg-gray-200 text-gray-600'
+                      }`}
                     >
-                      <span className="text-gray-600">+</span>
+                      <span>+</span>
                     </button>
 
                     <button
@@ -91,7 +99,6 @@ export default function Cart() {
                         <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
                       </svg>
                     </button>
-
                   </div>
                 </li>
               );
