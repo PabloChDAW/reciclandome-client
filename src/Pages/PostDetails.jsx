@@ -75,8 +75,8 @@ const posts = [
         Si te gusta el bricolaje, puedes reutilizar las piezas de tus dispositivos viejos para hacer manualidades o proyectos de arte. Las pantallas viejas, los teclados y las baterías pueden convertirse en algo completamente nuevo con un poco de creatividad.</p>
         
         <p>🌍 <strong>Recuerda:</strong> el reciclaje de dispositivos electrónicos no solo ayuda a reducir la contaminación, sino que también contribuye a la conservación de recursos naturales. Asegúrate de deshacerte de tus viejos dispositivos de la forma más responsable posible.</p>
-    `,        
-    image: "/paratos_electronicos.jpg",
+    `,
+        image: "/paratos_electronicos.jpg",
         date: "21 Abril 2025",
     },
     {

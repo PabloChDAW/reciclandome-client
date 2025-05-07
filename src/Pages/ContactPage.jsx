@@ -25,7 +25,7 @@ export default function ContactForm() {
                             <label className="block text-md md:text-lg font-medium text-black">Correo Electrónico</label>
                             <input
                                 type="email"
-                                className="mt-1 block w-full border-b border-black focus:outline-none text-green-950" 
+                                className="mt-1 block w-full border-b border-black focus:outline-none text-green-950"
                             />
                         </div>
                     </div>

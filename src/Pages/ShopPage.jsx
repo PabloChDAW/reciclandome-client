@@ -38,7 +38,7 @@ const products = [
 
 const ShopPage = () => {
     const { cart, setCart } = useContext(AppContext);
-    const [showToast, setShowToast] = useState(false); 
+    const [showToast, setShowToast] = useState(false);
 
     const handleAddToCart = (product) => {
         setCart(prevCart => {
@@ -53,7 +53,7 @@ const ShopPage = () => {
             return [...prevCart, { ...product, quantity: 1 }];
         });
 
-        
+
         setShowToast(true);
         setTimeout(() => setShowToast(false), 2000);
     };
