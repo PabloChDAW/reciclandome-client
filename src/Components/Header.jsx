@@ -120,7 +120,7 @@ export default function Header({ isHome = false, isShop = false }) {
 
                         <nav className="flex flex-col items-start gap-8 px-6 text-lg text-[#131700]">
                             <Link to="/" onClick={() => setMenuOpen(false)} className={`${getLinkClass("/")}`}>🏠 Inicio</Link>
-                            <Link to="/map" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 font-bold animate-pulse hover:text-green-900">🗺️ Mapa Interactivo</Link>
+                            <Link to="/create" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 font-bold animate-pulse hover:text-green-900">🗺️ Mapa Interactivo</Link>
                             <Link to="/about" onClick={() => setMenuOpen(false)} className={`${getLinkClass("/about")}`}>👥 Quiénes Somos</Link>
                             <Link to="/shop" onClick={() => setMenuOpen(false)} className={`${getLinkClass("/shop")}`}>🛍️ Tienda</Link>
                             <Link to="/contact" onClick={() => setMenuOpen(false)} className={`${getLinkClass("/contact")}`}>📞 Contacto</Link>
@@ -205,7 +205,7 @@ export default function Header({ isHome = false, isShop = false }) {
                         </div>
                         <div className="absolute top-full left-1/2 -translate-x-1/2 w-56 bg-white border border-gray-300 rounded shadow-md opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-40">
                             <Link to="/mapa/tipo-reciclaje" className="block px-4 py-2 text-center text-[#131700] hover:text-[#166534] hover:bg-gray-200 transition duration-700">Tipo de reciclaje</Link>
-                            <Link to="/mapa/crear-punto" className="block px-4 py-2 text-center text-[#131700] hover:text-[#166534] hover:bg-gray-200 transition duration-700">Crear punto</Link>
+                            <Link to="/create" className="block px-4 py-2 text-center text-[#131700] hover:text-[#166534] hover:bg-gray-200 transition duration-700">Crear punto</Link>
                             <Link to="/mapa/ver-puntos" className="block px-4 py-2 text-center text-[#131700] hover:text-[#166534] hover:bg-gray-200 transition duration-700">Ver puntos limpios</Link>
                             <Link to="/mapa/eliminar-punto" className="block px-4 py-2 text-center text-[#131700] hover:text-[#166534] hover:bg-gray-200 transition duration-700">Eliminar puntos</Link>
                         </div>
