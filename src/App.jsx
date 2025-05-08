@@ -42,8 +42,8 @@ export default function App() {
           <Route path='/aviso-legal' element={<AvisoLegal />} />
           <Route path='/contact' element={<ContactPage />} />
           <Route path='/cart' element={<Cart />} />
-          <Route path='/register' element={user ? <Home /> : <Register />} />
-          <Route path='/login' element={user ? <Home /> : <Login />} />
+          <Route path='/register' element={user ? <HomePage /> : <Register />} />
+          <Route path='/login' element={user ? <HomePage /> : <Login />} />
           <Route path='/create' element={user ? <Create /> : <Login />} />
           <Route path='/points/:id' element={<Show />} />
           <Route path='/points/update/:id' element={user ? <Update /> : <Login />} />

@@ -6,10 +6,12 @@ import { AppContext } from "../Context/AppContext";
 export default function Header({ isHome = false, isShop = false }) {
     const [menuOpen, setMenuOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const { user, cart, totalItems, increment, decrement, removeItem } = useContext(AppContext);
+    const { user, cart, totalItems, increment, decrement, removeItem, setUser, setToken } = useContext(AppContext);
     const navigate = useNavigate();
     const dropdownRef = useRef(null);
     const [scrolled, setScrolled] = useState(false);
+    const token = localStorage.getItem('token'); // o sessionStorage
+
 
 
     const location = useLocation(); // Obtiene la ruta actual

@@ -18,23 +18,37 @@ export default function Layout() {
   async function handleLogout(e) {
     e.preventDefault();
 
-    const res = await fetch("/api/logout", {
-      method: "post",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    try {
+      // Realizamos la solicitud de logout
+      const res = await fetch("/api/logout", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-    const data = await res.json();
-    console.log(data);
+      // Verificamos si la respuesta es OK
+      if (!res.ok) {
+        throw new Error("Error en el logout: " + res.statusText);
+      }
 
-    if (res.ok) {
+      // Si la respuesta es exitosa, parseamos los datos
+      const data = await res.json();
+      console.log(data);
+
+      // Limpiamos el estado y localStorage
       setUser(null);
       setToken(null);
       localStorage.removeItem("token");
+
+      // Navegamos a la página principal
       navigate("/");
+
+    } catch (error) {
+      console.error("Error al hacer logout:", error);
     }
   }
+
 
 
 
