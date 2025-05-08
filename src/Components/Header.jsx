@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { HiMenu, HiX, HiOutlineUser, HiOutlineUserAdd } from "react-icons/hi";
+import { FiLogOut } from "react-icons/fi";
 import { AppContext } from "../Context/AppContext";
 
 export default function Header({ isHome = false, isShop = false }) {
@@ -127,8 +128,17 @@ export default function Header({ isHome = false, isShop = false }) {
                             <div className="pt-10 border-t border-[#166534] w-full">
                                 {user ? (
                                     <div className="flex flex-col gap-4">
-                                        <p className="text-sm">Hola, {user.name}</p>
-                                        <button onClick={handleLogout} className="text-sm hover:underline">Cerrar sesión</button>
+                                        <p className="text-lg">Hola, {user.name}</p>
+                                        <button
+                                            onClick={handleLogout}
+                                            className="flex items-center space-x-2 border border-red-600 bg-gray-100 hover:bg-red-100 text-red-600 hover:text-red-700 px-3 py-2 rounded-md text-sm transition duration-200"
+                                            title="Cerrar sesión"
+                                        >
+                                            <FiLogOut className="text-xl" />
+                                            <span>Cerrar sesión</span>
+                                        </button>
+
+
                                     </div>
                                 ) : (
                                     <div className="flex flex-col gap-4">
@@ -212,8 +222,9 @@ export default function Header({ isHome = false, isShop = false }) {
                     {user ? (
                         <>
                             <p className="lg:text-[20px] sm:text-[14px]">Hola, {user.name}</p>
-                            <button onClick={handleLogout} className="text-sm hover:underline">Cerrar sesión</button>
-                        </>
+                            <button onClick={handleLogout} className="text-xl hover:text-red-500" title="Cerrar sesión">
+                                <FiLogOut />
+                            </button>                        </>
                     ) : (
                         <Link to="/login" className="lg:text-[20px] sm:text-[12px] hover:scale-110 transform duration-300">Hola, identifícate</Link>
                     )}

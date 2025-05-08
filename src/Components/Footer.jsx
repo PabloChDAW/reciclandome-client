@@ -70,9 +70,9 @@ const Footer = () => {
                 <div className="pb-5 border-t bg-white border-gray-200 mt-6 pt-4 text-center text-xs text-gray-600">
                     <p>
                         Copyright © 2025 Reciclando.me. Todos los derechos reservados.{" "}
-                        <Link to="/privacidad" className="hover:text-green-700 hover:underline">Aviso legal</Link> |{" "}
-                        <Link to="/cookies" className="hover:text-green-700 hover:underline">Política de privacidad</Link> |{" "}
-                        <Link to="/aviso-legal" className="hover:text-green-700 hover:underline">Política de cookies</Link>
+                        <Link to="/aviso-legal" className="hover:text-green-700 hover:underline">Aviso legal</Link> |{" "}
+                        <Link to="/politica-privacidad" className="hover:text-green-700 hover:underline">Política de privacidad</Link> |{" "}
+                        <Link to="/politica-cookies" className="hover:text-green-700 hover:underline">Política de cookies</Link>
                     </p>
                 </div>
             </footer>
