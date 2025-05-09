@@ -4,6 +4,7 @@ import Map3 from "../Components/Map3";
 import { FaRecycle, FaTrashAlt, FaFileAlt, FaGlassMartiniAlt, FaLeaf } from 'react-icons/fa';
 import Slider from '../Components/SliderHome';
 import Header from "../Components/Header";
+import InfoBox from "../Components/Infobox";
 
 export default function HomePage() {
   const sliderImages = ['/slider8.jpg', '/slider6.jpg', '/slider7.jpg'];
@@ -36,6 +37,25 @@ export default function HomePage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleMarkerClick = (point) => {
+    setSelectedPoint(point); 
+    };
+    async function getPoints() {
+      const res = await fetch("/api/points");
+      const data = await res.json();
+      console.log("hola")
+      console.log(data);
+  
+      if (res.ok) {
+        setPoints(data);
+      }
+    }
+  
+    useEffect(() => {
+      getPoints();
+    }, []);
+  
+
   return (
     <>
       {/* Header que aparece al hacer scroll */}
@@ -46,6 +66,43 @@ export default function HomePage() {
 
       {/* Slider principal */}
       <Slider images={sliderImages} interval={4000} />
+      <h1 className="title">Puntos de reciclaje</h1>
+      
+      <Map3 points={points} onMarkerClick={setSelectedPoint}></Map3> 
+
+      {selectedPoint && (
+        <div className="mt-4 p-4 border rounded-md border-blue-400 bg-blue-50">
+          <h2 className="text-lg font-bold mb-2">Punto Seleccionado</h2>
+          <p><strong>Latitud:</strong> {selectedPoint.latitude}</p>
+          <p><strong>Longitud:</strong> {selectedPoint.longitude}</p>
+          <p><strong>Usuario:</strong> {selectedPoint.user.name}</p>
+          <Link to={`/points/${selectedPoint.id}`} className="mt-2 inline-block bg-blue-600 text-white px-3 py-1 rounded-lg">
+            Ver más
+          </Link>
+        </div>
+      )}
+
+      {<InfoBox point={selectedPoint} />}
+      {points.length > 0 ? (
+        points.map((point) => (
+          <div key={point.id} className="mt-4 mb-4 p-4 border rounded-md border-dashed border-slate-400">
+            <div className="mb-2 flex items-start justify-between">
+              <div>
+                <p>Latitud: {point.latitude}</p>
+                <p>Longitud: {point.longitude}</p>
+                <small className="text-xs text-slate-600">
+                  Creado por {point.user.name} a las{" "} {new Date(point.created_at).toLocaleTimeString()}
+                </small>
+              </div>
+              <Link to={`/points/${point.id}`} className="bg-blue-500 text-white text-sm rounded-lg px-3 py-1">
+                Ver más
+              </Link>
+            </div>
+          </div>
+        ))
+      ) : (
+        <p>No hay puntos</p>
+      )}
 
       {/* Sección de bienvenida */}
       <div className="p-10 sm:py-20 sm:max-w-7xl mx-auto">
