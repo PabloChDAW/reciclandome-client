@@ -11,17 +11,17 @@ export default function Create() {
     longitude: -3.7038,
     name: "",
     address: "",
-    street: "",
     city: "",
     region: "",
     country: "",
     postcode: "",
-    category: "",
+    way: "",
     place_type: "",
     point_type: "",
-    wikidata_id: "",
     url: "",
-    description: ""
+    description: "",
+    phone: "", 
+    email: ""  
   });
   const pointTypes = ["Tipo 1", "Tipo 2", "Tipo 3"];
     // Seguridad y sanitización ---- //MapTyler no gestiona bien la iniciación en alguna coordenada 0.
@@ -75,7 +75,6 @@ useEffect(() => {
         // Extracción de datos específicos según la estructura de MapTiler
         const name = feature.text || properties.name || "Ubicación sin nombre";
         const address = feature.place_name || "";
-        const street = properties.address || feature.text || "";
         const city = getContextValue('municipality') || 
                      getContextValue('place') || 
                      getContextValue('locality');
@@ -84,7 +83,7 @@ useEffect(() => {
         const country = getContextValue('country');
         const postcode = getContextValue('postal_code') || 
                          getContextValue('postcode');
-        const category = properties.kind || 
+        const way = properties.kind || 
                         feature.place_type?.[0] || 
                         properties.place_type_name?.[0] ||
                         "";
@@ -96,14 +95,12 @@ useEffect(() => {
           ...prev,
           name,
           address,
-          street,
           city,
           region,
           country,
           postcode,
-          category,
+          way,
           place_type: placeType,
-          wikidata_id: properties.wikidata || "",
           url: generateUrl(name, formData.latitude, formData.longitude)
         }));
       }
@@ -133,6 +130,7 @@ useEffect(() => {
     const data = await res.json();
 
     if (data.errors) {
+      console.error("Error 422 - Datos de validación:", data);
       setErrors(data.errors);
     } else {
       navigate("/");
@@ -193,12 +191,11 @@ useEffect(() => {
           <p><strong>Tipo de punto:</strong> {formData.point_type || "—"}</p> 
           <p><strong>Tipo de lugar:</strong> {formData.place_type || "—"}</p>
           <p><strong>Dirección:</strong> {formData.address || "—"}</p>
-          <p><strong>Calle/Número:</strong> {formData.street || "—"}</p>
           <p><strong>Localidad:</strong> {formData.city || "—"}</p>
           <p><strong>Región:</strong> {formData.region || "—"}</p>
           <p><strong>País:</strong> {formData.country || "—"}</p>
           <p><strong>Código postal:</strong> {formData.postcode || "—"}</p>
-          <p><strong>Categoría:</strong> {formData.category || "—"}</p>
+          <p><strong>Categoría:</strong> {formData.way || "—"}</p>
         </div>
   
         {/* Input editable */}
@@ -210,7 +207,25 @@ useEffect(() => {
             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
           />
         </div>
-  
+        
+        <div>
+          <input
+            type="text"
+            placeholder="Teléfono"
+            value={formData.phone || ""}
+            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+          />
+        </div>
+
+        <div>
+          <input
+            type="email"
+            placeholder="Correo electrónico"
+            value={formData.email || ""}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          />
+        </div>
+
         <button className="primary-btn" disabled={isGeocoding}>
           {isGeocoding ? "Cargando datos..." : "Crear punto"}
         </button>

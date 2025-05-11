@@ -9,6 +9,16 @@ const InfoBox = ({ point }) => {
       <p>Usuario: {point.user_id}</p>
       <p>Fecha: {point.created_at}</p>
       <p>Coordenadas: {point.latitude}, {point.longitude}</p>
+      {/* <p>Teléfono: {point.phone || "—"}</p>
+      <p>Correo: {point.email || "—"}</p>
+      <p>Tipo de punto: {}</p>
+      <p>Tipo de lugar: {}</p>
+      <p>Dirección: {}</p>
+      <p>Localidad:{formData.city || "—"}</p>
+      <p>Región:{}</p>
+      <p>País:{}</p>
+      <p>Código postal:{}</p>
+      <p>Categoría: {formData.category || "—"}</p> */}
     </div>
   );
 };
