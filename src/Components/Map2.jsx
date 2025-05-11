@@ -48,11 +48,10 @@ export default function Map2({ latitud, longitud, setFormData}){
         console.log("Coordenadas click:", lng, lat);
           
         setNoSeCentra(true)
-        setFormData((prev) => ({
-          ...prev,
-          latitude: lat,
+        setFormData(
+          {latitude: lat,
           longitude: lng,
-        }));
+      });
         }
 
       map.current.on('click', handleClick);
