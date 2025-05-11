@@ -13,3 +13,7 @@ const InfoBox = ({ point }) => {
   );
 };
 export default InfoBox;
+
+/**
+ * TODO Incluir nuevos campos
+ */
