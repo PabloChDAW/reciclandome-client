@@ -204,3 +204,11 @@ Probar borrar un point.
 - Implementar aviso de coordenadas inválidas o mapa por defecto
 - En lugar de borrar directamente, cuadro de dialogo que pida por confirmación
 - ...................
+
+
+### 11. AÑADIR IMPORTACIONES (ESTÁN YA PUESTA, SOLO HAY QUE INSTALARLAS)
+
+- npm install react-router-dom react-icons
+- npm install react-icons
+- npm install framer-motion
+- npm install lucide-react 
