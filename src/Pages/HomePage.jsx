@@ -38,23 +38,23 @@ export default function HomePage() {
   }, []);
 
   const handleMarkerClick = (point) => {
-    setSelectedPoint(point); 
-    };
-    async function getPoints() {
-      const res = await fetch("/api/points");
-      const data = await res.json();
-      console.log("hola")
-      console.log(data);
-  
-      if (res.ok) {
-        setPoints(data);
-      }
+    setSelectedPoint(point);
+  };
+  async function getPoints() {
+    const res = await fetch("/api/points");
+    const data = await res.json();
+    console.log("hola")
+    console.log(data);
+
+    if (res.ok) {
+      setPoints(data);
     }
-  
-    useEffect(() => {
-      getPoints();
-    }, []);
-  
+  }
+
+  useEffect(() => {
+    getPoints();
+  }, []);
+
 
   return (
     <>
@@ -66,59 +66,71 @@ export default function HomePage() {
 
       {/* Slider principal */}
       <Slider images={sliderImages} interval={4000} />
-      <h1 className="title">Puntos de reciclaje</h1>
-      
-      <Map3 points={points} onMarkerClick={setSelectedPoint}></Map3> 
 
-      {selectedPoint && (
-        <div className="mt-4 p-4 border rounded-md border-blue-400 bg-blue-50">
-          <h2 className="text-lg font-bold mb-2">Punto Seleccionado</h2>
-          <p><strong>Latitud:</strong> {selectedPoint.latitude}</p>
-          <p><strong>Longitud:</strong> {selectedPoint.longitude}</p>
-          <p><strong>Usuario:</strong> {selectedPoint.user.name}</p>
-          <Link to={`/points/${selectedPoint.id}`} className="mt-2 inline-block bg-blue-600 text-white px-3 py-1 rounded-lg">
-            Ver más
-          </Link>
+      <div className="py-10">
+
+        <h1 className="text-3xl font-bold text-center mb-8">
+          ♻️ Puntos de Reciclaje
+        </h1>
+
+        <div className="mb-10 rounded-xl overflow-hidden shadow-lg border border-slate-200">
+          <Map3 points={points} onMarkerClick={setSelectedPoint} />
         </div>
-      )}
 
-      {<InfoBox point={selectedPoint} />}
-      {points.length > 0 ? (
-        points.map((point) => (
-          <div key={point.id} className="mt-4 mb-4 p-4 border rounded-md border-dashed border-slate-400">
-            <div className="mb-2 flex items-start justify-between">
-              <div>
-                <p>Latitud: {point.latitude}</p>
-                <p>Longitud: {point.longitude}</p>
-                <small className="text-xs text-slate-600">
-                  Creado por {point.user.name} a las{" "} {new Date(point.created_at).toLocaleTimeString()}
-                </small>
-              </div>
-              <Link to={`/points/${point.id}`} className="bg-blue-500 text-white text-sm rounded-lg px-3 py-1">
-                Ver más
-              </Link>
+        {selectedPoint && (
+          <section className="mt-10 p-6 rounded-2xl border border-blue-200 bg-blue-50 shadow-md">
+            <h2 className="text-2xl font-semibold text-blue-800 flex items-center gap-2 mb-4">
+              <span className="text-xl">📍</span> Detalles del Punto Seleccionado
+            </h2>
+            <ul className="text-sm text-blue-900 space-y-1">
+              <li><span className="font-medium">Latitud:</span> {selectedPoint.latitude}</li>
+              <li><span className="font-medium">Longitud:</span> {selectedPoint.longitude}</li>
+              <li><span className="font-medium">Usuario:</span> {selectedPoint.user.name}</li>
+            </ul>
+            <Link
+              to={`/points/${selectedPoint.id}`}
+              className="mt-5 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition"
+            >
+              Ver más detalles →
+            </Link>
+          </section>
+        )}
+
+        <InfoBox point={selectedPoint} />
+
+        <section className="mt-12">
+          <h3 className="text-xl font-semibold text-slate-700 mb-6">📌 Todos los puntos</h3>
+
+          {points.length > 0 ? (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {points.map((point) => (
+                <div
+                  key={point.id}
+                  className="p-5 rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition"
+                >
+                  <div className="space-y-2 text-sm text-slate-800">
+                    <p><span className="font-medium">Latitud:</span> {point.latitude}</p>
+                    <p><span className="font-medium">Longitud:</span> {point.longitude}</p>
+                    <p className="text-xs text-slate-500">
+                      Creado por <span className="font-medium">{point.user.name}</span> a las{" "}
+                      {new Date(point.created_at).toLocaleTimeString()}
+                    </p>
+                  </div>
+                  <div className="mt-4 text-right">
+                    <Link
+                      to={`/points/${point.id}`}
+                      className="bg-blue-500 hover:bg-blue-600 text-white text-xs font-semibold px-4 py-2 rounded-md transition"
+                    >
+                      Ver más
+                    </Link>
+                  </div>
+                </div>
+              ))}
             </div>
-          </div>
-        ))
-      ) : (
-        <p>No hay puntos</p>
-      )}
-
-      {/* Sección de bienvenida */}
-      <div className="p-10 sm:py-20 sm:max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-          <div>
-            <img src="/slider1.jpg" alt="Reciclaje" className="w-full h-auto rounded-2xl shadow-lg" />
-          </div>
-          <div className="space-y-6">
-            <h1 className="text-2xl sm:text-4xl font-bold">Transforma tu mundo, empieza reciclando.</h1>
-            <p className="text-sm sm:text-lg">
-              En Reciclando.me creemos que cada acción cuenta. Este espacio fue creado para ayudarte
-              a entender qué, cómo y dónde reciclar, además de conectar con iniciativas
-              locales y sostenibles. ¡Haz comunidad y transforma tu entorno!
-            </p>
-          </div>
-        </div>
+          ) : (
+            <p className="text-sm text-slate-500 italic">No hay puntos disponibles actualmente.</p>
+          )}
+        </section>
       </div>
 
       <div className="flex justify-center py-10">
