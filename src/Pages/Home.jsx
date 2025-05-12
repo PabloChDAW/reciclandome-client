@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Map3 from "../Components/Map3";
 import InfoBox from "../Components/Infobox";
-
+import PointItem from "../Components/PointItem";
 export default function Home() {
   const [points, setPoints] = useState([]);
 
@@ -33,7 +33,7 @@ export default function Home() {
       
       <Map3 points={points} onMarkerClick={setSelectedPoint}></Map3> 
 
-      {selectedPoint && (
+      {/* {selectedPoint && (
         <div className="mt-4 p-4 border rounded-md border-blue-400 bg-blue-50">
           <h2 className="text-lg font-bold mb-2">Punto Seleccionado</h2>
           <p><strong>Latitud:</strong> {selectedPoint.latitude}</p>
@@ -43,25 +43,12 @@ export default function Home() {
             Ver más
           </Link>
         </div>
-      )}
+      )} Esto es el infobox en realidad, debería borrarse en un futuro pero lo dejo aquí ahora para su entendimiento*/}
 
       {<InfoBox point={selectedPoint} />}
       {points.length > 0 ? (
         points.map((point) => (
-          <div key={point.id} className="mt-4 mb-4 p-4 border rounded-md border-dashed border-slate-400">
-            <div className="mb-2 flex items-start justify-between">
-              <div>
-                <p>Latitud: {point.latitude}</p>
-                <p>Longitud: {point.longitude}</p>
-                <small className="text-xs text-slate-600">
-                  Creado por {point.user.name} a las{" "} {new Date(point.created_at).toLocaleTimeString()}
-                </small>
-              </div>
-              <Link to={`/points/${point.id}`} className="bg-blue-500 text-white text-sm rounded-lg px-3 py-1">
-                Ver más
-              </Link>
-            </div>
-          </div>
+          <PointItem key={point.id} point={point} />
         ))
       ) : (
         <p>No hay puntos</p>
