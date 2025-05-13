@@ -37,6 +37,17 @@ export default function HomePage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (location.state?.scrollToMapa) {
+      const mapaSection = document.getElementById("mapa");
+      if (mapaSection) {
+        setTimeout(() => {
+          mapaSection.scrollIntoView({ behavior: "smooth" });
+        }, 100); // espera breve para que el DOM se monte
+      }
+    }
+  }, [location]);
+
   const handleMarkerClick = (point) => {
     setSelectedPoint(point);
   };
@@ -73,7 +84,7 @@ export default function HomePage() {
           ♻️ Puntos de Reciclaje
         </h1>
 
-        <div className="mb-10 overflow-hidden border border-slate-200 shadow-[0_0_20px_3px_rgba(34,197,94,0.4)] transition-all duration-500">
+        <div id="mapa" className="mb-10 overflow-hidden border border-slate-200 shadow-[0_0_20px_3px_rgba(34,197,94,0.4)] transition-all duration-500">
           <Map3 points={points} onMarkerClick={setSelectedPoint} />
         </div>
 
@@ -97,7 +108,7 @@ export default function HomePage() {
             </section>
           )}
 
-          <InfoBox point={selectedPoint} />
+          {/*<InfoBox point={selectedPoint} />
 
           <section className="mt-16 px-4">
             <h3 className="text-2xl font-bold text-center text-slate-700 mb-10">
@@ -150,7 +161,7 @@ export default function HomePage() {
                 No hay puntos disponibles actualmente.
               </p>
             )}
-          </section>
+          </section> */}
 
         </div>
       </div>

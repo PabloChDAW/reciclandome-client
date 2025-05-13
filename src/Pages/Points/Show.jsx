@@ -47,37 +47,52 @@ export default function Show() {
   }, []);
 
   return (
-    <>
+    <div className="py-20">
       {point ? (
-        <div key={point.id} className="mt-4 p-4 border rounded-md border-dashed border-slate-400">
-          <div className="mb-2 flex items-start justify-between">
+        <div key={point.id} className="px-6">
+          <div className="mb-4 flex items-start justify-between">
             <div>
-              <p>{point.latitude}</p>
-              <p>{point.longitude}</p>
-              <small className="text-xs text-slate-600">
-                Creado por {point.user.name} a las{" "} {new Date(point.created_at).toLocaleTimeString()}
-              </small>
+              <p className="text-sm text-slate-500">Latitud:</p>
+              <p className="text-lg font-semibold text-slate-800">{point.latitude}</p>
+              <p className="text-sm text-slate-500">Longitud:</p>
+              <p className="text-lg font-semibold text-slate-800">{point.longitude}</p>
+              <p className="text-xs text-slate-500 mt-2 italic">
+                Creado por <span className="font-medium">{point.user.name}</span> a las{" "}
+                {new Date(point.created_at).toLocaleTimeString()}
+              </p>
             </div>
           </div>
-          <Map latitud={point.latitude} longitud={point.longitude}></Map>
-          {user && user.id === point.user_id && <div className="flex items-center justify-end gap-4">
-          <Link
-            to={`/points/update/${point.id}`}
-            className="bg-green-500 text-white text-sm rounded-lg px-3 py-1"
-          >
-            Modificar
-          </Link>
-
-          <form onSubmit={handleDelete}>
-              <button className="bg-red-500 text-white text-sm rounded-lg px-3 py-1">
-                Eliminar
-              </button>
-            </form>
-          </div>}
+  
+          <div className="rounded-lg overflow-hidden mb-4">
+            <Map latitud={point.latitude} longitud={point.longitude} />
+          </div>
+  
+          {user && user.id === point.user_id && (
+            <div className="flex items-center justify-end gap-3 mt-4">
+              <Link
+                to={`/points/update/${point.id}`}
+                className="bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md px-4 py-2 transition"
+              >
+                ✏️ Modificar
+              </Link>
+  
+              <form onSubmit={handleDelete}>
+                <button
+                  type="submit"
+                  className="bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-md px-4 py-2 transition"
+                >
+                  🗑 Eliminar
+                </button>
+              </form>
+            </div>
+          )}
         </div>
       ) : (
-        <p className="title">Punto no encontrado.</p>
+        <p className="text-center text-lg text-slate-600 font-semibold mt-10">
+          Punto no encontrado.
+        </p>
       )}
-    </>
+    </div>
   );
+  
 }

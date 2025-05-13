@@ -1,15 +1,83 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function ContactForm() {
+    const [formData, setFormData] = useState({
+        nombre: "",
+        correo: "",
+        telefono: "",
+        sugerencias: "",
+        ayuda: "",
+        privacidad: false,
+    });
+
+    const [errors, setErrors] = useState({});
+    const [successMessage, setSuccessMessage] = useState("");
+
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setFormData({
+            ...formData,
+            [name]: type === "checkbox" ? checked : value,
+        });
+
+        if (errors[name]) {
+            setErrors({ ...errors, [name]: null });
+        }
+    };
+
+    const validate = () => {
+        const newErrors = {};
+        if (!formData.nombre.trim()) newErrors.nombre = "El nombre es obligatorio";
+        if (!formData.correo.trim()) {
+            newErrors.correo = "El correo es obligatorio";
+        } else if (!/\S+@\S+\.\S+/.test(formData.correo)) {
+            newErrors.correo = "El correo no es válido";
+        }
+        if (!formData.telefono.trim()) newErrors.telefono = "El teléfono es obligatorio";
+        if (!formData.ayuda.trim()) newErrors.ayuda = "Este campo es obligatorio";
+        if (!formData.privacidad) newErrors.privacidad = "Debe aceptar la política de privacidad";
+        return newErrors;
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const validationErrors = validate();
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+            return;
+        }
+
+        console.log("Formulario válido, enviando:", formData);
+
+        // Aquí iría la lógica de envío (por ejemplo, fetch a una API)
+
+        // Mostrar mensaje de éxito
+        setSuccessMessage("✅ Se ha enviado correctamente. En breve nos pondremos en contacto con usted.");
+
+        // Limpiar el formulario
+        setFormData({
+            nombre: "",
+            correo: "",
+            telefono: "",
+            sugerencias: "",
+            ayuda: "",
+            privacidad: false,
+        });
+
+        setErrors({});
+    };
+
+    const inputClass = (field) =>
+        `mt-1 block w-full border-b bg-transparent ${
+            errors[field] ? "border-red-500" : "border-black"
+        } focus:outline-none text-green-950`;
+
     return (
         <div
             className="min-h-screen flex items-center justify-center bg-cover bg-center relative"
-            style={{
-                backgroundImage: "url('/slider6.jpg')",
-            }}
+            style={{ backgroundImage: "url('/slider6.jpg')" }}
         >
-            {/* Capa de máscara blanca */}
             <div className="absolute inset-0 bg-white opacity-80"></div>
 
             <div className="p-10 sm:py-10 sm:max-w-7xl mx-auto grid md:grid-cols-2 max-w-6xl w-full relative z-10">
@@ -21,21 +89,29 @@ export default function ContactForm() {
                     </p>
                 </div>
 
-                <form className="space-y-4 m-10 md:m-0">
+                <form className="space-y-4 m-10 md:m-0" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label className="block text-md md:text-lg font-medium text-black">Nombre</label>
                             <input
                                 type="text"
-                                className="mt-1 block w-full border-b bg-transparent border-black focus:outline-none text-green-950"
+                                name="nombre"
+                                value={formData.nombre}
+                                onChange={handleChange}
+                                className={inputClass("nombre")}
                             />
+                            {errors.nombre && <p className="text-red-600 text-sm">{errors.nombre}</p>}
                         </div>
                         <div>
                             <label className="block text-md md:text-lg font-medium text-black">Correo Electrónico</label>
                             <input
                                 type="email"
-                                className="mt-1 block w-full border-b bg-transparent border-black focus:outline-none text-green-950"
+                                name="correo"
+                                value={formData.correo}
+                                onChange={handleChange}
+                                className={inputClass("correo")}
                             />
+                            {errors.correo && <p className="text-red-600 text-sm">{errors.correo}</p>}
                         </div>
                     </div>
 
@@ -44,14 +120,21 @@ export default function ContactForm() {
                             <label className="block text-md md:text-lg font-medium text-black">Teléfono</label>
                             <input
                                 type="tel"
-                                className="mt-1 block w-full border-b bg-transparent border-black focus:outline-none text-green-950"
+                                name="telefono"
+                                value={formData.telefono}
+                                onChange={handleChange}
+                                className={inputClass("telefono")}
                             />
+                            {errors.telefono && <p className="text-red-600 text-sm">{errors.telefono}</p>}
                         </div>
                         <div>
                             <label className="block text-md md:text-lg font-medium text-black">Sugerencias</label>
                             <input
                                 type="text"
-                                className="mt-1 block w-full border-b bg-transparent border-black focus:outline-none text-green-950"
+                                name="sugerencias"
+                                value={formData.sugerencias}
+                                onChange={handleChange}
+                                className={inputClass("sugerencias")}
                             />
                         </div>
                     </div>
@@ -62,20 +145,31 @@ export default function ContactForm() {
                         </label>
                         <input
                             type="text"
-                            className="mt-1 block w-full border-b bg-transparent border-black focus:outline-none text-green-950"
+                            name="ayuda"
+                            value={formData.ayuda}
+                            onChange={handleChange}
+                            className={inputClass("ayuda")}
                         />
+                        {errors.ayuda && <p className="text-red-600 text-sm">{errors.ayuda}</p>}
                     </div>
 
-                    <div className="flex items-center space-x-2 mt-4">
+                    <div className="flex items-start space-x-2 mt-4">
                         <input
                             type="checkbox"
-                            className="accent-green-950"
+                            name="privacidad"
+                            checked={formData.privacidad}
+                            onChange={handleChange}
+                            className="accent-green-950 mt-1"
                             id="privacy"
                         />
                         <label htmlFor="privacy" className="text-md md:text-lg text-green-950">
-                            Acepto y he leído la <Link to="/politica-privacidad" className="hover:text-[#166534] font-bold" >Política de privacidad</Link>
+                            Acepto y he leído la{" "}
+                            <Link to="/politica-privacidad" className="hover:text-[#166534] font-bold">
+                                Política de privacidad
+                            </Link>
                         </label>
                     </div>
+                    {errors.privacidad && <p className="text-red-600 text-sm">{errors.privacidad}</p>}
 
                     <button
                         type="submit"
@@ -83,6 +177,10 @@ export default function ContactForm() {
                     >
                         ➤ ENVIAR
                     </button>
+
+                    {successMessage && (
+                        <p className="text-green-700 text-md mt-4 font-semibold">{successMessage}</p>
+                    )}
                 </form>
             </div>
         </div>

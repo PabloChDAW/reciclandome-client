@@ -49,7 +49,7 @@ export default function Header({ isHome = false, isShop = false }) {
 
             if (screenWidth >= 1440) {
                 // Pantallas grandes (1440px o mayores)
-                setScrolled(window.scrollY > 600);  // Cambia el valor de desplazamiento según lo necesites
+                setScrolled(window.scrollY > 150);  // Cambia el valor de desplazamiento según lo necesites
             } else if (screenWidth >= 1024) {
                 // Pantallas medianas (1024px o mayores)
                 setScrolled(window.scrollY > 600);  // Cambia el valor de desplazamiento según lo necesites
@@ -84,7 +84,7 @@ export default function Header({ isHome = false, isShop = false }) {
             <div className="mx-auto px-4 py-3 bg-opacity-40 z-99 flex items-center justify-between relative">
                 {/* Logo */}
                 <Link to="/" className="flex items-center hover:scale-110 transform duration-700 gap-2">
-                    <img src="/Reciclandome_negro.png" alt="Logo" className="h-auto w-16" />
+                    <img src="/Reciclandome_negro.png" alt="Logo" className="h-auto w-16 md:w-12 lg:w-16" />
                 </Link>
 
                 {/* Botón hamburguesa - solo visible en móviles */}
@@ -120,7 +120,7 @@ export default function Header({ isHome = false, isShop = false }) {
 
                         <nav className="flex flex-col items-start gap-8 px-6 text-lg text-[#131700]">
                             <Link to="/" onClick={() => setMenuOpen(false)} className={`${getLinkClass("/")}`}>🏠 Inicio</Link>
-                            <Link to="/create" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 font-bold animate-pulse hover:text-green-900">🗺️ Mapa Interactivo</Link>
+                            <Link to="/create" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 font-bold animate-pulse hover:text-green-900">🗺️ Crear Punto en el mapa</Link>
                             <Link to="/about" onClick={() => setMenuOpen(false)} className={`${getLinkClass("/about")}`}>👥 Quiénes Somos</Link>
                             <Link to="/shop" onClick={() => setMenuOpen(false)} className={`${getLinkClass("/shop")}`}>🛍️ Tienda</Link>
                             <Link to="/contact" onClick={() => setMenuOpen(false)} className={`${getLinkClass("/contact")}`}>📞 Contacto</Link>
@@ -196,7 +196,7 @@ export default function Header({ isHome = false, isShop = false }) {
                 </div>
 */}
                 {/* Navegación desktop */}
-                <nav className="hidden md:flex md:items-center md:gap-6 text-[#131700] lg:text-[20px] sm:text-[14px]">
+                <nav className="hidden md:flex md:items-center md:gap-4 lg:gap-6 text-[#131700] lg:text-[20px] sm:text-[14px]">
                     <Link to="/" className={`${getLinkClass("/")}`}>Inicio</Link>
 
                     <div className="relative group hidden md:block">
@@ -221,7 +221,9 @@ export default function Header({ isHome = false, isShop = false }) {
                 <div className="hidden md:flex items-center gap-6 text-[#131700] relative">
                     {user ? (
                         <>
-                            <p className="lg:text-[20px] sm:text-[14px]">Hola, {user.name}</p>
+                            <p className="lg:text-[20px] sm:text-[12px] animate-bounce text-green-800">
+                                👋 ¡Hola, {user.name}!
+                            </p>                            
                             <button onClick={handleLogout} className="text-xl hover:text-red-500" title="Cerrar sesión">
                                 <FiLogOut />
                             </button>                        </>
@@ -266,7 +268,7 @@ export default function Header({ isHome = false, isShop = false }) {
                                 >
                                     <div className="flex flex-col h-full p-4">
                                         {/* Encabezado */}
-                                        <div className="flex justify-between items-center py-5 mb-6 border-b border-[#577759]">
+                                        <div className="flex justify-between items-center py-5 mb-6 border-b border-[#577759] border-opacity-20">
                                             <h2 className="text-2xl font-semibold">🛒 TU CESTA</h2>
                                             <button
                                                 onClick={() => setDropdownOpen(false)}
