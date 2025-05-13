@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Map3 from "../Components/Map3";
 import { FaRecycle, FaTrashAlt, FaFileAlt, FaGlassMartiniAlt, FaLeaf } from 'react-icons/fa';
 import InfoBox from "../Components/Infobox";
+import PointItem from "../Components/PointItem";
 
 export default function ShowPointsPage() {
     const [points, setPoints] = useState([]);
@@ -16,8 +17,6 @@ export default function ShowPointsPage() {
             setPoints(data);
         }
     }
-
-
 
     const handleMarkerClick = (point) => {
         setSelectedPoint(point);
@@ -70,7 +69,6 @@ export default function ShowPointsPage() {
                         </section>
                     )}
 
-                    <InfoBox point={selectedPoint} />
 
                     <section className="mt-16 px-4">
                         <h3 className="text-2xl font-bold text-center text-slate-700 mb-10">
@@ -79,44 +77,14 @@ export default function ShowPointsPage() {
 
                         {points.length > 0 ? (
                             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-                                {points.map((point) => (
-                                    <div
-                                        key={point.id}
-                                        className="flex flex-col justify-between p-6 rounded-2xl border border-slate-200 bg-white shadow hover:shadow-lg transition duration-300"
-                                    >
-                                        <div className="space-y-3">
-                                            <div className="flex items-center justify-between">
-                                                <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-semibold">
-                                                    #{point.id}
-                                                </span>
-                                                <span className="text-xs text-slate-500">
-                                                    {new Date(point.created_at).toLocaleTimeString()}
-                                                </span>
-                                            </div>
-
-                                            <div className="text-sm text-slate-800 space-y-1">
-                                                <p>
-                                                    <strong>Lat:</strong> {point.latitude}
-                                                </p>
-                                                <p>
-                                                    <strong>Lng:</strong> {point.longitude}
-                                                </p>
-                                                <p className="text-xs text-slate-500 italic">
-                                                    Creado por <span className="font-medium">{point.user.name}</span>
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <div className="mt-6 text-center">
-                                            <Link
-                                                to={`/points/${point.id}`}
-                                                className="inline-block bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition"
-                                            >
-                                                Ver detalles →
-                                            </Link>
-                                        </div>
-                                    </div>
-                                ))}
+                                {<InfoBox point={selectedPoint} />}
+                                {points.length > 0 ? (
+                                    points.map((point) => (
+                                        <PointItem key={point.id} point={point} />
+                                    ))
+                                ) : (
+                                    <p>No hay puntos</p>
+                                )}
                             </div>
                         ) : (
                             <p className="text-center text-sm text-slate-500 italic mt-8">

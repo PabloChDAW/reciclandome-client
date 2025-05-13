@@ -120,8 +120,8 @@ export default function Header({ isHome = false, isShop = false }) {
 
                         <nav className="flex flex-col items-start gap-5 px-6 text-sm text-[#131700]">
                             <Link to="/" onClick={() => setMenuOpen(false)} className={`${getLinkClass("/")}`}>🏠 Inicio</Link>
-                            <Link to="/show" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 font-bold animate-pulse hover:text-green-900">🗺️ Tipo de reciclaje</Link>
-                            <Link to="/" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 font-bold animate-pulse hover:text-green-900">🗺️ Ver puntos limpios</Link>
+                            <Link to="/" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 font-bold animate-pulse hover:text-green-900">🗺️ Tipo de reciclaje</Link>
+                            <Link to="/show" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 font-bold animate-pulse hover:text-green-900">🗺️ Ver puntos limpios</Link>
                             <Link to="/create" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 font-bold animate-pulse hover:text-green-900">🗺️ Crear Punto en el mapa</Link>
                             <Link to="/about" onClick={() => setMenuOpen(false)} className={`${getLinkClass("/about")}`}>👥 Quiénes Somos</Link>
                             <Link to="/shop" onClick={() => setMenuOpen(false)} className={`${getLinkClass("/shop")}`}>🛍️ Tienda</Link>
