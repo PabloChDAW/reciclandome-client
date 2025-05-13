@@ -52,14 +52,27 @@ export default function Show() {
         <div key={point.id} className="px-6">
           <div className="mb-4 flex items-start justify-between">
             <div>
-              <p className="text-sm text-slate-500">Latitud:</p>
-              <p className="text-lg font-semibold text-slate-800">{point.latitude}</p>
-              <p className="text-sm text-slate-500">Longitud:</p>
-              <p className="text-lg font-semibold text-slate-800">{point.longitude}</p>
-              <p className="text-xs text-slate-500 mt-2 italic">
-                Creado por <span className="font-medium">{point.user.name}</span> a las{" "}
-                {new Date(point.created_at).toLocaleTimeString()}
-              </p>
+
+              <p>ID: {point.id}</p>
+              <p>Usuario: {point.user_id}</p>
+              <p>Fecha: {point.created_at}</p>
+              <p>Coordenadas: {point.latitude}, {point.longitude}</p>
+              <p>Teléfono: {point.phone}</p>
+              <p>Correo: {point.email}</p>
+              <p>Tipo de punto: {point.point_type}</p>
+              <p>Tipo de lugar: {point.place_type}</p>
+              <p>Dirección: {point.address}</p>
+              <p>Localidad:{point.city}</p>
+              <p>Región:{point.region}</p>
+              <p>País:{point.country}</p>
+              <p>Código postal:{point.postcode}</p>
+              <p>Vía: {point.way}</p>
+              <p>Descripción: {point.description}</p>
+              <p>Url: {point.url}</p>
+              <small className="text-xs text-slate-600">
+                Creado por {point.user.name} a las{" "} {new Date(point.created_at).toLocaleTimeString()}
+              </small>
+
             </div>
           </div>
   

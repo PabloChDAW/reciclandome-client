@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import * as maptilersdk from '@maptiler/sdk';
 import "@maptiler/sdk/dist/maptiler-sdk.css";
 import './Map2.css';
+
 export default function Map2({ latitud, longitud, setFormData}){
   const mapContainer = useRef(null);
   const map = useRef(null);
@@ -48,12 +49,12 @@ export default function Map2({ latitud, longitud, setFormData}){
         console.log("Coordenadas click:", lng, lat);
           
         setNoSeCentra(true)
-        setFormData((prev) => ({
-          ...prev,
+        setFormData(prevState => ({
+          ...prevState,
           latitude: lat,
           longitude: lng,
-        }));
-        }
+      }));
+        };
 
       map.current.on('click', handleClick);
       
