@@ -84,7 +84,7 @@ export default function Header({ isHome = false, isShop = false }) {
             <div className="mx-auto px-4 py-3 bg-opacity-40 z-99 flex items-center justify-between relative">
                 {/* Logo */}
                 <Link to="/" className="flex items-center hover:scale-110 transform duration-700 gap-2">
-                    <img src="/Reciclandome_negro.png" alt="Logo" className="h-auto w-16 md:w-12 lg:w-16" />
+                    <img src="/reciclin_verde.png" alt="Logo" className="h-auto w-16 md:w-12 lg:w-16" />
                 </Link>
 
                 {/* Botón hamburguesa - solo visible en móviles */}
@@ -118,11 +118,14 @@ export default function Header({ isHome = false, isShop = false }) {
                             </button>
                         </div>
 
-                        <nav className="flex flex-col items-start gap-8 px-6 text-lg text-[#131700]">
+                        <nav className="flex flex-col items-start gap-5 px-6 text-sm text-[#131700]">
                             <Link to="/" onClick={() => setMenuOpen(false)} className={`${getLinkClass("/")}`}>🏠 Inicio</Link>
+                            <Link to="/" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 font-bold animate-pulse hover:text-green-900">🗺️ Tipo de reciclaje</Link>
+                            <Link to="/" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 font-bold animate-pulse hover:text-green-900">🗺️ Ver puntos limpios</Link>
                             <Link to="/create" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 font-bold animate-pulse hover:text-green-900">🗺️ Crear Punto en el mapa</Link>
                             <Link to="/about" onClick={() => setMenuOpen(false)} className={`${getLinkClass("/about")}`}>👥 Quiénes Somos</Link>
                             <Link to="/shop" onClick={() => setMenuOpen(false)} className={`${getLinkClass("/shop")}`}>🛍️ Tienda</Link>
+                            <Link to="/blog" onClick={() => setMenuOpen(false)} className={`${getLinkClass("/shop")}`}>📝 Blog</Link>
                             <Link to="/contact" onClick={() => setMenuOpen(false)} className={`${getLinkClass("/contact")}`}>📞 Contacto</Link>
 
                             <div className="pt-10 border-t border-[#166534] w-full">
@@ -203,11 +206,11 @@ export default function Header({ isHome = false, isShop = false }) {
                         <div className="hover:underline hover:font-bold cursor-pointer">
                             Mapa Interactivo <span className="text-xs">&#9660;</span>
                         </div>
+                        {/* METER RUTA INTERACTIVA AQUI */}
                         <div className="absolute top-full left-1/2 -translate-x-1/2 w-56 bg-white border border-gray-300 rounded shadow-md opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-40">
-                            <Link to="/mapa/tipo-reciclaje" className="block px-4 py-2 text-center text-[#131700] hover:text-[#166534] hover:bg-gray-200 transition duration-700">Tipo de reciclaje</Link>
+                            <Link to="/" className="block px-4 py-2 text-center text-[#131700] hover:text-[#166534] hover:bg-gray-200 transition duration-700">Tipo de reciclaje</Link>
                             <Link to="/create" className="block px-4 py-2 text-center text-[#131700] hover:text-[#166534] hover:bg-gray-200 transition duration-700">Crear punto</Link>
-                            <Link to="/mapa/ver-puntos" className="block px-4 py-2 text-center text-[#131700] hover:text-[#166534] hover:bg-gray-200 transition duration-700">Ver puntos limpios</Link>
-                            <Link to="/mapa/eliminar-punto" className="block px-4 py-2 text-center text-[#131700] hover:text-[#166534] hover:bg-gray-200 transition duration-700">Eliminar puntos</Link>
+                            <Link to="/" className="block px-4 py-2 text-center text-[#131700] hover:text-[#166534] hover:bg-gray-200 transition duration-700">Ver puntos limpios</Link>
                         </div>
                     </div>
 

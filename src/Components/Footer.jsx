@@ -16,7 +16,7 @@ const Footer = () => {
 
                     <div className="flex flex-col items-center">
                         <div className="w-48 h-auto hover:scale-105 transform duration-700 mb-2">
-                            <img src="/Reciclandome_negro.png" ></img>
+                            <img src="/reciclin_verde.png" ></img>
                         </div>
                     </div>
 
