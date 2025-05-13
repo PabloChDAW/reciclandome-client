@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
+import { Link } from "react-router-dom";
+
 
 export default function Register() {
   const { setToken } = useContext(AppContext);
@@ -40,49 +42,83 @@ export default function Register() {
 
   return (
     <>
-      <h1 className="title">Registrar una nueva cuenta</h1>
-      <form onSubmit={handleRegister} className="w-1/2 mx-auto space-y-6">
-        <div>
-          <input
-            type="text"
-            placeholder="Nombre"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          />
-          {/* Si errors.name es true, renderizar el párrafo */}
-          {errors.name && <p className="error">{errors.name[0]}</p>}
-        </div>
+      <div className="p-10 my-10 sm:py-10 sm:max-w-7xl mx-auto flex items-center justify-center">
+        <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg space-y-6 animate-fade-in-up">
+          <h1 className="text-xl md:text-3xl font-semibold text-[#14532d] text-center mb-6 animate-fade-in-down">
+            📝 Registrar una nueva cuenta
+          </h1>
 
-        <div>
-          <input
-            type="text"
-            placeholder="Email"
-            value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          />
-          {errors.email && <p className="error">{errors.email[0]}</p>}
-        </div>
+          <form onSubmit={handleRegister} className="space-y-6">
+            <div className="space-y-2">
+              <label htmlFor="name" className="text-sm md:text-base font-medium text-[#333]">👤 Nombre</label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Introduce tu nombre completo"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="w-full px-4 py-3 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#166534] transition-all duration-200 text-sm"
+              />
+              {errors.name && <p className="text-sm text-red-500 mt-1">{errors.name[0]}</p>}
+            </div>
 
-        <div>
-          <input
-            type="password"
-            placeholder="Contraseña"
-            value={formData.password}
-            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-          />
-          {errors.password && <p className="error">{errors.password[0]}</p>}
-        </div>
+            <div className="space-y-2">
+              <label htmlFor="email" className="text-sm md:text-base font-medium text-[#333]">📧 Email</label>
+              <input
+                type="text"
+                id="email"
+                placeholder="Introduce tu correo electrónico"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className="w-full px-4 py-3 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#166534] transition-all duration-200 text-sm"
+              />
+              {errors.email && <p className="text-sm text-red-500 mt-1">{errors.email[0]}</p>}
+            </div>
 
-        <div>
-          <input
-            type="password"
-            placeholder="Confirmar contraseña"
-            value={formData.password_confirmation}
-            onChange={(e) => setFormData({ ...formData, password_confirmation: e.target.value })}
-          />
+            <div className="space-y-2">
+              <label htmlFor="password" className="text-sm md:text-base font-medium text-[#333]">🔒 Contraseña</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Introduce tu contraseña"
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                className="w-full px-4 py-3 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#166534] transition-all duration-200 text-sm"
+              />
+              {errors.password && <p className="text-sm text-red-500 mt-1">{errors.password[0]}</p>}
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="password_confirmation" className="text-sm md:text-base font-medium text-[#333]">🔁 Confirmar contraseña</label>
+              <input
+                type="password"
+                id="password_confirmation"
+                placeholder="Confirma tu contraseña"
+                value={formData.password_confirmation}
+                onChange={(e) => setFormData({ ...formData, password_confirmation: e.target.value })}
+                className="w-full px-4 py-3 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#166534] transition-all duration-200 text-sm"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full border border-[#166534] bg-[#166534] text-white py-3 rounded-full hover:bg-white hover:text-[#166534] transition-all duration-300 shadow-md"
+            >
+              REGISTRARSE
+            </button>
+          </form>
+          {/* Enlace de Registro debajo del botón */}
+          <p className="text-sm text-center text-[#333] mt-4">
+            ¿No tienes cuenta?{" "}
+            <Link
+              to="/login"
+              className="text-[#166534] font-semibold hover:underline"
+            >
+              Inicia sesión aquí
+            </Link>
+          </p>
         </div>
-        <button className="primary-btn">Registrarse</button>
-      </form>
+      </div>
     </>
   );
 }
