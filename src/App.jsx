@@ -16,6 +16,7 @@ import AboutPage from "./Pages/AboutPage";
 import BlogPage from "./Pages/BlogPage";
 import PostDetails from "./Pages/PostDetails";
 import ContactPage from "./Pages/ContactPage";
+import ShowPointsPage from './Pages/ShowPointsPage';
 import ShopPage from "./Pages/ShopPage";
 import PoliticaPrivacidad from "./Pages/PoliticaPrivacidad";
 import PoliticaCookies from "./Pages/Cookies";
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="/blog/post/:id" element={<PostDetails />} />
           <Route path='/shop' element={<ShopPage />} />
           <Route path='/about' element={<AboutPage />} />
+          <Route path='/show' element={<ShowPointsPage />} />
           <Route path='/politica-privacidad' element={<PoliticaPrivacidad />} />
           <Route path='/politica-cookies' element={<PoliticaCookies />} />
           <Route path='/aviso-legal' element={<AvisoLegal />} />
