@@ -8,7 +8,6 @@ import InfoBox from "../Components/Infobox";
 
 export default function HomePage() {
   const sliderImages = ['/slider8.jpg', '/slider6.jpg', '/slider7.jpg'];
-
   const [points, setPoints] = useState([]);
   const [selectedPoint, setSelectedPoint] = useState(null);
   const [showHeader, setShowHeader] = useState(false);

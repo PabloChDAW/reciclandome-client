@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 import { Link } from "react-router-dom";
 
-
 export default function Register() {
   const { setToken } = useContext(AppContext);
 
