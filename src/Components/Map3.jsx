@@ -16,7 +16,7 @@ export default function Map3({ points, onMarkerClick }) {
   console.log('Estructura de points:', points);
 
   useEffect(() => {
-    if (points && points.length > 0) {
+    //if (points && points.length > 0) {
       if (!map.current) {
         map.current = new maptilersdk.Map({
           container: mapContainer.current,
@@ -84,7 +84,7 @@ export default function Map3({ points, onMarkerClick }) {
 
         markers.current.push(newMarker);
       });
-    }
+    //}
 
     return () => {
       if (map.current) {
@@ -101,7 +101,9 @@ export default function Map3({ points, onMarkerClick }) {
       {points.length > 0 ? (
         <div ref={mapContainer} style={{ width: '100%', height: '650px' }}></div>
       ) : (
-        <p>Cargando mapa...</p>
+
+        <div ref={mapContainer} style={{ width: '100%', height: '650px' }}></div>
+
       )}
     </div>
   );
