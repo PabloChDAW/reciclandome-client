@@ -58,6 +58,11 @@ export default function AppProvider({ children }) {
     );
   }
 
+  function clearCart() {
+    setCart([]);
+    localStorage.removeItem("cart");
+  }
+
   function removeItem(id) {
     setCart(prev => prev.filter(item => item.id !== id));
   }
@@ -75,6 +80,7 @@ export default function AppProvider({ children }) {
         setCart,
         increment,
         decrement,
+        clearCart,
         removeItem,
         totalItems,
       }}

@@ -7,7 +7,7 @@ import { AppContext } from "../Context/AppContext";
 export default function Header({ isHome = false, isShop = false }) {
     const [menuOpen, setMenuOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const { user, cart, totalItems, increment, decrement, removeItem, setUser, setToken } = useContext(AppContext);
+    const { user, cart, totalItems, increment, decrement, clearCart, removeItem, setUser, setToken } = useContext(AppContext);
     const navigate = useNavigate();
     const dropdownRef = useRef(null);
     const [scrolled, setScrolled] = useState(false);
@@ -38,7 +38,7 @@ export default function Header({ isHome = false, isShop = false }) {
             setUser(null);
             setToken(null);
             localStorage.removeItem("token");
-            localStorage.removeItem("cart");
+            clearCart();
             navigate('/');
         }
     }
