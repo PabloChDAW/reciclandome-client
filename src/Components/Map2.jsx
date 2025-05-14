@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import * as maptilersdk from '@maptiler/sdk';
 import "@maptiler/sdk/dist/maptiler-sdk.css";
 import './Map2.css';
+
 export default function Map2({ latitud, longitud, setFormData}){
   const mapContainer = useRef(null);
   const map = useRef(null);
@@ -13,8 +14,8 @@ export default function Map2({ latitud, longitud, setFormData}){
   useEffect(() => {
     if (!latitud || !longitud || map.current) return;
       if (latitud >= -90 && latitud <= 90 && longitud >= -180 && longitud <= 180) {
-        latitud = parseFloat(latitud)
-        longitud = parseFloat(longitud)
+        latitud = parseFloat(latitud);
+        longitud = parseFloat(longitud);
         map.current = new maptilersdk.Map({
           container: mapContainer.current,
           style: maptilersdk.MapStyle.STREETS,
@@ -48,12 +49,12 @@ export default function Map2({ latitud, longitud, setFormData}){
         console.log("Coordenadas click:", lng, lat);
           
         setNoSeCentra(true)
-        setFormData((prev) => ({
-          ...prev,
+        setFormData(prevState => ({
+          ...prevState,
           latitude: lat,
           longitude: lng,
-        }));
-        }
+      }));
+        };
 
       map.current.on('click', handleClick);
       
