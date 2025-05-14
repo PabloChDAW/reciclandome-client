@@ -1,18 +1,17 @@
-// src/components/ScrollToTop.jsx
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const ScrollToTop = () => {
-    const { pathname } = useLocation();
+  const { pathname } = useLocation();
 
-    useEffect(() => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth', // Puedes usar 'auto' si no quieres animación
-        });
-    }, [pathname]);
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Puedes usar 'auto' si no quieres animación
+    });
+  }, [pathname]);
 
-    return null;
+  return null;
 };
 
 export default ScrollToTop;

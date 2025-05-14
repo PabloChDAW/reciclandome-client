@@ -1,7 +1,8 @@
-import React from 'react';
-
 const InfoBox = ({ point }) => {
-  if (!point) return null; // No mostrar nada si no hay punto seleccionado
+  if (!point) {
+    return null; // No mostrar nada si no hay punto seleccionado
+  } 
+
   return (
     <div className="info-box">
       <h3>Punto de Reciclaje</h3>
@@ -25,8 +26,5 @@ const InfoBox = ({ point }) => {
     </div>
   );
 };
-export default InfoBox;
 
-/**
- * TODO Incluir nuevos campos
- */
+export default InfoBox;

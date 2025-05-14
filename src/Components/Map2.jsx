@@ -14,8 +14,8 @@ export default function Map2({ latitud, longitud, setFormData}){
   useEffect(() => {
     if (!latitud || !longitud || map.current) return;
       if (latitud >= -90 && latitud <= 90 && longitud >= -180 && longitud <= 180) {
-        latitud = parseFloat(latitud)
-        longitud = parseFloat(longitud)
+        latitud = parseFloat(latitud);
+        longitud = parseFloat(longitud);
         map.current = new maptilersdk.Map({
           container: mapContainer.current,
           style: maptilersdk.MapStyle.STREETS,

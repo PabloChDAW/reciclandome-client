@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Layout from './Pages/Layout';
 import HomePage from './Pages/HomePage';
-import Shop from './Pages/Shop'
 import Register from './Pages/Auth/Register';
 import Login from './Pages/Auth/Login';
 import { useContext } from 'react';
@@ -11,7 +10,6 @@ import Create from './Pages/Points/Create';
 import Show from './Pages/Points/Show';
 import Update from './Pages/Points/Update';
 import Cart from './Pages/Cart'; // Asegúrate de que la ruta es correcta
-
 import AboutPage from "./Pages/AboutPage";
 import BlogPage from "./Pages/BlogPage";
 import PostDetails from "./Pages/PostDetails";
