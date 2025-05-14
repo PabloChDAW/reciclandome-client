@@ -23,8 +23,9 @@ export default function Create() {
     phone: "", 
     email: ""  
   });
+
   const pointTypes = ["Tipo 1", "Tipo 2", "Tipo 3"];
-    // Seguridad y sanitización ---- //MapTyler no gestiona bien la iniciación en alguna coordenada 0.
+  // Seguridad y sanitización ---- //MapTyler no gestiona bien la iniciación en alguna coordenada 0.
   // Estas líneas evitan que un tercero pueda denegarnos el servicio si consigue forzar la aplicación a iniciar
   // Con valores válidos pero que MapTyler no puede gestionar (longitud o latitud 0)
   // De hecho además en este apartado la aplicación no fallaría si este mapa se iniciara en 0,0 por cualquier casuistica en 
@@ -51,70 +52,73 @@ export default function Create() {
   };
 
   // Geocodificación inversa corregida
-useEffect(() => {
-  const reverseGeocode = async () => {
-    if (!formData.latitude || !formData.longitude) return;
-    
-    setIsGeocoding(true);
-    try {
-      const response = await fetch(
-        `https://api.maptiler.com/geocoding/${formData.longitude},${formData.latitude}.json?key=bmHH9ekzKdndbQ2GrZEm`
-      );
-      const data = await response.json();
-      console.log("Respuesta de MapTiler:", data); // Para depuración
+  useEffect(() => {
+    const reverseGeocode = async () => {
+      if (!formData.latitude || !formData.longitude) {
+        return;
+      } 
+      
+      setIsGeocoding(true);
+      try {
+        const response = await fetch(
+          `https://api.maptiler.com/geocoding/${formData.longitude},${formData.latitude}.json?key=bmHH9ekzKdndbQ2GrZEm`
+        );
+        const data = await response.json();
+        console.log("Respuesta de MapTiler:", data); // Para depuración
 
-      if (data.features?.length > 0) {
-        const feature = data.features[0];
-        const properties = feature.properties || {};
-        const context = feature.context || [];
+        if (data.features?.length > 0) {
+          const feature = data.features[0];
+          const properties = feature.properties || {};
+          const context = feature.context || [];
 
-        // Función mejorada para extraer valores del contexto
-        const getContextValue = (type) => {
-          const item = context.find(c => c.id && c.id.startsWith(`${type}.`));
-          return item ? item.text : '';
-        };
+          // Función mejorada para extraer valores del contexto
+          const getContextValue = (type) => {
+            const item = context.find(c => c.id && c.id.startsWith(`${type}.`));
 
-        // Extracción de datos específicos según la estructura de MapTiler
-        const name = feature.text || properties.name || "Ubicación sin nombre";
-        const address = feature.place_name || "";
-        const city = getContextValue('municipality') || 
-                     getContextValue('place') || 
-                     getContextValue('locality');
-        const region = getContextValue('region') || 
-                       getContextValue('subregion');
-        const country = getContextValue('country');
-        const postcode = getContextValue('postal_code') || 
-                         getContextValue('postcode');
-        const way = properties.kind || 
-                        feature.place_type?.[0] || 
-                        properties.place_type_name?.[0] ||
-                        "";
-        const placeType = feature.place_type?.[0] || 
-                         properties.type || 
-                         properties.kind || "";
+            return item ? item.text : '';
+          };
 
-        setFormData(prev => ({
-          ...prev,
-          name,
-          address,
-          city,
-          region,
-          country,
-          postcode,
-          way,
-          place_type: placeType,
-          url: generateUrl(name, formData.latitude, formData.longitude)
-        }));
+          // Extracción de datos específicos según la estructura de MapTiler
+          const name = feature.text || properties.name || "Ubicación sin nombre";
+          const address = feature.place_name || "";
+          const city = getContextValue('municipality') || 
+                      getContextValue('place') || 
+                      getContextValue('locality');
+          const region = getContextValue('region') || 
+                        getContextValue('subregion');
+          const country = getContextValue('country');
+          const postcode = getContextValue('postal_code') || 
+                          getContextValue('postcode');
+          const way = properties.kind || 
+                          feature.place_type?.[0] || 
+                          properties.place_type_name?.[0] ||
+                          "";
+          const placeType = feature.place_type?.[0] || 
+                          properties.type || 
+                          properties.kind || "";
+
+          setFormData(prev => ({
+            ...prev,
+            name,
+            address,
+            city,
+            region,
+            country,
+            postcode,
+            way,
+            place_type: placeType,
+            url: generateUrl(name, formData.latitude, formData.longitude)
+          }));
+        }
+      } catch (error) {
+        console.error("Error en geocodificación:", error);
+      } finally {
+        setIsGeocoding(false);
       }
-    } catch (error) {
-      console.error("Error en geocodificación:", error);
-    } finally {
-      setIsGeocoding(false);
-    }
-  };
+    };
 
-  reverseGeocode();
-}, [formData.latitude, formData.longitude]);
+    reverseGeocode();
+  }, [formData.latitude, formData.longitude]);
 
   async function handleCreate(e) {
     e.preventDefault();
