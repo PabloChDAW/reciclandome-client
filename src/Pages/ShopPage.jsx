@@ -13,7 +13,7 @@ const products = [
     {
         id: 1,
         name: "Camiseta Dont be Trashy",
-        price: 16.95,
+        price: 0.01,
         image: "/Camiseta_Dont_Be_Trashy.png",
     },
     {
