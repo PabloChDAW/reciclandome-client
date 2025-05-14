@@ -38,6 +38,7 @@ export default function Header({ isHome = false, isShop = false }) {
             setUser(null);
             setToken(null);
             localStorage.removeItem("token");
+            localStorage.removeItem("cart");
             navigate('/');
         }
     }
