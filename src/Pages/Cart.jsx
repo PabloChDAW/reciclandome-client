@@ -124,7 +124,7 @@ export default function Cart() {
                   🧺 Total ({totalItems} {totalItems === 1 ? 'artículo' : 'artículos'})
                 </p>
                 <p className="text-2xl font-bold text-[#166534]">
-                  {totalPrice.toFixed(2)}€ 💚
+                  {totalPrice.toFixed(2)}€
                 </p>
               </div>
 
