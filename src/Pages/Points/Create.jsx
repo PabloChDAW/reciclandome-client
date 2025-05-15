@@ -124,7 +124,7 @@ export default function Create() {
     e.preventDefault();
 
     /* Petición de creación de point  */
-    const res = await fetch("/api/points", {
+    const res = await fetch("http://2.154.81.198/api/points", {
       method: 'post',
       headers: {
         Authorization: `Bearer ${token}`,
