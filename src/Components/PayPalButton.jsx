@@ -60,7 +60,8 @@ export default function PayPalButton({ amount, cart }) {
   return (
     <div
       ref={containerRef}
-      style={{ width: "100%", minWidth: 320 }}
+      className="w-full sm:min-w-[320px] p-4rounded-md shadow"
     ></div>
+
   );
 }
