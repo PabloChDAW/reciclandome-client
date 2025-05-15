@@ -12,7 +12,6 @@ import Create from './Pages/Points/Create';
 import Show from './Pages/Points/Show';
 import Update from './Pages/Points/Update';
 import Cart from './Pages/Cart'; // Asegúrate de que la ruta es correcta
-
 import AboutPage from "./Pages/AboutPage";
 import BlogPage from "./Pages/BlogPage";
 import PostDetails from "./Pages/PostDetails";

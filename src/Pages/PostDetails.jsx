@@ -1,12 +1,11 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const posts = [
-    {
-        id: 1,
-        title: "5 consejos para reciclar mejor desde casa",
-        content: `
+  {
+    id: 1,
+    title: "5 consejos para reciclar mejor desde casa",
+    content: `
             <p><strong>1. Separa correctamente los residuos</strong><br/>
                 Usa diferentes cubos o bolsas para separar plásticos, vidrios, papel/cartón, materia orgánica y desechos no reciclables. Etiquetarlos puede ayudarte a no confundirte.</p>
             
@@ -24,13 +23,13 @@ const posts = [
 
             <p>🌱 <strong>Recuerda:</strong> cada pequeño gesto suma. Si todos reciclamos mejor desde casa, el impacto colectivo será enorme.</p>
         `,
-        image: "/slider6.jpg",
-        date: "17 Mayo 2025",
-    },
-    {
-        id: 2,
-        title: "Cómo hacer manualidades con productos reciclados",
-        content: `
+    image: "/slider6.jpg",
+    date: "17 Mayo 2025",
+  },
+  {
+    id: 2,
+    title: "Cómo hacer manualidades con productos reciclados",
+    content: `
             <p><strong>Las manualidades con materiales reciclados no solo son una excelente manera de reutilizar objetos que de otro modo terminarían en la basura, sino que también fomentan la creatividad y la conciencia ambiental. Aquí te damos algunas ideas fáciles y divertidas para comenzar a crear:</strong></p>
 
             <p><strong>1. Reciclar botellas de plástico para hacer macetas decorativas</strong><br/>
@@ -50,13 +49,13 @@ const posts = [
 
             <p><strong>🌍 Recuerda:</strong> El reciclaje creativo no solo reduce los desechos, sino que también te permite crear artículos útiles y decorativos con objetos que, de otro modo, habrían terminado en el vertedero. ¡Pon en práctica tu creatividad y haz del reciclaje una parte divertida de tu vida!</p>
         `,
-        image: "/manualidades.jpg",
-        date: "30 Abril 2025",
-    },
-    {
-        id: 3,
-        title: "Reciclaje tecnológico: ¿qué hacer con tus aparatos viejos?",
-        content: `
+    image: "/manualidades.jpg",
+    date: "30 Abril 2025",
+  },
+  {
+    id: 3,
+    title: "Reciclaje tecnológico: ¿qué hacer con tus aparatos viejos?",
+    content: `
         <p>El reciclaje de aparatos tecnológicos es crucial para reducir la contaminación y aprovechar los recursos que estos dispositivos contienen. Si tienes viejos teléfonos, computadoras o electrodomésticos en casa, aquí te dejamos algunas ideas sobre qué hacer con ellos para contribuir al cuidado del medio ambiente:</p>
         
         <p><strong>1. No los tires a la basura</strong><br/>
@@ -76,13 +75,13 @@ const posts = [
         
         <p>🌍 <strong>Recuerda:</strong> el reciclaje de dispositivos electrónicos no solo ayuda a reducir la contaminación, sino que también contribuye a la conservación de recursos naturales. Asegúrate de deshacerte de tus viejos dispositivos de la forma más responsable posible.</p>
     `,
-        image: "/paratos_electronicos.jpg",
-        date: "21 Abril 2025",
-    },
-    {
-        id: 4,
-        title: "Moda sostenible: dale una segunda vida a tu ropa",
-        content: `
+    image: "/paratos_electronicos.jpg",
+    date: "21 Abril 2025",
+  },
+  {
+    id: 4,
+    title: "Moda sostenible: dale una segunda vida a tu ropa",
+    content: `
             <p>La moda sostenible es un movimiento que busca reducir el impacto ambiental de la industria textil, que es una de las más contaminantes del mundo. A través de prácticas responsables, podemos prolongar la vida útil de nuestra ropa y reducir la cantidad de desechos. Aquí te mostramos algunas formas de darle una segunda vida a tu ropa:</p>
         
             <p><strong>1. Rediseña y transforma tu ropa vieja</strong><br/>
@@ -102,42 +101,48 @@ const posts = [
         
             <p>🌱 <strong>Recuerda:</strong> cada pequeña acción cuenta cuando se trata de moda sostenible. Si todos tomamos decisiones más conscientes, podemos hacer una gran diferencia en el mundo de la moda.</p>
         `,
-        image: "/ropa.jpg",
-        date: "12 Abril 2025",
-    },
+    image: "/ropa.jpg",
+    date: "12 Abril 2025",
+  },
 ];
 
 const PostDetail = () => {
-    const { id } = useParams();
-    const post = posts.find((p) => p.id === parseInt(id));
+  const { id } = useParams();
+  const post = posts.find((p) => p.id === parseInt(id));
 
-    if (!post) {
-        return <div className="p-10 text-center text-red-600">Post no encontrado.</div>;
-    }
-
+  if (!post) {
     return (
-        <div className="bg-[#f5f6f1] min-h-screen py-16 px-4 md:px-12">
-            <div className="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow">
-                <img src={post.image} alt={post.title} className="w-full h-64 object-cover rounded-lg mb-6" />
-                <h1 className="text-3xl font-bold text-[#2d5e17] mb-2">{post.title}</h1>
-                <p className="text-sm text-gray-500 mb-6">{post.date}</p>
-                {/* Aquí es donde se muestra el contenido del post */}
-                <div
-                    className="text-gray-700 leading-relaxed space-y-4"
-                    dangerouslySetInnerHTML={{ __html: post.content }}
-                />
-                {/* Volver atrás */}
-                <div className="mt-8">
-                    <Link
-                        to="/blog"
-                        className="inline-block text-[#2d5e17] font-semibold hover:underline"
-                    >
-                        ← Volver atrás
-                    </Link>
-                </div>
-            </div>
-        </div>
+      <div className="p-10 text-center text-red-600">Post no encontrado.</div>
     );
+  }
+
+  return (
+    <div className="bg-[#f5f6f1] min-h-screen py-16 px-4 md:px-12">
+      <div className="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow">
+        <img
+          src={post.image}
+          alt={post.title}
+          className="w-full h-64 object-cover rounded-lg mb-6"
+        />
+        <h1 className="text-3xl font-bold text-[#2d5e17] mb-2">{post.title}</h1>
+        <p className="text-sm text-gray-500 mb-6">{post.date}</p>
+        {/* Aquí es donde se muestra el contenido del post */}
+        <div
+          className="text-gray-700 leading-relaxed space-y-4"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
+        {/* Volver atrás */}
+        <div className="mt-8">
+          <Link
+            to="/blog"
+            className="inline-block text-[#2d5e17] font-semibold hover:underline"
+          >
+            ← Volver atrás
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default PostDetail;

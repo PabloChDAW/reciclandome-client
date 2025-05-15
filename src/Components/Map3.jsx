@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import * as maptilersdk from '@maptiler/sdk';
 import "@maptiler/sdk/dist/maptiler-sdk.css";
 import './Map3.css';
@@ -9,14 +9,14 @@ export default function Map3({ points, onMarkerClick }) {
   const map = useRef(null);
   const zoom = 4.5; //se puede ampliar a 14 cuando se tenga la funcionalidad del GPS
 
-  //pasamo de null a usar un array. Esto permite mantener múltiples referencias a los marcadores y eliminarlos correctamente después si es necesario.
+  //pasamos de null a usar un array. Esto permite mantener múltiples referencias a los marcadores y eliminarlos correctamente después si es necesario.
   const markers = useRef([]);
 
   maptilersdk.config.apiKey = 'bmHH9ekzKdndbQ2GrZEm';
   console.log('Estructura de points:', points);
 
   useEffect(() => {
-    if (points && points.length > 0) {
+    //if (points && points.length > 0) {
       if (!map.current) {
         map.current = new maptilersdk.Map({
           container: mapContainer.current,
@@ -27,6 +27,7 @@ export default function Map3({ points, onMarkerClick }) {
                 */
           zoom: zoom
         });
+        
         // Desactivar scroll zoom por defecto
         map.current.scrollZoom.disable();
 
@@ -51,7 +52,6 @@ export default function Map3({ points, onMarkerClick }) {
         window.addEventListener("keydown", handleKeyDown);
         window.addEventListener("keyup", handleKeyUp);
         window.addEventListener("blur", handleBlur);
-
       }
 
       // Limpiar marcadores antiguos si hubiera
@@ -81,10 +81,9 @@ export default function Map3({ points, onMarkerClick }) {
           // Llamar a la función pasada como prop
           onMarkerClick(point);
         });
-
         markers.current.push(newMarker);
       });
-    }
+    //}
 
     return () => {
       if (map.current) {
@@ -95,13 +94,12 @@ export default function Map3({ points, onMarkerClick }) {
     };
   }, [points, onMarkerClick]);
 
-
   return (
     <div className="map-container">
       {points.length > 0 ? (
         <div ref={mapContainer} style={{ width: '100%', height: '650px' }}></div>
       ) : (
-        <p>Cargando mapa...</p>
+        <div ref={mapContainer} style={{ width: '100%', height: '650px' }}></div>
       )}
     </div>
   );

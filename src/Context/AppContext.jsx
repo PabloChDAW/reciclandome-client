@@ -3,7 +3,6 @@ import { createContext, useEffect, useState } from "react";
 export const AppContext = createContext();
 
 export default function AppProvider({ children }) {
-  
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [user, setUser] = useState(null);
 
@@ -58,6 +57,11 @@ export default function AppProvider({ children }) {
     );
   }
 
+  function clearCart() {
+    setCart([]);
+    localStorage.removeItem("cart");
+  }
+
   function removeItem(id) {
     setCart(prev => prev.filter(item => item.id !== id));
   }
@@ -75,6 +79,7 @@ export default function AppProvider({ children }) {
         setCart,
         increment,
         decrement,
+        clearCart,
         removeItem,
         totalItems,
       }}
