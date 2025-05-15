@@ -24,7 +24,7 @@ export default function TopHeader() {
       {/* Redes sociales */}
       <div className="flex gap-3 w-full sm:w-auto  justify-center sm:justify-start mt-2 sm:mt-0">
         <a
-          href="https://tiktok.com/tu-perfil"
+          href="https://www.tiktok.com/@reciclando.me_oficial"
           aria-label="TikTok"
           target="_blank"
           rel="noopener noreferrer"
@@ -35,7 +35,7 @@ export default function TopHeader() {
           />
         </a>
         <a
-          href="https://tiktok.com/tu-perfil"
+          href="https://x.com/reciclando_me_"
           aria-label="XTwitter"
           target="_blank"
           rel="noopener noreferrer"
@@ -46,7 +46,7 @@ export default function TopHeader() {
           />
         </a>
         <a
-          href="https://tiktok.com/tu-perfil"
+          href="https://www.instagram.com/reciclando.me_oficial/"
           aria-label="Instagram"
           target="_blank"
           rel="noopener noreferrer"

@@ -95,13 +95,13 @@ const Footer = () => {
             <h3 className="font-bold text-lg">NUESTRAS REDES</h3>
             <div className="flex space-x-4 mt-3 text-2xl text-[#577759]">
               <div
-                title="contacto@reciclando.me"
+                title="inforeciclando.me@gmail.com"
                 className="w-6 h-6 hover:scale-110 transform duration-700"
               >
                 <Mail className="w-6 h-6" />
               </div>
               <a
-                href="https://tiktok.com/tu-perfil"
+                href="https://www.tiktok.com/@reciclando.me_oficial"
                 aria-label="TikTok"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -109,7 +109,7 @@ const Footer = () => {
                 <FaTiktok className="w-6 h-6 hover:scale-110 transform duration-700" />
               </a>
               <a
-                href="https://x.com/tu-perfil"
+                href="https://x.com/reciclando_me_"
                 aria-label="TikTok"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -117,7 +117,7 @@ const Footer = () => {
                 <FaXTwitter className="w-6 h-6 hover:scale-110 transform duration-700" />
               </a>
               <a
-                href="https://instagram.com/tu-perfil"
+                href="https://www.instagram.com/reciclando.me_oficial/"
                 aria-label="TikTok"
                 target="_blank"
                 rel="noopener noreferrer"
