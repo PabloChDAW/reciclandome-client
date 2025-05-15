@@ -129,7 +129,7 @@ export default function Cart() {
               </div>
 
 
-              <div className="w-full sm:w-auto">
+              <div className="w-full sm:w-auto z-10">
                 <PayPalButton amount={totalPrice} cart={cart} />
               </div>
 
