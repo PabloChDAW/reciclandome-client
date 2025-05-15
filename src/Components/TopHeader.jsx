@@ -9,7 +9,7 @@ export default function TopHeader() {
         <div className="flex items-center gap-1 text-xs sm:text-sm justify-center">
           <Mail className="w-4 lg:w-5 md:w-4 sm:w-4  h-auto text-black" />
           <span className="text-[12px] lg:text-[16px] md:text-[14px] sm:text-[14px]  font-bold">
-            contacto@reciclando.me
+            inforeciclando.me@gmail.com
           </span>
         </div>
       </div>
