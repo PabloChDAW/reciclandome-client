@@ -53,6 +53,7 @@ export default function Header({ isHome = false, isShop = false }) {
       navigate("/");
     }
   }
+  
   useEffect(() => {
     if (!isHome && !isShop) return;
 
