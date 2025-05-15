@@ -1,12 +1,12 @@
 import { useEffect, useState, useRef } from "react";
 import Map3 from "../Components/Map3";
-import { FaRecycle, FaTrashAlt, FaFileAlt, FaGlassMartiniAlt, FaLeaf } from 'react-icons/fa';
 import InfoBox from "../Components/Infobox";
 import PointItem from "../Components/PointItem";
 
 export default function ShowPointsPage() {
-    const [points, setPoints] = useState([]);
-    const [selectedPoint, setSelectedPoint] = useState(null);
+  const [points, setPoints] = useState([]);
+  const [selectedPoint, setSelectedPoint] = useState(null);
+
 
     // Para poder usar eventos y utilidades del mapa fuera del mismo
     // se debe centralizar un estado que le identifique en la página que lo carga
@@ -49,16 +49,15 @@ export default function ShowPointsPage() {
             });
         }
     };
-
+    // Obtener puntos de reciclaje
     async function getPoints() {
         const res = await fetch("/api/points");
         const data = await res.json();
-        console.log("hola")
         console.log(data);
 
-        if (res.ok) {
-            setPoints(data);
-        }
+
+    if (res.ok) {
+      setPoints(data);
     }
 
     useEffect(() => {
@@ -110,7 +109,7 @@ export default function ShowPointsPage() {
                 <div className="border-t-2 border-b-[#577759] w-2/4"></div>
             </div>
 
-
         </>
     );
+
 }

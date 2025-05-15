@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8000/api/products";
+const API_URL = "http://localhost:5173/api/products";
 
 export const getAllProducts = async (token) => {
   // Asegúrate de pasar el token a la función

@@ -3,24 +3,12 @@ import { Link } from "react-router-dom";
 import Map3 from "../Components/Map3";
 import { FaRecycle, FaTrashAlt, FaFileAlt, FaGlassMartiniAlt, FaLeaf } from 'react-icons/fa';
 import Slider from '../Components/SliderHome';
-import Header from "../Components/Header";
-import InfoBox from "../Components/Infobox";
 
 export default function HomePage() {
   const sliderImages = ['/slider8.jpg', '/slider6.jpg', '/slider7.jpg'];
-
   const [points, setPoints] = useState([]);
   const [selectedPoint, setSelectedPoint] = useState(null);
   const [showHeader, setShowHeader] = useState(false);
-
-  // Obtener puntos de reciclaje
-  async function getPoints() {
-    const res = await fetch("/api/points");
-    const data = await res.json();
-    if (res.ok) {
-      setPoints(data);
-    }
-  }
 
   // Ejecutar al montar
   useEffect(() => {
@@ -48,9 +36,7 @@ export default function HomePage() {
     }
   }, [location]);
 
-  const handleMarkerClick = (point) => {
-    setSelectedPoint(point);
-  };
+  // Obtener puntos de reciclaje
   async function getPoints() {
     const res = await fetch("/api/points");
     const data = await res.json();
@@ -61,11 +47,6 @@ export default function HomePage() {
       setPoints(data);
     }
   }
-
-  useEffect(() => {
-    getPoints();
-  }, []);
-
 
   return (
     <>
@@ -107,62 +88,6 @@ export default function HomePage() {
               </Link>
             </section>
           )}
-
-          {/*<InfoBox point={selectedPoint} />
-
-          <section className="mt-16 px-4">
-            <h3 className="text-2xl font-bold text-center text-slate-700 mb-10">
-              📌 Todos los puntos de reciclaje
-            </h3>
-
-            {points.length > 0 ? (
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-                {points.map((point) => (
-                  <div
-                    key={point.id}
-                    className="flex flex-col justify-between p-6 rounded-2xl border border-slate-200 bg-white shadow hover:shadow-lg transition duration-300"
-                  >
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-semibold">
-                          #{point.id}
-                        </span>
-                        <span className="text-xs text-slate-500">
-                          {new Date(point.created_at).toLocaleTimeString()}
-                        </span>
-                      </div>
-
-                      <div className="text-sm text-slate-800 space-y-1">
-                        <p>
-                          <strong>Lat:</strong> {point.latitude}
-                        </p>
-                        <p>
-                          <strong>Lng:</strong> {point.longitude}
-                        </p>
-                        <p className="text-xs text-slate-500 italic">
-                          Creado por <span className="font-medium">{point.user.name}</span>
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="mt-6 text-center">
-                      <Link
-                        to={`/points/${point.id}`}
-                        className="inline-block bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition"
-                      >
-                        Ver detalles →
-                      </Link>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="text-center text-sm text-slate-500 italic mt-8">
-                No hay puntos disponibles actualmente.
-              </p>
-            )}
-          </section> */}
-
         </div>
       </div>
 

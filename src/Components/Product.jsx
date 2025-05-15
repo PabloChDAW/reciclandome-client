@@ -1,57 +1,58 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { AppContext } from '../Context/AppContext';
 
 const Product = ({ product, onAddToCart }) => {
   const { id, name, description, price, stock, image } = product;
   const { cart } = useContext(AppContext);
-
   const cartItem = cart.find(item => item.id === id);
   const currentQuantity = cartItem ? cartItem.quantity : 0;
-
   const isOutOfStock = stock === 0;
   const isMaxReached = currentQuantity >= stock;
-
   const disabled = isOutOfStock || isMaxReached;
 
   return (
-    <div className="product-card p-4 border rounded-lg shadow-md mb-4">
-      <img src={image} alt={name} className="w-full h-48 object-cover rounded mb-4" />
+    <div className="bg-white rounded-2xl shadow-lg p-5 flex flex-col justify-between transition-transform hover:-translate-y-1 hover:shadow-xl duration-300">
+      <img
+        src={image}
+        alt={name}
+        className="w-full h-48 object-cover rounded-lg mb-4"
+      />
 
-      <h2 className="text-2xl font-bold">{name}</h2>
+      <div className="flex flex-col gap-2 flex-1">
+        <h2 className="text-xl font-semibold text-gray-800">{name}</h2>
 
-      <p className="text-sm text-gray-500 mb-2">
-        <strong>Descripción:</strong> {description}
-      </p>
+        <p className="text-sm text-gray-500">
+          <span className="font-medium text-gray-600">Descripción:</span> {description}
+        </p>
 
-      <p className="text-lg font-semibold text-green-600">
-        <strong>Precio:</strong> {price}€
-      </p>
+        <p className="text-base font-semibold text-green-600">
+          <span className="font-medium text-gray-700">Precio:</span> {price}€
+        </p>
 
-      <p className={`text-sm ${isOutOfStock ? 'text-red-600' : 'text-gray-600'}`}>
-        <strong>Stock:</strong>{' '}
-        {isOutOfStock ? 'Sin stock' : `${stock} unidades disponibles`}
-      </p>
+        <p className={`text-sm ${isOutOfStock ? 'text-red-600' : 'text-gray-600'}`}>
+          <span className="font-medium">Stock:</span>{' '}
+          {isOutOfStock ? 'Sin stock' : `${stock} unidades disponibles`}
+        </p>
+      </div>
 
-      <div className="mt-4">
-        <button
-          className={`px-4 py-2 rounded-lg w-full text-white ${
-            isOutOfStock
-              ? 'bg-gray-400 cursor-not-allowed'
-              : isMaxReached
-              ? 'bg-blue-800 cursor-not-allowed'
-              : 'bg-blue-500 hover:bg-blue-600'
-          }`}
-          disabled={disabled}
-          onClick={() => onAddToCart(product)}
-        >
-          {isOutOfStock
-            ? 'Agotado'
+      <button
+        className={`mt-4 w-full px-4 py-2 rounded-xl text-white font-medium transition-colors duration-300 ${isOutOfStock
+            ? 'bg-gray-400 cursor-not-allowed'
             : isMaxReached
+              ? 'bg-blue-800 cursor-not-allowed'
+              : 'border border-[#166534] bg-[#166534] hover:bg-white text-white hover:text-[#166534] rounded-full'
+          }`}
+        disabled={disabled}
+        onClick={() => onAddToCart(product)}
+      >
+        {isOutOfStock
+          ? 'Agotado'
+          : isMaxReached
             ? 'Máximo alcanzado'
             : 'Agregar al carrito'}
-        </button>
-      </div>
+      </button>
     </div>
+
   );
 };
 

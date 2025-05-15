@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Layout from './Pages/Layout';
 import HomePage from './Pages/HomePage';
-import Shop from './Pages/Shop'
+import Thanks from './Pages/Thanks'
 import Register from './Pages/Auth/Register';
 import Login from './Pages/Auth/Login';
 import { useContext } from 'react';
@@ -11,7 +11,6 @@ import Create from './Pages/Points/Create';
 import Show from './Pages/Points/Show';
 import Update from './Pages/Points/Update';
 import Cart from './Pages/Cart'; // Asegúrate de que la ruta es correcta
-
 import AboutPage from "./Pages/AboutPage";
 import BlogPage from "./Pages/BlogPage";
 import PostDetails from "./Pages/PostDetails";
@@ -49,6 +48,8 @@ export default function App() {
           <Route path='/create' element={user ? <Create /> : <Login />} />
           <Route path='/points/:id' element={<Show />} />
           <Route path='/points/update/:id' element={user ? <Update /> : <Login />} />
+          <Route path='/thanks' element={<Thanks />} />
+
         </Route>
       </Routes>
       </div>
