@@ -33,7 +33,7 @@ const Footer = () => {
                 href="mailto:contacto@reciclandome.com"
                 className="text-green-700 hover:underline"
               >
-                contacto@reciclandome.com
+                inforeciclando@gmail.com
               </a>
             </p>
           </div>
