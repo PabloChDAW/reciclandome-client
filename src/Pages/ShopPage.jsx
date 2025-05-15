@@ -1,7 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../Context/AppContext";
 import SliderShop from "../Components/SliderShop";
 import { Link } from "react-router-dom";
+import { getAllProducts } from '../api/products';
+import Product from "../Components/Product"; 
+
 
 const sliderImages = [
   "/fondo_tienda.jpg",
@@ -9,11 +12,23 @@ const sliderImages = [
   "/fondo_tienda3.jpg",
 ];
 
-const products = [];
-
 const ShopPage = () => {
-  const { cart, setCart } = useContext(AppContext);
+  const { cart, setCart, token } = useContext(AppContext); // Asegúrate de tener el token en el contexto
+  const [products, setProducts] = useState([]);
   const [showToast, setShowToast] = useState(false);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await getAllProducts(token);
+        setProducts(data);
+      } catch (error) {
+        console.error("Error al obtener productos:", error);
+      }
+    };
+
+    fetchProducts();
+  }, [token]);
 
   const handleAddToCart = (product) => {
     setCart((prevCart) => {
@@ -48,32 +63,14 @@ const ShopPage = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-10 place-items-center">
                 {products.map((product) => (
-                  <div
+                  <Product
                     key={product.id}
-                    className="border rounded-xl p-4 shadow-sm hover:shadow-md hover:shadow-[#D0FDD7] transition w-full duration-500 hover:scale-105"
-                  >
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-40 object-contain mb-4"
-                    />
-                    <h2 className="text-lg font-semibold mb-1">
-                      {product.name}
-                    </h2>
-                    <p className="text-black font-bold mb-2">
-                      EUR {product.price}€
-                    </p>
-                    <button
-                      onClick={() => handleAddToCart(product)}
-                      className="w-full py-2 mt-10 text-sm bg-[#166534] hover:bg-white text-white hover:text-[#166534] hover:border border-[#166534] rounded-full transition duration-700 flex items-center justify-center gap-2"
-                    >
-                      🛒 AÑADIR A LA CESTA
-                    </button>
-                  </div>
+                    product={product}
+                    onAddToCart={handleAddToCart}
+                  />
                 ))}
               </div>
 
-              {/* ✅ Toast fuera del .map */}
               {showToast && (
                 <div className="fixed bottom-5 right-5 bg-green-600 text-white px-4 py-2 rounded shadow-md z-50 transition-opacity duration-500">
                   <Link to="/cart">✅ Producto añadido al carrito </Link>
