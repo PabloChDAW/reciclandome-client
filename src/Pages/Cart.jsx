@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AppContext } from "../Context/AppContext";
 import { useNavigate } from "react-router-dom";
+import PayPalButton from "../Components/PayPalButton";
 
 export default function Cart() {
   const { cart, setCart } = useContext(AppContext);
@@ -117,7 +118,7 @@ export default function Cart() {
           </ul>
 
           <div className="mt-8 pt-6 border-t">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4  p-6 rounded-lg shadow-md">
+            <div className="flex flex-col md:flex-col justify-between items-start md:items-center gap-4  p-6 rounded-lg shadow-md">
               <div>
                 <p className="text-sm">
                   🧺 Total ({totalItems} {totalItems === 1 ? 'artículo' : 'artículos'})
@@ -126,12 +127,12 @@ export default function Cart() {
                   {totalPrice.toFixed(2)}€ 💚
                 </p>
               </div>
-              <button
-                onClick={() => navigate("/checkout")}
-                className="w-full sm:w-auto px-8 py-3 border border-[#166534] bg-[#166534] text-white rounded-full hover:bg-white hover:text-[#166534] transition-all duration-300 shadow-md"
-              >
-                🚀 PROCEDER AL PAGO
-              </button>
+
+
+              <div className="w-full sm:w-auto">
+                <PayPalButton amount={totalPrice} cart={cart} />
+              </div>
+
             </div>
           </div>
         </>

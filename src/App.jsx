@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Layout from './Pages/Layout';
 import HomePage from './Pages/HomePage';
+import Shop from './Pages/Shop'
+import Thanks from './Pages/Thanks'
 import Register from './Pages/Auth/Register';
 import Login from './Pages/Auth/Login';
 import { useContext } from 'react';
@@ -47,6 +49,8 @@ export default function App() {
           <Route path='/create' element={user ? <Create /> : <Login />} />
           <Route path='/points/:id' element={<Show />} />
           <Route path='/points/update/:id' element={user ? <Update /> : <Login />} />
+          <Route path='/thanks' element={<Thanks />} />
+
         </Route>
       </Routes>
       </div>
