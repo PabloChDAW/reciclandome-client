@@ -19,8 +19,9 @@ export default function AppProvider({ children }) {
 
   async function getUser() {
     /* Petición de autorización */
-    const res = await fetch("/api/user", {
+    const res = await fetch("http://2.154.81.198/api/user", {
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
