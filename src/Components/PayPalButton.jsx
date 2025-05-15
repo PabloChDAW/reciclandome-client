@@ -60,7 +60,7 @@ export default function PayPalButton({ amount, cart }) {
   return (
     <div
       ref={containerRef}
-      className="w-full sm:min-w-[320px] p-4rounded-md shadow"
+      className="flex justify-center items-center w-full sm:min-w-[450px] p-4 rounded-md shadow"
     ></div>
 
   );
