@@ -4,7 +4,8 @@ import "@maptiler/sdk/dist/maptiler-sdk.css";
 import './Map3.css';
 
 //añadimos el prop onMarkerClick
-export default function Map3({ points, onMarkerClick }) {
+
+export default function Map3({ points, onMarkerClick, centerOnPoint }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const zoom = 4.5; //se puede ampliar a 14 cuando se tenga la funcionalidad del GPS
@@ -14,7 +15,7 @@ export default function Map3({ points, onMarkerClick }) {
 
   maptilersdk.config.apiKey = 'bmHH9ekzKdndbQ2GrZEm';
   console.log('Estructura de points:', points);
-
+  
   useEffect(() => {
     //if (points && points.length > 0) {
       if (!map.current) {
@@ -94,7 +95,22 @@ export default function Map3({ points, onMarkerClick }) {
       }
     };
   }, [points, onMarkerClick]);
-
+  
+  useEffect(() => {
+  // Efecto SEPARADO solo para el centrado
+  if (centerOnPoint && map.current) {
+    const latitude = parseFloat(centerOnPoint.latitude);
+    const longitude = parseFloat(centerOnPoint.longitude);
+    
+    map.current.flyTo({
+      center: [longitude, latitude],
+      zoom: 14,
+      speed: 1.2,
+      curve: 1.42,
+      essential: true
+    });
+  }
+}, [centerOnPoint]);
 
   return (
     <div className="map-container">
