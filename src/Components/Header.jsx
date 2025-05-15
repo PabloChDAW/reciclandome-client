@@ -34,9 +34,10 @@ export default function Header({ isHome = false, isShop = false }) {
   async function handleLogout(e) {
     e.preventDefault();
 
-    const res = await fetch("/api/logout", {
+    const res = await fetch("http://2.154.81.198/api/logout", {
       method: "post",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
