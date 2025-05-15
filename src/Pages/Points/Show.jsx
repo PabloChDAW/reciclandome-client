@@ -11,7 +11,7 @@ export default function Show() {
 
   async function getPoint() {
     /* Petición de datos de un post. */
-    const res = await fetch(`/api/points/${id}`);
+    const res = await fetch(`http://2.154.81.198/api/points/${id}`);
     const data = await res.json();
 
     // console.log(data);
@@ -26,9 +26,10 @@ export default function Show() {
 
     if (user && user.id === point.user_id) {
       /* Petición de borrado de un post. */
-      const res = await fetch(`/api/points/${id}`, {
+      const res = await fetch(`http://2.154.81.198/api/points/${id}`, {
         method: "delete",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });

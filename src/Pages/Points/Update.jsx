@@ -114,7 +114,7 @@ export default function Update() {
 
   async function getPoint() {
     /* Petición de datos de un point. */
-    const res = await fetch(`/api/points/${id}`);
+    const res = await fetch(`http://2.154.81.198/api/points/${id}`);
     const data = await res.json();
 
     if (res.ok) {
@@ -149,7 +149,7 @@ export default function Update() {
     e.preventDefault();
 
     /* Petición de actualización de point */
-    const res = await fetch(`/api/points/${id}`, {
+    const res = await fetch(`http://2.154.81.198/api/points/${id}`, {
       method: 'put',
       headers: {
         Authorization: `Bearer ${token}`,
