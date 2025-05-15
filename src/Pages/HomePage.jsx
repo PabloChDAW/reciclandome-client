@@ -38,7 +38,7 @@ export default function HomePage() {
 
   // Obtener puntos de reciclaje
   async function getPoints() {
-    const res = await fetch("/api/points");
+    const res = await fetch("http://2.154.81.198/api/points");
     const data = await res.json();
     console.log("hola")
     console.log(data);
