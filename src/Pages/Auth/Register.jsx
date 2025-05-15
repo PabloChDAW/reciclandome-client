@@ -22,8 +22,11 @@ export default function Register() {
   async function handleRegister(e) {
     e.preventDefault();
     /* Petición de autenticación */
-    const res = await fetch("/api/register", {
+    const res = await fetch("http://2.154.81.198/api/register", {
       method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(formData),
     });
 
