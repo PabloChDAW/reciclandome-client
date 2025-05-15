@@ -9,32 +9,7 @@ const sliderImages = [
   "/fondo_tienda3.jpg",
 ];
 
-const products = [
-    {
-        id: 1,
-        name: "Camiseta Dont be Trashy",
-        price: 0.01,
-        image: "/Camiseta_Dont_Be_Trashy.png",
-    },
-    {
-        id: 2,
-        name: "Camiseta Niño Reciclando",
-        price: 14.95,
-        image: "/Camiseta_Niño_Reciclando.png",
-    },
-    {
-        id: 3,
-        name: "Camiseta Eco Guerrera",
-        price: 15.95,
-        image: "/Camiseta_Dont_Be_Trashy.png",
-    },
-    {
-        id: 4,
-        name: "Camiseta Planeta Feliz",
-        price: 13.95,
-        image: "/Camiseta_Niño_Reciclando.png",
-    }
-];
+const products = [];
 
 const ShopPage = () => {
   const { cart, setCart } = useContext(AppContext);
