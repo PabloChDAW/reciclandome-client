@@ -18,7 +18,7 @@ export default function Login() {
   async function handleLogin(e) {
     e.preventDefault();
     /* Petición de login */
-    const res = await fetch("/api/login", {
+    const res = await fetch("http://2.154.81.198/api/login", {
       method: "post",
       body: JSON.stringify(formData),
     });
