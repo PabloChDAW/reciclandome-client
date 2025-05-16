@@ -14,15 +14,6 @@ export default function ShowPointsPage() {
     // ser pasadas como props al componente del mapa para ser gestionados desde allí. 
     const mapRef = useRef(null); 
 
-    // Obtener puntos de reciclaje
-    async function getPoints() {
-        const res = await fetch("/api/points");
-        const data = await res.json();
-        if (res.ok) {
-            setPoints(data);
-        }
-    }
-
     const handleMarkerClick = (point) => {
         setSelectedPoint(point);
         centerMapOnPoint(point);
@@ -32,7 +23,7 @@ export default function ShowPointsPage() {
                 behavior: 'smooth',
                 block: 'center'
             });
-    }
+        }
     };
 
     const centerMapOnPoint = (point) => {
@@ -56,10 +47,10 @@ export default function ShowPointsPage() {
         console.log(data);
 
 
-    if (res.ok) {
-      setPoints(data);
+        if (res.ok) {
+            setPoints(data);
+        }
     }
-
     useEffect(() => {
         getPoints();
     }, []);
@@ -110,6 +101,5 @@ export default function ShowPointsPage() {
             </div>
 
         </>
-    );
-
+    )
 }

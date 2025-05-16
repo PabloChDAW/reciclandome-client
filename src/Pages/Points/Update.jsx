@@ -24,7 +24,8 @@ export default function Update() {
     phone: "", 
     email: ""
   });
-  const pointTypes = ["Tipo 1", "Tipo 2", "Tipo 3"];
+  const pointTypes = ["Plásticos", "Vidrios", "Aceites", "Orgánica", "Electrónicos", 
+    "Textiles", "Neumáticos", "Chatarra", "Construcción"];
   
   // Seguridad y sanitización ---- //MapTyler no gestiona bien la iniciación en alguna coordenada 0.
   // Estas líneas evitan que un tercero pueda denegarnos el servicio si consigue forzar la aplicación a iniciar
