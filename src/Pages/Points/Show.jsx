@@ -47,7 +47,7 @@ export default function Show() {
   }, []);
 
   return (
-    <div className="py-16 mx-auto">
+    <div className="mx-auto">
 
       {point ? (
         <>
