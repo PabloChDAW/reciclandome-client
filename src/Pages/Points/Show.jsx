@@ -76,11 +76,9 @@ export default function Show() {
             <p className="mt-8 text-sm italic text-green-700 text-right">
               Creado por <span className="font-semibold">{point.user.name}</span> a las {new Date(point.created_at).toLocaleTimeString()}
             </p>
-          </section>
-
-          {/* Botones de acción con estilo natural y accesible */}
+            {/* Botones de acción con estilo natural y accesible */}
           {user && user.id === point.user_id && (
-            <div className="flex flex-col max-w-7xl mx-auto sm:flex-row justify-end gap-4 mt-4">
+            <div className="flex flex-col max-w-7xl mx-auto sm:flex-row justify-end gap-4 my-10">
               <Link
                 to={`/points/update/${point.id}`}
                 className="relative flex items-center justify-center w-full sm:w-[150px] border border-[#166534] bg-[#166534] hover:bg-white text-white hover:text-[#166534] rounded-full shadow-lg py-3 px-5 text-sm transition-all duration-300"
@@ -98,6 +96,9 @@ export default function Show() {
             </div>
 
           )}
+          </section>
+
+          
         </>
       ) : (
         <p className="text-center text-lg font-semibold text-green-900 mt-16">
