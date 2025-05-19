@@ -30,7 +30,7 @@ const InfoBox = ({ selectedPoint }) => {
             <div className="mt-6 flex justify-end">
                 <Link
                     to={`/points/${selectedPoint.id}`}
-                    className="inline-flex items-center gap-2 border border-[#166534] bg-[#166534] hover:bg-white text-white hover:text-[#166534] text-sm  px-6 py-3 rounded-full shadow hover:shadow-lg transition duration-300"
+                    className="inline-flex items-center gap-2 border border-[#166534] bg-[#166534] hover:bg-white text-white hover:text-[#166534] text-sm  px-6 py-3 rounded-xl shadow hover:shadow-lg transition duration-300"
                 > 
                     VER MAS DETALLES →
                 </Link>

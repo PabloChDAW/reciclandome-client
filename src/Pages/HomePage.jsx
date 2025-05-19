@@ -95,9 +95,9 @@ export default function HomePage() {
               <div className="mt-6">
                 <Link
                   to={`/points/${selectedPoint.id}`}
-                  className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-6 py-3 rounded-xl shadow hover:shadow-lg transition-transform transform hover:-translate-y-0.5"
+                  className="inline-flex items-center gap-2 border border-[#166534] bg-[#166534] hover:bg-white text-white hover:text-[#166534] text-sm px-6 py-3 rounded-xl shadow hover:shadow-lg transition duration-300"
                 >
-                  Ver más detalles →
+                  VER MÁS DETALLES →
                 </Link>
               </div>
             </section>
