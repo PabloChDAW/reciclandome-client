@@ -58,7 +58,7 @@ export default function ShowPointsPage() {
 
     return (
         <>
-            <div className="py-10 ">
+            <div className="py-20 ">
 
                 <h1 className="text-3xl font-bold text-center mb-8">
                     ♻️ Puntos de Reciclaje
@@ -67,24 +67,23 @@ export default function ShowPointsPage() {
                 <div id="mapa" className="mb-10 overflow-hidden border border-slate-200 shadow-[0_0_20px_3px_rgba(34,197,94,0.4)] transition-all duration-500">
                     <Map3 points={points} onMarkerClick={handleMarkerClick} centerOnPoint={selectedPoint} />
                 </div>
-                
-                <div className="max-w-7xl mx-auto">
-                    {<InfoBox selectedPoint={selectedPoint} />}
-    
-                    <section className="mt-16 px-4">
-                        <h3 className="text-2xl font-bold text-center text-slate-700 mb-10">
+
+                <div className="max-w-7xl mx-auto px-4">
+                    {/* Info del punto seleccionado */}
+                    {selectedPoint && <InfoBox selectedPoint={selectedPoint} />}
+
+                    {/* Título de sección */}
+                    <section className="mt-20">
+                        <h3 className="text-3xl font-bold text-center text-green-900 mb-12 flex items-center justify-center gap-2">
                             📌 Todos los puntos de reciclaje
                         </h3>
 
+                        {/* Lista de puntos */}
                         {points.length > 0 ? (
-                            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-                                {points.length > 0 ? (
-                                    points.map((point) => (
-                                        <PointItem key={point.id} point={point} onCenterMap={handleMarkerClick} />
-                                    ))
-                                ) : (
-                                    <p>No hay puntos</p>
-                                )}
+                            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                                {points.map((point) => (
+                                    <PointItem key={point.id} point={point} onCenterMap={handleMarkerClick} />
+                                ))}
                             </div>
                         ) : (
                             <p className="text-center text-sm text-slate-500 italic mt-8">
@@ -92,14 +91,9 @@ export default function ShowPointsPage() {
                             </p>
                         )}
                     </section>
-
                 </div>
-            </div>
 
-            <div className="flex justify-center py-10">
-                <div className="border-t-2 border-b-[#577759] w-2/4"></div>
             </div>
-
         </>
     )
 }

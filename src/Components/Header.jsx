@@ -31,6 +31,29 @@ export default function Header({ isHome = false, isShop = false }) {
       : "hover:text-green-900";
   };
 
+  const handleAddToCart = (product) => {
+    setCart((prevCart) => {
+      const existing = prevCart.find((item) => item.id === product.id);
+      if (existing) {
+        if (existing.quantity < product.stock) {
+          return prevCart.map((item) =>
+            item.id === product.id
+              ? { ...item, quantity: item.quantity + 1 }
+              : item
+          );
+        } else {
+          alert("No puedes añadir más de este producto. Stock máximo alcanzado.");
+          return prevCart;
+        }
+      }
+      return [...prevCart, { ...product, quantity: 1, stock: product.stock }];
+    });
+
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 2000);
+  };
+
+
   async function handleLogout(e) {
     e.preventDefault();
 
@@ -121,11 +144,10 @@ export default function Header({ isHome = false, isShop = false }) {
           <div
             className={`
                         fixed inset-0 bg-black z-40 transition-opacity duration-700
-                        ${
-                          menuOpen
-                            ? "bg-opacity-70"
-                            : "bg-opacity-0 pointer-events-none"
-                        }
+                        ${menuOpen
+                ? "bg-opacity-70"
+                : "bg-opacity-0 pointer-events-none"
+              }
                     `}
             onClick={() => setMenuOpen(false)}
           ></div>
@@ -356,9 +378,8 @@ export default function Header({ isHome = false, isShop = false }) {
                 />
 
                 <div
-                  className={`fixed top-0 right-0 h-full w-full sm:w-1/3 bg-white shadow-lg border-l z-50 transition-transform duration-500 ${
-                    dropdownOpen ? "translate-x-0" : "translate-x-full"
-                  }`}
+                  className={`fixed top-0 right-0 h-full w-full sm:w-1/3 bg-white shadow-lg border-l z-50 transition-transform duration-500 ${dropdownOpen ? "translate-x-0" : "translate-x-full"
+                    }`}
                 >
                   <div className="flex flex-col h-full p-4">
                     {/* Encabezado */}
@@ -404,10 +425,15 @@ export default function Header({ isHome = false, isShop = false }) {
                                   </span>
                                   <button
                                     onClick={() => increment(item.id)}
-                                    className="w-6 h-6 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-full"
+                                    disabled={item.quantity >= item.stock}
+                                    className={`w-6 h-6 flex items-center justify-center rounded-full ${item.quantity >= item.stock
+                                      ? 'bg-gray-200 cursor-not-allowed opacity-50'
+                                      : 'bg-gray-100 hover:bg-gray-200'}
+                                  `}
                                   >
                                     +
                                   </button>
+
                                   <button
                                     onClick={() => removeItem(item.id)}
                                     className="text-gray-400 hover:text-red-500 ml-2"
