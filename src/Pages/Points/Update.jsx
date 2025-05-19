@@ -174,95 +174,124 @@ export default function Update() {
   }, []);
 
   return (
-    <>
-      <h1 className="title">Modificar tu punto</h1>
-      <Map2 latitud={safeLat} longitud={safeLng} setFormData={setFormData}></Map2>
-      
-      <form onSubmit={handleUpdate} className="w-1/2 mx-auto space-y-4">
-        {/* Coordenadas editables */}
-        <div>
-          <input
-            type="number"
-            step="0.00001"
-            placeholder="Latitud"
-            value={formData.latitude || ""}
-            onChange={(e) => setFormData({ ...formData, latitude: e.target.value })}
-          />
-          {errors.latitude && <p className="error">{errors.latitude[0]}</p>}
-        </div>
-  
-        <div>
-          <input
-            type="number"
-            step="0.00001"
-            placeholder="Longitud"
-            value={formData.longitude || ""}
-            onChange={(e) => setFormData({ ...formData, longitude: e.target.value })}
-          />
-          {errors.longitude && <p className="error">{errors.longitude[0]}</p>}
-        </div>
+  <div className="py-20">
+    <h1 className="text-3xl font-bold text-green-900 mb-8 text-center">
+      🔄 Modificar punto de reciclaje
+    </h1>
 
-        <div>
-          <select
-            value={formData.point_type || ""}
-            onChange={(e) => setFormData({ ...formData, point_type: e.target.value })}
-          >
-            <option value="">Selecciona un tipo de punto</option>
-            {pointTypes.map((type, index) => (
-              <option key={index} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
-          {errors.point_type && <p className="error">{errors.point_type[0]}</p>}
-        </div>
+    <div>
+      <Map2 latitud={safeLat} longitud={safeLng} setFormData={setFormData} />
+    </div>
 
-        {/* Campos de solo lectura */}
-        <div className="info-box">
-          <h3>Información del lugar</h3>
-          <p><strong>Nombre:</strong> {formData.name || "—"}</p>
-          <p><strong>Tipo de punto:</strong> {formData.point_type || "—"}</p> 
-          <p><strong>Tipo de lugar:</strong> {formData.place_type || "—"}</p>
-          <p><strong>Dirección:</strong> {formData.address || "—"}</p>
-          <p><strong>Localidad:</strong> {formData.city || "—"}</p>
-          <p><strong>Región:</strong> {formData.region || "—"}</p>
-          <p><strong>País:</strong> {formData.country || "—"}</p>
-          <p><strong>Código postal:</strong> {formData.postcode || "—"}</p>
-          <p><strong>Categoría:</strong> {formData.way || "—"}</p>
-        </div>
-  
-        {/* Input editable */}
-        <div>
-          <input
-            type="text"
-            placeholder="Descripción (opcional)"
-            value={formData.description || ""}
-            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-          />
-        </div>
-        
-        <div>
-          <input
-            type="text"
-            placeholder="Teléfono"
-            value={formData.phone || ""}
-            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-          />
-        </div>
+    <form
+      onSubmit={handleUpdate}
+      className="mt-20 max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 gap-6 bg-white border border-slate-200 shadow-md rounded-3xl p-8"
+    >
+      {/* Coordenadas */}
+      <div>
+        <label className="block text-sm font-medium text-slate-700 mb-1">Latitud</label>
+        <input
+          type="number"
+          step="0.00001"
+          value={formData.latitude || ""}
+          onChange={(e) => setFormData({ ...formData, latitude: e.target.value })}
+          placeholder="Ej. -34.6037"
+          className="w-full border border-slate-300 rounded-lg px-4 py-2 text-sm"
+        />
+        {errors.latitude && <p className="text-red-600 text-xs mt-1">{errors.latitude[0]}</p>}
+      </div>
 
-        <div>
-          <input
-            type="email"
-            placeholder="Correo electrónico"
-            value={formData.email || ""}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          />
-        </div>
+      <div>
+        <label className="block text-sm font-medium text-slate-700 mb-1">Longitud</label>
+        <input
+          type="number"
+          step="0.00001"
+          value={formData.longitude || ""}
+          onChange={(e) => setFormData({ ...formData, longitude: e.target.value })}
+          placeholder="Ej. -58.3816"
+          className="w-full border border-slate-300 rounded-lg px-4 py-2 text-sm"
+        />
+        {errors.longitude && <p className="text-red-600 text-xs mt-1">{errors.longitude[0]}</p>}
+      </div>
 
-        <button className="primary-btn" disabled={isGeocoding}>
-          {isGeocoding ? "Cargando datos..." : "Actualizar punto"}
+      {/* Tipo de punto */}
+      <div className="sm:col-span-2">
+        <label className="block text-sm font-medium text-slate-700 mb-1">Tipo de punto</label>
+        <select
+          value={formData.point_type || ""}
+          onChange={(e) => setFormData({ ...formData, point_type: e.target.value })}
+          className="w-full border border-slate-300 rounded-lg px-4 py-2 text-sm"
+        >
+          <option value="">Selecciona un tipo de punto</option>
+          {pointTypes.map((type, i) => (
+            <option key={i} value={type}>
+              {type}
+            </option>
+          ))}
+        </select>
+        {errors.point_type && <p className="text-red-600 text-xs mt-1">{errors.point_type[0]}</p>}
+      </div>
+
+      {/* Info del lugar */}
+      <div className="sm:col-span-2 bg-slate-50 border border-slate-200 p-5 rounded-xl shadow-inner space-y-1">
+        <h3 className="text-base font-semibold text-slate-700 mb-2">📄 Información del lugar</h3>
+        <p><strong>📛 Nombre:</strong> {formData.name || "—"}</p>
+        <p><strong>📌 Tipo de lugar:</strong> {formData.place_type || "—"}</p>
+        <p><strong>📍 Dirección:</strong> {formData.address || "—"}</p>
+        <p><strong>🏘 Localidad:</strong> {formData.city || "—"}</p>
+        <p><strong>🗺 Región:</strong> {formData.region || "—"}</p>
+        <p><strong>🌎 País:</strong> {formData.country || "—"}</p>
+        <p><strong>📮 Código postal:</strong> {formData.postcode || "—"}</p>
+        <p><strong>📖 Categoría:</strong> {formData.way || "—"}</p>
+      </div>
+
+      {/* Datos extra */}
+      <div className="sm:col-span-2">
+        <label className="block text-sm font-medium text-slate-700 mb-1">Descripción (opcional)</label>
+        <input
+          type="text"
+          placeholder="Ej: Este punto ahora también recibe vidrio."
+          value={formData.description || ""}
+          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+          className="w-full border border-slate-300 rounded-lg px-4 py-2 text-sm"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-slate-700 mb-1">Teléfono</label>
+        <input
+          type="text"
+          placeholder="Ej: +54 11 1234 5678"
+          value={formData.phone || ""}
+          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+          className="w-full border border-slate-300 rounded-lg px-4 py-2 text-sm"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-slate-700 mb-1">Correo electrónico</label>
+        <input
+          type="email"
+          placeholder="ejemplo@email.com"
+          value={formData.email || ""}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          className="w-full border border-slate-300 rounded-lg px-4 py-2 text-sm"
+        />
+      </div>
+
+      <div className="sm:col-span-2 text-center mt-4">
+        <button
+          type="submit"
+          disabled={isGeocoding}
+          className="relative flex items-center justify-center w-full sm:w-[180px] border border-[#166534] bg-[#166534] hover:bg-white text-white hover:text-[#166534] rounded-full shadow-lg py-3 px-5 text-sm transition-all duration-300"
+        >
+          {isGeocoding ? "Cargando datos..." : "💾 Actualizar punto"}
         </button>
-      </form>
-    </>
-  );
+      </div>
+    </form>
+  </div>
+);
+
+
+
 }

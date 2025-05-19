@@ -1,6 +1,5 @@
-import React from "react";
-import { Mail, Instagram, X, Music2 } from "lucide-react";
-import { FaInstagram, FaTiktok, FaTwitter, FaFacebookF } from "react-icons/fa";
+import { Mail} from "lucide-react";
+import { FaInstagram, FaTiktok } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
@@ -30,10 +29,10 @@ const Footer = () => {
             <p>
               Correo Electrónico:{" "}
               <a
-                href="mailto:contacto@reciclandome.com"
+                href="mailto:inforeciclando.me@gmail.com"
                 className="text-green-700 hover:underline"
               >
-                inforeciclando@gmail.com
+                inforeciclando.me@gmail.com
               </a>
             </p>
           </div>

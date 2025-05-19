@@ -61,38 +61,48 @@ export default function HomePage() {
 
       <div className="py-10 ">
 
-        <h1 className="text-3xl font-bold text-center mb-8">
+        <h1 className="pt-10 text-3xl font-bold text-center mb-8">
           ♻️ Puntos de Reciclaje
         </h1>
 
-        <div id="mapa" className="mb-10 overflow-hidden border border-slate-200 shadow-[0_0_20px_3px_rgba(34,197,94,0.4)] transition-all duration-500">
+        <div id="mapa" className="overflow-hidden border border-slate-200 shadow-[0_0_20px_3px_rgba(34,197,94,0.4)] transition-all duration-500">
           <Map3 points={points} onMarkerClick={setSelectedPoint} />
         </div>
 
-        <div className="max-w-7xl mx-auto">
+        <div className="py-10 max-w-7xl mx-auto">
           {selectedPoint && (
-            <section className="mt-10 p-6 rounded-2xl border border-blue-200 bg-blue-50 shadow-md">
-              <h2 className="text-2xl font-semibold text-blue-800 flex items-center gap-2 mb-4">
-                <span className="text-xl">📍</span> Detalles del Punto Seleccionado
+            <section className="mt-10 p-6 sm:p-8 rounded-3xl border border-green-300 bg-gradient-to-br from-green-50 via-white to-green-100 shadow-2xl animate-fade-in">
+              <h2 className="text-2xl sm:text-3xl font-bold text-green-900 flex items-center gap-3 mb-6">
+                <span className="text-2xl">📍</span>
+                Detalles del Punto Seleccionado
               </h2>
-              <ul className="text-sm text-blue-900 space-y-1">
-                <li><span className="font-medium">Latitud:</span> {selectedPoint.latitude}</li>
-                <li><span className="font-medium">Longitud:</span> {selectedPoint.longitude}</li>
-                <li><span className="font-medium">Usuario:</span> {selectedPoint.user.name}</li>
-              </ul>
-              <Link
-                to={`/points/${selectedPoint.id}`}
-                className="mt-5 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition"
-              >
-                Ver más detalles →
-              </Link>
+
+              <div className="grid sm:grid-cols-2 gap-4 text-green-800 text-base">
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold text-[14px] sm:text-[16px]">🌐 Latitud:</span>
+                  <span className="text-[14px] sm:text-[16px]" >{selectedPoint.latitude}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold text-[14px] sm:text-[16px]">🧭 Longitud:</span>
+                  <span className="text-[14px] sm:text-[16px]" >{selectedPoint.longitude}</span>
+                </div>
+                <div className="flex items-center gap-2 col-span-2">
+                  <span className="font-semibold text-[14px] sm:text-[16px]">👤 Usuario:</span>
+                  <span className="text-[14px] sm:text-[16px]" >{selectedPoint.user.name}</span>
+                </div>
+              </div>
+
+              <div className="mt-6">
+                <Link
+                  to={`/points/${selectedPoint.id}`}
+                  className="inline-flex items-center gap-2 border border-[#166534] bg-[#166534] hover:bg-white text-white hover:text-[#166534] text-sm px-6 py-3 rounded-xl shadow hover:shadow-lg transition duration-300"
+                >
+                  VER MÁS DETALLES →
+                </Link>
+              </div>
             </section>
           )}
         </div>
-      </div>
-
-      <div className="flex justify-center py-10">
-        <div className="border-t-2 border-b-[#577759] w-2/4"></div>
       </div>
 
       {/* Sección de tipos de reciclaje */}

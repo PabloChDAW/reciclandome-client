@@ -4,105 +4,108 @@
     position: relative;
     width: 100%;
     height: 60vh;
-    min-height: 400px;
-    max-height: 700px;
+    min-height: 650px;
     margin: 2rem 0;
-    
+    border-radius: 0 !important;
+
+
     /* Estilo premium */
-    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
-    border: 2px solid #4F46E5;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
     background: linear-gradient(145deg, #f0f4ff, #e0e7ff);
-    
+
     /* Efectos especiales */
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
     transform: translateZ(0);
-  }
-  
-  /* Efecto hover épico */
-  .map-wrap:hover {
+}
+
+/* Efecto hover épico */
+.map-wrap:hover {
     transform: translateY(-4px);
-    box-shadow: 
-      0 20px 40px rgba(79, 70, 229, 0.25),
-      inset 0 0 0 2px white;
-  }
-  
-  /* Contenedor del mapa */
-  .map {
+    box-shadow:
+        0 20px 40px rgba(70, 229, 99, 0.25),
+        inset 0 0 0 2px white;
+}
+
+/* Contenedor del mapa */
+.map {
     position: absolute;
     width: 100%;
     height: 100%;
     z-index: 1;
-  }
-  
-  /* Borde neón (opcional) */
-  .map-wrap::after {
+}
+
+/* Borde neón (opcional) */
+.map-wrap::after {
     content: "";
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 14px;
     pointer-events: none;
-    box-shadow: 0 0 15px rgba(79, 70, 229, 0.6);
+    box-shadow: 0 0 15px rgba(70, 229, 107, 0.6);
     z-index: 2;
-  }
-  
-  /* ===== MODO OSCURO AUTOMÁTICO ===== */
-  @media (prefers-color-scheme: dark) {
+}
+
+/* ===== MODO OSCURO AUTOMÁTICO ===== */
+@media (prefers-color-scheme: dark) {
     .map-wrap {
-      background: linear-gradient(145deg, #1e1b2b, #2a2545);
-      border-color: #8B5CF6;
-      box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+        background: linear-gradient(145deg, #1e1b2b, #2a2545);
+        border-color: #5cf67b;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
     }
-    
+
     .map-wrap::after {
-      box-shadow: 0 0 20px rgba(139, 92, 246, 0.7);
+        box-shadow: 0 0 20px rgba(139, 92, 246, 0.7);
     }
-  }
-  
-  /* ===== CHINCHETA REXULONA ===== */
-  .maptiler-marker {
-    filter: 
-      drop-shadow(0 2px 4px rgba(0,0,0,0.3))
-      brightness(1.1)
-      saturate(1.2);
+}
+
+/* ===== CHINCHETA REXULONA ===== */
+.maptiler-marker {
+    filter:
+        drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) brightness(1.1) saturate(1.2);
     transition: transform 0.3s ease;
-  }
-  
-  .maptiler-marker:hover {
+}
+
+.maptiler-marker:hover {
     transform: scale(1.2) translateY(-10px);
-  }
-  
-  /* ===== ANIMACIÓN DE CARGA ===== */
-  @keyframes rexulonPulse {
-    0% { opacity: 0.8; transform: scale(0.95); }
-    50% { opacity: 1; transform: scale(1.05); }
-    100% { opacity: 0.8; transform: scale(0.95); }
-  }
-  
-  .map-loading-message {
+}
+
+/* ===== ANIMACIÓN DE CARGA ===== */
+@keyframes rexulonPulse {
+    0% {
+        opacity: 0.8;
+        transform: scale(0.95);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    100% {
+        opacity: 0.8;
+        transform: scale(0.95);
+    }
+}
+
+.map-loading-message {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(255,255,255,0.9);
+    background: rgba(255, 255, 255, 0.9);
     padding: 1rem 2rem;
-    border-radius: 50px;
     font-weight: bold;
     color: #4F46E5;
     z-index: 10;
     animation: rexulonPulse 2s infinite;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-  
-  /* ===== RESPONSIVE ===== */
-  @media (max-width: 768px) {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
     .map-wrap {
-      height: 50vh;
-      min-height: 300px;
-      border-radius: 12px;
-      margin: 1rem 0;
+        margin: 1rem 0;
     }
-  }
+}

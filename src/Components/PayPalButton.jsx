@@ -1,4 +1,3 @@
-// Components/PayPalButton.js
 import { useEffect, useRef } from "react";
 
 export default function PayPalButton({ amount, cart }) {
