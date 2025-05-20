@@ -28,15 +28,22 @@ export default function PayPalButton({ amount, cart }) {
           });
         },
         onApprove: (data, actions) => {
-          return actions.order.capture().then((details) => {
-            alert('✅ Pago realizado por ' + details.payer.name.given_name);
+          console.log(data);
 
-            fetch('http://localhost:8000/api/paypal/payment-completed', {
+          return actions.order.capture().then((details) => {
+            console.log(details);
+
+            console.log(data);
+
+            fetch('http://localhost:5173/api/paypal/payment-completed', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ details, cart }),
             }).then(() => {
-              window.location.href = "/thanks";
+              console.log("Pago completado y datos enviados.");
+              setTimeout(() => {
+                window.location.href = "/thanks";
+              }, 1000); // espera 1 segundo
             });
           });
         },
