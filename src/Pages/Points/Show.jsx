@@ -4,6 +4,8 @@ import { AppContext } from "../../Context/AppContext";
 import Map from "../../Components/Map";
 import toastr from 'toastr';
 import 'toastr/build/toastr.min.css';
+import Swal from 'sweetalert2';
+
 
 export default function Show() {
   // console.log(useParams());
@@ -25,28 +27,40 @@ export default function Show() {
   }
 
   async function handleDelete(e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (user && user.id === point.user_id) {
-      /* Petición de borrado de un post. */
-      const res = await fetch(`/api/points/${id}`, {
-        method: "delete",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+  if (user && user.id === point.user_id) {
+    const result = await Swal.fire({
+      title: '¿Estás seguro?',
+      text: "Esta acción no se puede deshacer",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#166534',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    });
 
-      const data = await res.json();
-      console.log(data);
+    if (!result.isConfirmed) return;
 
-      if (res.ok) {
-        toastr.success("Punto eliminado correctamente.");
-        setTimeout(() => navigate("/"), 2000); // Espera un poco antes de redirigir
-      } else {
-        toastr.error("Ocurrió un error al intentar eliminar el punto.");
-      }
+    const res = await fetch(`/api/points/${id}`, {
+      method: "delete",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      toastr.success("Punto eliminado correctamente.");
+      setTimeout(() => navigate("/"), 2000);
+    } else {
+      toastr.error("Ocurrió un error al intentar eliminar el punto.");
     }
   }
+}
+
 
   useEffect(() => {
     getPoint();
