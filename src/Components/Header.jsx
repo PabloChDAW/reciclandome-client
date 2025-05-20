@@ -25,6 +25,8 @@ export default function Header({ isHome = false, isShop = false }) {
 
   const location = useLocation(); // Obtiene la ruta actual
 
+  const [showLogoutToast, setShowLogoutToast] = useState(false);
+
   const getLinkClass = (path) => {
     return location.pathname === path
       ? "text-green-900 font-bold"
@@ -72,6 +74,12 @@ export default function Header({ isHome = false, isShop = false }) {
       setToken(null);
       localStorage.removeItem("token");
       clearCart();
+      setShowLogoutToast(true); // <-- Mostrar toastr aquí
+      // Ocultar toastr después de 2 segundos y navegar
+      setTimeout(() => {
+        setShowLogoutToast(false);
+        navigate("/");
+      }, 2000);
       navigate("/");
     }
   }
@@ -229,11 +237,11 @@ export default function Header({ isHome = false, isShop = false }) {
                     <p className="text-lg">Hola, {user.name}</p>
                     <button
                       onClick={handleLogout}
-                      className="flex items-center space-x-2 border border-red-600 bg-gray-100 hover:bg-red-100 text-red-600 hover:text-red-700 px-3 py-2 rounded-md text-sm transition duration-200"
+                      className="flex items-center space-x-2 border border-red-600 bg-red-700 hover:bg-white text-white hover:text-red-700 px-3 py-2 rounded-md text-sm transition duration-200"
                       title="Cerrar sesión"
                     >
                       <FiLogOut className="text-xl" />
-                      <span>Cerrar sesión</span>
+                      <span>CERRAR SESIÓN</span>
                     </button>
                   </div>
                 ) : (
@@ -243,14 +251,14 @@ export default function Header({ isHome = false, isShop = false }) {
                       onClick={() => setMenuOpen(false)}
                       className="flex items-center gap-2 hover:scale-105 transition-transform"
                     >
-                      👤 Login
+                      👤 INICIAR SESIÓN
                     </Link>
                     <Link
                       to="/register"
                       onClick={() => setMenuOpen(false)}
                       className="flex items-center gap-2 hover:scale-105 transition-transform"
                     >
-                      📝 Registro
+                      📝 REGISTRO
                     </Link>
                   </div>
                 )}
@@ -340,7 +348,7 @@ export default function Header({ isHome = false, isShop = false }) {
           ) : (
             <Link
               to="/login"
-              className="lg:text-[20px] sm:text-[12px] hover:scale-110 transform duration-300"
+              className="lg:text-[20px] sm:text-[12px] text-[#166534] hover:text-[#131700] hover:scale-110 transform duration-300"
             >
               Hola, identifícate
             </Link>
@@ -494,6 +502,40 @@ export default function Header({ isHome = false, isShop = false }) {
           </div>
         </div>
       </div>
+      {showLogoutToast && (
+  <div
+    className="fixed top-5 right-5 bg-gradient-to-r from-green-700 to-green-900 text-white px-6 py-3 rounded-md shadow-md flex items-center justify-between gap-4 max-w-xs animate-fade-slide-in z-50 opacity-70"
+    role="alert"
+    aria-live="assertive"
+  >
+    <div className="flex items-center gap-3">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-7 w-7 flex-shrink-0"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={3}
+        aria-hidden="true"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+      </svg>
+      <span className="text-sm">
+        ¡Hasta pronto! Aquí siempre hay un lugar para ti.      
+      </span>
+    </div>
+    <button
+      onClick={() => setShowLogoutToast(false)}
+      className="text-white hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-white rounded transition-colors"
+      aria-label="Cerrar notificación"
+    >
+      &#10005;
+    </button>
+  </div>
+)}
+
+
+
     </header>
   );
 }

@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../Context/AppContext";
 import { useNavigate, useParams } from "react-router-dom";
 import Map2 from "../../Components/Map2";
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css';
 
 export default function Update() {
   const {id} = useParams();
@@ -162,11 +164,13 @@ export default function Update() {
     const data = await res.json();
 
     if (data.errors) {
-      console.error("Error 422 - Datos de validación:", data);
-      setErrors(data.errors);
-    } else {
-      navigate("/");
-    }
+    console.error("Error 422 - Datos de validación:", data);
+    setErrors(data.errors);
+    toastr.error("Error al actualizar el punto. Verifica los datos ingresados.");
+  } else {
+    toastr.success("Punto actualizado correctamente.");
+    setTimeout(() => navigate("/"), 2000); // Espera 2s para que se vea el mensaje
+  }
   }
 
   useEffect(() => {

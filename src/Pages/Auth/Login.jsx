@@ -2,6 +2,9 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 import { Link } from "react-router-dom";
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css';
+
 
 
 export default function Login() {
@@ -28,11 +31,12 @@ export default function Login() {
 
     if (data.errors) {
       setErrors(data.errors);
+      toastr.error('Revisa los campos del formulario.', 'Error de inicio de sesión');
     } else {
       localStorage.setItem("token", data.token);
       setToken(data.token);
+      toastr.success('Has iniciado sesión correctamente', '¡Bienvenido!');
       navigate("/");
-      // console.log(data);
     }
   }
 
@@ -41,7 +45,7 @@ export default function Login() {
       <div className="p-10 my-10 sm:py-10 sm:max-w-7xl mx-auto flex items-center justify-center">
         <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg space-y-6 animate-fade-in-up">
           <h1 className="text-xl md:text-3xl font-semibold text-[#14532d] text-center mb-6 animate-fade-in-down">
-            Iniciar Sesión
+            INICIAR SESIÓN
           </h1>
 
           <form onSubmit={handleLogin} className="space-y-6">

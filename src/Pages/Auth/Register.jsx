@@ -2,6 +2,9 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 import { Link } from "react-router-dom";
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css';
+
 
 export default function Register() {
   const { setToken } = useContext(AppContext);
@@ -31,11 +34,12 @@ export default function Register() {
 
     if (data.errors) {
       setErrors(data.errors);
+      toastr.error('Revisa los campos del formulario.', 'Error al registrar');
     } else {
       localStorage.setItem("token", data.token);
       setToken(data.token);
+      toastr.success('Tu cuenta ha sido creada exitosamente', '¡Bienvenido!');
       navigate("/");
-      // console.log(data);
     }
   }
 
@@ -44,7 +48,7 @@ export default function Register() {
       <div className="p-10 my-10 sm:py-10 sm:max-w-7xl mx-auto flex items-center justify-center">
         <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg space-y-6 animate-fade-in-up">
           <h1 className="text-xl md:text-3xl font-semibold text-[#14532d] text-center mb-6 animate-fade-in-down">
-            📝 Registrar una nueva cuenta
+            📝 REGÍSTRATE CON NOSOTROS
           </h1>
 
           <form onSubmit={handleRegister} className="space-y-6">
