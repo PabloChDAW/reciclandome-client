@@ -224,6 +224,13 @@ export default function Header({ isHome = false, isShop = false }) {
                 📝 Blog
               </Link>
               <Link
+                to="/orders"
+                onClick={() => setMenuOpen(false)}
+                className={`${getLinkClass("/orders")}`}
+              >
+                📦 Mis pedidos
+              </Link>
+              <Link
                 to="/contact"
                 onClick={() => setMenuOpen(false)}
                 className={`${getLinkClass("/contact")}`}
@@ -291,7 +298,7 @@ export default function Header({ isHome = false, isShop = false }) {
 
           <div className="relative group hidden md:block">
             <div className="hover:underline hover:font-bold cursor-pointer">
-              Mapa Interactivo <span className="text-xs">&#9660;</span>
+              Mapa <span className="text-xs">&#9660;</span>
             </div>
             {/* TODO METER RUTA INTERACTIVA AQUI */}
             <div className="absolute top-full left-1/2 -translate-x-1/2 w-56 bg-white border border-gray-300 rounded shadow-md opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-40">
@@ -324,6 +331,9 @@ export default function Header({ isHome = false, isShop = false }) {
           </Link>
           <Link to="/shop" className={`${getLinkClass("/shop")}`}>
             Tienda
+          </Link>
+          <Link to="/orders" className={`${getLinkClass("/orders")}`}>
+            Mis Pedidos
           </Link>
           <Link to="/contact" className={`${getLinkClass("/contact")}`}>
             Contacto
