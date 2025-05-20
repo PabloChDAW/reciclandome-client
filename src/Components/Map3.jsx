@@ -8,7 +8,8 @@ export default function Map3({ points, onMarkerClick, centerOnPoint }) {
   const map = useRef(null);
   const zoom = 4.5;
   const markers = useRef([]);
-  const [mapStyle, setMapStyle] = useState(maptilersdk.MapStyle.STREETS); // NUEVO estado
+  const [mapStyle, setMapStyle] = useState('streets');
+
 
   maptilersdk.config.apiKey = 'bmHH9ekzKdndbQ2GrZEm';
   console.log('Estructura de points:', points);
@@ -98,10 +99,10 @@ export default function Map3({ points, onMarkerClick, centerOnPoint }) {
 
   // NUEVO efecto para cambiar estilo del mapa dinámicamente
   useEffect(() => {
-  if (map.current && mapStyle) {
-    map.current.setStyle(`https://api.maptiler.com/maps/${mapStyle}/style.json?key=${maptilersdk.config.apiKey}`);
-  }
-}, [mapStyle]);
+    if (map.current && mapStyle) {
+      map.current.setStyle(`https://api.maptiler.com/maps/${mapStyle}/style.json?key=${maptilersdk.config.apiKey}`);
+    }
+  }, [mapStyle]);
 
 
   return (
@@ -114,9 +115,10 @@ export default function Map3({ points, onMarkerClick, centerOnPoint }) {
           value={mapStyle}
           onChange={(e) => setMapStyle(e.target.value)}
         >
-          <option value="streets-v2">🛣️ Calles</option>
+          <option value="streets">🛣️ Calles</option>
           <option value="satellite">🛰️ Satélite</option>
           <option value="hybrid">🌐 Híbrido</option>
+
         </select>
 
       </div>
