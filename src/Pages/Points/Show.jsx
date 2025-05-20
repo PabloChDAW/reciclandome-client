@@ -2,6 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 import Map from "../../Components/Map";
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css';
+
 export default function Show() {
   // console.log(useParams());
   const { id } = useParams();
@@ -37,7 +40,10 @@ export default function Show() {
       console.log(data);
 
       if (res.ok) {
-        navigate("/");
+        toastr.success("Punto eliminado correctamente.");
+        setTimeout(() => navigate("/"), 2000); // Espera un poco antes de redirigir
+      } else {
+        toastr.error("Ocurrió un error al intentar eliminar el punto.");
       }
     }
   }

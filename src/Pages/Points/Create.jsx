@@ -2,6 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 import Map2 from "../../Components/Map2";
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css';
+
 
 export default function Create() {
   const navigate = useNavigate();
@@ -137,11 +140,13 @@ export default function Create() {
     const data = await res.json();
 
     if (data.errors) {
-      console.error("Error 422 - Datos de validación:", data);
-      setErrors(data.errors);
-    } else {
-      navigate("/");
-    }
+    console.error("Error 422 - Datos de validación:", data);
+    setErrors(data.errors);
+    toastr.error('Por favor, revisa los datos del formulario.', 'Error al crear punto');
+  } else {
+    toastr.success('¡Punto creado con satisfacción! Gracias por colaborar.', 'Éxito');
+    navigate("/");
+  }
 
     // console.log(formData);
     // console.log(data);

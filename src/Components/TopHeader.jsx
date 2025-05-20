@@ -17,7 +17,7 @@ export default function TopHeader() {
       <div className="flex gap-3 w-full sm:w-auto justify-center sm:justify-start mt-2 sm:mt-0">
         <MapPin className="w-4 lg:w-5 md:w-4 sm:w-4 h-auto text-black" />
         <span className=" text-[12px] lg:text-[16px] md:text-[14px] sm:text-[14px] font-bold">
-          Calle de la fama, 123, Córdoba, España
+          Calle Ibn Hazm, 14 Córdoba, España
         </span>
       </div>
 
