@@ -21,6 +21,7 @@ import PoliticaPrivacidad from "./Pages/PoliticaPrivacidad";
 import PoliticaCookies from "./Pages/Cookies";
 import AvisoLegal from "./Pages/AvisoLegal";
 import ScrollToTop from "./Components/ScrollToTop.jsx";
+import Orders from "./Pages/OrdersPage";
 
 export default function App() {
   const { user } = useContext(AppContext);
@@ -43,6 +44,7 @@ export default function App() {
           <Route path='/aviso-legal' element={<AvisoLegal />} />
           <Route path='/contact' element={<ContactPage />} />
           <Route path='/cart' element={<Cart />} />
+          <Route path='/orders' element={user ? <Orders /> : <Login />} />
           <Route path='/register' element={user ? <HomePage /> : <Register />} />
           <Route path='/login' element={user ? <HomePage /> : <Login />} />
           <Route path='/create' element={user ? <Create /> : <Login />} />
