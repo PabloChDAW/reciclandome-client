@@ -7,7 +7,7 @@ export default function Thanks() {
   useEffect(() => {
     const timer = setTimeout(() => {
       // Redirigir al inicio tras 5 segundos (opcional)
-      navigate("/shop");
+      navigate("/orders");
     }, 5000);
 
     return () => clearTimeout(timer); // Limpiar el temporizador al desmontar

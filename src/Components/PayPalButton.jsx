@@ -41,11 +41,15 @@ export default function PayPalButton({ amount, cart }) {
               },
               body: JSON.stringify({ details, cart }),
             }).then(() => {
+              
               console.log("Pago completado y datos enviados.");
+              localStorage.removeItem('cart');
+
               setTimeout(() => {
                 window.location.href = "/thanks";
               }, 1000); // espera 1 segundo
             });
+            
           });
         },
       }).render(containerRef.current);

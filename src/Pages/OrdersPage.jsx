@@ -53,15 +53,29 @@ export default function MyOrders() {
                             <p className="text-sm text-slate-700 mb-1">
                                 <strong>Estado:</strong> {order.status}
                             </p>
-                            <p className="text-sm text-slate-700 mb-1">
+                            <p className="text-sm text-slate-700 mb-4">
                                 <strong>Total:</strong> ${order.total}
                             </p>
-                            <Link
-                                to={`/orders/${order.id}`}
-                                className="text-green-700 hover:underline text-sm mt-2 inline-block"
-                            >
-                                Ver detalles →
-                            </Link>
+
+                            <hr />
+
+                            <ul className="divide-y divide-slate-200">
+                                {order.products.map((product) => (
+                                    <li key={product.id} className="flex items-center gap-4 py-4">
+                                        <img
+                                            src={product.image}
+                                            alt={product.name}
+                                            className="w-16 h-16 object-cover rounded-lg"
+                                        />
+                                        <div className="flex-1">
+                                            <h3 className="text-sm font-medium">{product.name}</h3>
+                                            <p className="text-sm text-slate-600">
+                                                Precio: ${product.price} &nbsp;|&nbsp; Cantidad: {product.pivot.quantity}
+                                            </p>
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
                         </li>
                     ))}
                 </ul>
