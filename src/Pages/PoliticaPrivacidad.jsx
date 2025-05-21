@@ -3,7 +3,7 @@ export default function PoliticaPrivacidad() {
     <div className="max-w-4xl mx-auto px-6 py-10 text-gray-800">
       <h1 className="text-2xl font-bold mb-4">Política de Privacidad</h1>
       <p className="mb-4">
-        En [Nombre de tu empresa], nos comprometemos a proteger tu privacidad.
+        En reciclando.me, nos comprometemos a proteger tu privacidad.
         Esta política describe cómo recopilamos, usamos y protegemos tu
         información personal.
       </p>
@@ -30,7 +30,7 @@ export default function PoliticaPrivacidad() {
       </p>
 
       <p className="mt-6">
-        Para más información, puedes contactarnos en [correo@empresa.com].
+        Para más información, puedes contactarnos en inforeciclando.me@gmail.com
       </p>
     </div>
   );
