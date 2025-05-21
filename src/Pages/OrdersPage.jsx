@@ -54,7 +54,7 @@ export default function MyOrders() {
                                 <strong>Estado:</strong> {order.status}
                             </p>
                             <p className="text-sm text-slate-700 mb-4">
-                                <strong>Total:</strong> ${order.total}
+                                <strong>Total:</strong> {order.total}€
                             </p>
 
                             <hr />
@@ -70,7 +70,7 @@ export default function MyOrders() {
                                         <div className="flex-1">
                                             <h3 className="text-sm font-medium">{product.name}</h3>
                                             <p className="text-sm text-slate-600">
-                                                Precio: ${product.price} &nbsp;|&nbsp; Cantidad: {product.pivot.quantity}
+                                                Precio: {product.price}€ &nbsp;|&nbsp; Cantidad: {product.pivot.quantity}
                                             </p>
                                         </div>
                                     </li>
