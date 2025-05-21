@@ -34,7 +34,7 @@ export default function Register() {
 
     if (data.errors) {
       setErrors(data.errors);
-      toastr.error('Revisa los campos del formulario.', 'Error al registrar');
+      toastr.error(data.errors, 'Error al registrar');
     } else {
       localStorage.setItem("token", data.token);
       setToken(data.token);
