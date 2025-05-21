@@ -48,7 +48,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/map"
+                  to="/show"
                   className="hover:text-green-700 hover:underline"
                 >
                   Mapa
