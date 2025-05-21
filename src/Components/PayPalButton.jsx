@@ -28,16 +28,17 @@ export default function PayPalButton({ amount, cart }) {
           });
         },
         onApprove: (data, actions) => {
-          console.log(data);
+
+          const userToken = localStorage.getItem('token');
 
           return actions.order.capture().then((details) => {
-            console.log(details);
-
-            console.log(data);
 
             fetch('http://localhost:5173/api/paypal/payment-completed', {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+              headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${userToken}`,
+              },
               body: JSON.stringify({ details, cart }),
             }).then(() => {
               console.log("Pago completado y datos enviados.");
