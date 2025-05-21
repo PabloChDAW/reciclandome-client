@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import emailjs from "@emailjs/browser";
+import { useRef } from "react";
+
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -10,6 +13,8 @@ export default function ContactForm() {
     ayuda: "",
     privacidad: false,
   });
+
+  const formRef = useRef();
 
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
@@ -43,34 +48,40 @@ export default function ContactForm() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
+  e.preventDefault();
+  const validationErrors = validate();
+  if (Object.keys(validationErrors).length > 0) {
+    setErrors(validationErrors);
+    return;
+  }
 
-    console.log("Formulario válido, enviando:", formData);
-
-    // Aquí iría la lógica de envío (por ejemplo, fetch a una API)
-
-    // Mostrar mensaje de éxito
-    setSuccessMessage(
-      "✅ Se ha enviado correctamente. En breve nos pondremos en contacto con usted."
+  emailjs
+    .sendForm(
+      "reciclando.me",
+      "template_y0ytl1h",
+      formRef.current,
+      "fcShrk1Y_PhAVwNFE"
+    )
+    .then(
+      (result) => {
+        console.log(result.text);
+        setSuccessMessage("✅ Enviado correctamente");
+        setFormData({
+          nombre: "",
+          correo: "",
+          telefono: "",
+          sugerencias: "",
+          ayuda: "",
+          privacidad: false,
+        });
+        setErrors({});
+      },
+      (error) => {
+        console.error(error.text);
+      }
     );
+};
 
-    // Limpiar el formulario
-    setFormData({
-      nombre: "",
-      correo: "",
-      telefono: "",
-      sugerencias: "",
-      ayuda: "",
-      privacidad: false,
-    });
-
-    setErrors({});
-  };
 
   const inputClass = (field) =>
     `mt-1 block w-full border-b bg-transparent ${
@@ -96,7 +107,7 @@ export default function ContactForm() {
           </p>
         </div>
 
-        <form className="space-y-4 m-10 md:m-0" onSubmit={handleSubmit}>
+        <form className="space-y-4 m-10 md:m-0" ref={formRef} onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-md md:text-lg font-medium text-black">
@@ -148,7 +159,7 @@ export default function ContactForm() {
             </div>
             <div>
               <label className="block text-md md:text-lg font-medium text-black">
-                Sugerencias
+                Asunto
               </label>
               <input
                 type="text"
