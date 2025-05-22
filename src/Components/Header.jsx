@@ -181,13 +181,13 @@ export default function Header({ isHome = false, isShop = false }) {
               >
                 🏠 Inicio
               </Link>
-              <Link
+              {/*<Link
                 to="/"
                 onClick={() => setMenuOpen(false)}
                 className="flex items-center gap-2 font-bold animate-pulse hover:text-green-900"
               >
                 🗺️ Tipo de reciclaje
-              </Link>
+              </Link>*/}
               <Link
                 to="/show"
                 onClick={() => setMenuOpen(false)}
@@ -291,7 +291,7 @@ export default function Header({ isHome = false, isShop = false }) {
         </>
 
         {/* Navegación desktop */}
-        <nav className="hidden md:flex md:items-center md:gap-4 lg:gap-6 text-[#131700] lg:text-[20px] sm:text-[14px]">
+        <nav className="hidden md:flex md:items-center md:gap-4 lg:gap-6 xl:gap-8 text-[#131700] lg:text-[16px] xl:text-[20px] sm:text-[14px]">
           <Link to="/" className={`${getLinkClass("/")}`}>
             Inicio
           </Link>
@@ -302,12 +302,12 @@ export default function Header({ isHome = false, isShop = false }) {
             </div>
             {/* TODO METER RUTA INTERACTIVA AQUI */}
             <div className="absolute top-full left-1/2 -translate-x-1/2 w-56 bg-white border border-gray-300 rounded shadow-md opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-40">
-              <Link
+              {/*<Link
                 to="/"
                 className="block px-4 py-2 text-center text-[#131700] hover:text-[#166534] hover:bg-gray-200 transition duration-700"
               >
                 Tipo de reciclaje
-              </Link>
+              </Link>*/}
               <Link
                 to="/create"
                 className="block px-4 py-2 text-center text-[#131700] hover:text-[#166534] hover:bg-gray-200 transition duration-700"
