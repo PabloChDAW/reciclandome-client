@@ -33,6 +33,28 @@ export default function Header({ isHome = false, isShop = false }) {
       : "hover:text-green-900";
   };
 
+  const [darkMode, setDarkMode] = useState(false);
+  const [showToggle, setShowToggle] = useState(false);
+
+  
+    // Carga preferencia guardada o por defecto
+    useEffect(() => {
+      const saved = localStorage.getItem("darkMode");
+      if (saved !== null) {
+        setDarkMode(saved === "true");
+      } else {
+        // Opcional: detectar preferencia sistema
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        setDarkMode(prefersDark);
+      }
+    }, []);
+  
+    // Añadir o quitar clase dark al <html> para Tailwind
+    useEffect(() => {
+      document.documentElement.classList.toggle("dark", darkMode);
+      localStorage.setItem("darkMode", darkMode);
+    }, [darkMode]);
+
   const handleAddToCart = (product) => {
     setCart((prevCart) => {
       const existing = prevCart.find((item) => item.id === product.id);
@@ -134,6 +156,36 @@ export default function Header({ isHome = false, isShop = false }) {
             className="h-auto w-16 md:w-12 lg:w-16"
           />
         </Link>
+
+        <div
+  onMouseEnter={() => setShowToggle(true)}
+  onMouseLeave={() => setShowToggle(false)}
+  className={`fixed top-1/2 left-0 z-50 transform -translate-y-1/2 transition-all duration-300
+    ${showToggle ? 'w-36 sm:w-44' : 'w-8 sm:w-12'} h-10 sm:h-12 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 
+    rounded-r-full shadow-lg overflow-hidden flex items-center justify-start cursor-pointer`}
+>
+  {showToggle ? (
+    <button
+      onClick={() => setDarkMode(!darkMode)}
+      aria-label="Toggle dark mode"
+      className="flex items-center justify-start gap-2 w-full h-full px-3 text-white dark:text-white focus:outline-none"
+    >
+      <span className="text-xl sm:text-xl">{darkMode ? '🌙' : '☀️'}</span>
+      <span className="text-sm font-medium whitespace-nowrap text-black dark:text-white">
+        {darkMode ? 'Modo Oscuro' : 'Modo Claro'}
+      </span>
+    </button>
+  ) : (
+    <img
+      src={darkMode ? '/Reciclandome_blanco.png' : '/reciclin_verde.png '}
+      alt="Toggle dark mode"
+      className="w-10 h-auto sm:w-20 sm:h-auto mx-auto"
+    />
+  )}
+</div>
+
+
+
 
         {/* Botón hamburguesa - solo visible en móviles */}
         <div className="md:hidden z-50 text-black">

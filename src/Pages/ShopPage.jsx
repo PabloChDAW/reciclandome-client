@@ -54,10 +54,10 @@ const ShopPage = () => {
         <div className="gap-5 max-w-7xl w-full items-center">
           <div className="flex flex-col gap-5 max-w-7xl w-full items-center">
             <div className="flex flex-col items-center lg:col-span-2">
-              <h1 className="text-4xl font-bold text-center mb-2">
+              <h1 className="dark:text-white text-4xl font-bold text-center mb-2">
                 Camisetas 100% recicladas ♻️
               </h1>
-              <p className="text-center text-lg text-gray-600 mb-10">
+              <p className="dark:text-white text-center text-lg text-gray-600 mb-10">
                 ¡Únete a nuestra causa y luce con conciencia ambiental! 🌿
               </p>
 

@@ -179,7 +179,7 @@ export default function Update() {
 
   return (
   <div className="py-20">
-    <h1 className="text-3xl font-bold text-green-900 mb-8 text-center">
+    <h1 className="dark:text-white text-3xl font-bold mb-8 text-center">
       🔄 Modificar punto de reciclaje
     </h1>
 

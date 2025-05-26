@@ -60,7 +60,7 @@ export default function ShowPointsPage() {
         <>
             <div className="py-20 ">
 
-                <h1 className="text-3xl font-bold text-center mb-8">
+                <h1 className="dark:text-white text-3xl font-bold text-center mb-8">
                     ♻️ Puntos de Reciclaje
                 </h1>
 
@@ -74,7 +74,7 @@ export default function ShowPointsPage() {
 
                     {/* Título de sección */}
                     <section className="mt-20">
-                        <h3 className="text-3xl font-bold text-center text-green-900 mb-12 flex items-center justify-center gap-2">
+                        <h3 className="dark:text-white text-3xl font-bold text-center mb-12 flex items-center justify-center gap-2">
                             📌 Todos los puntos de reciclaje
                         </h3>
 

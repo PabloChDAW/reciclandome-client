@@ -36,16 +36,16 @@ export default function MyOrders() {
 
     return (
         <div className="max-w-5xl mx-auto py-20 px-4">
-            <h1 className="text-3xl font-bold mb-8 text-center">📦 Mis pedidos</h1>
+            <h1 className="dark:text-white text-3xl font-bold mb-8 text-center">📦 Mis pedidos</h1>
 
             {orders.length === 0 ? (
-                <p className="text-center text-slate-600">Aún no has realizado ningún pedido.</p>
+                <p className="text-center text-slate-600 dark:text-white">Aún no has realizado ningún pedido.</p>
             ) : (
                 <ul className="space-y-6">
                     {orders.map((order) => (
                         <li key={order.id} className="border rounded-xl p-6 bg-white shadow-md">
                             <div className="flex justify-between items-center mb-2">
-                                <h2 className="text-lg font-semibold text-green-800">Pedido #{order.id}</h2>
+                                <h2 className="text-lg font-semibold">Pedido #{order.id}</h2>
                                 <span className="text-sm text-slate-600">
                                     {new Date(order.created_at).toLocaleDateString()}
                                 </span>

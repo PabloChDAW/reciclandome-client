@@ -41,12 +41,12 @@ export default function Cart() {
 
   return (
     <div className="p-6 sm:p-10 my-10 sm:py-20 sm:max-w-7xl mx-auto rounded-lg shadow-md">
-      <h2 className="text-3xl font-bold top-0 mb-8 border-b pb-4">🛍️ TU CARRITO</h2>
+      <h2 className="text-3xl font-bold top-0 mb-8 border-b pb-4 dark:text-white">🛍️ TU CARRITO</h2>
 
       {cart.length === 0 ? (
         <div className="py-12 text-center">
-          <p className=" text-lg">Tu carrito está vacío 😢</p>
-          <p className="text-sm mt-2">¡Explora nuestros productos y añade algo bonito! 💚</p>
+          <p className="dark:text-white text-lg">Tu carrito está vacío 😢</p>
+          <p className="dark:text-white text-sm mt-2">¡Explora nuestros productos y añade algo bonito! 💚</p>
         </div>
       ) : (
         <>
@@ -55,19 +55,19 @@ export default function Cart() {
               const subtotal = Number(item.price) * item.quantity;
               return (
                 <li key={item.id} className="py-6 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0 sm:space-x-4">
-                  <div className="flex-1 flex items-center">
+                  <div className="flex-1 flex items-center dark:text-white">
                     <img
                       src={item.image}
                       alt={item.name}
                       className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-md mr-4"
                     />
                     <div>
-                      <h3 className="font-semibold text-lg">{item.name}</h3>
-                      <p className="text-sm mt-1">
+                      <h3 className="dark:text-white font-semibold text-lg">{item.name}</h3>
+                      <p className="dark:text-white text-sm mt-1">
                         💸 {Number(item.price).toFixed(2)}€ × {item.quantity} ={" "}
                         <span className="font-medium">{subtotal.toFixed(2)}€</span>
                       </p>
-                      <p className="text-xs text-gray-400 mt-1">
+                      <p className="text-xs text-gray-400 dark:text-white mt-1">
                         Stock disponible: {item.stock}
                       </p>
                     </div>
@@ -76,7 +76,7 @@ export default function Cart() {
                   <div className="flex items-center space-x-3">
                     <button
                       onClick={() => decrement(item.id)}
-                      className="w-10 h-10 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
+                      className=" w-8 h-8 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
                     >
                       <span className="text-lg">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#577759">
@@ -85,7 +85,7 @@ export default function Cart() {
                       </span>
                     </button>
 
-                    <span className="w-6 text-center font-medium text-gray-800">{item.quantity}</span>
+                    <span className="w-6 text-center font-medium text-gray-800 dark:text-white">{item.quantity}</span>
 
                     <button
                       onClick={() => increment(item.id)}
@@ -96,7 +96,7 @@ export default function Cart() {
                           : 'bg-gray-100 hover:bg-gray-200 text-gray-600'
                       }`}
                     >
-                      <span className="text-lg">
+                      <span className="text-lg dark:text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#577759">
                           <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
                         </svg>
@@ -107,7 +107,7 @@ export default function Cart() {
                       onClick={() => removeItem(item.id)}
                       className="ml-4 transition-all hover:scale-110 duration-300"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#577759">
+                      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" className="fill-[#577759] dark:fill-white transition-colors duration-300">
                         <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
                       </svg>
                     </button>
@@ -120,10 +120,10 @@ export default function Cart() {
           <div className="mt-8 pt-6 border-t">
             <div className="flex flex-col md:flex-col justify-between items-start md:items-center gap-4  p-6 rounded-lg shadow-md">
               <div>
-                <p className="text-sm">
+                <p className="dark:text-white text-sm">
                   🧺 Total ({totalItems} {totalItems === 1 ? 'artículo' : 'artículos'})
                 </p>
-                <p className="text-2xl text-center font-bold text-[#166534]">
+                <p className="text-2xl text-center font-bold text-[#166534] dark:text-white">
                   {totalPrice.toFixed(2)}€
                 </p>
               </div>

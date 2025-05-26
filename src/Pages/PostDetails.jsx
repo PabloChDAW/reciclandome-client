@@ -117,7 +117,7 @@ const PostDetail = () => {
   }
 
   return (
-    <div className="bg-[#f5f6f1] min-h-screen py-16 px-4 md:px-12">
+    <div className="min-h-screen py-16 px-4 md:px-12">
       <div className="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow">
         <img
           src={post.image}

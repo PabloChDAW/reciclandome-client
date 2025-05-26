@@ -61,7 +61,7 @@ export default function HomePage() {
 
       <div className="py-10 ">
 
-        <h1 className="pt-10 text-3xl font-bold text-center mb-8">
+        <h1 className="pt-10 text-3xl dark:text-white font-bold text-center mb-8">
           ♻️ Puntos de Reciclaje
         </h1>
 
@@ -77,19 +77,10 @@ export default function HomePage() {
                 Detalles del Punto Seleccionado
               </h2>
 
-              <div className="grid sm:grid-cols-2 gap-4 text-green-800 text-base">
-                <div className="flex items-center gap-2">
-                  <span className="font-semibold text-[14px] sm:text-[16px]">🌐 Latitud:</span>
-                  <span className="text-[14px] sm:text-[16px]" >{selectedPoint.latitude}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="font-semibold text-[14px] sm:text-[16px]">🧭 Longitud:</span>
-                  <span className="text-[14px] sm:text-[16px]" >{selectedPoint.longitude}</span>
-                </div>
-                <div className="flex items-center gap-2 col-span-2">
-                  <span className="font-semibold text-[14px] sm:text-[16px]">👤 Usuario:</span>
-                  <span className="text-[14px] sm:text-[16px]" >{selectedPoint.user.name}</span>
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-green-900 text-base font-medium leading-relaxed">
+                  <p><span className="font-bold">🌐 Latitud: {selectedPoint.latitude}</span></p>
+                  <p><span className="font-bold">🧭 Longitud:{selectedPoint.longitude}</span></p>
+                  <p><span className="font-bold">👤 Usuario:{selectedPoint.user.name}</span></p>
               </div>
 
               <div className="mt-6">
@@ -106,9 +97,9 @@ export default function HomePage() {
       </div>
 
       {/* Sección de tipos de reciclaje */}
-      <div className="bg-[#577759] bg-opacity-5 py-20">
+      <div className="bg-[#577759] dark:bg-[#344735] bg-opacity-5 py-20">
         <div className="max-w-7xl mx-auto text-center sm:text-left">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center pb-20 mx-auto">
+          <h2 className="dark:text-white text-3xl sm:text-4xl font-bold text-center pb-20 mx-auto">
             Tipos de algunos puntos de reciclaje que disponemos
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 text-center max-w-7xl mx-auto">
@@ -156,23 +147,23 @@ export default function HomePage() {
       {/* Sección de cómo funciona el mapa */}
       <div className="p-10 lg:py-20 lg:max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-          <div className="space-y-6">
-            <h1 className="text-3xl sm:text-4xl font-bold">
+          <div className="space-y-6 ">
+            <h1 className="dark:text-white text-3xl sm:text-4xl font-bold">
               ¿Cómo funciona nuestro mapa de reciclaje?
             </h1>
-            <p className="text-sm sm:text-lg">
+            <p className="dark:text-white text-sm sm:text-lg">
               En Reciclando.me te lo ponemos fácil para que sepas dónde reciclar cada cosa.
               Nuestra aplicación cuenta con un mapa interactivo que te permite:
             </p>
 
-            <ul className="list-disc pl-6 text-sm sm:text-lg space-y-2">
-              <li>Buscar tu ubicación para encontrar los puntos de reciclaje más cercanos.</li>
-              <li>Filtrar por tipo de residuo: papel, vidrio, plásticos, electrónicos, ropa, pilas, y mucho más.</li>
-              <li>Ver información detallada de cada punto de reciclaje: dirección, tipo de residuos aceptados, horarios, etc.</li>
-              <li>Marcar favoritos o añadir nuevos puntos si conoces alguno que no aparece en el mapa.</li>
+            <ul className=" list-disc pl-6 text-sm sm:text-lg space-y-2">
+              <li className="dark:text-white">Buscar tu ubicación para encontrar los puntos de reciclaje más cercanos.</li>
+              <li className="dark:text-white">Filtrar por tipo de residuo: papel, vidrio, plásticos, electrónicos, ropa, pilas, y mucho más.</li>
+              <li className="dark:text-white">Ver información detallada de cada punto de reciclaje: dirección, tipo de residuos aceptados, horarios, etc.</li>
+              <li className="dark:text-white">Marcar favoritos o añadir nuevos puntos si conoces alguno que no aparece en el mapa.</li>
             </ul>
 
-            <p className="text-sm sm:text-lg">
+            <p className="dark:text-white text-sm sm:text-lg">
               Solo tienes que permitir que la web acceda a tu ubicación o escribir tu dirección,
               y el mapa te mostrará en segundos todos los puntos de reciclaje a tu alrededor.
             </p>

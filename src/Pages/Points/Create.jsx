@@ -154,7 +154,7 @@ export default function Create() {
 
   return (
     <div className="py-20">
-      <h1 className="text-3xl font-bold text-green-900 mb-8 text-center">
+      <h1 className="dark:text-white text-3xl font-bold mb-8 text-center">
         📍 Crear un nuevo punto de reciclaje
       </h1>
 

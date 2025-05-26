@@ -37,10 +37,10 @@ const posts = [
 
 const Blog = () => {
   return (
-    <div className="bg-[#f5f6f1] py-16 px-4 md:px-12 min-h-screen">
+    <div className=" py-16 px-4 md:px-12 min-h-screen">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold  mb-4 text-center">Nuestro Blog</h1>
-        <p className="text-center  mb-12">
+        <h1 className="dark:text-white text-4xl font-bold  mb-4 text-center">Nuestro Blog</h1>
+        <p className="dark:text-white text-center mb-12">
           Historias, consejos y novedades sobre reciclaje y sostenibilidad.
         </p>
 
