@@ -160,26 +160,28 @@ export default function Header({ isHome = false, isShop = false }) {
             onClick={() => setMenuOpen(false)}
           ></div>
 
-          {/* Menú lateral con transición de deslizamiento */}
+          {/* Menú lateral de móvil con transición de deslizamiento */}
           <div
+            role="navigation"
+            aria-label="Menú principal"
             className={`
                             fixed top-0 right-0 h-full w-3/4 sm:w-2/5 bg-white z-50 shadow-lg transform transition-transform duration-700 ease-in-out
                             ${menuOpen ? "translate-x-0" : "translate-x-full"}
                         `}
           >
-            <div className="flex justify-end p-4">
+            <div className="flex justify-end p-4 ">
               <button onClick={() => setMenuOpen(false)}>
                 <HiX className="text-2xl text-[#131700]" />
               </button>
             </div>
 
-            <nav className="flex flex-col items-start gap-5 px-6 text-sm text-[#131700]">
+            <nav className="flex flex-col items-start gap-6 px-6 text-sm text-[#131700] ">
               <Link
                 to="/"
                 onClick={() => setMenuOpen(false)}
                 className={`${getLinkClass("/")}`}
               >
-                🏠 Inicio
+                🏠 INICIO
               </Link>
               {/*<Link
                 to="/"
@@ -193,49 +195,49 @@ export default function Header({ isHome = false, isShop = false }) {
                 onClick={() => setMenuOpen(false)}
                 className="flex items-center gap-2 font-bold animate-pulse hover:text-green-900"
               >
-                🗺️ Ver puntos limpios
+                🗺️ VER PUNTOS LIMPIOS
               </Link>
               <Link
                 to="/create"
                 onClick={() => setMenuOpen(false)}
                 className="flex items-center gap-2 font-bold animate-pulse hover:text-green-900"
               >
-                🗺️ Crear Punto en el mapa
+                ➕ CREAR PUNTO
               </Link>
               <Link
                 to="/about"
                 onClick={() => setMenuOpen(false)}
                 className={`${getLinkClass("/about")}`}
               >
-                👥 Quiénes Somos
+                👥 QUIÉNES SOMOS
               </Link>
               <Link
                 to="/shop"
                 onClick={() => setMenuOpen(false)}
                 className={`${getLinkClass("/shop")}`}
               >
-                🛍️ Tienda
+                🛍️ TIENDA
               </Link>
               <Link
                 to="/blog"
                 onClick={() => setMenuOpen(false)}
-                className={`${getLinkClass("/shop")}`}
+                className={`${getLinkClass("/blog")}`}
               >
-                📝 Blog
+                📝 BLOG
               </Link>
               <Link
                 to="/orders"
                 onClick={() => setMenuOpen(false)}
                 className={`${getLinkClass("/orders")}`}
               >
-                📦 Mis pedidos
+                📦 MIS PEDIDOS
               </Link>
               <Link
                 to="/contact"
                 onClick={() => setMenuOpen(false)}
                 className={`${getLinkClass("/contact")}`}
               >
-                📞 Contacto
+                📞 CONTACTO
               </Link>
 
               <div className="pt-10 border-t border-[#166534] w-full">
@@ -244,7 +246,7 @@ export default function Header({ isHome = false, isShop = false }) {
                     <p className="text-lg">Hola, {user.name}</p>
                     <button
                       onClick={handleLogout}
-                      className="flex items-center space-x-2 border border-red-600 bg-red-700 hover:bg-white text-white hover:text-red-700 px-3 py-2 rounded-md text-sm transition duration-200"
+                      className="flex items-center space-x-2 border border-red-600 bg-red-700 hover:bg-white text-white hover:text-red-700 px-3 py-2 rounded-md text-sm hover:scale-95  hover:opacity-80 transition duration-200"
                       title="Cerrar sesión"
                     >
                       <FiLogOut className="text-xl" />

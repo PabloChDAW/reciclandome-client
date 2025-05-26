@@ -108,20 +108,36 @@ export default function Map3({ points, onMarkerClick, centerOnPoint }) {
   return (
     <div className="map-container relative">
       {/* NUEVO: Selector de vista del mapa */}
-      <div className="absolute top-4 left-4 z-10 bg-white rounded shadow p-2 text-sm">
-        <label className="mr-2 font-medium text-gray-700">Vista:</label>
-        <select
-          className="border rounded px-2 py-1"
-          value={mapStyle}
-          onChange={(e) => setMapStyle(e.target.value)}
-        >
-          <option value="streets">🛣️ Calles</option>
-          <option value="satellite">🛰️ Satélite</option>
-          <option value="hybrid">🌐 Híbrido</option>
+      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10 bg-white/90 backdrop-blur-md rounded-xl shadow-lg px-6 py-4 flex gap-6 items-center text-sm font-medium text-gray-700">
+  {/* Selector de vista */}
+  <div className="flex flex-col">
+    <label className="mb-1 text-xs text-gray-500">Vista del mapa</label>
+    <select
+      className="px-3 py-1.5 rounded-lg border border-gray-300 bg-white text-gray-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+      value={mapStyle}
+      onChange={(e) => setMapStyle(e.target.value)}
+    >
+      <option value="streets">🛣️ Calles</option>
+      <option value="satellite">🛰️ Satélite</option>
+      <option value="hybrid">🌐 Híbrido</option>
+    </select>
+  </div>
 
-        </select>
+  {/* Selector de reciclaje */}
+  <div className="flex flex-col">
+    <label className="mb-1 text-xs text-gray-500">Filtrar por reciclaje</label>
+    <select
+      className="px-3 py-1.5 rounded-lg border border-gray-300 bg-white text-gray-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 transition"
+    >
+      <option value="todos">♻️ Todos</option>
+      <option value="papel">📄 Papel</option>
+      <option value="vidrio">🍾 Vidrio</option>
+      <option value="plastico">🧴 Plástico</option>
+      <option value="organico">🍌 Orgánico</option>
+    </select>
+  </div>
+</div>
 
-      </div>
 
       {/* Mapa */}
       {points.length > 0 ? (
