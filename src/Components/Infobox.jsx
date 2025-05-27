@@ -5,35 +5,27 @@ const InfoBox = ({ selectedPoint }) => {
     if (!selectedPoint) return null;
 
     return (
-        <section className="p-6 max-w-7xl mx-auto sm:p-8 rounded-3xl border border-green-300 bg-gradient-to-br from-green-50 via-white to-green-100 shadow-2xl animate-fade-in">
+        <section className="mt-10 p-6 sm:p-8 rounded-3xl border border-green-300 bg-gradient-to-br from-green-50 via-white to-green-100 shadow-2xl animate-fade-in">
             <h2 className="text-2xl sm:text-3xl font-bold text-green-900 flex items-center gap-3 mb-6">
-                <span>📍</span>
-                Detalles del Punto <span className="text-xs sm:text-xl font-medium text-green-700">({selectedPoint.name})</span>
+            <span className="text-2xl">📍</span>
+            Detalles del Punto Seleccionado
             </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-green-800 text-base">
-                <div className="flex items-center gap-2">
-                    <span className="text-[14px] sm:text-[16px] font-semibold">🏷 Tipo de punto:</span>
-                    <span className="text-[14px] sm:text-[16px]">{selectedPoint.point_type}</span>
-                </div>
-                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-                    <span className="text-[14px] sm:text-[16px]  font-semibold">📍Dirección:</span>
-                    <span className="text-[14px] sm:text-[16px]">{selectedPoint.address}</span>
-                </div>
 
-                <div className="flex items-center gap-2 sm:col-span-2">
-                    <span className="text-[14px] sm:text-[16px] font-semibold">👤 Creador:</span>
-                    <span className="text-[14px] sm:text-[16px]">{selectedPoint.user.name}</span>
-                </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 text-green-900 text-base font-me  dium leading-relaxed">
+                <p><span className="font-bold">👤 Usuario:{selectedPoint.user.name}</span></p>
+                
+                <p><span className="font-bold">🏷 Tipo de punto:</span>{selectedPoint.point_type}</p>
+                <p><span className="font-bold">📌Dirección: {selectedPoint.address}</span></p>
             </div>
 
-            <div className="mt-6 flex justify-end">
-                <Link
-                    to={`/points/${selectedPoint.id}`}
-                    className="inline-flex items-center gap-2 border border-[#166534] bg-[#166534] hover:bg-white text-white hover:text-[#166534] text-sm  px-6 py-3 rounded-xl shadow hover:shadow-lg transition duration-300"
-                > 
-                    VER MAS DETALLES →
-                </Link>
+            <div className="mt-6">
+            <Link
+                to={`/points/${selectedPoint.id}`}
+                className="inline-flex items-center gap-2 border border-[#166534] bg-[#166534] hover:bg-white text-white hover:text-[#166534] text-sm px-6 py-3 rounded-xl shadow hover:shadow-lg transition duration-300"
+            >
+                VER MÁS DETALLES →
+            </Link>
             </div>
         </section>
 
