@@ -160,7 +160,7 @@ export default function Header({ isHome = false, isShop = false }) {
         <div
   onMouseEnter={() => setShowToggle(true)}
   onMouseLeave={() => setShowToggle(false)}
-  className={`fixed top-1/2 left-0 z-50 transform -translate-y-1/2 transition-all duration-300
+  className={`fixed top-[650px] left-0 z-50 transform -translate-y-1/2 transition-all duration-300
     ${showToggle ? 'w-36 sm:w-44' : 'w-8 sm:w-12'} h-10 sm:h-12 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 
     rounded-r-full shadow-lg overflow-hidden flex items-center justify-start cursor-pointer`}
 >
