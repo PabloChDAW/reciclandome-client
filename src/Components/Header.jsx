@@ -160,7 +160,7 @@ export default function Header({ isHome = false, isShop = false }) {
         <div
   onMouseEnter={() => setShowToggle(true)}
   onMouseLeave={() => setShowToggle(false)}
-  className={`fixed top-[650px] left-0 z-50 transform -translate-y-1/2 transition-all duration-300
+  className={`fixed top-[670px] left-0 z-50 transform -translate-y-1/2 transition-all duration-300
     ${showToggle ? 'w-36 sm:w-44' : 'w-8 sm:w-12'} h-10 sm:h-12 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 
     rounded-r-full shadow-lg overflow-hidden flex items-center justify-start cursor-pointer`}
 >
@@ -345,7 +345,7 @@ export default function Header({ isHome = false, isShop = false }) {
         </>
 
         {/* Navegación desktop */}
-        <nav className="hidden md:flex md:items-center md:gap-4 lg:gap-6 xl:gap-8 text-[#131700] lg:text-[16px] xl:text-[20px] sm:text-[14px]">
+        <nav className="hidden md:flex md:items-center md:gap-4 lg:gap-6 xl:gap-8 text-[#131700] lg:text-[15px] xl:text-[20px] sm:text-[12px]">
           <Link to="/" className={`${getLinkClass("/")}`}>
             Inicio
           </Link>
@@ -398,7 +398,7 @@ export default function Header({ isHome = false, isShop = false }) {
         <div className="hidden md:flex items-center gap-6 text-[#131700] relative">
           {user ? (
             <>
-              <p className="lg:text-[20px] sm:text-[12px] animate-bounce text-green-800">
+              <p className="lg:text-[16px] sm:text-[10px] animate-bounce text-green-800">
                 👋 ¡Hola, {user.name}!
               </p>
               <button
