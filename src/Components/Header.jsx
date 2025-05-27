@@ -140,7 +140,7 @@ export default function Header({ isHome = false, isShop = false }) {
   const headerClass =
     (isHome || isShop) && !scrolled
       ? "fixed top-20 z-50 sm:top-10 w-full bg-transparent shadow-md text-white transition-all duration-700 ease-out"
-      : "sticky w-full bg-[#EBF0EB] shadow-md text-black transition-all duration-1000 ease-out opacity-100";
+      : "sticky w-full bg-[#EBF0EB] dark:bg-[#b5c3b5] shadow-md text-black transition-all duration-1000 ease-out opacity-100";
 
   return (
     <header className={`z-50 transition-all duration-500 ${headerClass}`}>

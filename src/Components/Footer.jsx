@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="flex justify-center">
         <div className="border-t-2 border-b-[#577759] w-2/4 mb-10"></div>
       </div>
-      <footer className="bg-[#EBF0EB] text-center items-center justify-center border-t border-gray-200 text-sm text-[#131700] border-opacity-40">
+      <footer className="bg-[#EBF0EB] dark:bg-[#b5c3b5] text-center items-center justify-center border-t border-gray-200 text-sm text-[#131700] border-opacity-40">
         <div className="max-w-7xl mx-auto py-8 px-4 grid grid-cols-1 sm:grid-cols-4 gap-8">
           <div className="flex flex-col items-center">
             <div className="w-48 h-auto hover:scale-105 transform duration-700 mb-2">
@@ -20,17 +20,17 @@ const Footer = () => {
           {/* CONTACTO */}
           <div>
             <h3 className="font-bold text-lg">CONTACTO</h3>
-            <p className="mt-2">
+            <p className="dark:text-[#577759] mt-2">
               Dirección: c/Ibn Hazm, 14
               <br />
               Córdoba, España
             </p>
-            <p>Teléfono: +34 619 24 67 79</p>
-            <p>
+            <p className="dark:text-[#577759]">Teléfono: +34 619 24 67 79</p>
+            <p className="dark:text-[#577759]">
               Correo Electrónico:{" "}
               <a
                 href="mailto:inforeciclando.me@gmail.com"
-                className="text-green-700 hover:underline"
+                className="text-green-700 dark:text-[#577759] hover:underline"
               >
                 inforeciclando.me@gmail.com
               </a>
@@ -42,14 +42,14 @@ const Footer = () => {
             <h3 className="font-bold text-lg">LINKS</h3>
             <ul className="mt-2 space-y-1">
               <li>
-                <Link to="/" className="hover:text-green-700 hover:underline">
+                <Link to="/" className="dark:text-[#577759] dark:hover:text-green-700 hover:text-green-700 hover:underline">
                   Inicio
                 </Link>
               </li>
               <li>
                 <Link
                   to="/show"
-                  className="hover:text-green-700 hover:underline"
+                  className="dark:text-[#577759] dark:hover:text-green-700 hover:text-green-700 hover:underline"
                 >
                   Mapa
                 </Link>
@@ -57,7 +57,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/about"
-                  className="hover:text-green-700 hover:underline"
+                  className="dark:text-[#577759] dark:hover:text-green-700 hover:text-green-700 hover:underline"
                 >
                   Quienes somos
                 </Link>
@@ -65,7 +65,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/blog"
-                  className="hover:text-green-700 hover:underline"
+                  className="dark:text-[#577759] dark:hover:text-green-700 hover:text-green-700 hover:underline"
                 >
                   Blog
                 </Link>
@@ -73,7 +73,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/shop"
-                  className="hover:text-green-700 hover:underline"
+                  className="dark:text-[#577759] dark:hover:text-green-700 hover:text-green-700 hover:underline"
                 >
                   Tienda
                 </Link>
@@ -81,7 +81,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/contact"
-                  className="hover:text-green-700 hover:underline"
+                  className="dark:text-[#577759] dark:hover:text-green-700 hover:text-green-700 hover:underline"
                 >
                   Contacto
                 </Link>
@@ -128,8 +128,8 @@ const Footer = () => {
         </div>
 
         {/* COPYRIGHT */}
-        <div className="pb-5 border-t bg-white border-gray-200 mt-6 pt-4 text-center text-xs text-gray-600">
-          <p>
+        <div className="pb-5 border-t bg-white dark:bg-[#577759] border-gray-200 mt-6 pt-4 text-center text-xs text-gray-600 ">
+          <p className="dark:text-white ">
             Copyright © 2025 Reciclando.me. Todos los derechos reservados.{" "}
             <Link
               to="/aviso-legal"
