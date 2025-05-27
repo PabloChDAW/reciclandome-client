@@ -40,7 +40,7 @@ export default function Cart() {
   );
 
   return (
-    <div className="p-6 sm:p-10 my-10 sm:py-20 sm:max-w-7xl mx-auto rounded-lg shadow-md">
+    <div className="dark:bg-[#344735] p-6 sm:p-10 my-10 sm:py-20 sm:max-w-7xl mx-auto rounded-lg shadow-md">
       <h2 className="text-3xl font-bold top-0 mb-8 border-b pb-4 dark:text-white">🛍️ TU CARRITO</h2>
 
       {cart.length === 0 ? (

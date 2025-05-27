@@ -41,7 +41,7 @@ export default function AboutPage() {
         <div className="border-t-2 border-b-[#577759] w-2/4 mb-10"></div>
       </div>
 
-      <div className="bg-[#577759] bg-opacity-5 py-16 md:px-12 items-center justify-center">
+      <div className="bg-[#577759] dark:bg-[#344735] bg-opacity-5 py-16 md:px-12 items-center justify-center">
         <div className="flex flex-col md:flex-row items-center justify-center p-10 sm:py-10 sm:max-w-7xl mx-auto pb-16">
           <div className="flex flex-col md:flex-row gap-6">
             <div className="sm:p-6 rounded-lg max-w-xl ">
