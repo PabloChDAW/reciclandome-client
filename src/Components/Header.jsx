@@ -36,24 +36,24 @@ export default function Header({ isHome = false, isShop = false }) {
   const [darkMode, setDarkMode] = useState(false);
   const [showToggle, setShowToggle] = useState(false);
 
-  
-    // Carga preferencia guardada o por defecto
-    useEffect(() => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved !== null) {
-        setDarkMode(saved === "true");
-      } else {
-        // Opcional: detectar preferencia sistema
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        setDarkMode(prefersDark);
-      }
-    }, []);
-  
-    // Añadir o quitar clase dark al <html> para Tailwind
-    useEffect(() => {
-      document.documentElement.classList.toggle("dark", darkMode);
-      localStorage.setItem("darkMode", darkMode);
-    }, [darkMode]);
+
+  // Carga preferencia guardada o por defecto
+  useEffect(() => {
+    const saved = localStorage.getItem("darkMode");
+    if (saved !== null) {
+      setDarkMode(saved === "true");
+    } else {
+      // Opcional: detectar preferencia sistema
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      setDarkMode(prefersDark);
+    }
+  }, []);
+
+  // Añadir o quitar clase dark al <html> para Tailwind
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", darkMode);
+    localStorage.setItem("darkMode", darkMode);
+  }, [darkMode]);
 
   const handleAddToCart = (product) => {
     setCart((prevCart) => {
@@ -158,31 +158,31 @@ export default function Header({ isHome = false, isShop = false }) {
         </Link>
 
         <div
-  onMouseEnter={() => setShowToggle(true)}
-  onMouseLeave={() => setShowToggle(false)}
-  className={`fixed bottom-0 left-0 z-50 transform -translate-y-1/2 transition-all duration-300
+          onMouseEnter={() => setShowToggle(true)}
+          onMouseLeave={() => setShowToggle(false)}
+          className={`fixed bottom-0 left-0 z-50 transform -translate-y-1/2 transition-all duration-300
     ${showToggle ? 'w-36 sm:w-44' : 'w-8 sm:w-12'} h-10 sm:h-12 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 
     rounded-r-full shadow-lg overflow-hidden flex items-center justify-start cursor-pointer`}
->
-  {showToggle ? (
-    <button
-      onClick={() => setDarkMode(!darkMode)}
-      aria-label="Toggle dark mode"
-      className="flex items-center justify-start gap-2 w-full h-full px-3 text-white dark:text-white focus:outline-none"
-    >
-      <span className="text-xl sm:text-xl">{darkMode ? '🌙' : '☀️'}</span>
-      <span className="text-sm font-medium whitespace-nowrap text-black dark:text-white">
-        {darkMode ? 'Modo Oscuro' : 'Modo Claro'}
-      </span>
-    </button>
-  ) : (
-    <img
-      src={darkMode ? '/Reciclandome_blanco.png' : '/reciclin_verde.png '}
-      alt="Toggle dark mode"
-      className="w-10 h-auto sm:w-20 sm:h-auto mx-auto"
-    />
-  )}
-</div>
+        >
+          {showToggle ? (
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              aria-label="Toggle dark mode"
+              className="flex items-center justify-start gap-2 w-full h-full px-3 text-white dark:text-white focus:outline-none"
+            >
+              <span className="text-xl sm:text-xl">{darkMode ? '🌙' : '☀️'}</span>
+              <span className="text-sm font-medium whitespace-nowrap text-black dark:text-white">
+                {darkMode ? 'Modo Oscuro' : 'Modo Claro'}
+              </span>
+            </button>
+          ) : (
+            <img
+              src={darkMode ? '/Reciclandome_blanco.png' : '/reciclin_verde.png '}
+              alt="Toggle dark mode"
+              className="w-10 h-auto sm:w-20 sm:h-auto mx-auto"
+            />
+          )}
+        </div>
 
 
 
@@ -398,16 +398,27 @@ export default function Header({ isHome = false, isShop = false }) {
         <div className="hidden md:flex items-center gap-6 text-[#131700] relative">
           {user ? (
             <>
-              <p className="lg:text-[16px] sm:text-[10px] animate-bounce text-green-800">
-                👋 ¡Hola, {user.name}!
-              </p>
+              <div className="flex items-center gap-2">
+                {user.imageUrl ? (
+                  <img
+                    src={user.imageUrl}
+                    alt={`Foto de perfil de ${user.name}`}
+                    className="w-10 h-10 rounded-full object-cover border-2 border-green-600"
+                  />
+                ) : (
+                  <p className="lg:text-[16px] sm:text-[10px] animate-bounce text-green-800">
+                    👋 ¡Hola, {user.name}!
+                  </p>
+                )}
+              </div>
+
               <button
                 onClick={handleLogout}
                 className="text-xl hover:text-red-500"
                 title="Cerrar sesión"
               >
                 <FiLogOut />
-              </button>{" "}
+              </button>
             </>
           ) : (
             <Link
@@ -567,36 +578,36 @@ export default function Header({ isHome = false, isShop = false }) {
         </div>
       </div>
       {showLogoutToast && (
-  <div
-    className="fixed top-5 right-5 bg-gradient-to-r from-green-700 to-green-900 text-white px-6 py-3 rounded-md shadow-md flex items-center justify-between gap-4 max-w-xs animate-fade-slide-in z-50 opacity-70"
-    role="alert"
-    aria-live="assertive"
-  >
-    <div className="flex items-center gap-3">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-7 w-7 flex-shrink-0"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={3}
-        aria-hidden="true"
-      >
-        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-      </svg>
-      <span className="text-sm">
-        ¡Hasta pronto! Aquí siempre hay un lugar para ti.      
-      </span>
-    </div>
-    <button
-      onClick={() => setShowLogoutToast(false)}
-      className="text-white hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-white rounded transition-colors"
-      aria-label="Cerrar notificación"
-    >
-      &#10005;
-    </button>
-  </div>
-)}
+        <div
+          className="fixed top-5 right-5 bg-gradient-to-r from-green-700 to-green-900 text-white px-6 py-3 rounded-md shadow-md flex items-center justify-between gap-4 max-w-xs animate-fade-slide-in z-50 opacity-70"
+          role="alert"
+          aria-live="assertive"
+        >
+          <div className="flex items-center gap-3">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-7 w-7 flex-shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={3}
+              aria-hidden="true"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            <span className="text-sm">
+              ¡Hasta pronto! Aquí siempre hay un lugar para ti.
+            </span>
+          </div>
+          <button
+            onClick={() => setShowLogoutToast(false)}
+            className="text-white hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-white rounded transition-colors"
+            aria-label="Cerrar notificación"
+          >
+            &#10005;
+          </button>
+        </div>
+      )}
 
 
 
