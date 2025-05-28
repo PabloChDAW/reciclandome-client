@@ -184,9 +184,6 @@ export default function Header({ isHome = false, isShop = false }) {
           )}
         </div>
 
-
-
-
         {/* Botón hamburguesa - solo visible en móviles */}
         <div className="md:hidden z-50 text-black">
           <button onClick={() => setMenuOpen(!menuOpen)}>
@@ -221,13 +218,25 @@ export default function Header({ isHome = false, isShop = false }) {
                             ${menuOpen ? "translate-x-0" : "translate-x-full"}
                         `}
           >
-            <div className="flex justify-end p-4 ">
+            <div className="flex justify-between items-center p-4">
+              {/* Imagen del perfil a la izquierda */}
+              {user?.imageUrl && (
+                <img
+                  src={user.imageUrl}
+                  alt={`Foto de perfil de ${user.name}`}
+                  className="w-8 h-8 rounded-full object-cover border-2 border-green-600"
+                />
+              )}
+
+              {/* Botón de cerrar a la derecha */}
               <button onClick={() => setMenuOpen(false)}>
                 <HiX className="text-2xl text-[#131700]" />
               </button>
             </div>
 
-            <nav className="flex flex-col items-start gap-6 px-6 text-sm text-[#131700] ">
+
+
+            <nav className="flex flex-col items-start pt-5 gap-6 px-6 text-xs text-[#131700] ">
               <Link
                 to="/"
                 onClick={() => setMenuOpen(false)}
