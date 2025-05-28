@@ -41,7 +41,7 @@ export default function Slider({ images = [], interval = 4000 }) {
           <span className="text-[#166534] font-bold">Reciclando.me</span>.
           <br />
           <span
-            className="inline-block mt-3 px-4 py-2 bg-green-200 text-[#166534] rounded-full font-semibold hover:bg-green-300 hover:scale-105 transition-all duration-700 cursor-pointer"
+            className="inline-block mt-3 px-4 py-2 text-sm sm:text-lg bg-green-200 text-[#166534] rounded-full font-semibold hover:bg-green-300 hover:scale-105 transition-all duration-700 cursor-pointer"
             onClick={() => {
               const mapaSection = document.getElementById("mapa");
               if (mapaSection) {

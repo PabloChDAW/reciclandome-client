@@ -219,7 +219,7 @@ export default function Header({ isHome = false, isShop = false }) {
                         `}
           >
             <div className="flex justify-between items-center p-4">
-              {/* Imagen del perfil a la izquierda */}
+              <Link to="/profile">{/* Imagen del perfil a la izquierda */}
               {user?.imageUrl && (
                 <img
                   src={user.imageUrl}
@@ -227,14 +227,13 @@ export default function Header({ isHome = false, isShop = false }) {
                   className="w-8 h-8 rounded-full object-cover border-2 border-green-600"
                 />
               )}
+              </Link>
 
               {/* Botón de cerrar a la derecha */}
               <button onClick={() => setMenuOpen(false)}>
                 <HiX className="text-2xl text-[#131700]" />
               </button>
             </div>
-
-
 
             <nav className="flex flex-col items-start pt-5 gap-6 px-6 text-xs text-[#131700] ">
               <Link
@@ -285,13 +284,6 @@ export default function Header({ isHome = false, isShop = false }) {
                 className={`${getLinkClass("/blog")}`}
               >
                 📝 BLOG
-              </Link>
-              <Link
-                to="/orders"
-                onClick={() => setMenuOpen(false)}
-                className={`${getLinkClass("/orders")}`}
-              >
-                📦 MIS PEDIDOS
               </Link>
               <Link
                 to="/contact"
@@ -395,9 +387,6 @@ export default function Header({ isHome = false, isShop = false }) {
           <Link to="/shop" className={`${getLinkClass("/shop")}`}>
             Tienda
           </Link>
-          <Link to="/orders" className={`${getLinkClass("/orders")}`}>
-            Mis Pedidos
-          </Link>
           <Link to="/contact" className={`${getLinkClass("/contact")}`}>
             Contacto
           </Link>
@@ -407,7 +396,7 @@ export default function Header({ isHome = false, isShop = false }) {
         <div className="hidden md:flex items-center gap-6 text-[#131700] relative">
           {user ? (
             <>
-              <div className="flex items-center gap-2">
+              <Link to="/profile"><div className="flex items-center gap-2">
                 {user.imageUrl ? (
                   <img
                     src={user.imageUrl}
@@ -420,6 +409,7 @@ export default function Header({ isHome = false, isShop = false }) {
                   </p>
                 )}
               </div>
+              </Link>
 
               <button
                 onClick={handleLogout}
