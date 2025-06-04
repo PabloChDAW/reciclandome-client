@@ -22,11 +22,7 @@ export default function Slider({ images = [], interval = 4000 }) {
           key={idx}
           src={src}
           alt={`slide-${idx}`}
-          className={`
-                        absolute inset-0 w-full h-full object-cover
-                        transition-opacity duration-1000
-                        ${idx === current ? "opacity-100" : "opacity-0"}
-                    `}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${idx === current ? "opacity-100" : "opacity-0"} `}
         />
       ))}
 
@@ -47,10 +43,7 @@ export default function Slider({ images = [], interval = 4000 }) {
           <button
             key={idx}
             onClick={() => setCurrent(idx)}
-            className={`
-                            w-3 h-3 rounded-full
-                            ${idx === current ? "bg-white" : "bg-white/50"}
-                        `}
+            className={`w-3 h-3 rounded-full ${idx === current ? "bg-white" : "bg-white/50"} `}
           />
         ))}
       </div>

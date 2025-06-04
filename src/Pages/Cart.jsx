@@ -73,7 +73,6 @@ export default function Cart() {
                     </div>
                   </div>
 
-
                   <div className="flex items-center space-x-3">
                     <button
                       onClick={() => decrement(item.id)}
@@ -128,7 +127,6 @@ export default function Cart() {
                   {totalPrice.toFixed(2)}€
                 </p>
               </div>
-
 
               <div className="w-full sm:w-auto z-10">
                 <PayPalButton amount={totalPrice} cart={cart} />
