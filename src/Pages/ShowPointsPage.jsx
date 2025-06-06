@@ -6,7 +6,7 @@ import PointItem from "../Components/PointItem";
 export default function ShowPointsPage() {
   const [points, setPoints] = useState([]);
   const [selectedPoint, setSelectedPoint] = useState(null);
-
+  const [cargando, setCargando] = useState(true);
 
     // Para poder usar eventos y utilidades del mapa fuera del mismo
     // se debe centralizar un estado que le identifique en la página que lo carga
@@ -50,6 +50,7 @@ export default function ShowPointsPage() {
         if (res.ok) {
             setPoints(data);
         }
+        setCargando(false);
     }
     useEffect(() => {
         getPoints();
@@ -86,6 +87,11 @@ export default function ShowPointsPage() {
                                 ))}
                             </div>
                         ) : (
+                            cargando?
+                            <p className="text-center text-sm text-slate-500 italic mt-8">
+                                Cargando puntos...
+                            </p>
+                            :
                             <p className="text-center text-sm text-slate-500 italic mt-8">
                                 No hay puntos disponibles actualmente.
                             </p>
