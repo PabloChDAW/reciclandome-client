@@ -94,7 +94,7 @@ export default function Show() {
             </div>
 
             <p className="mt-8 text-sm italic text-green-700 text-right">
-              Creado por <span className="font-semibold">{point.user.name}</span> a las {new Date(point.created_at).toLocaleTimeString()}
+              Creado por <span className="font-semibold">{point.user.name}</span> el {new Date(point.created_at).toLocaleDateString()} a las {new Date(point.created_at).toLocaleTimeString()}
             </p>
             {/* Botones de acción con estilo natural y accesible */}
           {user && user.id === point.user_id && (
