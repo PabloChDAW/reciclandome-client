@@ -214,7 +214,7 @@ export default function Header({ isHome = false, isShop = false }) {
             role="navigation"
             aria-label="Menú principal"
             className={`
-                            fixed top-0 right-0 h-full w-3/4 sm:w-2/5 bg-white z-50 shadow-lg transform transition-transform duration-700 ease-in-out
+                            fixed top-0 right-0 h-full w-3/4  bg-white z-50 shadow-lg transform transition-transform duration-700 ease-in-out
                             ${menuOpen ? "translate-x-0" : "translate-x-full"}
                         `}
           >
@@ -293,17 +293,20 @@ export default function Header({ isHome = false, isShop = false }) {
                 📞 CONTACTO
               </Link>
 
-              <div className="pt-10 border-t border-[#166534] w-full">
+              <div className="pt-10 border-t border-[#577759] border-opacity-15 w-full">
                 {user ? (
-                  <div className="flex flex-col gap-4">
-                    <p className="text-lg">Hola, {user.name}</p>
+                  <div className="flex items-center justify-between">
+                    <Link to="/profile">
+                      <p className="text-[14px] animate-bounce text-green-800">
+                        👋 ¡Hola, {user.name}!
+                      </p>                    </Link>
                     <button
                       onClick={handleLogout}
-                      className="flex items-center space-x-2 border border-red-600 bg-red-700 hover:bg-white text-white hover:text-red-700 px-3 py-2 rounded-md text-sm hover:scale-95  hover:opacity-80 transition duration-200"
+                      className="flex items-center gap-1 border  hover:bg-red-700 text-red-700 hover:text-white px-2 py-1 rounded text-sm hover:scale-95 hover:opacity-80 transition duration-200"
                       title="Cerrar sesión"
                     >
-                      <FiLogOut className="text-xl" />
-                      <span>CERRAR SESIÓN</span>
+                      <FiLogOut className="text-base" />
+                      <span className="hidden sm:inline">Salir</span>
                     </button>
                   </div>
                 ) : (
@@ -331,7 +334,7 @@ export default function Header({ isHome = false, isShop = false }) {
                   onClick={() => {
                     setMenuOpen(false);
                   }}
-                  className="relative flex items-center justify-center border border-[#166534] bg-[#166534] hover:bg-white text-white hover:text-[#166534] rounded-full shadow-lg py-3 px-5 text-sm  transition-all duration-300"
+                  className="relative flex items-center justify-center border border-[#166534] bg-[#166534] hover:bg-white text-white hover:text-[#166534] rounded-full shadow-lg py-2 px-4 text-sm  transition-all duration-300"
                 >
                   🛒 VER CESTA
                   {totalItems > 0 && (
