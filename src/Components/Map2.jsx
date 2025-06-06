@@ -71,7 +71,7 @@ export default function Map2({ latitud, longitud, setFormData }) {
         const { lng, lat } = e.lngLat;
         console.log("Coordenadas click:", lng, lat);
 
-        const decimales = 10; // Numero de redondeo configurable (10 tiene mucha precisión)
+        const decimales = 8; // Numero de redondeo configurable (10 tiene mucha precisión)
         const multiplicador = Math.pow(10, decimales);
         
         const roundedLat = Math.round(lat * multiplicador) / multiplicador;
@@ -84,7 +84,7 @@ export default function Map2({ latitud, longitud, setFormData }) {
         10	        ~0.01 mm	                              Científico/geodésico (excesivo para casi todo)
         Según GPT no necesitamos alta precisión y podríamos redondear a 6, que es una precisión aceptable.
         Esto reduciría la carga de la BBDD y haría las flechas del step más intuitivas de usar.
-        Consultar con Pablo
+        Consultar con Pablo. Actualmente respeta el back (8 decimales)
         */
         
         console.log("Coordenadas redondeadas:", roundedLng, roundedLat);

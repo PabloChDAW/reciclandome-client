@@ -12,8 +12,8 @@ export default function PointItem({ point, onCenterMap }) {
       <p className="text-sm"><span className="font-medium">📍 Tipo:</span> {point.point_type}</p>
       <p className="text-sm"><span className="font-medium">📫 Dirección:</span> {point.address}</p>
       <p className="text-xs italic text-slate-500">
-        Creado por <span className="font-semibold">{point.user.name}</span> a las{" "}
-        {new Date(point.created_at).toLocaleTimeString()}
+        Creado por <span className="font-semibold">{point.user.name}</span> el ㅤ
+        {new Date(point.created_at).toLocaleDateString()} a las {new Date(point.created_at).toLocaleTimeString()}
       </p>
     </div>
 
