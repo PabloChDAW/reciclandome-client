@@ -123,9 +123,10 @@ export default function Update() {
     if (res.ok) {
       if (data.point.user_id !== user.id) {
         navigate("/"); //Redirección a home en caso de que la id del usuario logueado y la 
-        // id del usuario a la que pertenece el punto no sean coincidentes. De esta manera los usuarios 
-        // no tendrán oportunidad ni si quiera de acceder a realizar acciones para las que no tienen permisos
-        // (en este caso actualizar el punto)
+        // id del usuario a la que pertenece el punto no sean coincidentes sin darles oportunidad
+        // a acceder al sitio
+        toastr.error('No tienes permiso para actualizar este punto.', 'Acceso Denegado');
+        //toastr.error(data.errors, 'Andá a modificar la URL a otro lado, boludo. No robes los puntos chtm');
       }
 
       setFormData({
@@ -145,6 +146,23 @@ export default function Update() {
         phone: data.point.phone || "", 
         email: data.point.email || ""
       });
+    }
+    else{
+      let errorMessage;
+      let errorTitle;
+      if (res.status === 404) {
+          errorMessage = 'El punto que buscas no existe.';
+          errorTitle = 'Punto No Encontrado';
+      }
+      else if (res.status >= 500) {
+          errorMessage = 'Ha ocurrido un error en el servidor. Por favor, inténtalo más tarde o avisa a un administrador';
+          errorTitle = 'Error del Servidor';
+      } else {
+          errorMessage = 'Error del cliente desconocido, por favor ponte en contacto con un administrador';
+          errorTitle = 'Error del Cliente';
+      }
+      toastr.error(errorMessage, errorTitle);
+      navigate("/");
     }
   }
 
