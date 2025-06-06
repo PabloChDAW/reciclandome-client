@@ -13,7 +13,7 @@ export default function Show() {
   const navigate = useNavigate();
   const { user, token } = useContext(AppContext);
   const [point, setPoint] = useState(null);
-
+  const [cargando, setCargando] =useState(true);
   async function getPoint() {
     /* Petición de datos de un post. */
     const res = await fetch(`/api/points/${id}`);
@@ -24,6 +24,7 @@ export default function Show() {
     if (res.ok) {
       setPoint(data.point);
     }
+    setCargando(false);
   }
 
   async function handleDelete(e) {
@@ -121,8 +122,13 @@ export default function Show() {
           
         </>
       ) : (
+        cargando?
         <p className="text-center text-lg font-semibold text-green-900 mt-16">
-          Punto no encontrado.
+          Cargando punto...
+        </p>
+        :
+        <p>
+          Punto no encontrado
         </p>
       )}
     </div>
