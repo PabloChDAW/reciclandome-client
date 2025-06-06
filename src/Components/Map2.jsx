@@ -96,8 +96,27 @@ export default function Map2({ latitud, longitud, setFormData }) {
           longitude: roundedLng,
         }));
       };
+      const handleDragEnd = () => {
+        const lngLat = marker.current.getLngLat();
+        console.log("Marcador arrastrado a:", lngLat.lng, lngLat.lat);
 
+        const decimales = 8;
+        const multiplicador = Math.pow(10, decimales);
+        
+        const roundedLat = Math.round(lngLat.lat * multiplicador) / multiplicador;
+        const roundedLng = Math.round(lngLat.lng * multiplicador) / multiplicador;
+        
+        console.log("Coordenadas redondeadas del arrastre:", roundedLng, roundedLat);
+        
+        setNoSeCentra(true); 
+        setFormData(prevState => ({
+          ...prevState,
+          latitude: roundedLat,
+          longitude: roundedLng,
+        }));
+      };
       map.current.on('click', handleClick);
+      marker.current.on('dragend', handleDragEnd);
 
       marker.current.setLngLat([longitud, latitud]);
 
@@ -110,6 +129,9 @@ export default function Map2({ latitud, longitud, setFormData }) {
       return () => {
         if (map.current) {
           map.current.off('click', handleClick);
+        }
+        if (marker.current) {
+          marker.current.off('dragend', handleDragEnd);
         }
       };
     }
