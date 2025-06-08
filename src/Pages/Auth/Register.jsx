@@ -4,6 +4,7 @@ import { AppContext } from "../../Context/AppContext";
 import { Link } from "react-router-dom";
 import toastr from 'toastr';
 import 'toastr/build/toastr.min.css';
+import CriteriaItem from '../../Components/CriteriaItem'; 
 
 
 export default function Register() {
@@ -22,8 +23,31 @@ export default function Register() {
 
   const [errors, setErrors] = useState({});
 
+  const [passwordCriteria, setPasswordCriteria] = useState({
+  hasLowercase: false,
+  hasUppercase: false,
+  hasNumber: false,
+  hasSymbol: false,
+  hasMinLength: false,
+  });
+
+  const validatePassword = (password) => {
+    return {
+      hasLowercase: /[a-z]/.test(password),
+      hasUppercase: /[A-Z]/.test(password),
+      hasNumber: /\d/.test(password),
+      hasSymbol: /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password),
+      hasMinLength: password.length >= 10,
+    };
+  };
+
+  const isPasswordValid = Object.values(passwordCriteria).every((criteria) => criteria);
+
   async function handleRegister(e) {
     e.preventDefault();
+    if (!isPasswordValid) {
+      return;
+    }
     /* Petición de autenticación */
     const res = await fetch("/api/register", {
       method: "post",
@@ -85,12 +109,25 @@ export default function Register() {
                 id="password"
                 placeholder="Introduce tu contraseña"
                 value={formData.password}
-                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                onChange={(e) => {
+                  const newPassword = e.target.value;
+                  setFormData({ ...formData, password: newPassword });
+                  setPasswordCriteria(validatePassword(newPassword));
+                }}
                 className="w-full px-4 py-3 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#166534] transition-all duration-200 text-sm"
               />
               {errors.password && <p className="text-sm text-red-500 mt-1">{errors.password[0]}</p>}
             </div>
-
+            {formData.password && (
+              <div className="mt-3 p-3 bg-gray-50 rounded-md space-y-2">
+                <p className="text-sm font-medium text-gray-700 mb-2">Requisitos de contraseña:</p>
+                <CriteriaItem met={passwordCriteria.hasMinLength} text="Al menos 10 caracteres" />
+                <CriteriaItem met={passwordCriteria.hasLowercase} text="Al menos una letra minúscula" />
+                <CriteriaItem met={passwordCriteria.hasUppercase} text="Al menos una letra mayúscula" />
+                <CriteriaItem met={passwordCriteria.hasNumber} text="Al menos un número" />
+                <CriteriaItem met={passwordCriteria.hasSymbol} text="Al menos un símbolo (!@#$%^&*)" />
+              </div>
+            )}
             <div className="space-y-2">
               <label htmlFor="password_confirmation" className="text-sm md:text-base font-medium text-[#333]">🔁 Confirmar contraseña</label>
               <input
@@ -102,10 +139,17 @@ export default function Register() {
                 className="w-full px-4 py-3 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#166534] transition-all duration-200 text-sm"
               />
             </div>
-
+            {formData.password_confirmation && formData.password !== formData.password_confirmation && (
+              <p className="text-sm text-red-500 mt-1">Las contraseñas no coinciden</p>
+            )}
             <button
               type="submit"
-              className="w-full border border-[#166534] bg-[#166534] text-white py-3 rounded-full hover:bg-white hover:text-[#166534] transition-all duration-300 shadow-md"
+              disabled={!isPasswordValid || formData.password !== formData.password_confirmation}
+              className={`w-full py-3 rounded-full transition-all duration-300 shadow-md ${
+                isPasswordValid && formData.password === formData.password_confirmation
+                  ? "border border-[#166534] bg-[#166534] text-white hover:bg-white hover:text-[#166534]"
+                  : "bg-gray-300 text-gray-500 cursor-not-allowed"
+              }`}
             >
               REGISTRARSE
             </button>
