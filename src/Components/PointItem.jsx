@@ -31,6 +31,16 @@ export default function PointItem({ point, onCenterMap }) {
       >
         Centrar en el mapa
       </button>
+      {point.url && (
+          <a
+            href={point.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-blue-600 hover:bg-blue-700 text-white text-center text-sm font-medium px-5 py-2 rounded-xl transition"
+          >
+            Cómo llegar 🗺️
+          </a>
+      )}
     </div>
   </div>
 );

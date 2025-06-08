@@ -50,9 +50,8 @@ export default function Create() {
   const generateUrl = (name, lat, lng) => {
     lat = parseFloat(lat);
     lng = parseFloat(lng);
-    const namePart = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-    const coordPart = `${lat.toFixed(5)}-${lng.toFixed(5)}`.replace(/\./g, '');
-    return `${namePart}-${coordPart}`;
+    const base = 'https://www.google.com/maps/dir/?api=1&destination=';
+    return `${base}${lat},${lng}`;
   };
 
   // Geocodificación inversa corregida
