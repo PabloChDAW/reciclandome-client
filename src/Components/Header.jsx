@@ -556,7 +556,7 @@ export default function Header({ isHome = false, isShop = false }) {
         </div>
       </div>
       
-      //Añadido? Es posible que necesite removerse
+      {/*Añadido? Es posible que necesite removerse */}
       {showLogoutToast && (
         <div
           className="fixed top-5 right-5 bg-gradient-to-r from-green-700 to-green-900 text-white px-6 py-3 rounded-md shadow-md flex items-center justify-between gap-4 max-w-xs animate-fade-slide-in z-50 opacity-70"
@@ -588,7 +588,7 @@ export default function Header({ isHome = false, isShop = false }) {
           </button>
         </div>
       )}
-      //Fin de posible que se necesite remover
+      {/* Fin de posible que se necesite remover */}
       
       {/* Toast de cierre de sesión */}
       {showLogoutToast && (
