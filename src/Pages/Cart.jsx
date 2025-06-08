@@ -54,20 +54,20 @@ export default function Cart() {
             {cart.map((item) => {
               const subtotal = Number(item.price) * item.quantity;
               return (
-                <li key={item.id} className="py-6 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0 sm:space-x-4">
-                  <div className="flex-1 flex items-center dark:text-white">
+                <li key={item.id} className="py-6 flex flex-col sm:flex-row justify-between items-center space-y-6 sm:space-y-0 sm:space-x-4">
+                  <div className="flex items-center w-full dark:text-white">
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-md mr-4"
+                      className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-md mr-4 shrink-0"
                     />
-                    <div>
-                      <h3 className="dark:text-white font-semibold text-lg">{item.name}</h3>
-                      <p className="dark:text-white text-sm mt-1">
+                    <div className="text-left">
+                      <h3 className="font-semibold text-lg">{item.name}</h3>
+                      <p className="text-sm mt-1">
                         💸 {Number(item.price).toFixed(2)}€ × {item.quantity} ={" "}
                         <span className="font-medium">{subtotal.toFixed(2)}€</span>
                       </p>
-                      <p className="text-xs text-gray-400 dark:text-white mt-1">
+                      <p className="text-xs text-gray-400 mt-1">
                         Stock disponible: {item.stock}
                       </p>
                     </div>
@@ -127,7 +127,6 @@ export default function Cart() {
                   {totalPrice.toFixed(2)}€
                 </p>
               </div>
-
 
               <div className="w-full sm:w-auto z-10">
                 <PayPalButton amount={totalPrice} cart={cart} />

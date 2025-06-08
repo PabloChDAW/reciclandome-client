@@ -7,17 +7,7 @@ import { AppContext } from "../Context/AppContext";
 export default function Header({ isHome = false, isShop = false }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const {
-    user,
-    cart,
-    totalItems,
-    increment,
-    decrement,
-    clearCart,
-    removeItem,
-    setUser,
-    setToken,
-  } = useContext(AppContext);
+  const {user, cart, totalItems, increment, decrement, clearCart, removeItem, setUser, setToken, } = useContext(AppContext);
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
@@ -35,7 +25,7 @@ export default function Header({ isHome = false, isShop = false }) {
 
   const [darkMode, setDarkMode] = useState(false);
   const [showToggle, setShowToggle] = useState(false);
-
+  
 
   // Carga preferencia guardada o por defecto
   useEffect(() => {
@@ -77,10 +67,8 @@ export default function Header({ isHome = false, isShop = false }) {
     setTimeout(() => setShowToast(false), 2000);
   };
 
-
   async function handleLogout(e) {
     e.preventDefault();
-
     const res = await fetch("/api/logout", {
       method: "post",
       headers: {
@@ -89,6 +77,7 @@ export default function Header({ isHome = false, isShop = false }) {
     });
 
     const data = await res.json();
+
     console.log(data);
 
     if (res.ok) {
@@ -105,6 +94,7 @@ export default function Header({ isHome = false, isShop = false }) {
       navigate("/");
     }
   }
+
   useEffect(() => {
     if (!isHome && !isShop) return;
 
@@ -184,7 +174,7 @@ export default function Header({ isHome = false, isShop = false }) {
           )}
         </div>
 
-        {/* Botón hamburguesa - solo visible en móviles */}
+        {/* BOTÓN HAMBURGUESA - solo visible en móviles */}
         <div className="md:hidden z-50 text-black">
           <button onClick={() => setMenuOpen(!menuOpen)}>
             {menuOpen ? (
@@ -195,17 +185,13 @@ export default function Header({ isHome = false, isShop = false }) {
           </button>
         </div>
 
-        {/* Menú desplegable móvil con animación */}
+        {/* MENÚ DE MÓVIL */}
         <>
           {/* Backdrop con transición de opacidad */}
           <div
-            className={`
-                        fixed inset-0 bg-black z-40 transition-opacity duration-700
-                        ${menuOpen
-                ? "bg-opacity-70"
-                : "bg-opacity-0 pointer-events-none"
-              }
-                    `}
+            className={`fixed inset-0 bg-black z-40 transition-opacity duration-700
+              ${menuOpen ? "bg-opacity-70" : "bg-opacity-0 pointer-events-none"}
+              `}
             onClick={() => setMenuOpen(false)}
           ></div>
 
@@ -243,13 +229,6 @@ export default function Header({ isHome = false, isShop = false }) {
               >
                 🏠 INICIO
               </Link>
-              {/*<Link
-                to="/"
-                onClick={() => setMenuOpen(false)}
-                className="flex items-center gap-2 font-bold animate-pulse hover:text-green-900"
-              >
-                🗺️ Tipo de reciclaje
-              </Link>*/}
               <Link
                 to="/show"
                 onClick={() => setMenuOpen(false)}
@@ -293,7 +272,8 @@ export default function Header({ isHome = false, isShop = false }) {
                 📞 CONTACTO
               </Link>
 
-              <div className="pt-10 border-t border-[#577759] border-opacity-15 w-full">
+              {/*CONTROL INICIO/FIN DE SESIÓN*/}
+              <div className="pt-10 border-t border-[#166534] w-full">
                 {user ? (
                   <div className="flex items-center justify-between">
                     <Link to="/profile">
@@ -328,6 +308,8 @@ export default function Header({ isHome = false, isShop = false }) {
                   </div>
                 )}
               </div>
+
+              {/* BOTÓN DEL CARRITO */}
               <div className="fixed bottom-4 left-4 right-4 z-50 md:hidden">
                 <Link
                   to="/cart"
@@ -348,7 +330,7 @@ export default function Header({ isHome = false, isShop = false }) {
           </div>
         </>
 
-        {/* Navegación desktop */}
+        {/* NAVEGACIÓN VISTO ESCRITORIO */}
         <nav className="hidden md:flex md:items-center md:gap-4 lg:gap-6 xl:gap-8 text-[#131700] lg:text-[15px] xl:text-[20px] sm:text-[12px]">
           <Link to="/" className={`${getLinkClass("/")}`}>
             Inicio
@@ -360,12 +342,6 @@ export default function Header({ isHome = false, isShop = false }) {
             </div>
             {/* TODO METER RUTA INTERACTIVA AQUI */}
             <div className="absolute top-full left-1/2 -translate-x-1/2 w-56 bg-white border border-gray-300 rounded shadow-md opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-40">
-              {/*<Link
-                to="/"
-                className="block px-4 py-2 text-center text-[#131700] hover:text-[#166534] hover:bg-gray-200 transition duration-700"
-              >
-                Tipo de reciclaje
-              </Link>*/}
               <Link
                 to="/create"
                 className="block px-4 py-2 text-center text-[#131700] hover:text-[#166534] hover:bg-gray-200 transition duration-700"
@@ -395,7 +371,7 @@ export default function Header({ isHome = false, isShop = false }) {
           </Link>
         </nav>
 
-        {/* Auth + Carrito Desktop */}
+        {/* AUTH + CARRITO ESCRITORIO */}
         <div className="hidden md:flex items-center gap-6 text-[#131700] relative">
           {user ? (
             <>
@@ -431,7 +407,7 @@ export default function Header({ isHome = false, isShop = false }) {
             </Link>
           )}
 
-          {/* Carrito */}
+          {/* CARRITO VISTA ESCRITORIO */}
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -579,6 +555,8 @@ export default function Header({ isHome = false, isShop = false }) {
           </div>
         </div>
       </div>
+      
+      //Añadido? Es posible que necesite removerse
       {showLogoutToast && (
         <div
           className="fixed top-5 right-5 bg-gradient-to-r from-green-700 to-green-900 text-white px-6 py-3 rounded-md shadow-md flex items-center justify-between gap-4 max-w-xs animate-fade-slide-in z-50 opacity-70"
@@ -610,9 +588,40 @@ export default function Header({ isHome = false, isShop = false }) {
           </button>
         </div>
       )}
-
-
-
+      //Fin de posible que se necesite remover
+      
+      {/* Toast de cierre de sesión */}
+      {showLogoutToast && (
+        <div
+          className="fixed top-5 right-5 bg-gradient-to-r from-green-700 to-green-900 text-white px-6 py-3 rounded-md shadow-md flex items-center justify-between gap-4 max-w-xs animate-fade-slide-in z-50 opacity-70"
+          role="alert"
+          aria-live="assertive"
+        >
+          <div className="flex items-center gap-3">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-7 w-7 flex-shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={3}
+              aria-hidden="true"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            <span className="text-sm">
+              ¡Hasta pronto! Aquí siempre hay un lugar para ti.
+            </span>
+          </div>
+          <button
+            onClick={() => setShowLogoutToast(false)}
+            className="text-white hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-white rounded transition-colors"
+            aria-label="Cerrar notificación"
+          >
+            &#10005;
+          </button>
+        </div>
+      )}
     </header>
   );
 }
