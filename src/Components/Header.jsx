@@ -25,6 +25,7 @@ export default function Header({ isHome = false, isShop = false }) {
 
   const [darkMode, setDarkMode] = useState(false);
   const [showToggle, setShowToggle] = useState(false);
+  
 
   // Carga preferencia guardada o por defecto
   useEffect(() => {
@@ -146,10 +147,12 @@ export default function Header({ isHome = false, isShop = false }) {
           />
         </Link>
 
-        <div onMouseEnter={() => setShowToggle(true)} onMouseLeave={() => setShowToggle(false)}
+        <div
+          onMouseEnter={() => setShowToggle(true)}
+          onMouseLeave={() => setShowToggle(false)}
           className={`fixed bottom-0 left-0 z-50 transform -translate-y-1/2 transition-all duration-300
-          ${showToggle ? 'w-36 sm:w-44' : 'w-8 sm:w-12'} h-10 sm:h-12 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 
-          rounded-r-full shadow-lg overflow-hidden flex items-center justify-start cursor-pointer`}
+    ${showToggle ? 'w-36 sm:w-44' : 'w-8 sm:w-12'} h-10 sm:h-12 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 
+    rounded-r-full shadow-lg overflow-hidden flex items-center justify-start cursor-pointer`}
         >
           {showToggle ? (
             <button
@@ -193,18 +196,32 @@ export default function Header({ isHome = false, isShop = false }) {
           ></div>
 
           {/* Menú lateral de móvil con transición de deslizamiento */}
-          <div role="navigation" aria-label="Menú principal"
-            className={`fixed top-0 right-0 h-full w-3/4 sm:w-2/5 bg-white z-50 shadow-lg transform transition-transform duration-700 ease-in-out
-            ${menuOpen ? "translate-x-0" : "translate-x-full"}
-            `}
+          <div
+            role="navigation"
+            aria-label="Menú principal"
+            className={`
+                            fixed top-0 right-0 h-full w-3/4  bg-white z-50 shadow-lg transform transition-transform duration-700 ease-in-out
+                            ${menuOpen ? "translate-x-0" : "translate-x-full"}
+                        `}
           >
-            <div className="flex justify-end p-4 ">
+            <div className="flex justify-between items-center p-4">
+              <Link to="/profile">{/* Imagen del perfil a la izquierda */}
+              {user?.imageUrl && (
+                <img
+                  src={user.imageUrl}
+                  alt={`Foto de perfil de ${user.name}`}
+                  className="w-8 h-8 rounded-full object-cover border-2 border-green-600"
+                />
+              )}
+              </Link>
+
+              {/* Botón de cerrar a la derecha */}
               <button onClick={() => setMenuOpen(false)}>
                 <HiX className="text-2xl text-[#131700]" />
               </button>
             </div>
 
-            <nav className="flex flex-col items-start gap-6 px-6 text-sm text-[#131700] ">
+            <nav className="flex flex-col items-start pt-5 gap-6 px-6 text-xs text-[#131700] ">
               <Link
                 to="/"
                 onClick={() => setMenuOpen(false)}
@@ -248,13 +265,6 @@ export default function Header({ isHome = false, isShop = false }) {
                 📝 BLOG
               </Link>
               <Link
-                to="/orders"
-                onClick={() => setMenuOpen(false)}
-                className={`${getLinkClass("/orders")}`}
-              >
-                📦 MIS PEDIDOS
-              </Link>
-              <Link
                 to="/contact"
                 onClick={() => setMenuOpen(false)}
                 className={`${getLinkClass("/contact")}`}
@@ -265,15 +275,18 @@ export default function Header({ isHome = false, isShop = false }) {
               {/*CONTROL INICIO/FIN DE SESIÓN*/}
               <div className="pt-10 border-t border-[#166534] w-full">
                 {user ? (
-                  <div className="flex flex-col gap-4">
-                    <p className="text-lg">Hola, {user.name}</p>
+                  <div className="flex items-center justify-between">
+                    <Link to="/profile">
+                      <p className="text-[14px] animate-bounce text-green-800">
+                        👋 ¡Hola, {user.name}!
+                      </p>                    </Link>
                     <button
                       onClick={handleLogout}
-                      className="flex items-center space-x-2 border border-red-600 bg-red-700 hover:bg-white text-white hover:text-red-700 px-3 py-2 rounded-md text-sm hover:scale-95  hover:opacity-80 transition duration-200"
+                      className="flex items-center gap-1 border  hover:bg-red-700 text-red-700 hover:text-white px-2 py-1 rounded text-sm hover:scale-95 hover:opacity-80 transition duration-200"
                       title="Cerrar sesión"
                     >
-                      <FiLogOut className="text-xl" />
-                      <span>CERRAR SESIÓN</span>
+                      <FiLogOut className="text-base" />
+                      <span className="hidden sm:inline">Salir</span>
                     </button>
                   </div>
                 ) : (
@@ -303,7 +316,7 @@ export default function Header({ isHome = false, isShop = false }) {
                   onClick={() => {
                     setMenuOpen(false);
                   }}
-                  className="relative flex items-center justify-center border border-[#166534] bg-[#166534] hover:bg-white text-white hover:text-[#166534] rounded-full shadow-lg py-3 px-5 text-sm  transition-all duration-300"
+                  className="relative flex items-center justify-center border border-[#166534] bg-[#166534] hover:bg-white text-white hover:text-[#166534] rounded-full shadow-lg py-2 px-4 text-sm  transition-all duration-300"
                 >
                   🛒 VER CESTA
                   {totalItems > 0 && (
@@ -353,9 +366,6 @@ export default function Header({ isHome = false, isShop = false }) {
           <Link to="/shop" className={`${getLinkClass("/shop")}`}>
             Tienda
           </Link>
-          <Link to="/orders" className={`${getLinkClass("/orders")}`}>
-            Mis Pedidos
-          </Link>
           <Link to="/contact" className={`${getLinkClass("/contact")}`}>
             Contacto
           </Link>
@@ -365,16 +375,28 @@ export default function Header({ isHome = false, isShop = false }) {
         <div className="hidden md:flex items-center gap-6 text-[#131700] relative">
           {user ? (
             <>
-              <p className="lg:text-[16px] sm:text-[10px] animate-bounce text-green-800">
-                👋 ¡Hola, {user.name}!
-              </p>
+              <Link to="/profile"><div className="flex items-center gap-2">
+                {user.imageUrl ? (
+                  <img
+                    src={user.imageUrl}
+                    alt={`Foto de perfil de ${user.name}`}
+                    className="w-10 h-10 rounded-full object-cover border-2 border-green-600"
+                  />
+                ) : (
+                  <p className="lg:text-[16px] sm:text-[10px] animate-bounce text-green-800">
+                    👋 ¡Hola, {user.name}!
+                  </p>
+                )}
+              </div>
+              </Link>
+
               <button
                 onClick={handleLogout}
                 className="text-xl hover:text-red-500"
                 title="Cerrar sesión"
               >
                 <FiLogOut />
-              </button>{" "}
+              </button>
             </>
           ) : (
             <Link
@@ -533,7 +555,41 @@ export default function Header({ isHome = false, isShop = false }) {
           </div>
         </div>
       </div>
-
+      
+      //Añadido? Es posible que necesite removerse
+      {showLogoutToast && (
+        <div
+          className="fixed top-5 right-5 bg-gradient-to-r from-green-700 to-green-900 text-white px-6 py-3 rounded-md shadow-md flex items-center justify-between gap-4 max-w-xs animate-fade-slide-in z-50 opacity-70"
+          role="alert"
+          aria-live="assertive"
+        >
+          <div className="flex items-center gap-3">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-7 w-7 flex-shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={3}
+              aria-hidden="true"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            <span className="text-sm">
+              ¡Hasta pronto! Aquí siempre hay un lugar para ti.
+            </span>
+          </div>
+          <button
+            onClick={() => setShowLogoutToast(false)}
+            className="text-white hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-white rounded transition-colors"
+            aria-label="Cerrar notificación"
+          >
+            &#10005;
+          </button>
+        </div>
+      )}
+      //Fin de posible que se necesite remover
+      
       {/* Toast de cierre de sesión */}
       {showLogoutToast && (
         <div

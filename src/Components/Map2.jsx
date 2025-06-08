@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useState } from 'react';
 import * as maptilersdk from '@maptiler/sdk';
 import "@maptiler/sdk/dist/maptiler-sdk.css";
+import { useEffect, useRef, useState } from 'react';
 import './Map2.css';
 
 export default function Map2({ latitud, longitud, setFormData }) {
@@ -71,15 +71,52 @@ export default function Map2({ latitud, longitud, setFormData }) {
         const { lng, lat } = e.lngLat;
         console.log("Coordenadas click:", lng, lat);
 
+        const decimales = 8; // Numero de redondeo configurable (10 tiene mucha precisión)
+        const multiplicador = Math.pow(10, decimales);
+        
+        const roundedLat = Math.round(lat * multiplicador) / multiplicador;
+        const roundedLng = Math.round(lng * multiplicador) / multiplicador;
+        /* SEGÚN GPT:
+        Decimales	  Margen de error aproximado	            Uso típico
+        4	          ~11 metros	Mapas generales,            GPS básico
+        6	          ~11 centímetros	                        Aplicaciones topográficas
+        8	          ~1.1 milímetros	                        Cartografía de alta precisión
+        10	        ~0.01 mm	                              Científico/geodésico (excesivo para casi todo)
+        Según GPT no necesitamos alta precisión y podríamos redondear a 6, que es una precisión aceptable.
+        Esto reduciría la carga de la BBDD y haría las flechas del step más intuitivas de usar.
+        Consultar con Pablo. Actualmente respeta el back (8 decimales)
+        */
+        
+        console.log("Coordenadas redondeadas:", roundedLng, roundedLat);
+        
         setNoSeCentra(true)
         setFormData(prevState => ({
           ...prevState,
-          latitude: lat,
-          longitude: lng,
+          latitude: roundedLat,
+          longitude: roundedLng,
         }));
       };
+      const handleDragEnd = () => {
+        const lngLat = marker.current.getLngLat();
+        console.log("Marcador arrastrado a:", lngLat.lng, lngLat.lat);
 
+        const decimales = 8;
+        const multiplicador = Math.pow(10, decimales);
+        
+        const roundedLat = Math.round(lngLat.lat * multiplicador) / multiplicador;
+        const roundedLng = Math.round(lngLat.lng * multiplicador) / multiplicador;
+        
+        console.log("Coordenadas redondeadas del arrastre:", roundedLng, roundedLat);
+        
+        setNoSeCentra(true); 
+        setFormData(prevState => ({
+          ...prevState,
+          latitude: roundedLat,
+          longitude: roundedLng,
+        }));
+      };
       map.current.on('click', handleClick);
+      marker.current.on('dragend', handleDragEnd);
 
       marker.current.setLngLat([longitud, latitud]);
 
@@ -92,6 +129,9 @@ export default function Map2({ latitud, longitud, setFormData }) {
       return () => {
         if (map.current) {
           map.current.off('click', handleClick);
+        }
+        if (marker.current) {
+          marker.current.off('dragend', handleDragEnd);
         }
       };
     }

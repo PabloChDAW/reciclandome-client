@@ -13,7 +13,7 @@ export default function Show() {
   const navigate = useNavigate();
   const { user, token } = useContext(AppContext);
   const [point, setPoint] = useState(null);
-
+  const [cargando, setCargando] =useState(true);
   async function getPoint() {
     /* Petición de datos de un post. */
     const res = await fetch(`/api/points/${id}`);
@@ -24,6 +24,7 @@ export default function Show() {
     if (res.ok) {
       setPoint(data.point);
     }
+    setCargando(false);
   }
 
   async function handleDelete(e) {
@@ -94,7 +95,7 @@ export default function Show() {
             </div>
 
             <p className="mt-8 text-sm italic text-green-700 text-right">
-              Creado por <span className="font-semibold">{point.user.name}</span> a las {new Date(point.created_at).toLocaleTimeString()}
+              Creado por <span className="font-semibold">{point.user.name}</span> el {new Date(point.created_at).toLocaleDateString()} a las {new Date(point.created_at).toLocaleTimeString()}
             </p>
             {/* Botones de acción con estilo natural y accesible */}
           {user && user.id === point.user_id && (
@@ -121,8 +122,13 @@ export default function Show() {
           
         </>
       ) : (
+        cargando?
         <p className="text-center text-lg font-semibold text-green-900 mt-16">
-          Punto no encontrado.
+          Cargando punto...
+        </p>
+        :
+        <p>
+          Punto no encontrado
         </p>
       )}
     </div>

@@ -5,6 +5,7 @@ import HomePage from './Pages/HomePage';
 import Thanks from './Pages/Thanks'
 import Register from './Pages/Auth/Register';
 import Login from './Pages/Auth/Login';
+import Account from './Pages/Auth/Profile';
 import { useContext } from 'react';
 import { AppContext } from './Context/AppContext';
 import Create from './Pages/Points/Create';
@@ -48,6 +49,7 @@ export default function App() {
           <Route path='/register' element={user ? <HomePage /> : <Register />} />
           <Route path='/login' element={user ? <HomePage /> : <Login />} />
           <Route path='/create' element={user ? <Create /> : <Login />} />
+          <Route path='/profile' element={user ? <Account /> : <Login />} />
           <Route path='/points/:id' element={<Show />} />
           <Route path='/points/update/:id' element={user ? <Update /> : <Login />} />
           <Route path='/thanks' element={<Thanks />} />

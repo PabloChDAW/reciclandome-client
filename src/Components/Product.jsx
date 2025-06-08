@@ -11,17 +11,17 @@ const Product = ({ product, onAddToCart }) => {
   const disabled = isOutOfStock || isMaxReached;
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-5 flex flex-col justify-between transition-transform hover:-translate-y-1 hover:shadow-xl duration-300">
+  <div className="bg-white rounded-2xl border bg-slate-300shadow-md hover:shadow-lg transition-transform hover:-translate-y-1 duration-300 p-10 flex flex-col h-full">
       <img
         src={image}
         alt={name}
-        className="w-full h-48 object-cover rounded-lg mb-4"
+        className="w-48 sm:w-full h-48 object-cover rounded-lg mb-4 mx-auto"
       />
 
-      <div className="flex flex-col gap-2 flex-1">
+      <div className="flex flex-col mt-5 gap-4 flex-1">
         <h2 className="text-xl font-semibold text-gray-800">{name}</h2>
 
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-gray-500 ">
           <span className="font-medium text-gray-600">Descripción:</span> {description}
         </p>
 
