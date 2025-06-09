@@ -20,15 +20,19 @@ export default function Update() {
     postcode: "",
     way: "",
     place_type: "",
-    point_type: "",
+    types: [],
     url: "",
     description: "",
     phone: "", 
     email: ""
   });
-  const pointTypes = ["Plásticos", "Vidrios", "Aceites", "Orgánica", "Electrónicos", 
-    "Textiles", "Neumáticos", "Chatarra", "Construcción"];
-  
+  const [allTypes, setAllTypes] = useState([]);
+
+useEffect(() => {
+  fetch('/api/types')
+    .then(res => res.json())
+    .then(setAllTypes);
+}, []);
   // Seguridad y sanitización ---- //MapTyler no gestiona bien la iniciación en alguna coordenada 0.
   // Estas líneas evitan que un tercero pueda denegarnos el servicio si consigue forzar la aplicación a iniciar
   // Con valores válidos pero que MapTyler no puede gestionar (longitud o latitud 0)
@@ -140,7 +144,7 @@ export default function Update() {
         postcode: data.point.postcode || "",
         way: data.point.way || "",
         place_type: data.point.place_type || "",
-        point_type: data.point.point_type || "",
+        types: data.point.types?.map(t => t.id) || [],
         url: data.point.url || "",
         description: data.point.description || "",
         phone: data.point.phone || "", 
@@ -176,7 +180,10 @@ export default function Update() {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify({
+        ...formData,
+        point_ids: formData.types // este es el nuevo campo esperado por el backend
+      }),
     });
 
     const data = await res.json();
@@ -238,20 +245,23 @@ export default function Update() {
 
       {/* Tipo de punto */}
       <div className="sm:col-span-2">
-        <label className="block text-sm font-medium text-slate-700 mb-1">Tipo de punto</label>
+        <label className="block text-sm font-medium text-slate-700 mb-1">Tipos de residuos</label>
         <select
-          value={formData.point_type || ""}
-          onChange={(e) => setFormData({ ...formData, point_type: e.target.value })}
+          multiple
+          value={formData.types}
+          onChange={(e) => {
+            const selectedOptions = Array.from(e.target.selectedOptions, opt => Number(opt.value));
+            setFormData({ ...formData, types: selectedOptions });
+          }}
           className="w-full border border-slate-300 rounded-lg px-4 py-2 text-sm"
         >
-          <option value="">Selecciona un tipo de punto</option>
-          {pointTypes.map((type, i) => (
-            <option key={i} value={type}>
-              {type}
+          {allTypes.map((type) => (
+            <option key={type.id} value={type.id}>
+              {type.name}
             </option>
           ))}
         </select>
-        {errors.point_type && <p className="text-red-600 text-xs mt-1">{errors.point_type[0]}</p>}
+        {errors.point_ids && <p className="text-red-600 text-xs mt-1">{errors.point_ids[0]}</p>}
       </div>
 
       {/* Info del lugar */}

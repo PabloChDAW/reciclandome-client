@@ -15,7 +15,12 @@ const InfoBox = ({ selectedPoint }) => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 text-green-900 text-base font-me  dium leading-relaxed">
                 <p><span className="font-bold">👤 Usuario:{selectedPoint.user.name}</span></p>
                 
-                <p><span className="font-bold">🏷 Tipo de punto:</span>{selectedPoint.point_type}</p>
+                <p>
+                    <span className="font-bold">🏷 Tipos de residuos:</span>{" "}
+                    {selectedPoint.types && selectedPoint.types.length > 0
+                        ? selectedPoint.types.map((t) => t.name).join(", ")
+                        : "No especificado"}
+                </p>
                 <p><span className="font-bold">📌Dirección: {selectedPoint.address}</span></p>
             </div>
 

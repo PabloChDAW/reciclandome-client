@@ -87,7 +87,21 @@ export default function Show() {
               <p><span className="font-bold">📍 Coordenadas:</span> {point.latitude}, {point.longitude}</p>
               <p><span className="font-bold">📞 Teléfono:</span> {point.phone}</p>
               <p><span className="font-bold">✉️ Correo:</span> {point.email}</p>
-              <p><span className="font-bold">🔖 Tipo de Punto:</span> {point.point_type}</p>
+              <div className="flex flex-wrap gap-2">
+                <span className="font-bold">🔖 Tipos de Residuos:</span>
+                {point.types && point.types.length > 0 ? (
+                  point.types.map((type) => (
+                    <span
+                      key={type.id}
+                      className="bg-green-200 text-green-900 text-xs font-semibold px-2 py-1 rounded-full"
+                    >
+                      {type.name}
+                    </span>
+                  ))
+                ) : (
+                  <span className="italic text-gray-500 ml-1">No especificado</span>
+                )}
+              </div>
               <p><span className="font-bold">🏠 Tipo de Lugar:</span> {point.place_type}</p>
               <p><span className="font-bold">📫 Dirección:</span> {point.address}</p>
               <p><span className="font-bold">🛤️ Vía:</span> {point.way}</p>

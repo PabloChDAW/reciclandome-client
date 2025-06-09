@@ -15,7 +15,7 @@ export default function ShowPointsPage() {
     user: false,
     city: '',
     name: '',
-    point_type: '',
+    types: [],
     place_type: '',
     way: ''
     });
@@ -109,7 +109,7 @@ export default function ShowPointsPage() {
         }
     if (filters.city) activeFilters.city = filters.city;
     if (filters.name) activeFilters.name = filters.name;
-    if (filters.point_type) activeFilters.point_type = filters.point_type;
+    if (filters.types.length > 0) activeFilters.types = filters.types;
     if (filters.place_type) activeFilters.place_type = filters.place_type;
     if (filters.way) activeFilters.way = filters.way;
     
@@ -132,7 +132,7 @@ export default function ShowPointsPage() {
         if (res.ok) {
         setPoints(data);
         }
-        console.log("los punticos son: "+data)
+        console.log("los punticos son: ", data)
     } catch (error) {
         console.error('Error obteniendo puntos:', error);
     }
@@ -283,20 +283,24 @@ export default function ShowPointsPage() {
                         {/* Filtro por tipo de punto */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Tipo de punto
+                                Tipos de residuos
                             </label>
                             <select
-                            value={filters.point_type}
-                            onChange={(e) => setFilters(prev => ({ ...prev, point_type: e.target.value }))}
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                                multiple
+                                value={filters.types}
+                                onChange={(e) => {
+                                 const selectedOptions = Array.from(e.target.selectedOptions).map(o => Number(o.value));
+                                setFilters(prev => ({ ...prev, types: selectedOptions }));
+                                }}
+                                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 h-[100px]"
                             >
-                            <option value="">Todos los tipos</option>
-                            {types.map((type) => (
-                                <option key={type.id} value={type.name}>
-                                {type.name}
+                                {types.map((type) => (
+                                <option key={type.id} value={type.id}>
+                                    {type.name}
                                 </option>
-                            ))}
+                                ))}
                             </select>
+                            <p className="text-xs text-gray-500 mt-1 italic">Mantén presionado Ctrl (Windows) o Cmd (Mac) para seleccionar múltiples</p>
                         </div>
                         
                         {/* Filtro por tipo de lugar */}
@@ -357,7 +361,7 @@ export default function ShowPointsPage() {
                             user: false,
                             city: '',
                             name: '',
-                            point_type: '',
+                            types: [],
                             place_type: '',
                             way: ''
                             })}
@@ -380,7 +384,7 @@ export default function ShowPointsPage() {
                     <section className="mt-20">
                         <h3 className="dark:text-white text-3xl font-bold text-center mb-12 flex items-center justify-center gap-2">
                         📌 {filters.user ? 'Mis puntos de reciclaje' : 
-                            filters.city || filters.name || filters.point_type || filters.place_type || filters.way ? 
+                            filters.city || filters.name || filters.types.length > 0  || filters.place_type || filters.way ? 
                             'Filtrando puntos' : 
                             'Todos los puntos de reciclaje'}
                         </h3>

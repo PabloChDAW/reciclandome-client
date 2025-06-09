@@ -20,15 +20,14 @@ export default function Create() {
     postcode: "",
     way: "",
     place_type: "",
-    point_type: "",
+    types: [],
     url: "",
     description: "",
     phone: "",
     email: ""
   });
 
-  const pointTypes = ["Plásticos", "Vidrios", "Aceites", "Orgánica", "Electrónicos",
-    "Textiles", "Neumáticos", "Chatarra", "Construcción"];
+  const [pointTypes, setPointTypes] = useState([]);
   // Seguridad y sanitización ---- //MapTyler no gestiona bien la iniciación en alguna coordenada 0.
   // Estas líneas evitan que un tercero pueda denegarnos el servicio si consigue forzar la aplicación a iniciar
   // Con valores válidos pero que MapTyler no puede gestionar (longitud o latitud 0)
@@ -45,7 +44,28 @@ export default function Create() {
   // --------------
   useEffect(() => {
   }, [formData]);
+  useEffect(() => {
+    const fetchPointTypes = async () => {
+      try {
+        const response = await fetch("/api/types", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
+        if (!response.ok) {
+          throw new Error("Error al obtener tipos de residuos");
+        }
+
+        const data = await response.json();
+        setPointTypes(data); // Asegúrate de que `data` es un array de objetos con `id` y `name`
+      } catch (error) {
+        console.error("Error cargando tipos de residuos:", error);
+      }
+    };
+
+    fetchPointTypes();
+  }, []);
   // Generar URL única
   const generateUrl = (name, lat, lng) => {
     lat = parseFloat(lat);
@@ -143,7 +163,7 @@ export default function Create() {
     setErrors(data.errors);
     console.log(errors)
     if(data.lugarVacio){
-      toastr.error(errors, 'Error al crear punto');
+      toastr.error(data.errors, 'Error al crear punto');
     }
     else{
       toastr.error('Por favor, revisa los datos del formulario.', 'Error al crear punto');
@@ -179,7 +199,7 @@ export default function Create() {
             type="number"
             step="0.00001"
             value={formData.latitude || ""}
-            onChange={(e) => setFormData({ ...formData, latitude: e.target.value })}
+            onChange={(e) => setFormData({ ...formData, latitude: parseFloat(e.target.value || 0) })}
             placeholder="Ej. -34.6037"
             className="w-full border border-slate-300 rounded-lg px-4 py-2 text-sm"
           />
@@ -192,7 +212,7 @@ export default function Create() {
             type="number"
             step="0.00001"
             value={formData.longitude || ""}
-            onChange={(e) => setFormData({ ...formData, longitude: e.target.value })}
+            onChange={(e) => setFormData({ ...formData, longitude: parseFloat(e.target.value || 0)})}
             placeholder="Ej. -58.3816"
             className="w-full border border-slate-300 rounded-lg px-4 py-2 text-sm"
           />
@@ -201,20 +221,31 @@ export default function Create() {
 
         {/* Tipo de punto */}
         <div className="sm:col-span-2">
-          <label className="block text-sm font-medium text-slate-700 mb-1">Tipo de punto</label>
-          <select
-            value={formData.point_type || ""}
-            onChange={(e) => setFormData({ ...formData, point_type: e.target.value })}
-            className="w-full border border-slate-300 rounded-lg px-4 py-2 text-sm"
-          >
-            <option value="">Selecciona un tipo de punto</option>
-            {pointTypes.map((type, i) => (
-              <option key={i} value={type}>
-                {type}
-              </option>
+          <label className="block text-sm font-medium text-slate-700 mb-2">Tipos de residuos</label>
+          <div className="space-y-2">
+            {pointTypes.map((type) => (
+              <div key={type.id} className="flex items-center">
+                <input
+                  type="checkbox"
+                  id={`type-${type.id}`}
+                  value={type.id}
+                  checked={formData.types?.includes(type.id)}
+                  onChange={(e) => {
+                    const typeId = parseInt(e.target.value);
+                    const newTypes = e.target.checked
+                      ? [...(formData.types || []), typeId]
+                      : (formData.types || []).filter((id) => id !== typeId);
+                    setFormData({ ...formData, types: newTypes });
+                  }}
+                  className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+                />
+                <label htmlFor={`type-${type.id}`} className="ml-2 text-sm text-slate-700">
+                  {type.name}
+                </label>
+              </div>
             ))}
-          </select>
-          {errors.point_type && <p className="text-red-600 text-xs mt-1">{errors.point_type[0]}</p>}
+          </div>
+          {errors.types && <p className="text-red-600 text-xs mt-1">{errors.types[0]}</p>}
         </div>
 
         {/* Info extra autocompletada */}

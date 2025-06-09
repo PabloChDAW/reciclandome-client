@@ -9,7 +9,21 @@ export default function PointItem({ point, onCenterMap }) {
     {/* Información del punto */}
     <div className="mb-4 space-y-1 text-green-900 w-full ">
       <h3 className="text-xl font-bold">{point.name}</h3>
-      <p className="text-sm"><span className="font-medium">📍 Tipo:</span> {point.point_type}</p>
+      <div className="flex flex-wrap gap-1 items-center">
+        <span className="font-medium">♻️ Tipos:</span>
+        {point.types && point.types.length > 0 ? (
+          point.types.map(type => (
+            <span 
+              key={type.id}
+              className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full"
+            >
+              {type.name}
+            </span>
+          ))
+        ) : (
+          <span className="text-gray-500 text-xs">No especificado</span>
+        )}
+      </div>
       <p className="text-sm"><span className="font-medium">📫 Dirección:</span> {point.address}</p>
       <p className="text-xs italic text-slate-500">
         Creado por <span className="font-semibold">{point.user.name}</span> el: {" "}
