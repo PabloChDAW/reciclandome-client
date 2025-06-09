@@ -312,7 +312,7 @@ export default function ShowPointsPage() {
                             <option value="">Todos los lugares</option>
                             <option value="address">Dirección</option>
                             <option value="road">Carretera</option>
-                            <option value="municipal_district">Punto de interés</option> 
+                            <option value="municipal_district">Distrito municipal</option> 
                             {/* <option value="poi">Punto de interés</option>
                             <option value="neighborhood">Barrio</option> */}
                             <option value="locality">Localidad</option>
@@ -320,7 +320,7 @@ export default function ShowPointsPage() {
                             <option value="region">Región</option>
                             <option value="country">País</option>
                             <option value="postcode">Código postal</option>
-                            <option value="place">Lugar</option>
+                            <option value="place">Lugar genérico</option>
                             </select>
                         </div>
                         
