@@ -3,7 +3,7 @@ const API_URL = "https://reciclandome-api-main-nfmp30.laravel.cloud/products";
 export const getAllProducts = async (token) => {
   // Asegúrate de pasar el token a la función
   try {
-    const response = await fetch(API_URL, {
+    const response = await fetch("http://2.154.81.198/api/products", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
