@@ -179,7 +179,6 @@ export default function ShowPointsPage() {
         }
     };
 
-   
     useEffect(() => {
         checkAuth();
         getTypes();
@@ -201,12 +200,12 @@ export default function ShowPointsPage() {
 
                 <div className="max-w-7xl mx-auto px-4 mb-8">
                     <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-4">Filtros</h3>
+                        <h3 className="text-lg font-semibold  mb-4">Filtros</h3>
                         
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {/* Toggle para mis puntos */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-3">
+                                <label className="block text-sm font-medium mb-3">
                                     {isAuthenticated ? "Mostrar mis puntos" : "Mostrar puntos"}
                                 </label>
                                 <div className="relative">
@@ -225,7 +224,7 @@ export default function ShowPointsPage() {
                         
                         {/* Buscador de ciudades */}
                         <div className="relative">
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                            <label className="block text-sm font-medium mb-1">
                             Filtrar por ciudad
                             </label>
                             <input
@@ -383,7 +382,7 @@ export default function ShowPointsPage() {
 
                         {/* Lista de puntos */}
                         {points.length > 0 ? (
-                            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
                                 {points.map((point) => (
                                     <PointItem key={point.id} point={point} onCenterMap={handleMarkerClick} />
                                 ))}
