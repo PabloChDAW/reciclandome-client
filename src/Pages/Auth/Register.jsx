@@ -121,7 +121,7 @@ export default function Register() {
             {formData.password && (
               <div className="mt-3 p-3 bg-gray-50 rounded-md space-y-2">
                 <p className="text-sm font-medium text-gray-700 mb-2">Requisitos de contraseña:</p>
-                <CriteriaItem met={passwordCriteria.hasMinLength} text="Al menos 10 caracteres" />
+                <CriteriaItem met={passwordCriteria.hasMinLength} text="Al menos 12 caracteres" />
                 <CriteriaItem met={passwordCriteria.hasLowercase} text="Al menos una letra minúscula" />
                 <CriteriaItem met={passwordCriteria.hasUppercase} text="Al menos una letra mayúscula" />
                 <CriteriaItem met={passwordCriteria.hasNumber} text="Al menos un número" />
