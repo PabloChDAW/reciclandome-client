@@ -311,10 +311,12 @@ export default function ShowPointsPage() {
                             >
                             <option value="">Todos los lugares</option>
                             <option value="address">Dirección</option>
-                            <option value="poi">Punto de interés</option>
-                            <option value="neighborhood">Barrio</option>
+                            <option value="road">Carretera</option>
+                            <option value="municipal_district">Punto de interés</option> 
+                            {/* <option value="poi">Punto de interés</option>
+                            <option value="neighborhood">Barrio</option> */}
                             <option value="locality">Localidad</option>
-                            <option value="municipality">Municipio</option>
+                            <option value="municipality">Municipio</option> 
                             <option value="region">Región</option>
                             <option value="country">País</option>
                             <option value="postcode">Código postal</option>
@@ -336,10 +338,13 @@ export default function ShowPointsPage() {
                             <option value="road">Carretera</option>
                             <option value="street">Calle</option>
                             <option value="admin_area">Área administrativa</option>
-                            <option value="building">Edificio</option>
+                            <option value="subregion">Subregión</option>
+                            <option value="county">Subregión</option>
+                            {/* <option value="building">Edificio</option>
                             <option value="natural">Elemento natural</option>
                             <option value="water">Agua</option>
-                            <option value="landuse">Uso de suelo</option>
+                            <option value="landuse">Uso de suelo</option> */}
+                            <option value="place">Lugar genérico</option>
                             </select>
                         </div>
                         </div>
