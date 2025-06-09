@@ -49,7 +49,7 @@ export default function Register() {
       return;
     }
     /* Petición de autenticación */
-    const res = await fetch("/api/register", {
+    const res = await fetch("https://reciclandome-api-main-nfmp30.laravel.cloud/register", {
       method: "post",
       body: JSON.stringify(formData),
     });

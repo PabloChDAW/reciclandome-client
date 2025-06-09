@@ -69,7 +69,7 @@ export default function Header({ isHome = false, isShop = false }) {
 
   async function handleLogout(e) {
     e.preventDefault();
-    const res = await fetch("/api/logout", {
+    const res = await fetch("https://reciclandome-api-main-nfmp30.laravel.cloud/logout", {
       method: "post",
       headers: {
         Authorization: `Bearer ${token}`,

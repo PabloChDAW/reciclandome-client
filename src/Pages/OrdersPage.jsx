@@ -10,7 +10,7 @@ export default function MyOrders() {
     useEffect(() => {
         async function fetchOrders() {
             try {
-                const res = await fetch(`/api/orders`, {
+                const res = await fetch(`https://reciclandome-api-main-nfmp30.laravel.cloud/orders`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },

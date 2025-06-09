@@ -127,7 +127,7 @@ export default function Create() {
     e.preventDefault();
 
     /* Petición de creación de point  */
-    const res = await fetch("/api/points", {
+    const res = await fetch("https://reciclandome-api-main-nfmp30.laravel.cloud/points", {
       method: 'post',
       headers: {
         Authorization: `Bearer ${token}`,

@@ -42,7 +42,7 @@ export default function ShowPointsPage() {
     };
     // Obtener puntos de reciclaje
     async function getPoints() {
-        const res = await fetch("/api/points");
+        const res = await fetch("https://reciclandome-api-main-nfmp30.laravel.cloud/points");
         const data = await res.json();
         console.log(data);
 
