@@ -9,6 +9,11 @@ export default function Map3({ points, onMarkerClick, centerOnPoint }) {
   const zoom = 4.5;
   const markers = useRef([]);
   const [mapStyle, setMapStyle] = useState('streets');
+  const styles = [
+    { id: "streets", emoji: "🛣️" },
+    { id: "satellite", emoji: "🛰️" },
+    { id: "hybrid", emoji: "🌐" },
+  ];
 
 
   maptilersdk.config.apiKey = 'bmHH9ekzKdndbQ2GrZEm';
@@ -32,13 +37,13 @@ export default function Map3({ points, onMarkerClick, centerOnPoint }) {
       };
 
       const handleKeyUp = () => {
-        if (map.current){
+        if (map.current) {
           map.current.scrollZoom.disable();
         }
       };
 
       const handleBlur = () => {
-        if (map.current){
+        if (map.current) {
           map.current.scrollZoom.disable();
         }
       };
@@ -112,35 +117,23 @@ export default function Map3({ points, onMarkerClick, centerOnPoint }) {
   return (
     <div className="map-container relative">
       {/* NUEVO: Selector de vista del mapa */}
-      <div className="absolute top-4 left-32 sm:left-1/2 transform -translate-x-1/2 z-10 bg-white/90 backdrop-blur-md rounded-xl shadow-lg px-2 py-1 gap-2 sm:px-6 sm:py-4 flex sm:gap-6 items-center text-sm font-medium text-gray-700">
-        {/* Selector de vista */}
-        <div className="flex flex-col">
-          <label className="mb-1 text-xs text-center text-gray-500">Vista del mapa</label>
-          <select
-            className="px-1 py-1 sm:px-3 sm:py-1.5 rounded-lg border border-gray-300 bg-white text-gray-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
-            value={mapStyle}
-            onChange={(e) => setMapStyle(e.target.value)}
+      <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-10 flex gap-3 text-xl bg-white rounded-full px-4 py-2 shadow-lg">
+        {styles.map(({ id, emoji }) => (
+          <button
+            key={id}
+            onClick={() => setMapStyle(id)}
+            title={id} // Mostrar en hover
+            aria-label={`Cambiar vista a ${id}`}
+            className={`transition-transform duration-200 hover:scale-125 ${mapStyle === id
+                ? "text-blue-600 scale-125"
+                : "text-gray-500 hover:text-blue-400"
+              }`}
           >
-            <option value="streets">🛣️ Calles</option>
-            <option value="satellite">🛰️ Satélite</option>
-            <option value="hybrid">🌐 Híbrido</option>
-          </select>
-        </div>
-
-        {/* Selector de reciclaje */}
-        <div className="flex flex-col">
-          <label className="mb-1 text-xs text-center text-gray-500">Filtrar por reciclaje</label>
-          <select
-            className="px-3 py-1.5 rounded-lg border border-gray-300 bg-white text-gray-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 transition"
-          >
-            <option value="todos">♻️ Todos</option>
-            <option value="papel">📄 Papel</option>
-            <option value="vidrio">🍾 Vidrio</option>
-            <option value="plastico">🧴 Plástico</option>
-            <option value="organico">🍌 Orgánico</option>
-          </select>
-        </div>
+            {emoji}
+          </button>
+        ))}
       </div>
+
 
 
       {/* Mapa */}
