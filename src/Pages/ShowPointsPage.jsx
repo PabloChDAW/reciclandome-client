@@ -3,6 +3,7 @@ import Map3 from "../Components/Map3";
 import InfoBox from "../Components/Infobox";
 import PointItem from "../Components/PointItem";
 import ToggleSwitchFilter from "../Components/ToggleSwitchFilter";
+import SortingButtons from "../Components/SortingButtons";
 export default function ShowPointsPage() {
     const [points, setPoints] = useState([]);
     const [selectedPoint, setSelectedPoint] = useState(null);
@@ -19,6 +20,12 @@ export default function ShowPointsPage() {
     place_type: '',
     way: ''
     });
+
+    const [sorting, setSorting] = useState({
+    orderBy: "created_at",
+    orderDirection: "desc",
+    })
+
     const [cityOptions, setCityOptions] = useState([]);
     const [showCityDropdown, setShowCityDropdown] = useState(false);
     const [types, setTypes] = useState([]);
@@ -95,6 +102,10 @@ export default function ShowPointsPage() {
         setFilters(prev => ({ ...prev, user: !prev.user }));
     };
 
+    const handleSortChange = (orderBy, orderDirection) => {
+        setSorting({ orderBy, orderDirection })
+    }
+
     // Obtener puntos de reciclaje
     // Obtener puntos de reciclaje con filtros
     async function getPoints() {
@@ -116,7 +127,10 @@ export default function ShowPointsPage() {
     if (Object.keys(activeFilters).length > 0) {
         params.append('filters', JSON.stringify(activeFilters));
     }
-    
+
+    params.append("order_by", sorting.orderBy)
+    params.append("order_direction", sorting.orderDirection)
+
     try {
         const headers = {
             Accept: "application/json",
@@ -188,7 +202,7 @@ export default function ShowPointsPage() {
         console.log('Filtros cambiaron:', filters);
         console.log('Estado autenticación:', isAuthenticated);
         getPoints();
-    }, [filters, isAuthenticated]);
+    }, [filters, isAuthenticated, sorting]);
 
     return (
         <>
@@ -199,6 +213,12 @@ export default function ShowPointsPage() {
                 </h1>
 
                 <div className="max-w-7xl mx-auto px-4 mb-8">
+                    <SortingButtons
+                        currentSort={sorting.orderBy}
+                        currentDirection={sorting.orderDirection}
+                        onSortChange={handleSortChange}
+                    />
+
                     <div className="bg-white p-6 rounded-lg shadow-md mb-6">
                         <h3 className="text-lg font-semibold  mb-4">Filtros</h3>
                         
