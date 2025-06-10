@@ -7,6 +7,22 @@ import Swal from "sweetalert2"
 import toastr from "toastr"
 import "toastr/build/toastr.min.css"
 
+function getTypeRoute(typeName) {
+  const routeMap = {
+    'Plásticos': 'plasticos',
+    'Vidrios': 'vidrios',
+    'Aceites': 'aceites',
+    'Orgánica': 'organica',
+    'Electrónicos': 'electronicos',
+    'Textiles': 'textiles',
+    'Neumáticos': 'neumaticos',
+    'Chatarra': 'chatarra',
+    'Construcción': 'construccion'
+  };
+  
+  return routeMap[typeName] || typeName.toLowerCase();
+}
+
 export default function PointItemProfile({ point, handleDeletePoint }) {
   const { user, token } = useContext(AppContext)
   const navigate = useNavigate()
@@ -56,18 +72,22 @@ export default function PointItemProfile({ point, handleDeletePoint }) {
           <h3 className="font-semibold text-green-900 truncate">{point.name}</h3>
 
           {/* Tipos de reciclaje */}
-          {point.types && point.types.length > 0 && (
+            {point.types && point.types.length > 0 && (
             <div className="flex flex-wrap gap-1 mt-1 mb-2">
-              {point.types.slice(0, 3).map((type) => (
-                <span key={type.id} className="bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded-full">
-                  {type.name}
-                </span>
-              ))}
-              {point.types.length > 3 && (
+                {point.types.slice(0, 3).map((type) => (
+                <Link
+                    key={type.id}
+                    to={`/tipos/${getTypeRoute(type.name)}`}
+                    className="bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded-full hover:bg-green-200 transition-colors duration-200"
+                >
+                    {type.name}
+                </Link>
+                ))}
+                {point.types.length > 3 && (
                 <span className="text-green-600 text-xs px-2 py-0.5">+{point.types.length - 3} más</span>
-              )}
+                )}
             </div>
-          )}
+            )}
 
           <p className="text-sm text-gray-600 truncate">📍 {point.address}</p>
         </div>
