@@ -45,12 +45,12 @@ export default function Register() {
 
   async function handleRegister(e) {
     e.preventDefault();
-    if (!isPasswordValid) {
-      return;
-    }
     /* Petición de autenticación */
-    const res = await fetch("/api/register", {
+    const res = await fetch("https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/register", {
       method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(formData),
     });
 
@@ -58,12 +58,11 @@ export default function Register() {
 
     if (data.errors) {
       setErrors(data.errors);
-      toastr.error(data.errors, 'Error al registrar');
     } else {
       localStorage.setItem("token", data.token);
       setToken(data.token);
-      toastr.success('Tu cuenta ha sido creada exitosamente', '¡Bienvenido!');
       navigate("/");
+      // console.log(data);
     }
   }
 

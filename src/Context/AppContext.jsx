@@ -39,9 +39,10 @@ export default function AppProvider({ children }) {
   }, [user]);
 
   async function getUser() {
-    if (!token) return;
-    const res = await fetch("/api/user", {
+    /* Petición de autorización */
+    const res = await fetch("https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/user", {
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -49,18 +50,13 @@ export default function AppProvider({ children }) {
     const data = await res.json();
 
     if (res.ok) {
-      setUser(prev => {
-        const savedImage = localStorage.getItem(`profileImage_${data.id}`);
-        return savedImage ? { ...data, imageUrl: savedImage } : data;
-      });
+      setUser(data);
     }
   }
 
   useEffect(() => {
     if (token) {
       getUser();
-    } else {
-      setUser(null);
     }
   }, [token]);
 

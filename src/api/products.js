@@ -3,7 +3,7 @@ const API_URL = "http://localhost:5173/api/products";
 export const getAllProducts = async (token) => {
   // Asegúrate de pasar el token a la función
   try {
-    const response = await fetch(API_URL, {
+    const response = await fetch("https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/products", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

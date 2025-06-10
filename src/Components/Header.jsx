@@ -70,15 +70,16 @@ export default function Header({ isHome = false, isShop = false }) {
 
   async function handleLogout(e) {
     e.preventDefault();
-    const res = await fetch("/api/logout", {
+
+    const res = await fetch("https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/logout", {
       method: "post",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
 
     const data = await res.json();
-
     console.log(data);
 
     if (res.ok) {
@@ -86,12 +87,6 @@ export default function Header({ isHome = false, isShop = false }) {
       setToken(null);
       localStorage.removeItem("token");
       clearCart();
-      setShowLogoutToast(true); // <-- Mostrar toastr aquí
-      // Ocultar toastr después de 2 segundos y navegar
-      setTimeout(() => {
-        setShowLogoutToast(false);
-        navigate("/");
-      }, 2000);
       navigate("/");
     }
   }

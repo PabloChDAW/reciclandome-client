@@ -21,7 +21,7 @@ export default function Login() {
   async function handleLogin(e) {
     e.preventDefault();
     /* Petición de login */
-    const res = await fetch("/api/login", {
+    const res = await fetch("https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/login", {
       method: "post",
       body: JSON.stringify(formData),
     });
@@ -31,12 +31,11 @@ export default function Login() {
 
     if (data.errors) {
       setErrors(data.errors);
-      toastr.error('Revisa los campos del formulario.', 'Error de inicio de sesión');
     } else {
       localStorage.setItem("token", data.token);
       setToken(data.token);
-      toastr.success('Has iniciado sesión correctamente', '¡Bienvenido!');
       navigate("/");
+      // console.log(data);
     }
   }
 
