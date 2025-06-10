@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
 import { FiLogOut } from "react-icons/fi";
 import { AppContext } from "../Context/AppContext";
+import toastr from 'toastr';
 
 export default function Header({ isHome = false, isShop = false }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -56,7 +57,7 @@ export default function Header({ isHome = false, isShop = false }) {
               : item
           );
         } else {
-          alert("No puedes añadir más de este producto. Stock máximo alcanzado.");
+          toastr.error("No puedes añadir más de este producto. Stock máximo alcanzado.");
           return prevCart;
         }
       }

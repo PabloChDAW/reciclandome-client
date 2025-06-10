@@ -4,6 +4,7 @@ import InfoBox from "../Components/Infobox";
 import PointItem from "../Components/PointItem";
 import ToggleSwitchFilter from "../Components/ToggleSwitchFilter";
 import SortingButtons from "../Components/SortingButtons";
+import toastr from 'toastr';
 
 
 export default function ShowPointsPage() {
@@ -98,7 +99,7 @@ export default function ShowPointsPage() {
 
     const handleUserToggle = () => {
         if (!isAuthenticated) {
-            alert("Debes iniciar sesión para ver tus puntos");
+            toastr.error("Debes iniciar sesión para ver tus puntos");
             return;
         }
         setFilters(prev => ({ ...prev, user: !prev.user }));
