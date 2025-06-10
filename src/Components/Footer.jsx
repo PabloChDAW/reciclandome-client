@@ -133,21 +133,21 @@ const Footer = () => {
             Copyright © 2025 Reciclando.me. Todos los derechos reservados.{" "}
             <Link
               to="/aviso-legal"
-              className="hover:text-green-700 hover:underline"
+              className="dark:hover:text-white dark:hover:font-semibold  hover:text-green-700 hover:underline"
             >
               Aviso legal
             </Link>{" "}
             |{" "}
             <Link
               to="/politica-privacidad"
-              className="hover:text-green-700 hover:underline"
+              className="dark:hover:text-white dark:hover:font-semibold  hover:text-green-700 hover:underline"
             >
               Política de privacidad
             </Link>{" "}
             |{" "}
             <Link
               to="/politica-cookies"
-              className="hover:text-green-700 hover:underline"
+              className="dark:hover:text-white dark:hover:font-semibold  hover:text-green-700 hover:underline"
             >
               Política de cookies
             </Link>

@@ -62,8 +62,8 @@ export default function Cart() {
                       className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-md mr-4 shrink-0"
                     />
                     <div className="text-left">
-                      <h3 className="font-semibold text-lg">{item.name}</h3>
-                      <p className="text-sm mt-1">
+                      <h3 className="dark:text-white font-semibold text-lg">{item.name}</h3>
+                      <p className="dark:text-white text-sm mt-1">
                         💸 {Number(item.price).toFixed(2)}€ × {item.quantity} ={" "}
                         <span className="font-medium">{subtotal.toFixed(2)}€</span>
                       </p>

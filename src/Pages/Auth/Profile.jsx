@@ -178,7 +178,7 @@ export default function Profile() {
                 <div className="mt-8">
                     <Link
                         to="/orders"
-                        className="inline-block border border-[#166534] bg-[#166534] hover:bg-white text-white hover:text-[#166534] rounded-full font-semibold px-5 py-2 transition shadow-md duration-300"
+                        className="inline-block borderdark:border-[#577759] border-[#166534]  dark:bg-[#577759] bg-[#166534] dark:hover:bg-white text-white hover:bg-white dark:hover:text-[#577759] hover:text-[#166534] rounded-full font-semibold px-5 py-2 transition shadow-md duration-300"
                     >
                         📦 Ver mis pedidos
                     </Link>
