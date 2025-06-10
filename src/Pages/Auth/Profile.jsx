@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom"; 
 import PointItemProfile from "../../Components/PointItemProfile";
 import { AppContext } from "../../Context/AppContext";
+import toastr from 'toastr';
 
 export default function Profile() {
     const { user, setUser } = useContext(AppContext);
@@ -96,10 +97,10 @@ export default function Profile() {
                 // Actualizamos también el user en contexto (opcional)
                 setUser(prev => ({ ...prev, imageUrl: data.secure_url }));
             } else {
-                alert("Error al subir la imagen");
+                toastr.error("Error al subir la imagen");
             }
         } catch (error) {
-            alert("Error en la subida");
+            toastr.error("Error en la subida");
         } finally {
             setUploading(false);
         }
