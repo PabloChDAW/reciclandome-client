@@ -25,8 +25,8 @@ export default function SortingButtons({ currentSort, currentDirection, onSortCh
   }
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md mb-6">
-      <h3 className="text-lg font-semibold mb-4">Ordenar por:</h3>
+    <div className="bg-white dark:bg-[#344735] p-4 rounded-lg shadow-md mb-6">
+      <h3 className="dark:text-white text-lg font-semibold mb-4">Ordenar por:</h3>
       <div className="flex flex-wrap gap-2">
         {sortOptions.map((option) => (
           <button

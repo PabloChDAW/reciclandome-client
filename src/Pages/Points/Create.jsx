@@ -190,11 +190,11 @@ export default function Create() {
 
       <form
         onSubmit={handleCreate}
-        className="mt-20 max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 gap-6 bg-white border border-slate-200 shadow-md rounded-3xl p-8"
+        className="dark:bg-[#344735] mt-20 max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 gap-6 bg-white border border-slate-200 shadow-md rounded-3xl p-8"
       >
         {/* Coordenadas */}
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Latitud</label>
+          <label className="block text-sm font-medium text-slate-700 dark:text-white mb-1">Latitud</label>
           <input
             type="number"
             step="0.00001"
@@ -207,7 +207,7 @@ export default function Create() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Longitud</label>
+          <label className="block text-sm font-medium text-slate-700 dark:text-white mb-1">Longitud</label>
           <input
             type="number"
             step="0.00001"
@@ -219,51 +219,61 @@ export default function Create() {
           {errors.longitude && <p className="text-red-600 text-xs mt-1">{errors.longitude[0]}</p>}
         </div>
 
-        {/* Tipo de punto */}
+        {/* Tipo de punto mejorado visualmente */}
         <div className="sm:col-span-2">
-          <label className="block text-sm font-medium text-slate-700 mb-2">Tipos de residuos</label>
-          <div className="space-y-2">
-            {pointTypes.map((type) => (
-              <div key={type.id} className="flex items-center">
-                <input
-                  type="checkbox"
-                  id={`type-${type.id}`}
-                  value={type.id}
-                  checked={formData.types?.includes(type.id)}
-                  onChange={(e) => {
-                    const typeId = parseInt(e.target.value);
-                    const newTypes = e.target.checked
-                      ? [...(formData.types || []), typeId]
-                      : (formData.types || []).filter((id) => id !== typeId);
-                    setFormData({ ...formData, types: newTypes });
-                  }}
-                  className="h-4 w-4 text-blue-600 border-gray-300 rounded"
-                />
-                <label htmlFor={`type-${type.id}`} className="ml-2 text-sm text-slate-700">
+          <label className="block text-sm font-semibold text-slate-700 dark:text-white mb-3">Tipos de residuos</label>
+          <div className="flex flex-wrap gap-3">
+            {pointTypes.map((type) => {
+              const isChecked = formData.types?.includes(type.id);
+              return (
+                <label
+                  key={type.id}
+                  htmlFor={`type-${type.id}`}
+                  className={`cursor-pointer border rounded-xl px-4 py-2 text-sm font-medium transition-all duration-300 
+            ${isChecked
+                      ? 'bg-green-100 dark:bg-green-800 text-green-800 dark:text-white border-green-500'
+                      : 'bg-white dark:bg-[#577759] text-slate-700 dark:text-white border-gray-300 hover:border-green-400'
+                    }`}
+                >
+                  <input
+                    type="checkbox"
+                    id={`type-${type.id}`}
+                    value={type.id}
+                    checked={isChecked}
+                    onChange={(e) => {
+                      const typeId = parseInt(e.target.value);
+                      const newTypes = e.target.checked
+                        ? [...(formData.types || []), typeId]
+                        : (formData.types || []).filter((id) => id !== typeId);
+                      setFormData({ ...formData, types: newTypes });
+                    }}
+                    className="hidden"
+                  />
                   {type.name}
                 </label>
-              </div>
-            ))}
+              );
+            })}
           </div>
-          {errors.types && <p className="text-red-600 text-xs mt-1">{errors.types[0]}</p>}
+          {errors.types && <p className="text-red-600 text-xs mt-2">{errors.types[0]}</p>}
         </div>
 
+
         {/* Info extra autocompletada */}
-        <div className="sm:col-span-2 bg-slate-50 border border-slate-200 p-5 rounded-xl shadow-inner space-y-1">
-          <h3 className="text-base font-semibold text-slate-700 mb-2">📄 Información del lugar</h3>
-          <p><strong>🏷 Nombre:</strong> {formData.name || "—"}</p>
-          <p><strong>📌 Tipo de lugar:</strong> {formData.place_type || "—"}</p>
-          <p><strong>📍 Dirección:</strong> {formData.address || "—"}</p>
-          <p><strong>🏙 Localidad:</strong> {formData.city || "—"}</p>
-          <p><strong>🌎 Región:</strong> {formData.region || "—"}</p>
-          <p><strong>🌐 País:</strong> {formData.country || "—"}</p>
-          <p><strong>📮 Código postal:</strong> {formData.postcode || "—"}</p>
-          <p><strong>📖 Tipo de vía:</strong> {formData.way || "—"}</p>
+        <div className="sm:col-span-2 bg-slate-50 dark:bg-[#577759] border border-slate-200 p-5 rounded-xl shadow-inner space-y-1">
+          <h3 className="text-base font-semibold text-slate-700 dark:text-white mb-2">📄 Información del lugar</h3>
+          <p className="dark:text-gray-200 gap-2"><strong>🏷  Nombre:</strong> {formData.name || "—"}</p>
+          <p className="dark:text-gray-200 gap-2"><strong>📌 Tipo de lugar:</strong> {formData.place_type || "—"}</p>
+          <p className="dark:text-gray-200 gap-2"><strong>📍 Dirección:</strong> {formData.address || "—"}</p>
+          <p className="dark:text-gray-200 gap-2"><strong>🏙  Localidad:</strong> {formData.city || "—"}</p>
+          <p className="dark:text-gray-200 gap-2"><strong>🌎 Región:</strong> {formData.region || "—"}</p>
+          <p className="dark:text-gray-200 gap-2"><strong>🌐 País:</strong> {formData.country || "—"}</p>
+          <p className="dark:text-gray-200 gap-2"><strong>📮 Código postal:</strong> {formData.postcode || "—"}</p>
+          <p className="dark:text-gray-200 gap-2"><strong>📖 Tipo de vía:</strong> {formData.way || "—"}</p>
         </div>
 
         {/* Campo nombre editable */}
         <div className="sm:col-span-2">
-          <label className="block text-sm font-medium text-slate-700 mb-1">Nombre del lugar</label>
+          <label className="block text-sm font-medium text-slate-700 dark:text-white mb-1">Nombre del lugar</label>
           <input
             type="text"
             placeholder="Ej: Centro de Reciclaje Municipal"
@@ -272,7 +282,7 @@ export default function Create() {
             className="w-full border border-slate-300 rounded-lg px-4 py-2 text-sm"
           />
           {errors.name && <p className="text-red-600 text-xs mt-1">{errors.name[0]}</p>}
-          <div className="text-xs text-slate-500 mt-1">
+          <div className="text-xs text-slate-500 dark:text-slate-200 mt-1">
             Este campo se autocompleta al hacer click en el mapa, pero puedes editarlo.<br/>
             Te pedimos que los nombres sean <b>respetuosos y adecuados para toda la comunidad</b>. Ayúdanos a mantener un espacio seguro y amigable.
           </div>
@@ -280,7 +290,7 @@ export default function Create() {
 
         {/* Datos extra del usuario */}
         <div className="sm:col-span-2">
-          <label className="block text-sm font-medium text-slate-700 mb-1">Descripción (opcional)</label>
+          <label className="block text-sm font-medium text-slate-700 dark:text-white mb-1">Descripción (opcional)</label>
           <input
             type="text"
             placeholder="Ej: Este punto recibe plásticos y cartones."
@@ -291,7 +301,7 @@ export default function Create() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Teléfono</label>
+          <label className="block text-sm font-medium text-slate-700 dark:text-white mb-1">Teléfono</label>
           <input
             type="text"
             placeholder="Ej: +54 11 1234 5678"

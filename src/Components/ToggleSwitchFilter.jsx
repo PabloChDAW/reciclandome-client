@@ -1,6 +1,6 @@
 const ToggleSwitchFilter = ({ enabled, onToggle }) => (
   <div className="flex items-center space-x-3">
-    <span className={`text-sm ${!enabled ? 'text-gray-900 font-medium' : 'text-gray-500'}`}>
+    <span className={`text-sm ${!enabled ? 'text-gray-900 dark:text-white font-medium' : 'dark:text-white text-gray-500'}`}>
       Todos los puntos
     </span>
     <button
@@ -16,7 +16,7 @@ const ToggleSwitchFilter = ({ enabled, onToggle }) => (
         }`}
       />
     </button>
-    <span className={`text-sm ${enabled ? 'text-gray-900 font-medium' : 'text-gray-500'}`}>
+    <span className={`text-sm ${enabled ? 'text-gray-900 dark:text-white font-medium' : 'dark:text-white text-gray-500'}`}>
       Mis puntos
     </span>
   </div>

@@ -13,17 +13,17 @@ export default function ShowPointsPage() {
     const [user, setUser] = useState(null);
 
     const [filters, setFilters] = useState({
-    user: false,
-    city: '',
-    name: '',
-    types: [],
-    place_type: '',
-    way: ''
+        user: false,
+        city: '',
+        name: '',
+        types: [],
+        place_type: '',
+        way: ''
     });
 
     const [sorting, setSorting] = useState({
-    orderBy: "created_at",
-    orderDirection: "desc",
+        orderBy: "created_at",
+        orderDirection: "desc",
     })
 
     const [cityOptions, setCityOptions] = useState([]);
@@ -33,14 +33,14 @@ export default function ShowPointsPage() {
     // se debe centralizar un estado que le identifique en la página que lo carga
     // Además, las utilidades que quieran usarse del mapa en otros componentes deben declararse aquí y 
     // ser pasadas como props al componente del mapa para ser gestionados desde allí. 
-    const mapRef = useRef(null); 
+    const mapRef = useRef(null);
 
     const handleMarkerClick = (point) => {
         setSelectedPoint(point);
         centerMapOnPoint(point);
         const mapaElement = document.getElementById('mapa');
         if (mapaElement) {
-            mapaElement.scrollIntoView({ 
+            mapaElement.scrollIntoView({
                 behavior: 'smooth',
                 block: 'center'
             });
@@ -51,7 +51,7 @@ export default function ShowPointsPage() {
         if (mapRef.current) {
             const latitude = parseFloat(point.latitude);
             const longitude = parseFloat(point.longitude);
-            
+
             mapRef.current.flyTo({
                 center: [longitude, latitude],
                 zoom: 14,
@@ -109,49 +109,49 @@ export default function ShowPointsPage() {
     // Obtener puntos de reciclaje
     // Obtener puntos de reciclaje con filtros
     async function getPoints() {
-    setCargando(true);
-    
-    const params = new URLSearchParams();
-    
-    // Solo agregar filtros si hay alguno activo
-    const activeFilters = {};
-    if (filters.user && isAuthenticated) {
+        setCargando(true);
+
+        const params = new URLSearchParams();
+
+        // Solo agregar filtros si hay alguno activo
+        const activeFilters = {};
+        if (filters.user && isAuthenticated) {
             activeFilters.user = 'me';
         }
-    if (filters.city) activeFilters.city = filters.city;
-    if (filters.name) activeFilters.name = filters.name;
-    if (filters.types.length > 0) activeFilters.types = filters.types;
-    if (filters.place_type) activeFilters.place_type = filters.place_type;
-    if (filters.way) activeFilters.way = filters.way;
-    
-    if (Object.keys(activeFilters).length > 0) {
-        params.append('filters', JSON.stringify(activeFilters));
-    }
+        if (filters.city) activeFilters.city = filters.city;
+        if (filters.name) activeFilters.name = filters.name;
+        if (filters.types.length > 0) activeFilters.types = filters.types;
+        if (filters.place_type) activeFilters.place_type = filters.place_type;
+        if (filters.way) activeFilters.way = filters.way;
 
-    params.append("order_by", sorting.orderBy)
-    params.append("order_direction", sorting.orderDirection)
-
-    try {
-        const headers = {
-            Accept: "application/json",
-        };
-        const token = localStorage.getItem("token");
-        if (token && isAuthenticated) {
-            headers["Authorization"] = `Bearer ${token}`;
+        if (Object.keys(activeFilters).length > 0) {
+            params.append('filters', JSON.stringify(activeFilters));
         }
-        const res = await fetch(`/api/points/filter?${params}`, {headers});
-        const data = await res.json();
-        console.log(data);
 
-        if (res.ok) {
-        setPoints(data);
+        params.append("order_by", sorting.orderBy)
+        params.append("order_direction", sorting.orderDirection)
+
+        try {
+            const headers = {
+                Accept: "application/json",
+            };
+            const token = localStorage.getItem("token");
+            if (token && isAuthenticated) {
+                headers["Authorization"] = `Bearer ${token}`;
+            }
+            const res = await fetch(`/api/points/filter?${params}`, { headers });
+            const data = await res.json();
+            console.log(data);
+
+            if (res.ok) {
+                setPoints(data);
+            }
+            console.log("los punticos son: ", data)
+        } catch (error) {
+            console.error('Error obteniendo puntos:', error);
         }
-        console.log("los punticos son: ", data)
-    } catch (error) {
-        console.error('Error obteniendo puntos:', error);
-    }
-    
-    setCargando(false);
+
+        setCargando(false);
     }
 
     async function getTypes() {
@@ -159,7 +159,7 @@ export default function ShowPointsPage() {
             const res = await fetch("/api/types");
             const data = await res.json();
             if (res.ok) {
-            setTypes(data);
+                setTypes(data);
             }
         } catch (error) {
             console.error('Error obteniendo tipos:', error);
@@ -177,16 +177,16 @@ export default function ShowPointsPage() {
             // Obtener ciudades únicas de los puntos existentes
             const res = await fetch("/api/points");
             const allPoints = await res.json();
-            
+
             if (res.ok) {
-            const cities = [...new Set(
-                allPoints
-                .map(point => point.city)
-                .filter(city => city && city.toLowerCase().includes(searchTerm.toLowerCase()))
-            )].slice(0, 10); // Limitar a 10 sugerencias
-            
-            setCityOptions(cities);
-            setShowCityDropdown(cities.length > 0);
+                const cities = [...new Set(
+                    allPoints
+                        .map(point => point.city)
+                        .filter(city => city && city.toLowerCase().includes(searchTerm.toLowerCase()))
+                )].slice(0, 10); // Limitar a 10 sugerencias
+
+                setCityOptions(cities);
+                setShowCityDropdown(cities.length > 0);
             }
         } catch (error) {
             console.error('Error buscando ciudades:', error);
@@ -212,20 +212,20 @@ export default function ShowPointsPage() {
                     ♻️ Puntos de Reciclaje
                 </h1>
 
-                <div className="max-w-7xl mx-auto px-4 mb-8">
+                <div className="max-w-7xl mx-auto px-4 mb-8 ">
                     <SortingButtons
                         currentSort={sorting.orderBy}
                         currentDirection={sorting.orderDirection}
                         onSortChange={handleSortChange}
                     />
 
-                    <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-                        <h3 className="text-lg font-semibold  mb-4">Filtros</h3>
-                        
+                    <div className="bg-white dark:bg-[#344735] p-6 rounded-lg shadow-md mb-6">
+                        <h3 className="dark:text-white text-lg font-semibold mb-4">Filtros</h3>
+
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {/* Toggle para mis puntos */}
+                            {/* Toggle para mis puntos */}
                             <div>
-                                <label className="block text-sm font-medium mb-3">
+                                <label className="dark:text-white block text-sm font-medium mb-3">
                                     {isAuthenticated ? "Mostrar mis puntos" : "Mostrar puntos"}
                                 </label>
                                 <div className="relative">
@@ -235,163 +235,164 @@ export default function ShowPointsPage() {
                                         disabled={!isAuthenticated}
                                     />
                                     {!isAuthenticated && (
-                                        <p className="text-xs text-gray-500 mt-1">
+                                        <p className="text-xs text-gray-500 dark:text-white mt-1">
                                             Inicia sesión para filtrar tus puntos
                                         </p>
                                     )}
                                 </div>
                             </div>
-                        
-                        {/* Buscador de ciudades */}
-                        <div className="relative">
-                            <label className="block text-sm font-medium mb-1">
-                            Filtrar por ciudad
-                            </label>
-                            <input
-                            type="text"
-                            value={filters.city}
-                            onChange={(e) => {
-                                const value = e.target.value;
-                                setFilters(prev => ({ ...prev, city: value }));
-                                searchCities(value);
-                            }}
-                            onFocus={() => {
-                                if (filters.city.length >= 3) setShowCityDropdown(true);
-                            }}
-                            onBlur={() => {
-                                // Delay para permitir click en dropdown
-                                setTimeout(() => setShowCityDropdown(false), 200);
-                            }}
-                            placeholder="Escribe al menos 3 letras..."
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                            />
-                            
-                            {/* Dropdown de sugerencias */}
-                            {showCityDropdown && cityOptions.length > 0 && (
-                            <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
-                                {cityOptions.map((city, index) => (
-                                <button
-                                    key={index}
-                                    type="button"
-                                    onClick={() => {
-                                    setFilters(prev => ({ ...prev, city }));
-                                    setShowCityDropdown(false);
+
+                            {/* Buscador de ciudades */}
+                            <div className="relative">
+                                <label className="dark:text-white block text-sm font-medium mb-1">
+                                    Filtrar por ciudad
+                                </label>
+                                <input
+                                    type="text"
+                                    value={filters.city}
+                                    onChange={(e) => {
+                                        const value = e.target.value;
+                                        setFilters(prev => ({ ...prev, city: value }));
+                                        searchCities(value);
                                     }}
-                                    className="w-full text-left px-3 py-2 hover:bg-gray-100 text-sm"
-                                >
-                                    {city}
-                                </button>
-                                ))}
+                                    onFocus={() => {
+                                        if (filters.city.length >= 3) setShowCityDropdown(true);
+                                    }}
+                                    onBlur={() => {
+                                        // Delay para permitir click en dropdown
+                                        setTimeout(() => setShowCityDropdown(false), 200);
+                                    }}
+                                    placeholder="Escribe al menos 3 letras..."
+                                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                                />
+
+                                {/* Dropdown de sugerencias */}
+                                {showCityDropdown && cityOptions.length > 0 && (
+                                    <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                                        {cityOptions.map((city, index) => (
+                                            <button
+                                                key={index}
+                                                type="button"
+                                                onClick={() => {
+                                                    setFilters(prev => ({ ...prev, city }));
+                                                    setShowCityDropdown(false);
+                                                }}
+                                                className="w-full text-left px-3 py-2 hover:bg-gray-100 text-sm"
+                                            >
+                                                {city}
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
-                            )}
-                        </div>
-                        
-                        {/* Buscador por nombre */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Buscar por nombre
-                            </label>
-                            <input
-                            type="text"
-                            value={filters.name}
-                            onChange={(e) => setFilters(prev => ({ ...prev, name: e.target.value }))}
-                            placeholder="Nombre del punto..."
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                            />
-                        </div>
-                        
-                        {/* Filtro por tipo de punto */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                                Tipos de residuos
-                            </label>
-                            <select
-                                multiple
-                                value={filters.types}
-                                onChange={(e) => {
-                                 const selectedOptions = Array.from(e.target.selectedOptions).map(o => Number(o.value));
-                                setFilters(prev => ({ ...prev, types: selectedOptions }));
-                                }}
-                                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 h-[100px]"
-                            >
-                                {types.map((type) => (
-                                <option key={type.id} value={type.id}>
-                                    {type.name}
-                                </option>
-                                ))}
-                            </select>
-                            <p className="text-xs text-gray-500 mt-1 italic">Mantén presionado Ctrl (Windows) o Cmd (Mac) para seleccionar múltiples</p>
-                        </div>
-                        
-                        {/* Filtro por tipo de lugar */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Tipo de lugar
-                            </label>
-                            <select
-                            value={filters.place_type}
-                            onChange={(e) => setFilters(prev => ({ ...prev, place_type: e.target.value }))}
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                            >
-                            <option value="">Todos los lugares</option>
-                            <option value="address">Dirección</option>
-                            <option value="road">Carretera</option>
-                            <option value="municipal_district">Distrito municipal</option> 
-                            {/* <option value="poi">Punto de interés</option>
+
+                            {/* Buscador por nombre */}
+                            <div>
+                                <label className="block dark:text-white text-sm font-medium mb-1">
+                                    Buscar por nombre
+                                </label>
+                                <input
+                                    type="text"
+                                    value={filters.name}
+                                    onChange={(e) => setFilters(prev => ({ ...prev, name: e.target.value }))}
+                                    placeholder="Nombre del punto..."
+                                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                                />
+                            </div>
+
+                            {/* Filtro por tipo de punto */}
+                            <div>
+                                <label className="block dark:text-white text-sm font-medium  mb-1">
+                                    Tipos de residuos
+                                </label>
+                                <select
+                                    multiple
+                                    value={filters.types}
+                                    onChange={(e) => {
+                                        const selectedOptions = Array.from(e.target.selectedOptions).map(o => Number(o.value));
+                                        setFilters(prev => ({ ...prev, types: selectedOptions }));
+                                    }}
+                                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 h-[100px]"
+                                >
+                                    {types.map((type) => (
+                                        <option key={type.id} value={type.id}>
+                                            {type.name}
+                                        </option>
+                                    ))}
+                                </select>
+                                <p className="text-xs text-gray-500 dark:text-gray-200 mt-1 italic">Mantén presionado Ctrl (Windows) o Cmd (Mac) para seleccionar múltiples</p>
+                            </div>
+
+                            {/* Filtro por tipo de lugar */}
+                            <div>
+                                <label className="block dark:text-white text-sm font-medium mb-1">
+                                    Tipo de lugar
+                                </label>
+                                <select
+                                    value={filters.place_type}
+                                    onChange={(e) => setFilters(prev => ({ ...prev, place_type: e.target.value }))}
+                                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                                >
+                                    <option value="">Todos los lugares</option>
+                                    <option value="address">Dirección</option>
+                                    <option value="road">Carretera</option>
+                                    <option value="municipal_district">Distrito municipal</option>
+                                    {/* <option value="poi">Punto de interés</option>
                             <option value="neighborhood">Barrio</option> */}
-                            <option value="locality">Localidad</option>
-                            <option value="municipality">Municipio</option> 
-                            <option value="region">Región</option>
-                            <option value="country">País</option>
-                            <option value="postcode">Código postal</option>
-                            <option value="place">Lugar genérico</option>
-                            </select>
-                        </div>
-                        
-                        {/* Filtro por vía */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Tipo de vía
-                            </label>
-                            <select
-                            value={filters.way}
-                            onChange={(e) => setFilters(prev => ({ ...prev, way: e.target.value }))}
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                            >
-                            <option value="">Todas las vías</option>
-                            <option value="road">Carretera</option>
-                            <option value="street">Calle</option>
-                            <option value="admin_area">Área administrativa</option>
-                            <option value="subregion">Subregión</option>
-                            <option value="county">Subregión</option>
-                            {/* <option value="building">Edificio</option>
+                                    <option value="locality">Localidad</option>
+                                    <option value="municipality">Municipio</option>
+                                    <option value="region">Región</option>
+                                    <option value="country">País</option>
+                                    <option value="postcode">Código postal</option>
+                                    <option value="place">Lugar genérico</option>
+                                </select>
+                            </div>
+
+                            {/* Filtro por vía */}
+                            <div>
+                                <label className="block dark:text-white text-sm font-medium mb-1">
+                                    Tipo de vía
+                                </label>
+                                <select
+                                    value={filters.way}
+                                    onChange={(e) => setFilters(prev => ({ ...prev, way: e.target.value }))}
+                                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                                >
+                                    <option value="">Todas las vías</option>
+                                    <option value="road">Carretera</option>
+                                    <option value="street">Calle</option>
+                                    <option value="admin_area">Área administrativa</option>
+                                    <option value="subregion">Subregión</option>
+                                    <option value="county">Subregión</option>
+                                    {/* <option value="building">Edificio</option>
                             <option value="natural">Elemento natural</option>
                             <option value="water">Agua</option>
                             <option value="landuse">Uso de suelo</option> */}
-                            <option value="place">Lugar genérico</option>
-                            </select>
+                                    <option value="place">Lugar genérico</option>
+                                </select>
+                            </div>
                         </div>
-                        </div>
-                        
+
                         {/* Botón para limpiar filtros */}
                         <div className="mt-4 flex justify-end">
-                        <button
-                            type="button"
-                            onClick={() => setFilters({
-                            user: false,
-                            city: '',
-                            name: '',
-                            types: [],
-                            place_type: '',
-                            way: ''
-                            })}
-                            className="text-sm text-gray-600 hover:text-gray-900 border border-gray-300 rounded-lg px-4 py-2 hover:bg-gray-50"
-                        >
-                            Limpiar filtros
-                        </button>
+                            <button
+                                type="button"
+                                onClick={() => setFilters({
+                                    user: false,
+                                    city: '',
+                                    name: '',
+                                    types: [],
+                                    place_type: '',
+                                    way: ''
+                                })}
+                                className="inline-flex items-center gap-2 text-sm bg-red-600 text-white hover:bg-white hover:text-red-600  border border-red-300 hover:border-red-500 rounded-full px-4 py-2 transition-all duration-300"
+                            >
+                                🧹 Limpiar filtros
+
+                            </button>
                         </div>
                     </div>
-                    </div>
+                </div>
                 <div id="mapa" className="mb-10 overflow-hidden border border-slate-200 shadow-[0_0_20px_3px_rgba(34,197,94,0.4)] transition-all duration-500">
                     <Map3 points={points} onMarkerClick={handleMarkerClick} centerOnPoint={selectedPoint} />
                 </div>
@@ -403,10 +404,10 @@ export default function ShowPointsPage() {
                     {/* Título de sección */}
                     <section className="mt-20">
                         <h3 className="dark:text-white text-3xl font-bold text-center mb-12 flex items-center justify-center gap-2">
-                        📌 {filters.user ? 'Mis puntos de reciclaje' : 
-                            filters.city || filters.name || filters.types.length > 0  || filters.place_type || filters.way ? 
-                            'Filtrando puntos' : 
-                            'Todos los puntos de reciclaje'}
+                            📌 {filters.user ? 'Mis puntos de reciclaje' :
+                                filters.city || filters.name || filters.types.length > 0 || filters.place_type || filters.way ?
+                                    'Filtrando puntos' :
+                                    'Todos los puntos de reciclaje'}
                         </h3>
 
                         {/* Lista de puntos */}
@@ -417,16 +418,16 @@ export default function ShowPointsPage() {
                                 ))}
                             </div>
                         ) : (
-                            cargando?
-                            <p className="text-center text-sm text-slate-500 italic mt-8">
-                                Cargando puntos...
-                            </p>
-                            :
-                            <p className="text-center text-sm text-slate-500 italic mt-8">
-                                {Object.values(filters).some(value => value !== false && value !== '') ? 
-                                'No se encontraron puntos con los filtros seleccionados.' : 
-                                'No hay puntos disponibles actualmente.'}
-                            </p>
+                            cargando ?
+                                <p className="text-center text-sm text-slate-500 italic mt-8">
+                                    Cargando puntos...
+                                </p>
+                                :
+                                <p className="text-center text-sm text-slate-500 italic mt-8">
+                                    {Object.values(filters).some(value => value !== false && value !== '') ?
+                                        'No se encontraron puntos con los filtros seleccionados.' :
+                                        'No hay puntos disponibles actualmente.'}
+                                </p>
                         )}
                     </section>
                 </div>

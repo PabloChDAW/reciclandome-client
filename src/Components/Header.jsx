@@ -331,7 +331,7 @@ export default function Header({ isHome = false, isShop = false }) {
         </>
 
         {/* NAVEGACIÓN VISTO ESCRITORIO */}
-        <nav className="hidden md:flex md:items-center md:gap-4 lg:gap-6 xl:gap-8 text-[#131700] lg:text-[15px] xl:text-[20px] sm:text-[12px]">
+        <nav className="hidden md:flex md:items-center md:gap-4 lg:gap-6 xl:gap-8 text-[#131700] lg:text-[15px] xl:text-[20px] sm:text-[14px]">
           <Link to="/" className={`${getLinkClass("/")}`}>
             Inicio
           </Link>
