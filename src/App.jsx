@@ -23,7 +23,15 @@ import PoliticaCookies from "./Pages/Cookies";
 import AvisoLegal from "./Pages/AvisoLegal";
 import ScrollToTop from "./Components/ScrollToTop.jsx";
 import Orders from "./Pages/OrdersPage";
-
+import Plasticos from "./Pages/Residuos/Plasticos.jsx";
+import Chatarra from "./Pages/Residuos/Chatarra.jsx";
+import Construccion from "./Pages/Residuos/Construccion.jsx";
+import Electronicos from "./Pages/Residuos/Electronicos.jsx";
+import Neumaticos from "./Pages/Residuos/Neumaticos.jsx";
+import Organica from "./Pages/Residuos/Organica.jsx";
+import Aceites from "./Pages/Residuos/Aceites.jsx";
+import Textiles from "./Pages/Residuos/Textiles.jsx";
+import Vidrios from "./Pages/Residuos/Vidrios.jsx";
 export default function App() {
   const { user } = useContext(AppContext);
 
@@ -54,6 +62,17 @@ export default function App() {
           <Route path='/points/update/:id' element={user ? <Update /> : <Login />} />
           <Route path='/thanks' element={<Thanks />} />
 
+          <Route path='/tipos'>
+            <Route path='plasticos' element={<Plasticos />} />
+            <Route path='vidrios' element={<Vidrios />} />
+            <Route path='aceites' element={<Aceites />} />
+            <Route path='organica' element={<Organica />} />
+            <Route path='electronicos' element={<Electronicos />} />
+            <Route path='textiles' element={<Textiles />} />
+            <Route path='neumaticos' element={<Neumaticos />} />
+            <Route path='chatarra' element={<Chatarra />} />
+            <Route path='construccion' element={<Construccion />} />
+          </Route>
         </Route>
       </Routes>
       </div>

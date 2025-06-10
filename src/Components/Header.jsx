@@ -234,7 +234,7 @@ export default function Header({ isHome = false, isShop = false }) {
                 onClick={() => setMenuOpen(false)}
                 className="flex items-center gap-2 font-bold animate-pulse hover:text-green-900"
               >
-                🗺️ VER PUNTOS LIMPIOS
+                🗺️ BUSCAR PUNTOS 
               </Link>
               <Link
                 to="/create"
@@ -352,7 +352,7 @@ export default function Header({ isHome = false, isShop = false }) {
                 to="/show"
                 className="block px-4 py-2 text-center text-[#131700] hover:text-[#166534] hover:bg-gray-200 transition duration-700"
               >
-                Ver puntos limpios
+                Buscar puntos
               </Link>
             </div>
           </div>

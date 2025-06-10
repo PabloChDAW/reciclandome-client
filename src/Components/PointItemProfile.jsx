@@ -73,7 +73,7 @@ export default function PointItemProfile({ point, handleDeletePoint }) {
         </div>
 
         {/* Botones de acción */}
-        <div className="flex-shrink-0 flex gap-2">
+        <div className="flex flex-col gap-2">
           <Link
             to={`/points/${point.id}`}
             className="bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-3 py-2 rounded-lg transition-colors duration-200 whitespace-nowrap"

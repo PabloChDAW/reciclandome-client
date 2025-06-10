@@ -1,6 +1,22 @@
 
 import { Link } from "react-router-dom";
 
+function getTypeRoute(typeName) {
+  const routeMap = {
+    'Plásticos': 'plasticos',
+    'Vidrios': 'vidrios',
+    'Aceites': 'aceites',
+    'Orgánica': 'organica',
+    'Electrónicos': 'electronicos',
+    'Textiles': 'textiles',
+    'Neumáticos': 'neumaticos',
+    'Chatarra': 'chatarra',
+    'Construcción': 'construccion'
+  };
+  
+  return routeMap[typeName] || typeName.toLowerCase();
+}
+
 const InfoBox = ({ selectedPoint }) => {
     if (!selectedPoint) return null;
 
@@ -17,9 +33,19 @@ const InfoBox = ({ selectedPoint }) => {
                 
                 <p>
                     <span className="font-bold">🏷 Tipos de residuos:</span>{" "}
-                    {selectedPoint.types && selectedPoint.types.length > 0
-                        ? selectedPoint.types.map((t) => t.name).join(", ")
-                        : "No especificado"}
+                    {selectedPoint.types && selectedPoint.types.length > 0 ? (
+                        selectedPoint.types.map(type => (
+                        <Link
+                            key={type.id}
+                            to={`/tipos/${getTypeRoute(type.name)}`}
+                            className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full hover:bg-green-200 transition-colors duration-200 inline-block"
+                        >
+                            {type.name}
+                        </Link>
+                        ))
+                    ) : (
+                        <span className="text-gray-500 text-xs">No especificado</span>
+                    )}
                 </p>
                 <p><span className="font-bold">📌Dirección: {selectedPoint.address}</span></p>
             </div>

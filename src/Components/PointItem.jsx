@@ -1,5 +1,21 @@
 import { Link } from "react-router-dom";
 
+function getTypeRoute(typeName) {
+  const routeMap = {
+    'Plásticos': 'plasticos',
+    'Vidrios': 'vidrios',
+    'Aceites': 'aceites',
+    'Orgánica': 'organica',
+    'Electrónicos': 'electronicos',
+    'Textiles': 'textiles',
+    'Neumáticos': 'neumaticos',
+    'Chatarra': 'chatarra',
+    'Construcción': 'construccion'
+  };
+  
+  return routeMap[typeName] || typeName.toLowerCase();
+}
+
 export default function PointItem({ point, onCenterMap }) {
   return (
   <div
@@ -10,15 +26,16 @@ export default function PointItem({ point, onCenterMap }) {
     <div className="mb-4 space-y-1 text-green-900 w-full ">
       <h3 className="text-xl font-bold">{point.name}</h3>
       <div className="flex flex-wrap gap-1 items-center">
-        <span className="font-medium">♻️ Tipos:</span>
+        <span className="font-bold">🏷 Tipos de residuos:</span>{" "}
         {point.types && point.types.length > 0 ? (
           point.types.map(type => (
-            <span 
+            <Link
               key={type.id}
-              className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full"
+              to={`/tipos/${getTypeRoute(type.name)}`}
+              className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full hover:bg-green-200 transition-colors duration-200 inline-block"
             >
               {type.name}
-            </span>
+            </Link>
           ))
         ) : (
           <span className="text-gray-500 text-xs">No especificado</span>

@@ -326,7 +326,7 @@ export default function Create() {
           <button
             type="submit"
             disabled={isGeocoding}
-            className="relative flex items-center justify-center w-full sm:w-[150px] border dark:border-[#577759] border-[#166534]  dark:bg-[#577759] bg-[#166534] dark:hover:bg-white text-white hover:bg-white dark:hover:text-[#577759] hover:text-[#166534] rounded-full shadow-lg py-3 px-5 text-sm transition-all duration-300"
+            className="relative flex items-center justify-center w-full sm:w-[150px] border dark:border-[#577759] border-[#166534] dark:bg-[#577759] bg-[#166534] dark:hover:bg-white text-white hover:bg-white dark:hover:text-[#577759] hover:text-[#166534] rounded-full shadow-lg py-3 px-5 text-sm transition-all duration-300"
           >
             {isGeocoding ? "Cargando datos..." : "✅ Crear punto"}
           </button>
