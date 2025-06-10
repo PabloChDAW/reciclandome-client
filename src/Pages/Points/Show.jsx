@@ -16,7 +16,7 @@ export default function Show() {
   const [cargando, setCargando] =useState(true);
   async function getPoint() {
     /* Petición de datos de un post. */
-    const res = await fetch(`/api/points/${id}`);
+    const res = await fetch(`https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/points/${id}`);
     const data = await res.json();
 
     // console.log(data);
@@ -44,7 +44,7 @@ export default function Show() {
 
     if (!result.isConfirmed) return;
 
-    const res = await fetch(`/api/points/${id}`, {
+    const res = await fetch(`https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/points/${id}`, {
       method: "delete",
       headers: {
         Authorization: `Bearer ${token}`,

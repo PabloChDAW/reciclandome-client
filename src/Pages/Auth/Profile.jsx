@@ -51,7 +51,7 @@ export default function Profile() {
         if (token) {
             headers["Authorization"] = `Bearer ${token}`;
         }
-        const res = await fetch(`/api/points/filter?${params}`, {headers});
+        const res = await fetch(`https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/points/filter?${params}`, {headers});
         const data = await res.json();
         console.log(data);
 

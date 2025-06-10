@@ -21,7 +21,7 @@ export default function Login() {
   async function handleLogin(e) {
     e.preventDefault();
     /* Petición de login */
-    const res = await fetch("/api/login", {
+    const res = await fetch("https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/login", {
       method: "post",
       body: JSON.stringify(formData),
     });

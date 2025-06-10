@@ -47,7 +47,7 @@ export default function Create() {
   useEffect(() => {
     const fetchPointTypes = async () => {
       try {
-        const response = await fetch("/api/types", {
+        const response = await fetch("https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/types", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -147,7 +147,7 @@ export default function Create() {
     e.preventDefault();
 
     /* Petición de creación de point  */
-    const res = await fetch("/api/points", {
+    const res = await fetch("https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/points", {
       method: 'post',
       headers: {
         Authorization: `Bearer ${token}`,

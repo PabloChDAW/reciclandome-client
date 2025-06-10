@@ -40,7 +40,7 @@ export default function AppProvider({ children }) {
 
   async function getUser() {
     if (!token) return;
-    const res = await fetch("/api/user", {
+    const res = await fetch("https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/user", {
       headers: {
         Authorization: `Bearer ${token}`,
       },

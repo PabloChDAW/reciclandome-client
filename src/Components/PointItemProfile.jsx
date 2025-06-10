@@ -44,7 +44,7 @@ export default function PointItemProfile({ point, handleDeletePoint }) {
 
       if (!result.isConfirmed) return
 
-      const res = await fetch(`/api/points/${point.id}`, {
+      const res = await fetch(`https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/points/${point.id}`, {
         method: "delete",
         headers: {
           Authorization: `Bearer ${token}`,
