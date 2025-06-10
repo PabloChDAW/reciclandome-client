@@ -86,29 +86,30 @@ export default function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 text-center max-w-7xl mx-auto">
             {[
               {
-                title: "Plásticos",
+                title: <Link to="/tipos/plasticos" >Plásticos</Link>,
                 text: "Envases, botellas, y otros residuos plásticos se reciclan para reducir la contaminación y darles una nueva vida.",
-                icon: <FaRecycle size={40} className="text-green-800 dark:text-white mx-auto mb-2" />
+                icon:<Link to="/tipos/plasticos"> <FaRecycle size={40} className="text-green-800 dark:text-white mx-auto mb-2" /> </Link>,
+                
               },
               {
-                title: "Papel/Cartón",
+                title: <Link to="/tipos/textiles" >Papel/Cartón</Link>,
                 text: "Recicla periódicos, cajas, y folletos para evitar la tala innecesaria de árboles y conservar recursos naturales.",
-                icon: <FaFileAlt size={40} className="text-green-800 dark:text-white mx-auto mb-2" />
+                icon:<Link to="/tipos/textiles"><FaFileAlt size={40} className="text-green-800 dark:text-white mx-auto mb-2" /></Link>
               },
               {
-                title: "Vidrio",
+                title: <Link to="/tipos/vidrios" >Vidrio</Link>,
                 text: "Botellas y frascos de vidrio pueden reciclarse indefinidamente sin perder calidad. ¡No los tires al cubo normal!",
-                icon: <FaGlassMartiniAlt size={40} className="text-green-800 dark:text-white mx-auto mb-2" />
+                icon:<Link to="/tipos/vidrios"><FaGlassMartiniAlt size={40} className="text-green-800 dark:text-white mx-auto mb-2" /> </Link>
               },
               {
-                title: "Metales",
+                title: <Link to="/tipos/chatarra" >Metales</Link>,
                 text: "Latas, envoltorios y objetos metálicos se funden para crear nuevos productos, ahorrando mucha energía.",
-                icon: <FaTrashAlt size={40} className="text-green-800 dark:text-white mx-auto mb-2" />
+                icon:<Link to="/tipos/chatarra"><FaTrashAlt size={40} className="text-green-800 dark:text-white mx-auto mb-2" /></Link>
               },
               {
-                title: "Residuos Orgánicos",
+                title: <Link to="/tipos/organica" >Residuos Orgánicos</Link>,
                 text: "Restos de comida y materia vegetal se transforman en compost, enriqueciendo el suelo de manera natural.",
-                icon: <FaLeaf size={40} className="text-green-800 dark:text-white mx-auto mb-2" />
+                icon:<Link to="/tipos/organica"><FaLeaf size={40} className="text-green-800 dark:text-white mx-auto mb-2" /></Link>
               }
             ].map((item, idx) => (
               <div key={idx} className="bg-gray-50 dark:bg-[#577759] p-4 rounded-xl shadow hover:shadow-md hover:scale-105 transition duration-700">
