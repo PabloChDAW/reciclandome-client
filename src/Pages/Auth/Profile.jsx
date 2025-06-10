@@ -189,7 +189,7 @@ export default function Profile() {
                     <h2 className="text-2xl font-bold text-gray-900 dark:text-white">♻️ Mis Puntos de Reciclaje</h2>
                     <Link
                     to="/create"
-                    className="bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors duration-200"
+                    className="bg-green-600 hover:bg-green-700 text-white text-sm font-medium text-center py-1 sm:px-4 sm:py-2 rounded-lg transition-colors duration-200"
                     >
                     + Añadir punto
                     </Link>
