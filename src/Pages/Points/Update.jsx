@@ -276,7 +276,24 @@ useEffect(() => {
         <p><strong>📮 Código postal:</strong> {formData.postcode || "—"}</p>
         <p><strong>📖 Categoría:</strong> {formData.way || "—"}</p>
       </div>
-
+      
+      {/* Campo nombre editable */}
+        <div className="sm:col-span-2">
+          <label className="block text-sm font-medium text-slate-700 mb-1">Nombre del lugar</label>
+          <input
+            type="text"
+            placeholder="Ej: Centro de Reciclaje Municipal"
+            value={formData.name || ""}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            className="w-full border border-slate-300 rounded-lg px-4 py-2 text-sm"
+          />
+          {errors.name && <p className="text-red-600 text-xs mt-1">{errors.name[0]}</p>}
+          <div className="text-xs text-slate-500 mt-1">
+            Este campo se autocompleta al hacer click en el mapa, pero puedes editarlo.<br/>
+            Te pedimos que los nombres sean <b>respetuosos y adecuados para toda la comunidad</b>. Ayúdanos a mantener un espacio seguro y amigable.
+          </div>
+        </div>
+        
       {/* Datos extra */}
       <div className="sm:col-span-2">
         <label className="block text-sm font-medium text-slate-700 mb-1">Descripción (opcional)</label>

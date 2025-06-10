@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom"; 
+import PointItemProfile from "../../Components/PointItemProfile";
 import { AppContext } from "../../Context/AppContext";
-import { Link } from "react-router-dom"; // Asegúrate de tener esto si estás usando React Router
-
 
 export default function Profile() {
     const { user, setUser } = useContext(AppContext);
     const [imageUrl, setImageUrl] = useState("");
     const [uploading, setUploading] = useState(false);
-
+    const [userPoints, setUserPoints] = useState([])
+    const [cargando, setCargando] = useState(false)    
     // Carga la imagen guardada para este usuario al cambiar user
     useEffect(() => {
         if (user?.id) {
@@ -18,8 +19,56 @@ export default function Profile() {
                 setImageUrl("");
             }
         }
+        getPoints()
     }, [user]);
 
+    async function getPoints() {
+    setCargando(true);
+    
+    const params = new URLSearchParams();
+        const token = localStorage.getItem("token");
+        if (token) {
+            const filters = {
+            user: "me",
+            }
+            //Transformar así o fallará
+            params.append("filters", JSON.stringify(filters))
+        }
+        else{
+            // navigate('/')
+        }
+
+
+    params.append("order_by", "created_at")
+    params.append("order_direction", "desc")
+
+    try {
+        const headers = {
+            Accept: "application/json",
+        };
+        const token = localStorage.getItem("token");
+        if (token) {
+            headers["Authorization"] = `Bearer ${token}`;
+        }
+        const res = await fetch(`/api/points/filter?${params}`, {headers});
+        const data = await res.json();
+        console.log(data);
+
+        if (res.ok) {
+        setUserPoints(data);
+        }
+        console.log("los punticos son: ", data)
+    } catch (error) {
+        console.error('Error obteniendo puntos:', error);
+    }
+    
+    setCargando(false);
+    }
+
+    // Función para manejar la eliminación de un punto
+  const handleDeletePoint = (pointId) => {
+    getPoints()
+  }
     async function handleFileChange(e) {
         const file = e.target.files[0];
         if (!file || !user?.id) return;
@@ -133,6 +182,38 @@ export default function Profile() {
                     >
                         📦 Ver mis pedidos
                     </Link>
+                </div>
+                {/* Sección: Mis Puntos de Reciclaje */}
+                <div className="mt-12">
+                <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white">♻️ Mis Puntos de Reciclaje</h2>
+                    <Link
+                    to="/create"
+                    className="bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors duration-200"
+                    >
+                    + Añadir punto
+                    </Link>
+                </div>
+
+                {cargando ? (
+                    <div className="text-center py-8">
+                    <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-green-500"></div>
+                    <p className="mt-2">Cargando puntos...</p>
+                    </div>
+                ) : userPoints.length > 0 ? (
+                    <div className="space-y-3">
+                    {userPoints.map((point) => (
+                        <PointItemProfile key={point.id} point={point} handleDeletePoint={handleDeletePoint}/>
+                    ))}
+                    </div>
+                ) : (
+                    <div className="text-center py-8 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <p className="text-gray-500 dark:text-gray-300">No has creado ningún punto de reciclaje todavía.</p>
+                    <Link to="/create" className="inline-block mt-3 text-green-600 dark:text-green-400 hover:underline">
+                        Crea tu primer punto
+                    </Link>
+                    </div>
+                )}
                 </div>
             </div>
         </div>
