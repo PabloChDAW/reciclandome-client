@@ -41,7 +41,8 @@ export default function HomePage() {
   async function getPoints() {
     const res = await fetch("https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/points", {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
       },
     });
     const data = await res.json();

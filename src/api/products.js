@@ -8,6 +8,7 @@ export const getAllProducts = async (token) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`, // Aquí agregamos el token en la cabecera
+        'X-Requested-With': 'XMLHttpRequest'
       },
     });
 

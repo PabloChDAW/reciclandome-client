@@ -51,6 +51,7 @@ export default function Create() {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
+            'X-Requested-With': 'XMLHttpRequest'
           },
         });
 
@@ -152,7 +153,8 @@ export default function Create() {
       method: 'post',
       headers: {
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
       },
       body: JSON.stringify(formData),
     });

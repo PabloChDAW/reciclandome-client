@@ -124,7 +124,8 @@ useEffect(() => {
     /* Petición de datos de un point. */
     const res = await fetch(`https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/points/${id}`, {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
       },
     });
     const data = await res.json();
@@ -183,7 +184,8 @@ useEffect(() => {
       method: 'put',
       headers: {
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
       },
       body: JSON.stringify({
         ...formData,

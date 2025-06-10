@@ -49,6 +49,7 @@ export default function PointItemProfile({ point, handleDeletePoint }) {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
+          'X-Requested-With': 'XMLHttpRequest'
         },
       })
 

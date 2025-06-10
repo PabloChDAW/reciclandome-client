@@ -46,6 +46,7 @@ export default function Profile() {
     try {
         const headers = {
             Accept: "application/json",
+            'X-Requested-With': 'XMLHttpRequest'
         };
         const token = localStorage.getItem("token");
         if (token) {
@@ -87,7 +88,8 @@ export default function Profile() {
                     method: "POST",
                     body: formData,
                     headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
                 },
                 }
             );

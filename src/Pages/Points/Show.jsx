@@ -18,7 +18,8 @@ export default function Show() {
     /* Petición de datos de un post. */
     const res = await fetch(`https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/points/${id}`, {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
       },
     });
     const data = await res.json();
@@ -53,6 +54,7 @@ export default function Show() {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
+        'X-Requested-With': 'XMLHttpRequest'
       },
     });
 

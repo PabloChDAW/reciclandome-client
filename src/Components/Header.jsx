@@ -75,6 +75,7 @@ export default function Header({ isHome = false, isShop = false }) {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
+        'X-Requested-With': 'XMLHttpRequest'
       },
     });
 
