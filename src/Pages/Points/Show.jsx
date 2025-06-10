@@ -16,7 +16,11 @@ export default function Show() {
   const [cargando, setCargando] =useState(true);
   async function getPoint() {
     /* Petición de datos de un post. */
-    const res = await fetch(`https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/points/${id}`);
+    const res = await fetch(`https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/points/${id}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
     const data = await res.json();
 
     // console.log(data);
@@ -47,6 +51,7 @@ export default function Show() {
     const res = await fetch(`https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/points/${id}`, {
       method: "delete",
       headers: {
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     });

@@ -74,6 +74,7 @@ export default function Header({ isHome = false, isShop = false }) {
       method: "post",
       headers: {
         Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
       },
     });
 

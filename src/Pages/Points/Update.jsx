@@ -122,7 +122,11 @@ useEffect(() => {
 
   async function getPoint() {
     /* Petición de datos de un point. */
-    const res = await fetch(`https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/points/${id}`);
+    const res = await fetch(`https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/points/${id}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
     const data = await res.json();
 
     if (res.ok) {

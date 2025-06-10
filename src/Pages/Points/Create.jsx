@@ -49,6 +49,7 @@ export default function Create() {
       try {
         const response = await fetch("https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/types", {
           headers: {
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
           },
         });

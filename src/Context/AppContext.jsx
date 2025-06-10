@@ -42,6 +42,7 @@ export default function AppProvider({ children }) {
     if (!token) return;
     const res = await fetch("https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/user", {
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });

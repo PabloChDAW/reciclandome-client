@@ -39,7 +39,11 @@ export default function HomePage() {
 
   // Obtener puntos de reciclaje
   async function getPoints() {
-    const res = await fetch("https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/points");
+    const res = await fetch("https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/points", {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
     const data = await res.json();
     console.log("hola")
     console.log(data);

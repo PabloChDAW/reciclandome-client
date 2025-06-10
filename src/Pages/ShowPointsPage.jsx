@@ -159,7 +159,11 @@ export default function ShowPointsPage() {
 
     async function getTypes() {
         try {
-            const res = await fetch("https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/types");
+            const res = await fetch("https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/types", {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            });
             const data = await res.json();
             if (res.ok) {
                 setTypes(data);
@@ -178,7 +182,11 @@ export default function ShowPointsPage() {
 
         try {
             // Obtener ciudades únicas de los puntos existentes
-            const res = await fetch("https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/points");
+            const res = await fetch("https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/points", {
+                headers: {
+                'Content-Type': 'application/json'
+            },
+            });
             const allPoints = await res.json();
 
             if (res.ok) {

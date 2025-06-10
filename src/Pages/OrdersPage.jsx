@@ -13,6 +13,7 @@ export default function MyOrders() {
                 const res = await fetch(`https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/orders`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json'
                     },
                 });
                 const data = await res.json();

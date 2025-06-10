@@ -23,6 +23,9 @@ export default function Login() {
     /* Petición de login */
     const res = await fetch("https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/login", {
       method: "post",
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(formData),
     });
 

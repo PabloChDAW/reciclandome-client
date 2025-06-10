@@ -51,6 +51,9 @@ export default function Register() {
     /* Petición de autenticación */
     const res = await fetch("https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/register", {
       method: "post",
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(formData),
     });
 
