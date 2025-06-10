@@ -4,6 +4,8 @@ import InfoBox from "../Components/Infobox";
 import PointItem from "../Components/PointItem";
 import ToggleSwitchFilter from "../Components/ToggleSwitchFilter";
 import SortingButtons from "../Components/SortingButtons";
+
+
 export default function ShowPointsPage() {
     const [points, setPoints] = useState([]);
     const [selectedPoint, setSelectedPoint] = useState(null);

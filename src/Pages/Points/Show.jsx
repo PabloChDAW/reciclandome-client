@@ -5,7 +5,7 @@ import Map from "../../Components/Map";
 import toastr from 'toastr';
 import 'toastr/build/toastr.min.css';
 import Swal from 'sweetalert2';
-
+import { translateToSpanish } from '../../Utils/translations';
 
 export default function Show() {
   // console.log(useParams());
@@ -102,9 +102,9 @@ export default function Show() {
                   <span className="italic text-gray-500 ml-1">No especificado</span>
                 )}
               </div>
-              <p><span className="font-bold">🏠 Tipo de Lugar:</span> {point.place_type}</p>
+              <p><span className="font-bold">🏠 Tipo de Lugar:</span> {translateToSpanish(point.place_type, "place_type")}</p>
               <p><span className="font-bold">📫 Dirección:</span> {point.address}</p>
-              <p><span className="font-bold">🛤️ Vía:</span> {point.way}</p>
+              <p><span className="font-bold">🛤️ Vía:</span> {translateToSpanish(point.way, "way")}</p>
               <p className="md:col-span-2"><span className="font-bold">📝 Descripción:</span> {point.description}</p>
             </div>
 

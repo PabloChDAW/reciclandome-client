@@ -4,7 +4,7 @@ import { AppContext } from "../../Context/AppContext";
 import Map2 from "../../Components/Map2";
 import toastr from 'toastr';
 import 'toastr/build/toastr.min.css';
-
+import { translateToSpanish } from '../../Utils/translations';
 
 export default function Create() {
   const navigate = useNavigate();
@@ -262,13 +262,13 @@ export default function Create() {
         <div className="sm:col-span-2 bg-slate-50 dark:bg-[#577759] border border-slate-200 p-5 rounded-xl shadow-inner space-y-1">
           <h3 className="text-base font-semibold text-slate-700 dark:text-white mb-2">📄 Información del lugar</h3>
           <p className="dark:text-gray-200 gap-2"><strong>🏷  Nombre:</strong> {formData.name || "—"}</p>
-          <p className="dark:text-gray-200 gap-2"><strong>📌 Tipo de lugar:</strong> {formData.place_type || "—"}</p>
+          <p className="dark:text-gray-200 gap-2"><strong>📌 Tipo de lugar:</strong> {translateToSpanish(formData.place_type, "place_type") || "—"}</p>
           <p className="dark:text-gray-200 gap-2"><strong>📍 Dirección:</strong> {formData.address || "—"}</p>
           <p className="dark:text-gray-200 gap-2"><strong>🏙  Localidad:</strong> {formData.city || "—"}</p>
           <p className="dark:text-gray-200 gap-2"><strong>🌎 Región:</strong> {formData.region || "—"}</p>
           <p className="dark:text-gray-200 gap-2"><strong>🌐 País:</strong> {formData.country || "—"}</p>
           <p className="dark:text-gray-200 gap-2"><strong>📮 Código postal:</strong> {formData.postcode || "—"}</p>
-          <p className="dark:text-gray-200 gap-2"><strong>📖 Tipo de vía:</strong> {formData.way || "—"}</p>
+          <p className="dark:text-gray-200 gap-2"><strong>📖 Tipo de vía:</strong> {translateToSpanish(formData.way, "way") || "—"}</p>
         </div>
 
         {/* Campo nombre editable */}
