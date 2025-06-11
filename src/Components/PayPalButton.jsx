@@ -33,7 +33,7 @@ export default function PayPalButton({ amount, cart }) {
 
           return actions.order.capture().then((details) => {
 
-            fetch('http://localhost:5173/api/paypal/payment-completed', {
+            fetch('https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/paypal/payment-completed', {
               method: 'POST',
               headers: { 
                 'Content-Type': 'application/json',
