@@ -61,7 +61,7 @@ export default function PayPalButton({ amount, cart }) {
       if (window.paypal) renderButton();
     } else {
       const script = document.createElement("script");
-      script.src = "https://www.paypal.com/sdk/js?client-id=Afr5lcAhTfWtrQJaPsqxhTieflEhzxyN1xBsA_CTTh82R2ZgAtAoJoFEJsaS9EbC5-LtDxIXMuiQmy1F&currency=EUR";
+      script.src = "https://www.paypal.com/sdk/js?client-id=ASeKkHv-w1ERhCiGQHtgmzGSNdFWqVqXUPCUtavDvPw_Yk2vd9x-h1lt_R2M44fv6Ghu2C6J6BajAdoG&currency=EUR";
       script.id = "paypal-sdk";
       script.onload = () => renderButton();
       document.body.appendChild(script);
