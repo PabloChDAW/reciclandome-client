@@ -27,13 +27,9 @@ export default function Update() {
     phone: "", 
     email: ""
   });
+  // const [allTypes, setAllTypes] = useState([]);
   const [allTypes, setAllTypes] = useState([]);
 
-useEffect(() => {
-  fetch('/api/types')
-    .then(res => res.json())
-    .then(setAllTypes);
-}, []);
   // Seguridad y sanitización ---- //MapTyler no gestiona bien la iniciación en alguna coordenada 0.
   // Estas líneas evitan que un tercero pueda denegarnos el servicio si consigue forzar la aplicación a iniciar
   // Con valores válidos pero que MapTyler no puede gestionar (longitud o latitud 0)
@@ -119,6 +115,31 @@ useEffect(() => {
 
     reverseGeocode();
   }, [formData.latitude, formData.longitude]);
+
+  useEffect(() => {
+    const fetchPointTypes = async () => {
+      try {
+        const response = await fetch("https://reciclandome-api-main-laravelcloud-4b3jba.laravel.cloud/api/types", {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+            'X-Requested-With': 'XMLHttpRequest'
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Error al obtener tipos de residuos");
+        }
+
+        const data = await response.json();
+        setAllTypes(data); // Asegúrate de que `data` es un array de objetos con `id` y `name`
+      } catch (error) {
+        console.error("Error cargando tipos de residuos:", error);
+      }
+    };
+
+    fetchPointTypes();
+  }, []);
 
   async function getPoint() {
     /* Petición de datos de un point. */
